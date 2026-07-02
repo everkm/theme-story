@@ -6,6 +6,7 @@ import {
   resolveStoryMediaUrl,
 } from "../lib/dataSource";
 import { useTranslations } from "../lib/i18n";
+import { pageUrl } from "../lib/url";
 import { Header } from "../layout/Header";
 import { Footer } from "../components/Footer";
 import { PageChrome } from "../components/PageChrome";
@@ -27,12 +28,12 @@ export const MasonryPage: Component<MasonryPageProps> = (p) => {
   return (
     <>
       <Header ctx={ctx()} />
-      <PageChrome ctx={ctx()} pageKey="masonry" />
+      <PageChrome ctx={ctx()} pageKey="album" />
       <Main
         ctx={ctx()}
-        pageKey="masonry"
+        pageKey="album"
         pageTitle={pageTitle()}
-        layout="masonry"
+        layout="album"
         hidePageHeader
       >
         <div class="page-template-container">
@@ -43,11 +44,24 @@ export const MasonryPage: Component<MasonryPageProps> = (p) => {
               <p class="text-muted-foreground italic">{t().pages.masonryEmpty}</p>
             }
           >
-            <div class="masonry-grid">
+            <div class="loading-placeholder">
+              <div class="flex-grid generic-card">
+                <div class="card loading" />
+                <div class="card loading" />
+                <div class="card loading" />
+              </div>
+            </div>
+            <div
+              id="masonry-container"
+              data-vendor-script={pageUrl(
+                ctx().request_id,
+                "/assets/vendor/minimasonry.min.js",
+              )}
+            >
               <For each={items()}>
                 {(item) => (
-                  <article class="masonry-item">
-                    <div class="masonry-item__image-wrap">
+                  <div class="masonry-item">
+                    <div class="image-container">
                       <img
                         src={resolveStoryMediaUrl(
                           ctx(),
@@ -55,24 +69,24 @@ export const MasonryPage: Component<MasonryPageProps> = (p) => {
                           originPath(),
                         )}
                         alt={item.title ?? ""}
-                        loading="lazy"
                       />
                       <Show when={!!item.title}>
-                        <div class="masonry-item__title">{item.title}</div>
+                        <div class="image-title">{item.title}</div>
                       </Show>
                       <Show when={!!item.description}>
-                        <div class="masonry-item__description">
-                          {item.description}
-                        </div>
+                        <div class="image-description">{item.description}</div>
                       </Show>
                     </div>
-                  </article>
+                  </div>
                 )}
               </For>
             </div>
           </Show>
           <Show when={!!doc()?.content_html}>
-            <div class="app-prose mt-8" innerHTML={doc()!.content_html!} />
+            <div
+              class="page-template-content app-prose mt-8"
+              innerHTML={doc()!.content_html!}
+            />
           </Show>
         </div>
       </Main>

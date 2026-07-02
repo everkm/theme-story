@@ -33,7 +33,7 @@ function renderPageBody(pageKey: string, props: PageContext) {
       return <ArchivesPage props={props} />;
     case "links":
       return <LinksPage props={props} />;
-    case "masonry":
+    case "album":
       return <MasonryPage props={props} />;
     case "not-found":
       return <NotFoundPage props={props} />;
@@ -70,12 +70,12 @@ function resolveLayoutTitle(
     );
     return `${title} | ${siteName}`;
   }
-  if (pageKey === "masonry") {
+  if (pageKey === "album") {
     const title = dataSourceTitle(
       props,
       cfg.masonry,
       "/_masonry.md",
-      "Masonry",
+      "Album",
     );
     return `${title} | ${siteName}`;
   }

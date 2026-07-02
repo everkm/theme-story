@@ -1,7 +1,8 @@
 /* Story static pages (about, etc.) — hexo-theme-redefine page-template */
 
 .page-title-header {
-  @apply mb-6 text-[2.4rem] leading-tight font-bold sm:mb-9 sm:text-[3.2rem];
+  @apply text-[2.4rem] leading-none font-bold sm:text-[3.2rem];
+  margin: 6px 0 36px 0;
   color: var(--story-text-secondary);
 }
 

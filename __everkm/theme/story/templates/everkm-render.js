@@ -2828,7 +2828,7 @@ function resolvePageKey(compName, tplPath, post) {
   if (key === "tags") return "tags-index";
   if (key === "archives") return "archives";
   if (key === "links") return "links";
-  if (key === "masonry") return "masonry";
+  if (key === "album" || key === "masonry") return "album";
   if (key === "404" || key === "not-found") return "not-found";
   if (key.startsWith("tags/")) return "tag-posts";
   if (post) return "post";
@@ -3161,7 +3161,7 @@ function inferIconKey(link) {
   const path = link.path.toLowerCase();
   if (/github\.com/i.test(path)) return "github";
   if (path.includes("archives")) return "archives";
-  if (path.includes("masonry")) return "album";
+  if (path.includes("/album") || path.includes("masonry")) return "album";
   if (path.includes("/links")) return "links";
   if (path.includes("/about")) return "about";
   if (path === "/" || path === "/index.html") return "home";
@@ -4942,13 +4942,14 @@ var LinksPage = (p3) => {
 };
 
 // src/pages/masonry.tsx
-var _tmpl$69 = ['<div class="masonry-grid">', "</div>"];
-var _tmpl$220 = ['<div class="app-prose mt-8">', "</div>"];
-var _tmpl$317 = ['<div class="page-template-container"><h1 class="page-title-header">', "</h1>", "", "</div>"];
-var _tmpl$413 = ['<p class="text-muted-foreground italic">', "</p>"];
-var _tmpl$511 = ['<div class="masonry-item__title">', "</div>"];
-var _tmpl$610 = ['<div class="masonry-item__description">', "</div>"];
-var _tmpl$75 = ['<article class="masonry-item"><div class="masonry-item__image-wrap"><img', ' loading="lazy">', "", "</div></article>"];
+var _tmpl$69 = '<div class="loading-placeholder"><div class="flex-grid generic-card"><div class="card loading"></div><div class="card loading"></div><div class="card loading"></div></div></div>';
+var _tmpl$220 = ['<div id="masonry-container"', ">", "</div>"];
+var _tmpl$317 = ['<div class="page-template-content app-prose mt-8">', "</div>"];
+var _tmpl$413 = ['<div class="page-template-container"><h1 class="page-title-header">', "</h1>", "", "</div>"];
+var _tmpl$511 = ['<p class="text-muted-foreground italic">', "</p>"];
+var _tmpl$610 = ['<div class="image-title">', "</div>"];
+var _tmpl$75 = ['<div class="image-description">', "</div>"];
+var _tmpl$83 = ['<div class="masonry-item"><div class="image-container"><img', ">", "", "</div></div>"];
 var MasonryPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
@@ -4965,53 +4966,53 @@ var MasonryPage = (p3) => {
     get ctx() {
       return ctx();
     },
-    pageKey: "masonry"
+    pageKey: "album"
   }), createComponent(Main, {
     get ctx() {
       return ctx();
     },
-    pageKey: "masonry",
+    pageKey: "album",
     get pageTitle() {
       return pageTitle();
     },
-    layout: "masonry",
+    layout: "album",
     hidePageHeader: true,
     get children() {
-      return ssr(_tmpl$317, escape(pageTitle()), escape(createComponent(Show, {
+      return ssr(_tmpl$413, escape(pageTitle()), escape(createComponent(Show, {
         get when() {
           return items().length > 0;
         },
         get fallback() {
-          return ssr(_tmpl$413, escape(t2().pages.masonryEmpty));
+          return ssr(_tmpl$511, escape(t2().pages.masonryEmpty));
         },
         get children() {
-          return ssr(_tmpl$69, escape(createComponent(For, {
+          return [ssr(_tmpl$69), ssr(_tmpl$220, ssrAttribute("data-vendor-script", escape(pageUrl(ctx().request_id, "/assets/vendor/minimasonry.min.js"), true), false), escape(createComponent(For, {
             get each() {
               return items();
             },
-            children: (item) => ssr(_tmpl$75, ssrAttribute("src", escape(resolveStoryMediaUrl(ctx(), item.image, originPath()), true), false) + ssrAttribute("alt", escape(item.title, true) ?? "", false), escape(createComponent(Show, {
+            children: (item) => ssr(_tmpl$83, ssrAttribute("src", escape(resolveStoryMediaUrl(ctx(), item.image, originPath()), true), false) + ssrAttribute("alt", escape(item.title, true) ?? "", false), escape(createComponent(Show, {
               get when() {
                 return !!item.title;
               },
               get children() {
-                return ssr(_tmpl$511, escape(item.title));
+                return ssr(_tmpl$610, escape(item.title));
               }
             })), escape(createComponent(Show, {
               get when() {
                 return !!item.description;
               },
               get children() {
-                return ssr(_tmpl$610, escape(item.description));
+                return ssr(_tmpl$75, escape(item.description));
               }
             })))
-          })));
+          })))];
         }
       })), escape(createComponent(Show, {
         get when() {
           return !!doc()?.content_html;
         },
         get children() {
-          return ssr(_tmpl$220, doc().content_html);
+          return ssr(_tmpl$317, doc().content_html);
         }
       })));
     }
@@ -5088,7 +5089,7 @@ function renderPageBody(pageKey, props) {
       return createComponent(LinksPage, {
         props
       });
-    case "masonry":
+    case "album":
       return createComponent(MasonryPage, {
         props
       });
@@ -5121,8 +5122,8 @@ function resolveLayoutTitle(pageKey, props, cfg) {
     const title = dataSourceTitle(props, cfg.links, "/_links.md", "Links");
     return `${title} | ${siteName}`;
   }
-  if (pageKey === "masonry") {
-    const title = dataSourceTitle(props, cfg.masonry, "/_masonry.md", "Masonry");
+  if (pageKey === "album") {
+    const title = dataSourceTitle(props, cfg.masonry, "/_masonry.md", "Album");
     return `${title} | ${siteName}`;
   }
   if (pageKey === "not-found") {

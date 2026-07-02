@@ -6,7 +6,6 @@ type CleanupFn = (() => void) | null;
 function initFootnoteBackButton(bodySelector: string): CleanupFn {
   const container = document.querySelector(bodySelector) as HTMLElement | null;
   if (!container) {
-    console.error(`Footnote back button container not found: ${bodySelector}`);
     return null;
   }
 

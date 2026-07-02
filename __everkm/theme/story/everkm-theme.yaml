@@ -92,7 +92,7 @@ config:
           external: true
           icon: github
         - label: Album
-          path: /masonry/index.html
+          path: /album/index.html
           icon: album
         - label: Links
           path: /links/index.html

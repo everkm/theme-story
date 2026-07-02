@@ -15,6 +15,7 @@ import { installPreloader } from "./preloader";
 import { resetHomeBannerBlur } from "./homeBannerBlur";
 import { installHomeBannerScroll } from "./homeBannerScroll";
 import { installParticles } from "./particles";
+import { bootMasonryLayout, teardownMasonryLayout } from "./masonryLayout";
 
 import { STORY_PAGE_SWAP } from "./events";
 
@@ -241,6 +242,7 @@ export function bootClient(): void {
   installBannerTyped();
   installHomeBannerScroll();
   installParticles();
+  void bootMasonryLayout();
   updateActiveNav();
   mountClientBlocks();
   installFootnoteBackButton("#article");
@@ -257,5 +259,7 @@ export function bootClient(): void {
     installScrollTopBottom();
     resetHomeBannerBlur();
     installNavbarShrink();
+    teardownMasonryLayout();
+    void bootMasonryLayout();
   });
 }

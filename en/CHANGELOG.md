@@ -42,7 +42,8 @@ This changelog is for end users. Keep the wording user-friendly and avoid exposi
   - Mobile navigation menu stays hidden until opened; the menu button switches to a close icon
   - Footer social icons inline with the copyright line; “Powered by” on its own row below
   - About page uses the same rounded card frame as archives and other static pages
-  - Links and album (masonry) pages use the same page frame and header spacing as About
+  - Links and album pages use the same page frame and header spacing as About
+  - Album page (`/album/`) uses MiniMasonry layout, hover captions, and loading skeleton aligned with hexo-theme-redefine
   - Algolia search overlay uses story theme colors (accent red, surface tokens) instead of paper grayscale
   - Homepage banner scroll-down button works after client hydration
   - Homepage sidebar site-info card vertical spacing aligned with hexo-theme-redefine
