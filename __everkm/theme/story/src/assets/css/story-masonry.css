@@ -1,0 +1,34 @@
+/* Story masonry page — hexo-theme-redefine album */
+
+.masonry-grid {
+  @apply columns-1 gap-4 sm:columns-2 lg:columns-3;
+}
+
+.masonry-item {
+  @apply mb-4 break-inside-avoid;
+}
+
+.masonry-item__image-wrap {
+  @apply overflow-hidden rounded-[18px] border;
+  border-color: var(--border);
+  background-color: var(--story-surface-solid);
+  box-shadow: var(--story-box-shadow);
+
+  & img {
+    @apply block w-full;
+  }
+}
+
+.masonry-item__title {
+  @apply px-4 pt-3 text-lg font-semibold;
+  color: var(--story-text-secondary);
+}
+
+.masonry-item__description {
+  @apply px-4 pt-1 pb-4 text-sm;
+  color: var(--story-text-muted);
+}
+
+.masonry-item:hover .masonry-item__image-wrap {
+  box-shadow: var(--story-box-shadow-hover);
+}

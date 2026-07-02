@@ -1,0 +1,113 @@
+name: story
+owner: everkm
+version: 0.1.0
+author: dayu<dayu@dayu.me>
+repository: https://github.com/everkm/theme-story
+demo: https://story.theme.everkm.com/
+
+default_template: post
+
+config:
+  site:
+    name: Jack's Blog
+    description: Your personal blog journey.
+    author: Jack
+    profile: /assets/images/avatar-0.jpg
+    lang: zh
+    timezone: Asia/Shanghai
+
+  code_highlight:
+    server: true
+  math_render:
+    server: true
+    font_size: 14
+
+  home: '[[_home]]'
+  about: '[[_about]]'
+  links: '[[_links]]'
+  masonry: '[[_masonry]]'
+
+  posts:
+    per_page: 10
+    per_index: 10
+    featured_tag: featured
+
+  features:
+    light_and_dark_mode: true
+    show_archives: true
+    show_back_button: true
+    view_transitions: true
+    preloader: true
+    particles: false
+    home_banner: true
+    home_sidebar: true
+
+  story:
+    colors:
+      primary: "#A31F34"
+      default_mode: light
+    global:
+      scroll_progress:
+        bar: false
+        percentage: true
+      scroll_tools:
+        enable: true
+      preloader:
+        max_duration_ms: 5000
+    home_banner:
+      enable: true
+      style: fixed
+      image:
+        light: /assets/images/main_bg_ligth.jpg
+        dark: /assets/images/main_bg.jpg
+      title: Jack's Blog
+      subtitle:
+        text:
+          - Welcome to my blog
+          - Your personal blog journey.
+        typing_speed: 100
+        backing_speed: 80
+        starting_delay: 500
+        backing_delay: 1500
+        loop: true
+        smart_backspace: true
+    home_sidebar:
+      enable: true
+      position: left
+      announcement: 欢迎来到 Story 主题演示站
+    navbar:
+      auto_hide: true
+      color:
+        left: "#f78736"
+        right: "#367df7"
+      links:
+        - label: Home
+          path: /index.html
+          icon: home
+        - label: Archives
+          path: /archives/index.html
+          icon: archives
+        - label: Github
+          path: https://github.com/EvanNotFound/hexo-theme-redefine
+          external: true
+          icon: github
+        - label: Album
+          path: /masonry/index.html
+          icon: album
+        - label: Links
+          path: /links/index.html
+          icon: links
+        - label: About
+          path: /about/
+          icon: about
+    articles:
+      toc:
+        enable: false
+        max_depth: 3
+      copyright:
+        enable: true
+        default: cc_by_nc_sa
+
+folders:
+  "/":
+    url_id_suffix: false

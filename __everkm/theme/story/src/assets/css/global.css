@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@import "./theme.css";
+@import "./story-nav.css";
+@import "./story-archives.css";
+@import "./typography.css";
+@import "./code-highlight.css";
+@import "./math-svg.css";
+@import "./callouts-obsidian.css";
+
+@import "./story-home.css";
+@import "./story-links.css";
+@import "./story-masonry.css";
+@import "./story-page.css";
+@import "./story-post.css";
+@import "./story-tags.css";
+@import "./story-tools.css";
+@import "./story-preloader.css";
+@import "./story-particles.css";
+
+@source "../../**/*.{tsx,ts}";
+
+@custom-variant dark (&:where(.dark, .dark *, [data-theme=dark], [data-theme=dark] *));
+
+@layer base {
+  * {
+    @apply border-border outline-accent/75;
+    scrollbar-width: auto;
+    scrollbar-color: var(--color-muted) transparent;
+  }
+  a,
+  button {
+    @apply outline-accent outline-offset-1 focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@utility max-w-app {
+  /* hexo-theme-redefine global.content_max_width default: 1000px */
+  /* @apply max-w-[62.5rem]; */
+  @apply max-w-5xl;
+}
+
+@utility app-layout {
+  @apply max-w-app mx-auto w-full px-4;
+}
+
+@utility active-nav {
+  @apply underline decoration-wavy decoration-2 underline-offset-8;
+}
+
+:target {
+  scroll-margin-block: 1rem;
+}

@@ -1,0 +1,243 @@
+@plugin "@tailwindcss/typography";
+
+@layer base {
+  /* ===== Override default Tailwind Typography styles ===== */
+  .app-prose {
+    /* Typography defaults use light-on-dark pre colors; override for readable fenced blocks */
+    --tw-prose-pre-code: var(--foreground);
+    --tw-prose-pre-bg: var(--shiki-light-bg);
+    @apply prose max-w-none prose-pre:bg-(--shiki-light-bg) prose-pre:p-0 dark:prose-pre:bg-(--shiki-dark-bg);
+
+    h1,
+    h2,
+    h3,
+    h4,
+    th {
+      @apply text-foreground mb-3;
+      scroll-margin-block: 1rem;
+    }
+
+    h3 {
+      @apply italic;
+    }
+
+    p,
+    strong,
+    ol,
+    ul,
+    figcaption,
+    table {
+      @apply text-foreground;
+    }
+
+    a {
+      @apply text-foreground hover:text-accent wrap-break-word decoration-dashed underline-offset-4 focus-visible:no-underline;
+    }
+
+    ul {
+      @apply overflow-x-clip;
+    }
+
+    li {
+      @apply marker:text-accent;
+    }
+
+    hr {
+      @apply border-border;
+    }
+
+    img {
+      @apply border-border mx-auto border;
+    }
+
+    img[role="button"] {
+      @apply cursor-zoom-in;
+
+      &:focus-visible {
+        @apply outline-2 outline-offset-2 outline-dashed;
+      }
+    }
+
+    figcaption {
+      @apply opacity-75;
+    }
+
+    table {
+      th,
+      td {
+        @apply border-border border p-2;
+      }
+
+      th {
+        @apply py-1.5;
+      }
+    }
+
+    /* Inline code */
+    :not(pre) > code {
+      @apply bg-muted/75 text-foreground rounded p-1 wrap-break-word before:content-none after:content-none;
+    }
+
+    .astro-code code {
+      @apply flex-[1_0_100%] bg-inherit p-0;
+    }
+
+    /* Fenced code blocks (prose `pre` + inner `code` both ship padding — keep it on `code` only) */
+    pre:not(.astro-code) {
+      @apply outline-border overflow-x-auto border bg-transparent p-0;
+      /* token colors when code_highlight.server: code-highlight.css */
+    }
+
+    pre:not(.astro-code) > code {
+      @apply text-foreground block w-full bg-(--shiki-light-bg) p-4 wrap-break-word before:content-none after:content-none;
+    }
+
+    &:where([data-theme="dark"], [data-theme="dark"] *) pre:not(.astro-code) > code {
+      @apply bg-(--shiki-dark-bg);
+    }
+
+    blockquote {
+      @apply border-s-accent/80 wrap-break-word opacity-80;
+    }
+
+    details:not(.callout) {
+      @apply text-foreground inline-block cursor-pointer select-none [&_p]:hidden [&_ul]:my-0!;
+    }
+
+    summary {
+      @apply focus-visible:outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-dashed;
+    }
+
+    pre {
+      @apply focus-visible:outline-accent focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-dashed;
+    }
+
+    /* Callouts (rehype-callouts / Obsidian syntax) */
+    .callout {
+      @apply my-6!;
+    }
+
+    .callout .callout-content > :first-child {
+      @apply mt-0!;
+    }
+
+    .callout .callout-content > :last-child {
+      @apply mb-0!;
+    }
+
+    mark {
+      @apply bg-accent/15 text-foreground rounded-sm px-1;
+    }
+
+    /* Definition list */
+    dl {
+      @apply mb-4 p-0;
+    }
+
+    dt {
+      @apply text-foreground mt-4 mb-1 font-semibold;
+    }
+
+    dt:first-child {
+      @apply mt-0;
+    }
+
+    dd {
+      @apply text-muted-foreground mb-2 ml-0 border-s-2 border-muted ps-4;
+    }
+
+    /* Footnotes — aligned with youlog markdown2.css */
+    .footnote-reference {
+      font-size: 0.78em;
+      vertical-align: super;
+      line-height: 0;
+    }
+
+    .footnote-reference a {
+      @apply text-accent no-underline!;
+      padding: 0 0.1em;
+    }
+
+    .footnote-definition {
+      @apply text-muted-foreground text-[0.85em] leading-relaxed;
+      margin-top: 0.6em;
+      display: grid !important;
+      grid-template-columns: auto 1fr;
+      column-gap: 0.5em;
+      align-items: start;
+      scroll-margin-block: 1rem;
+    }
+
+    .footnote-definition:last-of-type {
+      margin-bottom: 2.5rem;
+    }
+
+    hr.footnote-definitions-separator {
+      @apply mt-16! mb-6! h-0 border-0 border-t p-0!;
+      border-top-color: color-mix(in srgb, var(--muted-foreground) 35%, transparent);
+    }
+
+    .footnote-definition-label {
+      @apply text-accent text-right text-[0.8em] font-semibold;
+      grid-column: 1;
+      grid-row: 1;
+      min-width: 2.2em;
+      margin-right: 0.3em;
+      padding-top: 0.1em;
+
+      &::before {
+        content: "[";
+      }
+
+      &::after {
+        content: "]";
+      }
+    }
+
+    .footnote-definition > p {
+      @apply my-0!;
+      grid-column: 2;
+      grid-row: 1;
+      min-width: 0;
+    }
+
+    .footnote-definition > :last-child {
+      @apply mb-0!;
+    }
+
+    .footnote-back-button {
+      @apply text-accent inline cursor-pointer border-0 bg-transparent p-0 text-[0.85em] font-medium;
+    }
+
+    .footnotes-section,
+    [class*="footnote"] > p {
+      @apply text-muted-foreground text-sm;
+    }
+  }
+
+  /* ===== Code Blocks & Syntax Highlighting ===== */
+  .astro-code {
+    @apply outline-border flex border bg-(--shiki-light-bg) text-(--shiki-light) [&_span]:text-(--shiki-light);
+  }
+
+  html[data-theme="dark"] .astro-code {
+    @apply bg-(--shiki-dark-bg) text-(--shiki-dark) [&_span]:text-(--shiki-dark);
+  }
+
+  /* Styles for Shiki transformers */
+  /* https://shiki.style/packages/transformers */
+  .astro-code {
+    .line.diff.add {
+      @apply relative inline-block w-full bg-green-400/20 before:absolute before:-left-3 before:text-green-500 before:content-['+'];
+    }
+    .line.diff.remove {
+      @apply relative inline-block w-full bg-red-500/20 before:absolute before:-left-3 before:text-red-500 before:content-['-'];
+    }
+    .line.highlighted {
+      @apply inline-block w-full bg-slate-400/20;
+    }
+    .highlighted-word {
+      @apply border-border rounded-sm border px-0.5 py-px;
+    }
+  }
+}

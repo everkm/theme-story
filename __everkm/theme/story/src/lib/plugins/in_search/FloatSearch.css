@@ -1,0 +1,90 @@
+@import "tailwindcss";
+@source "../**/*.{tsx,ts}";
+@source "../../widgets/infinite-loader/**/*.{tsx,ts}";
+
+/* FloatSearch — story theme tokens (redefine palette) */
+@theme inline {
+  --color-surface: var(--story-surface-solid);
+  --color-surface-muted: var(--muted);
+  --color-text-primary: var(--story-text-primary);
+  --color-text-secondary: var(--story-text-muted);
+  --color-text-tertiary: var(--story-text-muted);
+  --color-link: var(--accent);
+  --color-border: var(--border);
+  --color-state-hover: color-mix(in srgb, var(--accent) 10%, var(--story-surface-solid));
+  --color-state-active: color-mix(in srgb, var(--accent) 18%, var(--story-surface-solid));
+  --color-background-dark: var(--background);
+}
+
+[data-role="float-search"] > div {
+  border-color: var(--border);
+  box-shadow: var(--story-box-shadow);
+}
+
+@media (min-width: 768px) {
+  [data-role="float-search"] > div {
+    border-radius: 18px;
+  }
+}
+
+em.hit-keyword {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.keycode {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background-color: var(--muted);
+  color: var(--story-text-muted);
+  padding: 0.125rem 0.375rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+@keyframes loading-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+.loading-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  overflow: hidden;
+}
+
+.loading-bar::after {
+  content: "";
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  background-color: var(--accent);
+  animation: loading-slide 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+.in-search-opened {
+  overflow: hidden !important;
+}
+
+#header-in-search [role="button"] {
+  border-color: var(--border);
+  background-color: color-mix(in srgb, var(--muted) 70%, transparent);
+  color: var(--story-text-muted);
+}
+
+#header-in-search [role="button"]:hover {
+  background-color: var(--muted);
+  color: var(--story-text-primary);
+}

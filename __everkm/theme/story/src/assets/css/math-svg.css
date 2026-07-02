@@ -1,0 +1,39 @@
+/* Scoped under .app-prose — server-rendered Typst math SVG (math_render.server) */
+
+.app-prose .math-svg {
+  color: inherit;
+  background: transparent;
+}
+
+.app-prose .math-svg.math-inline {
+  display: inline-block;
+  vertical-align: -0.25em;
+  line-height: 0;
+  max-width: 100%;
+}
+
+.app-prose .math-svg.math-inline svg {
+  display: inline-block;
+  width: auto;
+  height: 1.1em;
+  max-width: 100%;
+  vertical-align: middle;
+  background: transparent;
+}
+
+.app-prose .math-svg.math-display {
+  display: block;
+  overflow-x: auto;
+  text-align: center;
+  margin: 1em 0;
+  width: 100%;
+}
+
+.app-prose .math-svg.math-display svg {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  margin-inline: auto;
+  background: transparent;
+}

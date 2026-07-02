@@ -1,0 +1,22 @@
+folders:
+  "/":
+    url_id_suffix: false
+
+config:
+
+  features:
+    particles: true
+
+  socials:
+    - name: github
+      url: https://github.com/EvanNotFound/hexo-theme-redefine
+
+  algolia_search:
+    app_id: 1N74YC70XF
+    api_key: 95bb37e3122ee9cb57a8ee0abbd14409
+    index_name: story
+    site: theme-story
+
+  copyright:
+    text: everkm
+    link: https://everkm.com

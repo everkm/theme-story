@@ -1,0 +1,89 @@
+/* Story scroll tools — hexo-theme-redefine right-side-tools */
+
+.progress-bar-container {
+  @apply fixed top-0 left-0 z-[1009] w-full;
+}
+
+.scroll-progress-bar {
+  @apply h-0.5;
+  background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+  visibility: hidden;
+}
+
+.right-side-tools-container {
+  @apply fixed right-[38px] bottom-[5%] opacity-100 transition-opacity duration-200;
+}
+
+.right-side-tools-container.hide {
+  @apply pointer-events-none opacity-0;
+}
+
+@media (max-width: 640px) {
+  .right-side-tools-container {
+    @apply right-3;
+  }
+}
+
+.side-tools-container .right-bottom-tools {
+  @apply mb-1 flex size-[42px] cursor-pointer items-center justify-center rounded-xl text-xl;
+  color: var(--story-text-default);
+  background: var(--background);
+  box-shadow: var(--story-box-shadow-flat);
+  list-style: none;
+}
+
+.side-tools-container .right-bottom-tools:hover {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+@media (max-width: 768px) {
+  .side-tools-container .right-bottom-tools {
+    @apply mb-0.5 size-[38px] text-lg;
+  }
+}
+
+.side-tools-container .hidden-tools-list {
+  @apply m-0 list-none p-0 opacity-0;
+  transform: translateX(250%);
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.side-tools-container .hidden-tools-list.show {
+  @apply opacity-100;
+  transform: translateX(0);
+}
+
+.side-tools-container .visible-tools-list {
+  @apply m-0 list-none p-0;
+}
+
+.side-tools-container .visible-tools-list .tool-scroll-to-top {
+  @apply hidden;
+}
+
+.side-tools-container .visible-tools-list .tool-scroll-to-top.show {
+  @apply flex;
+}
+
+.side-tools-container .visible-tools-list .tool-scroll-to-top .arrow-up {
+  @apply hidden;
+}
+
+.side-tools-container .visible-tools-list .tool-scroll-to-top .percent {
+  @apply flex text-base;
+}
+
+.side-tools-container .visible-tools-list .tool-scroll-to-top:hover .percent {
+  @apply hidden;
+}
+
+.side-tools-container .visible-tools-list .tool-scroll-to-top:hover .arrow-up {
+  @apply flex;
+}
+
+.side-tools-container .toggle-tools-list span {
+  display: inline-block;
+}

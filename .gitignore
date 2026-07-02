@@ -1,0 +1,10 @@
+.DS_Store
+node_modules
+*.dump
+stats.json
+dist
+**/theme/dev
+/packages/publish-www/content/post/zh_CN/a.diff
+cache
+.loc
+*.pyc

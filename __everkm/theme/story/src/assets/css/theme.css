@@ -1,0 +1,100 @@
+/* Register design tokens for Tailwind v4 */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --font-app: "Source Sans 3", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Noto Sans SC", sans-serif;
+}
+
+/* redefine-inspired semantic tokens */
+:root,
+[data-theme="light"] {
+  --story-surface-solid: #ffffff;
+  --story-surface-80: rgba(255, 255, 255, 0.8);
+  --story-surface-15: rgba(255, 255, 255, 0.15);
+  --story-text-default: #373d3f;
+  --story-text-primary: #323739;
+  --story-text-secondary: #343a3c;
+  --story-text-muted: #5c6669;
+  --story-home-banner-text: #ffffff;
+  --story-box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  --story-box-shadow-hover: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px inset;
+  --story-box-shadow-flat: rgba(0, 0, 0, 0.05) 0px 1px 4px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  --story-box-shadow-flat-hover: rgba(0, 0, 0, 0.05) 0px 1px 4px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px inset;
+  --story-home-banner-control-border: rgba(255, 255, 255, 0.35);
+  --story-home-banner-control-bg: rgba(255, 255, 255, 0.3);
+  --story-archive-timeline-fade: linear-gradient(
+      to bottom,
+      rgba(232, 232, 232, 1) 60%,
+      rgba(0, 0, 0, 0) 100%
+    )
+    1 100%;
+}
+
+[data-theme="dark"] {
+  --story-surface-solid: #292b2f;
+  --story-surface-80: rgba(32, 33, 36, 0.8);
+  --story-surface-15: rgba(32, 33, 36, 0.15);
+  --story-text-default: #bebec6;
+  --story-text-primary: #d2d2d7;
+  --story-text-secondary: #cbcbd1;
+  --story-text-muted: #9595a2;
+  --story-home-banner-text: #d1d1b6;
+  --story-box-shadow: rgba(255, 255, 255, 0.05) 0px 6px 24px 0px,
+    rgba(255, 255, 255, 0.08) 0px 0px 0px 1px;
+  --story-box-shadow-hover: rgba(255, 255, 255, 0.05) 0px 6px 24px 0px,
+    rgba(255, 255, 255, 0.08) 0px 0px 0px 1px,
+    rgba(255, 255, 255, 0.08) 0px 0px 0px 1px inset;
+  --story-box-shadow-flat: rgba(255, 255, 255, 0.05) 0px 1px 4px 0px,
+    rgba(255, 255, 255, 0.08) 0px 0px 0px 1px;
+  --story-box-shadow-flat-hover: rgba(255, 255, 255, 0.05) 0px 1px 4px 0px,
+    rgba(255, 255, 255, 0.08) 0px 0px 0px 1px,
+    rgba(255, 255, 255, 0.08) 0px 0px 0px 1px inset;
+  --story-home-banner-control-border: rgba(197, 197, 197, 0.35);
+  --story-home-banner-control-bg: rgba(197, 197, 197, 0.3);
+  --story-archive-timeline-fade: linear-gradient(
+      to bottom,
+      rgba(50, 50, 50, 1) 60%,
+      rgba(255, 255, 255, 0) 100%
+    )
+    1 100%;
+}
+
+/* Light theme — redefine-inspired primary */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+  --background: #fdfdfd;
+  --foreground: #323739;
+  --accent: #a31f34;
+  --accent-foreground: #ffffff;
+  --muted: #f7f7f7;
+  --muted-foreground: #5c6669;
+  --border: rgba(0, 0, 0, 0.08);
+  --shiki-light: #323232;
+  --shiki-light-bg: #f6f8fa;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #202124;
+  --foreground: #d2d2d7;
+  --accent: #a31f34;
+  --accent-foreground: #ffffff;
+  --muted: #292b2f;
+  --muted-foreground: #9595a2;
+  --border: rgba(255, 255, 255, 0.08);
+  --shiki-dark: #c0c5ce;
+  --shiki-dark-bg: #2b303b;
+}

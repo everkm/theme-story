@@ -1,0 +1,286 @@
+/* Story header / footer — hexo-theme-redefine navbar & footer */
+
+:root {
+  --story-navbar-height-mobile: 62px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --story-navbar-height-mobile: var(--story-navbar-height);
+  }
+}
+
+/* ── Navbar ── */
+.navbar-container {
+  @apply box-border flex h-full w-full items-center justify-center px-4 backdrop-blur-lg sm:px-6 md:px-12;
+  box-shadow: var(--story-box-shadow);
+  height: var(--story-navbar-height-mobile);
+  padding-top: 2px;
+  transition: box-shadow 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .navbar-container {
+    height: var(--story-navbar-height);
+  }
+
+  body.navbar-shrink .navbar-container {
+    height: 50.4px;
+  }
+}
+
+.navbar-container:hover {
+  box-shadow: var(--story-box-shadow-hover);
+}
+
+.navbar-container--page {
+  @apply sticky top-0 z-40;
+}
+
+.navbar-content {
+  @apply relative z-[1005] flex h-full w-full min-w-0 max-w-[62.5rem] flex-row items-center justify-between gap-2;
+  transition: max-width 0.3s ease;
+}
+
+.navbar-content.has-home-banner {
+  @apply max-w-[75rem];
+}
+
+.navbar-content__left {
+  @apply flex min-w-0 flex-1 items-center;
+}
+
+.logo-title {
+  @apply max-w-[58vw] truncate text-[1.36rem] leading-none no-underline sm:max-w-none sm:text-[1.53rem] md:text-[1.7rem];
+  font-weight: 520;
+  color: var(--story-text-primary);
+  transform: translateY(1px);
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--accent);
+  }
+
+  & h1 {
+    @apply m-0 truncate text-[inherit] leading-none;
+    font-weight: inherit;
+    color: inherit;
+  }
+}
+
+.navbar-content__right {
+  @apply relative flex shrink-0 items-center;
+}
+
+.navbar-list {
+  @apply m-0 list-none items-center gap-[24px] p-0;
+}
+
+.navbar-list--desktop {
+  @apply hidden md:flex;
+}
+
+.navbar-menu-btn__icon--close {
+  @apply hidden;
+}
+
+.navbar-menu-btn[aria-expanded="true"] .navbar-menu-btn__icon--open {
+  @apply hidden;
+}
+
+.navbar-menu-btn[aria-expanded="true"] .navbar-menu-btn__icon--close {
+  @apply block;
+}
+
+@media (max-width: 767px) {
+  #menu-items.is-open {
+    @apply absolute top-[calc(100%+0.5rem)] right-0 z-50 flex max-h-[70vh] w-[min(18rem,calc(100vw-2rem))] flex-col gap-1 overflow-y-auto rounded-[18px] border p-3 backdrop-blur-lg;
+    border-color: var(--border);
+    background-color: var(--story-surface-solid);
+    box-shadow: var(--story-box-shadow);
+  }
+
+  #menu-items.is-open .navbar-item {
+    @apply w-full;
+  }
+
+  #menu-items.is-open .navbar-item a,
+  #menu-items.is-open .navbar-item button {
+    @apply inline-flex w-full items-center rounded-xl px-3 py-2.5 text-left;
+  }
+
+  #menu-items.is-open .navbar-item a:hover,
+  #menu-items.is-open .navbar-item a.active {
+    background-color: var(--muted);
+  }
+
+  #menu-items.is-open .navbar-item a::after {
+    display: none;
+  }
+
+  #menu-items.is-open #header-in-search {
+    @apply w-full justify-start;
+  }
+}
+
+@media (min-width: 768px) {
+  #menu-items.is-open {
+    @apply w-auto flex-row items-center;
+  }
+
+  .navbar-menu-btn {
+    @apply hidden;
+  }
+}
+
+.navbar-item {
+  @apply relative cursor-pointer text-base font-medium;
+  color: var(--story-text-default);
+
+  & a {
+    @apply relative inline-flex items-center gap-1.5 px-1.5 py-1 no-underline;
+    color: inherit;
+    transition: color 0.2s ease;
+  }
+
+  & .navbar-link__icon {
+    @apply size-[1em] shrink-0;
+  }
+
+  & .navbar-link__label {
+    @apply text-[0.95em] tracking-wide uppercase;
+  }
+
+  & a:hover {
+    color: var(--story-text-primary);
+  }
+
+  & a.active {
+    color: var(--story-text-primary);
+  }
+
+  & a::after {
+    content: "";
+    @apply absolute left-1/2 h-0.5 w-full rounded-[18px] opacity-0;
+    bottom: -5px;
+    background: var(--accent);
+    transform: translate3d(-50%, -5px, 0);
+    transition:
+      transform 0.2s ease 0.2s,
+      opacity 0.2s ease 0.2s,
+      bottom 0.2s ease;
+  }
+
+  & a.active::after,
+  & a:hover::after {
+    transform: translate3d(-50%, 0, 0);
+    opacity: 1;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease,
+      bottom 0.2s ease;
+  }
+}
+
+body.navbar-shrink .navbar-item a::after {
+  bottom: -8.2px;
+}
+
+.navbar-icon-btn {
+  @apply relative inline-flex size-9 items-center justify-center rounded-xl p-0 no-underline;
+  color: var(--story-text-default);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+
+  &:hover {
+    color: var(--accent);
+    background-color: var(--muted);
+  }
+
+  &::after {
+    display: none !important;
+  }
+}
+
+.navbar-menu-btn {
+  @apply relative inline-flex size-10 items-center justify-center rounded-xl p-2 md:hidden;
+  color: var(--story-text-default);
+
+  &:hover {
+    color: var(--accent);
+    background-color: var(--muted);
+  }
+}
+
+#header-in-search {
+  @apply flex items-center;
+}
+
+/* ── Footer ── */
+.main-content-footer {
+  @apply w-full;
+}
+
+.story-footer {
+  @apply relative mt-4 h-auto border-t-2 text-sm sm:mt-5 sm:text-base;
+  border-color: var(--border);
+  color: var(--story-text-muted);
+}
+
+.story-footer__info {
+  @apply mx-auto px-3 py-3 text-center sm:px-4 sm:py-4;
+  max-width: 62.5rem;
+  line-height: 1.35;
+}
+
+.story-footer__line {
+  @apply text-balance;
+}
+
+.story-footer__line--primary {
+  @apply flex flex-wrap items-center justify-center gap-x-3 gap-y-2;
+}
+
+.story-footer__line--secondary {
+  @apply mt-2;
+}
+
+.story-footer__copyright a {
+  @apply text-accent underline decoration-dashed underline-offset-4;
+}
+
+.story-footer__line--secondary a {
+  @apply text-accent underline decoration-dashed underline-offset-4;
+}
+
+.story-footer__socials {
+  @apply inline-flex flex-wrap items-center justify-center gap-3 sm:gap-4;
+}
+
+.story-footer__socials a {
+  @apply text-accent no-underline;
+}
+
+.story-page-home .main-content-footer .story-footer {
+  @apply mt-6 rounded-[18px] border px-0 sm:mt-8;
+  border-color: var(--border);
+}
+
+.story-page-home--fixed-banner .main-content-footer .story-footer {
+  background-color: var(--story-surface-80) !important;
+}
+
+.story-page-home .main-content-footer .story-footer__info {
+  @apply max-w-none px-4 py-3 sm:px-6 sm:py-4;
+}
+
+@media (max-width: 640px) {
+  .story-page-home .main-content-header {
+    height: var(--story-navbar-height-mobile);
+  }
+
+  .story-page-home .main-content-container {
+    padding-top: var(--story-navbar-height-mobile);
+  }
+}

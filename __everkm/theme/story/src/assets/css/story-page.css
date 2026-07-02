@@ -1,0 +1,35 @@
+/* Story static pages (about, etc.) — hexo-theme-redefine page-template */
+
+.page-title-header {
+  @apply mb-6 text-[2.4rem] leading-tight font-bold sm:mb-9 sm:text-[3.2rem];
+  color: var(--story-text-secondary);
+}
+
+.page-template-container {
+  @apply mb-6 box-border rounded-[18px] p-[22px] sm:mb-8 md:p-[30px];
+  background: var(--story-surface-solid);
+}
+
+@media (min-width: 640px) {
+  .page-template-container {
+    box-shadow: var(--story-box-shadow);
+  }
+
+  .page-template-container:hover {
+    box-shadow: var(--story-box-shadow-hover);
+  }
+}
+
+.page-template-content {
+  color: var(--story-text-default);
+}
+
+.page-template-content > :first-child {
+  @apply mt-0;
+}
+
+@media (max-width: 639px) {
+  .page-template-container {
+    box-shadow: none;
+  }
+}

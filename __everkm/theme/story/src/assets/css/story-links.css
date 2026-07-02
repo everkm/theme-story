@@ -1,0 +1,97 @@
+/* Story links page — hexo-theme-redefine bookmarks */
+
+.friends-link-container {
+  @apply flex flex-col;
+}
+
+.friends-link-container__title {
+  @apply mt-1.5 mb-5 text-[2.4rem] leading-none font-bold sm:text-[3.2rem];
+  color: var(--story-text-secondary);
+}
+
+.friends-link-category__title {
+  @apply mt-2 mb-4 text-2xl font-bold;
+  color: var(--story-text-secondary);
+}
+
+.friends-link-grid {
+  @apply mb-6 grid w-full gap-4;
+}
+
+.friends-link-grid--cards {
+  @apply grid-cols-1 sm:grid-cols-2;
+}
+
+.friends-link-grid--list {
+  @apply grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+}
+
+.friends-link-item {
+  @apply scale-100 transition-transform duration-100 ease-linear active:scale-95;
+}
+
+.friends-link-item a {
+  @apply block no-underline;
+}
+
+.friends-link-card {
+  @apply overflow-hidden rounded-[18px] border;
+  border-color: var(--border);
+  background-color: var(--story-surface-solid);
+  box-shadow: var(--story-box-shadow-flat);
+}
+
+.friends-link-card__thumbnail {
+  @apply h-32 overflow-hidden md:h-44;
+
+  & img {
+    @apply size-full object-cover;
+  }
+}
+
+.friends-link-card__body,
+.friends-link-row {
+  @apply flex min-w-0 flex-row items-center gap-1 overflow-hidden sm:gap-2;
+}
+
+.friends-link-row {
+  @apply rounded-[18px] border px-0;
+  border-color: var(--border);
+  background-color: var(--story-surface-solid);
+  box-shadow: var(--story-box-shadow-flat);
+}
+
+.friends-link-avatar {
+  @apply size-16 shrink-0 overflow-hidden;
+  background-color: var(--muted);
+
+  & img {
+    @apply size-16 max-w-none object-cover;
+  }
+}
+
+.friends-link-card .friends-link-avatar {
+  @apply rounded-bl-[18px];
+}
+
+.friends-link-row .friends-link-avatar {
+  @apply rounded-l-[18px];
+}
+
+.friends-link-meta {
+  @apply flex min-w-0 flex-col px-3 py-2;
+}
+
+.friends-link-name {
+  @apply truncate text-lg font-medium;
+  color: var(--story-text-secondary);
+}
+
+.friends-link-item:hover .friends-link-name {
+  color: var(--accent);
+}
+
+.friends-link-desc {
+  @apply truncate text-sm;
+  color: var(--story-text-muted);
+}

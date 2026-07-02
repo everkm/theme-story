@@ -1,0 +1,84 @@
+/* Story tags index — hexo-theme-redefine blur tag cloud */
+
+.tagcloud-content {
+  @apply text-justify;
+}
+
+.tagcloud-content:hover .tag-list a {
+  filter: blur(0) !important;
+  transition: filter 0.3s ease;
+}
+
+.tag-list {
+  @apply m-0 flex list-none flex-wrap items-center justify-center p-0;
+  line-height: 2.5rem;
+}
+
+.tag-list[data-show-value] a::after {
+  content: attr(data-weight);
+  @apply ml-2.5 rounded-[9px] px-2 py-1 text-2xl;
+  min-width: 35px;
+  background-color: var(--muted);
+  color: var(--story-text-muted);
+  transition: background-color 0.2s ease;
+}
+
+.tag-list li a {
+  @apply relative m-2.5 block flex-1 rounded-[18px] px-5 py-3.5 text-xl no-underline;
+  color: var(--story-text-default);
+  filter: blur(var(--blur, 0));
+  transform: scaleX(1) scaleY(1);
+  background-color: var(--story-surface-solid);
+  box-shadow: var(--story-box-shadow-flat);
+  transition:
+    transform 0.2s ease,
+    filter 0.3s ease,
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.tag-list li a[data-weight] {
+  --blur: 0;
+}
+
+.tag-list li a[data-weight="1"] {
+  --blur: 3px;
+}
+
+.tag-list li a[data-weight="2"] {
+  --blur: 1.8px;
+}
+
+.tag-list li a[data-weight="3"] {
+  --blur: 0.8px;
+}
+
+.tag-list li a[data-weight="4"] {
+  --blur: 0.4px;
+}
+
+.tag-list li a[data-weight="5"] {
+  --blur: 0;
+}
+
+.tag-cloud-item__hash {
+  @apply mr-1 opacity-30;
+}
+
+.tag-list li a:hover {
+  transform: scale(1.05);
+  box-shadow: var(--story-box-shadow-flat-hover);
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.tag-list li a:hover .tag-cloud-item__hash {
+  @apply opacity-40;
+  color: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tag-list * {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,118 @@
+/* Story archives page — hexo-theme-redefine timeline */
+
+.archive-container {
+  @apply mb-6 box-border rounded-[18px] p-[22px] sm:mb-8 md:p-[30px];
+  background: var(--story-surface-solid);
+}
+
+@media (min-width: 640px) {
+  .archive-container {
+    box-shadow: var(--story-box-shadow);
+  }
+
+  .archive-container:hover {
+    box-shadow: var(--story-box-shadow-hover);
+  }
+}
+
+.archive-list-container {
+  @apply w-full;
+}
+
+.archive-item + .archive-item {
+  @apply mt-8;
+}
+
+.archive-item__header {
+  @apply mb-2 flex flex-row items-center;
+}
+
+.archive-year {
+  @apply mr-2 text-[1.8rem] font-semibold sm:text-3xl;
+  color: var(--story-text-secondary);
+}
+
+.archive-year-post-count {
+  @apply rounded-[9px] border px-2.5 py-0.5 text-xs font-bold sm:text-sm;
+  border-color: var(--border);
+  background-color: var(--muted);
+  color: var(--story-text-muted);
+}
+
+.archive-article-list {
+  @apply m-0 list-none p-0 text-lg leading-normal md:pl-8;
+}
+
+.archive-article-item {
+  @apply relative space-y-2 border-l-2 px-4 pb-2 pt-10 text-xl sm:px-6;
+  border-color: var(--border);
+  list-style: none;
+}
+
+.archive-article-item::before {
+  content: attr(data-date-label);
+  @apply absolute left-8 top-4 block text-xs font-bold sm:left-8;
+  color: var(--story-text-muted);
+}
+
+.archive-article-item::after {
+  content: "";
+  @apply absolute -left-[7px] top-5 block size-3 rounded-full border-2;
+  border-color: var(--story-text-muted);
+  background: var(--background);
+  transition: background 0.2s ease-in-out;
+}
+
+.archive-article-item:last-child {
+  border-image: var(--story-archive-timeline-fade);
+}
+
+.archive-article-link {
+  @apply block w-fit no-underline;
+  color: inherit;
+}
+
+.archive-article-title {
+  @apply relative my-0.5 block text-xl sm:text-2xl;
+  color: var(--story-text-secondary);
+  transition: color 0.2s ease;
+}
+
+.archive-article-title::after {
+  content: "";
+  @apply absolute -left-7 top-2 size-[7px] rounded-full border;
+  border-color: var(--border);
+  background: var(--muted-foreground);
+  opacity: 0.35;
+}
+
+.archive-article-link:hover .archive-article-title {
+  color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .archive-container {
+    @apply rounded-2xl px-4 py-5;
+    box-shadow: none;
+  }
+
+  .archive-article-list {
+    @apply pl-2;
+  }
+
+  .archive-article-item {
+    @apply px-3 pt-9;
+  }
+
+  .archive-article-item::before {
+    @apply left-6 text-[0.7rem];
+  }
+
+  .archive-article-title {
+    @apply text-lg;
+  }
+
+  .archive-article-title::after {
+    @apply -left-6 top-[0.45em] size-1.5;
+  }
+}
