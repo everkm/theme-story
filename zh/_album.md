@@ -27,4 +27,4 @@ items:
     description: Lorem ipsum dolor sit amet
 ---
 
-相册数据存放在 `_masonry.md` frontmatter 中，由虚拟页 `/album/` 读取。
+相册数据存放在 `_album.md` frontmatter 中，由虚拟页 `/album/` 读取。

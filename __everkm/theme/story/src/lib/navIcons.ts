@@ -14,7 +14,6 @@ const NAV_ICONS: Record<string, string> = {
   photo: IconPhoto,
   album: IconPhoto,
   image: IconPhoto,
-  masonry: IconPhoto,
   link: IconLink,
   links: IconLink,
   info: IconInfoCircle,
@@ -25,7 +24,7 @@ function inferIconKey(link: StoryNavLink): string | null {
   const path = link.path.toLowerCase();
   if (/github\.com/i.test(path)) return "github";
   if (path.includes("archives")) return "archives";
-  if (path.includes("/album") || path.includes("masonry")) return "album";
+  if (path.includes("/album")) return "album";
   if (path.includes("/links")) return "links";
   if (path.includes("/about")) return "about";
   if (path === "/" || path === "/index.html") return "home";

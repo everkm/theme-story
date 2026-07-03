@@ -16,7 +16,7 @@ export type FriendLinkCategory = {
   list?: FriendLinkItem[];
 };
 
-export type MasonryItem = {
+export type AlbumItem = {
   image: string;
   title?: string;
   description?: string;
@@ -42,10 +42,10 @@ export function parseFriendLinkCategories(meta: Record<string, unknown> | undefi
   return raw as FriendLinkCategory[];
 }
 
-export function parseMasonryItems(meta: Record<string, unknown> | undefined): MasonryItem[] {
+export function parseAlbumItems(meta: Record<string, unknown> | undefined): AlbumItem[] {
   const raw = meta?.items;
   if (!Array.isArray(raw)) return [];
-  return raw as MasonryItem[];
+  return raw as AlbumItem[];
 }
 
 export function categoryLabel(category: FriendLinkCategory): string {

@@ -2,7 +2,7 @@ import { Component, For, Show } from "solid-js";
 import { getStoryConfig } from "../lib/config";
 import {
   loadDataSourceDoc,
-  parseMasonryItems,
+  parseAlbumItems,
   resolveStoryMediaUrl,
 } from "../lib/dataSource";
 import { useTranslations } from "../lib/i18n";
@@ -12,18 +12,18 @@ import { Footer } from "../components/Footer";
 import { PageChrome } from "../components/PageChrome";
 import { Main } from "../components/Main";
 
-type MasonryPageProps = {
+type AlbumPageProps = {
   props: PageContext;
 };
 
-export const MasonryPage: Component<MasonryPageProps> = (p) => {
+export const AlbumPage: Component<AlbumPageProps> = (p) => {
   const ctx = () => p.props;
   const cfg = () => getStoryConfig(ctx());
   const t = () => useTranslations(ctx().lang);
-  const doc = () => loadDataSourceDoc(ctx(), cfg().masonry, "/_masonry.md");
-  const items = () => parseMasonryItems(doc()?.meta);
-  const originPath = () => doc()?.path ?? "/_masonry.md";
-  const pageTitle = () => doc()?.title ?? t().pages.masonryTitle;
+  const doc = () => loadDataSourceDoc(ctx(), cfg().album, "/_album.md");
+  const items = () => parseAlbumItems(doc()?.meta);
+  const originPath = () => doc()?.path ?? "/_album.md";
+  const pageTitle = () => doc()?.title ?? t().pages.albumTitle;
 
   return (
     <>
@@ -41,7 +41,7 @@ export const MasonryPage: Component<MasonryPageProps> = (p) => {
           <Show
             when={items().length > 0}
             fallback={
-              <p class="text-muted-foreground italic">{t().pages.masonryEmpty}</p>
+              <p class="text-muted-foreground italic">{t().pages.albumEmpty}</p>
             }
           >
             <div class="loading-placeholder">
@@ -52,7 +52,7 @@ export const MasonryPage: Component<MasonryPageProps> = (p) => {
               </div>
             </div>
             <div
-              id="masonry-container"
+              id="album-container"
               data-vendor-script={pageUrl(
                 ctx().request_id,
                 "/assets/vendor/minimasonry.min.js",
@@ -66,7 +66,7 @@ export const MasonryPage: Component<MasonryPageProps> = (p) => {
                     originPath(),
                   );
                   return (
-                    <div class="masonry-item">
+                    <div class="album-item">
                       <a
                         class="story-album-link"
                         href={imageUrl}

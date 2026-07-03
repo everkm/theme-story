@@ -17,14 +17,14 @@ declare global {
   }
 }
 
-let masonryInstance: MiniMasonryInstance | null = null;
+let layoutInstance: MiniMasonryInstance | null = null;
 let scriptPromise: Promise<void> | null = null;
 
 const IMAGE_WAIT_MS = 8000;
 
 function vendorScriptUrl(): string {
   const fromDom = document
-    .querySelector("#masonry-container")
+    .querySelector("#album-container")
     ?.getAttribute("data-vendor-script");
   if (fromDom) return fromDom;
 
@@ -46,7 +46,7 @@ function loadMiniMasonryScript(): Promise<void> {
     };
 
     const existing = document.querySelector<HTMLScriptElement>(
-      'script[data-story-masonry="1"]',
+      'script[data-story-album="1"]',
     );
     if (existing) {
       if (existing.dataset.loaded === "1") {
@@ -68,7 +68,7 @@ function loadMiniMasonryScript(): Promise<void> {
     const script = document.createElement("script");
     script.src = vendorScriptUrl();
     script.defer = true;
-    script.dataset.storyMasonry = "1";
+    script.dataset.storyAlbum = "1";
     script.onload = () => {
       script.dataset.loaded = "1";
       finish();
@@ -80,13 +80,13 @@ function loadMiniMasonryScript(): Promise<void> {
   return scriptPromise;
 }
 
-export function teardownMasonryLayout(): void {
-  masonryInstance?.destroy();
-  masonryInstance = null;
+export function teardownAlbumLayout(): void {
+  layoutInstance?.destroy();
+  layoutInstance = null;
 }
 
-function waitForMasonryImages(container: HTMLElement): Promise<void> {
-  const images = container.querySelectorAll<HTMLImageElement>(".masonry-item img");
+function waitForAlbumImages(container: HTMLElement): Promise<void> {
+  const images = container.querySelectorAll<HTMLImageElement>(".album-item img");
   if (images.length === 0) return Promise.resolve();
 
   return new Promise((resolve) => {
@@ -121,61 +121,61 @@ function waitForMasonryImages(container: HTMLElement): Promise<void> {
   });
 }
 
-function revealMasonryLayout(
+function revealAlbumLayout(
   loadingPlaceholder: HTMLElement,
-  masonryContainer: HTMLElement,
+  albumContainer: HTMLElement,
 ): void {
   loadingPlaceholder.style.opacity = "0";
   window.setTimeout(() => {
     loadingPlaceholder.style.display = "none";
-    masonryContainer.classList.remove("is-preload");
-    masonryContainer.style.display = "block";
-    masonryContainer.style.visibility = "visible";
+    albumContainer.classList.remove("is-preload");
+    albumContainer.style.display = "block";
+    albumContainer.style.visibility = "visible";
 
     const MiniMasonry = window.MiniMasonry;
     if (!MiniMasonry) {
-      masonryContainer.style.opacity = "1";
+      albumContainer.style.opacity = "1";
       return;
     }
 
-    teardownMasonryLayout();
+    teardownAlbumLayout();
     const baseWidth = window.innerWidth >= 768 ? 255 : 150;
-    masonryInstance = new MiniMasonry({
+    layoutInstance = new MiniMasonry({
       baseWidth,
-      container: masonryContainer,
+      container: albumContainer,
       gutterX: 10,
       gutterY: 10,
       surroundingGutter: false,
     });
-    masonryInstance.layout();
-    masonryContainer.style.opacity = "1";
+    layoutInstance.layout();
+    albumContainer.style.opacity = "1";
   }, 100);
 }
 
-export async function bootMasonryLayout(): Promise<void> {
+export async function bootAlbumLayout(): Promise<void> {
   const loadingPlaceholder = document.querySelector<HTMLElement>(
     ".page-template-container .loading-placeholder",
   );
-  const masonryContainer = document.querySelector<HTMLElement>("#masonry-container");
-  if (!loadingPlaceholder || !masonryContainer) {
-    teardownMasonryLayout();
+  const albumContainer = document.querySelector<HTMLElement>("#album-container");
+  if (!loadingPlaceholder || !albumContainer) {
+    teardownAlbumLayout();
     return;
   }
 
   loadingPlaceholder.style.display = "block";
   loadingPlaceholder.style.opacity = "1";
-  masonryContainer.classList.add("is-preload");
-  masonryContainer.style.display = "block";
-  masonryContainer.style.opacity = "0";
+  albumContainer.classList.add("is-preload");
+  albumContainer.style.display = "block";
+  albumContainer.style.opacity = "0";
 
   try {
     await Promise.all([
       loadMiniMasonryScript(),
-      waitForMasonryImages(masonryContainer),
+      waitForAlbumImages(albumContainer),
     ]);
-    revealMasonryLayout(loadingPlaceholder, masonryContainer);
+    revealAlbumLayout(loadingPlaceholder, albumContainer);
   } catch (error) {
-    console.error("[story] masonry layout failed:", error);
-    revealMasonryLayout(loadingPlaceholder, masonryContainer);
+    console.error("[story] album layout failed:", error);
+    revealAlbumLayout(loadingPlaceholder, albumContainer);
   }
 }

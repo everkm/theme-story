@@ -25,7 +25,7 @@ config:
   home: '[[_home]]'
   about: '[[_about]]'
   links: '[[_links]]'
-  masonry: '[[_masonry]]'
+  album: '[[_album]]'
 
   posts:
     per_page: 10

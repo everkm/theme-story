@@ -10,7 +10,7 @@ type GalleryConfig = {
 const GALLERIES: GalleryConfig[] = [
   {
     id: "album",
-    gallery: "#masonry-container",
+    gallery: "#album-container",
     children: "a.story-album-link",
   },
   {
@@ -34,7 +34,7 @@ function isImageUrl(url: string): boolean {
 }
 
 function isProseImageCandidate(img: HTMLImageElement): boolean {
-  if (img.closest("#masonry-container")) return false;
+  if (img.closest("#album-container")) return false;
   if (img.closest(".article-hero")) return false;
   if (img.closest(".article-header__avatar")) return false;
   if (img.closest("a.story-album-link")) return false;

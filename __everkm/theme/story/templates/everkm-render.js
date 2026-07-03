@@ -2592,7 +2592,7 @@ var DEFAULTS = {
   home: "/_home.md",
   about: "/_about.md",
   links: "/_links.md",
-  masonry: "/_masonry.md",
+  album: "/_album.md",
   posts: {
     per_page: 10,
     per_index: 10,
@@ -2718,8 +2718,8 @@ var en = {
     aboutEmpty: "No content yet.",
     linksTitle: "Friend Links",
     linksEmpty: "No friend links configured yet.",
-    masonryTitle: "Album",
-    masonryEmpty: "No album items configured yet.",
+    albumTitle: "Album",
+    albumEmpty: "No album items configured yet.",
     notFoundTitle: "Page Not Found",
     notFoundDesc: "The page you are looking for doesn't exist or has been moved.",
     notFoundBackHome: "Back to Home"
@@ -2793,8 +2793,8 @@ var zh = {
     aboutEmpty: "\u6682\u65E0\u5185\u5BB9",
     linksTitle: "\u53CB\u60C5\u94FE\u63A5",
     linksEmpty: "\u5C1A\u672A\u914D\u7F6E\u53CB\u94FE\u3002",
-    masonryTitle: "\u76F8\u518C",
-    masonryEmpty: "\u5C1A\u672A\u914D\u7F6E\u76F8\u518C\u5185\u5BB9\u3002",
+    albumTitle: "\u76F8\u518C",
+    albumEmpty: "\u5C1A\u672A\u914D\u7F6E\u76F8\u518C\u5185\u5BB9\u3002",
     notFoundTitle: "\u9875\u9762\u672A\u627E\u5230",
     notFoundDesc: "\u60A8\u8BBF\u95EE\u7684\u9875\u9762\u4E0D\u5B58\u5728\u6216\u5DF2\u88AB\u79FB\u52A8\u3002",
     notFoundBackHome: "\u8FD4\u56DE\u9996\u9875"
@@ -2828,7 +2828,7 @@ function resolvePageKey(compName, tplPath, post) {
   if (key === "tags") return "tags-index";
   if (key === "archives") return "archives";
   if (key === "links") return "links";
-  if (key === "album" || key === "masonry") return "album";
+  if (key === "album") return "album";
   if (key === "404" || key === "not-found") return "not-found";
   if (key.startsWith("tags/")) return "tag-posts";
   if (post) return "post";
@@ -3172,7 +3172,6 @@ var NAV_ICONS = {
   photo: IconPhoto_default,
   album: IconPhoto_default,
   image: IconPhoto_default,
-  masonry: IconPhoto_default,
   link: IconLink_default,
   links: IconLink_default,
   info: IconInfoCircle_default,
@@ -3182,7 +3181,7 @@ function inferIconKey(link) {
   const path = link.path.toLowerCase();
   if (/github\.com/i.test(path)) return "github";
   if (path.includes("archives")) return "archives";
-  if (path.includes("/album") || path.includes("masonry")) return "album";
+  if (path.includes("/album")) return "album";
   if (path.includes("/links")) return "links";
   if (path.includes("/about")) return "about";
   if (path === "/" || path === "/index.html") return "home";
@@ -4158,7 +4157,7 @@ function parseFriendLinkCategories(meta) {
   if (!Array.isArray(raw)) return [];
   return raw;
 }
-function parseMasonryItems(meta) {
+function parseAlbumItems(meta) {
   const raw = meta?.items;
   if (!Array.isArray(raw)) return [];
   return raw;
@@ -4947,9 +4946,9 @@ var LinksPage = (p3) => {
   })];
 };
 
-// src/pages/masonry.tsx
+// src/pages/album.tsx
 var _tmpl$68 = '<div class="loading-placeholder"><div class="flex-grid generic-card"><div class="card loading"></div><div class="card loading"></div><div class="card loading"></div></div></div>';
-var _tmpl$220 = ['<div id="masonry-container"', ">", "</div>"];
+var _tmpl$220 = ['<div id="album-container"', ">", "</div>"];
 var _tmpl$317 = ['<div class="page-template-content app-prose mt-8">', "</div>"];
 var _tmpl$413 = ['<div class="page-template-container"><h1 class="page-title-header">', "</h1>", "", "</div>"];
 var _tmpl$511 = ['<p class="text-muted-foreground italic">', "</p>"];
@@ -4957,15 +4956,15 @@ var _tmpl$69 = ['<div class="image-title">', "</div>"];
 var _tmpl$74 = ['<div class="image-description">', "</div>"];
 var _tmpl$83 = ["<strong>", "</strong>"];
 var _tmpl$93 = ['<span class="hidden-caption-content">', "", "</span>"];
-var _tmpl$103 = ['<div class="masonry-item"><a class="story-album-link"', '><div class="image-container"><img', ">", "", "", "</div></a></div>"];
-var MasonryPage = (p3) => {
+var _tmpl$103 = ['<div class="album-item"><a class="story-album-link"', '><div class="image-container"><img', ">", "", "", "</div></a></div>"];
+var AlbumPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
   const t2 = () => useTranslations(ctx().lang);
-  const doc = () => loadDataSourceDoc(ctx(), cfg().masonry, "/_masonry.md");
-  const items = () => parseMasonryItems(doc()?.meta);
-  const originPath = () => doc()?.path ?? "/_masonry.md";
-  const pageTitle = () => doc()?.title ?? t2().pages.masonryTitle;
+  const doc = () => loadDataSourceDoc(ctx(), cfg().album, "/_album.md");
+  const items = () => parseAlbumItems(doc()?.meta);
+  const originPath = () => doc()?.path ?? "/_album.md";
+  const pageTitle = () => doc()?.title ?? t2().pages.albumTitle;
   return [createComponent(Header, {
     get ctx() {
       return ctx();
@@ -4991,7 +4990,7 @@ var MasonryPage = (p3) => {
           return items().length > 0;
         },
         get fallback() {
-          return ssr(_tmpl$511, escape(t2().pages.masonryEmpty));
+          return ssr(_tmpl$511, escape(t2().pages.albumEmpty));
         },
         get children() {
           return [ssr(_tmpl$68), ssr(_tmpl$220, ssrAttribute("data-vendor-script", escape(pageUrl(ctx().request_id, "/assets/vendor/minimasonry.min.js"), true), false), escape(createComponent(For, {
@@ -5122,7 +5121,7 @@ function renderPageBody(pageKey, props) {
         props
       });
     case "album":
-      return createComponent(MasonryPage, {
+      return createComponent(AlbumPage, {
         props
       });
     case "not-found":
@@ -5155,7 +5154,7 @@ function resolveLayoutTitle(pageKey, props, cfg) {
     return `${title} | ${siteName}`;
   }
   if (pageKey === "album") {
-    const title = dataSourceTitle(props, cfg.masonry, "/_masonry.md", "Album");
+    const title = dataSourceTitle(props, cfg.album, "/_album.md", "Album");
     return `${title} | ${siteName}`;
   }
   if (pageKey === "not-found") {

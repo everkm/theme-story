@@ -11,7 +11,7 @@ import { TagsIndexPage } from "./tags-index";
 import { TagPostsPage } from "./tag-posts";
 import { ArchivesPage } from "./archives";
 import { LinksPage } from "./links";
-import { MasonryPage } from "./masonry";
+import { AlbumPage } from "./album";
 import { NotFoundPage } from "./not-found";
 import { dataSourceTitle } from "../lib/dataSource";
 
@@ -34,7 +34,7 @@ function renderPageBody(pageKey: string, props: PageContext) {
     case "links":
       return <LinksPage props={props} />;
     case "album":
-      return <MasonryPage props={props} />;
+      return <AlbumPage props={props} />;
     case "not-found":
       return <NotFoundPage props={props} />;
     default:
@@ -73,8 +73,8 @@ function resolveLayoutTitle(
   if (pageKey === "album") {
     const title = dataSourceTitle(
       props,
-      cfg.masonry,
-      "/_masonry.md",
+      cfg.album,
+      "/_album.md",
       "Album",
     );
     return `${title} | ${siteName}`;

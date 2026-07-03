@@ -1,6 +1,6 @@
-/* Story album page — hexo-theme-redefine masonry (MiniMasonry) */
+/* Story album page — MiniMasonry layout */
 
-.page-template-container #masonry-container {
+.page-template-container #album-container {
   position: relative;
   display: none;
   opacity: 0;
@@ -8,7 +8,7 @@
   min-height: 1px;
 }
 
-.page-template-container #masonry-container.is-preload {
+.page-template-container #album-container.is-preload {
   display: block;
   visibility: hidden;
   position: absolute;
@@ -17,16 +17,16 @@
   opacity: 0;
 }
 
-.page-template-container #masonry-container .masonry-item {
+.page-template-container #album-container .album-item {
   position: absolute;
   box-sizing: border-box;
 }
 
-.page-template-container #masonry-container .masonry-item:hover img {
+.page-template-container #album-container .album-item:hover img {
   box-shadow: var(--story-box-shadow);
 }
 
-.page-template-container #masonry-container .masonry-item img {
+.page-template-container #album-container .album-item img {
   width: 100%;
   border-radius: 14px;
   box-shadow: var(--story-box-shadow-flat);
@@ -46,7 +46,7 @@
 }
 
 .page-template-container .loading {
-  animation: masonry-gradient-slide 1.1s ease infinite;
+  animation: album-gradient-slide 1.1s ease infinite;
   background: 0 0 / 300% 300% linear-gradient(
     120deg,
     rgba(156, 156, 156, 0.125) 40%,
@@ -143,7 +143,7 @@
   box-shadow: var(--story-box-shadow-hover);
 }
 
-@keyframes masonry-gradient-slide {
+@keyframes album-gradient-slide {
   0% {
     background-position: 100% 50%;
   }

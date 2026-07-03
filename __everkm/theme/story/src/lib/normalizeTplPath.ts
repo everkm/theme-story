@@ -24,7 +24,7 @@ export function resolvePageKey(
   if (key === "tags") return "tags-index";
   if (key === "archives") return "archives";
   if (key === "links") return "links";
-  if (key === "album" || key === "masonry") return "album";
+  if (key === "album") return "album";
   if (key === "404" || key === "not-found") return "not-found";
   if (key.startsWith("tags/")) return "tag-posts";
 

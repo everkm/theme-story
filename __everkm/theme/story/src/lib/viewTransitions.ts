@@ -16,7 +16,7 @@ import { resetHomeBannerBlur } from "./homeBannerBlur";
 import { installHomeBannerScroll } from "./homeBannerScroll";
 import { installParticles } from "./particles";
 import { bootImageViewer, teardownImageViewer } from "./imageViewer";
-import { bootMasonryLayout, teardownMasonryLayout } from "./masonryLayout";
+import { bootAlbumLayout, teardownAlbumLayout } from "./albumLayout";
 
 import { STORY_PAGE_SWAP } from "./events";
 
@@ -245,7 +245,7 @@ export function bootClient(): void {
   installBannerTyped();
   installHomeBannerScroll();
   installParticles();
-  void bootMasonryLayout().then(() => bootImageViewer());
+  void bootAlbumLayout().then(() => bootImageViewer());
   updateActiveNav();
   mountClientBlocks();
   installFootnoteBackButton("#article");
@@ -263,7 +263,7 @@ export function bootClient(): void {
     resetHomeBannerBlur();
     installNavbarShrink();
     teardownImageViewer();
-    teardownMasonryLayout();
-    void bootMasonryLayout().then(() => bootImageViewer());
+    teardownAlbumLayout();
+    void bootAlbumLayout().then(() => bootImageViewer());
   });
 }
