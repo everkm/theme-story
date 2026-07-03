@@ -30,10 +30,15 @@ export const HomePage: Component<HomePageProps> = (p) => {
     }).items;
 
   const sidebarPosition = () => cfg().story?.home_sidebar?.position ?? "left";
-  const bannerFixed = () =>
+  const pageNo = () => pagination().pageNo;
+  const bannerEnabled = () =>
     cfg().features?.home_banner !== false &&
-    cfg().story?.home_banner?.enable !== false &&
-    cfg().story?.home_banner?.style === "fixed";
+    cfg().story?.home_banner?.enable !== false;
+  const isFixedBanner = () => cfg().story?.home_banner?.style === "fixed";
+  const showFullBanner = () => bannerEnabled() && pageNo() === 1;
+  const showBannerBackground = () =>
+    bannerEnabled() && pageNo() > 1 && isFixedBanner();
+  const bannerFixed = () => bannerEnabled() && isFixedBanner();
 
   return (
     <main
@@ -41,13 +46,21 @@ export const HomePage: Component<HomePageProps> = (p) => {
       id="main-content"
       data-layout="home"
       data-home-path={pageUrl(ctx().request_id, "/index.html")}
-      classList={{ "story-page-home--fixed-banner": bannerFixed() }}
+      classList={{
+        "story-page-home--fixed-banner": bannerFixed(),
+        "story-page-home--banner-background-only": showBannerBackground(),
+      }}
     >
-      <HomeBanner ctx={ctx()} cfg={cfg()} />
+      <Show when={showFullBanner()}>
+        <HomeBanner ctx={ctx()} cfg={cfg()} mode="hero" />
+      </Show>
+      <Show when={showBannerBackground()}>
+        <HomeBanner ctx={ctx()} cfg={cfg()} mode="background" />
+      </Show>
 
       <div class="main-content-container">
         <div class="main-content-header">
-          <Header ctx={ctx()} mode="home" />
+          <Header ctx={ctx()} mode="home" hasHomeBanner={showFullBanner()} />
         </div>
 
         <div class="main-content-body">
@@ -71,6 +84,7 @@ export const HomePage: Component<HomePageProps> = (p) => {
                 pageNo={pagination().pageNo}
                 pageCount={pagination().pageCount}
                 basePath={HOME_PATH}
+                layout="home"
               />
             </div>
           </div>

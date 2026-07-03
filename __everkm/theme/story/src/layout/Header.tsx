@@ -17,6 +17,8 @@ import IconGithub from "../assets/icons/socials/github.svg";
 type HeaderProps = {
   ctx: PageContext;
   mode?: "home" | "default";
+  /** True only on home page 1 with full hero banner. */
+  hasHomeBanner?: boolean;
 };
 
 function hexToRgba(hex: string, alpha: number): string {
@@ -48,6 +50,7 @@ export const Header: Component<HeaderProps> = (props) => {
   const path = () => currentPagePath(props.ctx);
   const isActive = (target: string) => isActivePath(path(), target);
   const isHome = () => props.mode === "home";
+  const hasHomeBanner = () => props.hasHomeBanner === true;
   const navLinks = () => cfg().story?.navbar?.links ?? [];
   const useConfigNav = () => navLinks().length > 0;
   const navBackground = () => {
@@ -174,7 +177,7 @@ export const Header: Component<HeaderProps> = (props) => {
       >
         <div
           class="navbar-content transition-navbar"
-          classList={{ "has-home-banner": isHome() }}
+          classList={{ "has-home-banner": hasHomeBanner() }}
         >
           <div class="navbar-content__left">
             <a

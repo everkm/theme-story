@@ -2,9 +2,18 @@ export function updateHomeBannerBlur(): void {
   const bg = document.querySelector<HTMLElement>(".home-banner-background");
   if (!bg) return;
 
+  const main = document.querySelector<HTMLElement>("#main-content");
+  const isBackgroundOnly = main?.classList.contains(
+    "story-page-home--banner-background-only",
+  );
+  if (isBackgroundOnly) {
+    bg.style.filter = "blur(15px)";
+    bg.style.webkitFilter = "blur(15px)";
+    return;
+  }
+
   const isFixedHome =
-    document.querySelector("#main-content.story-page-home--fixed-banner") !==
-    null;
+    main?.classList.contains("story-page-home--fixed-banner") ?? false;
   if (!isFixedHome) {
     bg.style.filter = "";
     bg.style.webkitFilter = "";

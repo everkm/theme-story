@@ -3138,6 +3138,24 @@ function paginationHref(base, targetPage) {
   if (targetPage <= 1) return `${normalized}/index.html`;
   return `${normalized}/index.p${targetPage}.html`;
 }
+function buildPageNavItems(current, total, options) {
+  const endSize = options?.endSize ?? 1;
+  const midSize = options?.midSize ?? 2;
+  if (total <= 1) return [];
+  const items = [];
+  const leftEnd = Math.min(endSize, current - 1);
+  const rightEnd = Math.max(total - endSize + 1, current + 1);
+  const leftMid = Math.max(leftEnd + 1, current - midSize);
+  const rightMid = Math.min(rightEnd - 1, current + midSize);
+  for (let i2 = 1; i2 <= leftEnd; i2++) items.push(i2);
+  if (leftMid - leftEnd > 1) items.push("ellipsis");
+  for (let i2 = leftMid; i2 < current; i2++) items.push(i2);
+  items.push(current);
+  for (let i2 = current + 1; i2 <= rightMid; i2++) items.push(i2);
+  if (rightEnd - rightMid > 1) items.push("ellipsis");
+  for (let i2 = rightEnd; i2 <= total; i2++) items.push(i2);
+  return items;
+}
 
 // src/assets/icons/IconMenuDeep.svg
 var IconMenuDeep_default = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6h16" /><path d="M7 12h13" /><path d="M10 18h10" /></svg>';
@@ -3229,6 +3247,7 @@ var Header = (props) => {
   const path = () => currentPagePath(props.ctx);
   const isActive = (target) => isActivePath(path(), target);
   const isHome = () => props.mode === "home";
+  const hasHomeBanner = () => props.hasHomeBanner === true;
   const navLinks = () => cfg().story?.navbar?.links ?? [];
   const useConfigNav = () => navLinks().length > 0;
   const navBackground = () => {
@@ -3274,7 +3293,7 @@ var Header = (props) => {
       return ssr(_tmpl$7, ssrAttribute("href", escape(href(), true), false) + ssrAttribute("data-nav-path", escape(activePath(), true) || escape(void 0, true), false) + ssrAttribute("class", activePath() && isActive(activePath()) ? "active" : escape(void 0, true), false) + ssrAttribute("target", external() ? "_blank" : escape(void 0, true), false) + ssrAttribute("rel", external() ? "noopener noreferrer" : escape(void 0, true), false), escape(navLinkContent(iconSvg(), link.label)));
     }
   });
-  return ssr(_tmpl$8, `navbar-container ${!isHome() ? "navbar-container--page" : ""}`, "background:" + escape(navBackground(), true), `navbar-content transition-navbar ${isHome() ? "has-home-banner" : ""}`, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/index.html"), true), false), escape(cfg().site.name), ssrAttribute("aria-label", escape(t2().a11y.openMenu, true), false), ssrAttribute("data-label-open", escape(t2().a11y.openMenu, true), false) + ssrAttribute("data-label-close", escape(t2().a11y.closeMenu, true), false), escape(createComponent(Icon, {
+  return ssr(_tmpl$8, `navbar-container ${!isHome() ? "navbar-container--page" : ""}`, "background:" + escape(navBackground(), true), `navbar-content transition-navbar ${hasHomeBanner() ? "has-home-banner" : ""}`, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/index.html"), true), false), escape(cfg().site.name), ssrAttribute("aria-label", escape(t2().a11y.openMenu, true), false), ssrAttribute("data-label-open", escape(t2().a11y.openMenu, true), false) + ssrAttribute("data-label-close", escape(t2().a11y.closeMenu, true), false), escape(createComponent(Icon, {
     svg: IconX_default,
     "class": "navbar-menu-btn__icon navbar-menu-btn__icon--close",
     id: "close-icon"
@@ -3496,95 +3515,65 @@ var HomeArticleCard = (props) => {
   })), ssrAttribute("href", escape(href(), true), false), escape(t2().home.readMore));
 };
 
-// src/components/LinkButton.tsx
-var _tmpl$12 = ["<span", ">", "</span>"];
-var LinkButton = (props) => {
-  const [local, rest] = splitProps(props, ["href", "disabled", "title", "aria-label", "class", "accentHover", "children"]);
-  const accentHover = () => local.accentHover !== false && !local.disabled;
-  const linkClass = () => ["group inline-flex items-center gap-1", accentHover() ? "hover:text-accent" : "", local.class ?? ""].filter(Boolean).join(" ");
-  return createComponent(Show, {
-    get when() {
-      return !local.disabled && local.href;
-    },
-    get fallback() {
-      return ssr(_tmpl$12, ssrAttribute("class", escape(linkClass(), true), false) + ssrAttribute("title", escape(local.title, true), false) + ssrAttribute("aria-label", escape(local["aria-label"], true), false), escape(local.children));
-    },
-    get children() {
-      return ssrElement("a", mergeProps({
-        get href() {
-          return local.href;
-        },
-        get ["class"]() {
-          return linkClass();
-        },
-        get title() {
-          return local.title;
-        },
-        get ["aria-label"]() {
-          return local["aria-label"];
-        }
-      }, rest), escape(local.children), false);
-    }
-  });
-};
-
-// src/assets/icons/IconArrowLeft.svg
-var IconArrowLeft_default = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M5 12l6 6" /><path d="M5 12l6 -6" /></svg>';
-
-// src/assets/icons/IconArrowRight.svg
-var IconArrowRight_default = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" /></svg>';
+// src/layout/icons.tsx
+var _tmpl$92 = ['<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1024 1024"', '><path fill="currentColor" d="M338.752 104.704a64 64 0 0 0 0 90.496l316.8 316.8l-316.8 316.8a64 64 0 0 0 90.496 90.496l362.048-362.048a64 64 0 0 0 0-90.496L429.248 104.704a64 64 0 0 0-90.496 0"></path></svg>'];
+var _tmpl$102 = ['<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1024 1024"', '><path fill="currentColor" d="M685.248 104.704a64 64 0 0 1 0 90.496L368.448 512l316.8 316.8a64 64 0 0 1-90.496 90.496L232.704 557.248a64 64 0 0 1 0-90.496l362.048-362.048a64 64 0 0 1 90.496 0"></path></svg>'];
+var NavigateNextIcon = (props) => ssr(_tmpl$92, ssrAttribute("class", escape(props.class, true), false));
+var NavigatePrevIcon = (props) => ssr(_tmpl$102, ssrAttribute("class", escape(props.class, true), false));
 
 // src/components/Pagination.tsx
-var _tmpl$13 = ['<nav class="mt-auto mb-8 flex justify-center gap-4" role="navigation" aria-label="Pagination Navigation">', "", " / ", "", "</nav>"];
-var _tmpl$27 = ['<div data-vt-swap="pagination">', "</div>"];
+var _tmpl$12 = ['<div class="paginator mt-[30px] flex justify-center text-base" role="navigation" aria-label="Pagination Navigation">', "", "", "</div>"];
+var _tmpl$27 = ['<a class="', '" rel="prev"', ">", "</a>"];
+var _tmpl$36 = ["<span", ">", "</span>"];
+var _tmpl$46 = ['<a class="', '"', ">", "</a>"];
+var _tmpl$56 = '<span class="space mx-[0.3rem] inline-flex items-center px-2.5 py-2 max-sm:px-0.5">&hellip;</span>';
+var _tmpl$64 = ['<a class="', '" rel="next"', ">", "</a>"];
+var _tmpl$72 = ['<div class="home-paginator px-7 py-5">', "</div>"];
+var _tmpl$82 = ['<div data-vt-swap="pagination">', "</div>"];
+var paginatorChipClass = "relative mx-[0.3rem] inline-flex cursor-pointer items-center justify-center rounded-[9px] px-4 py-2 whitespace-nowrap bg-background text-[var(--story-text-default)] shadow-[var(--story-box-shadow)] transition-[color,background,box-shadow,transform] duration-200 hover:bg-accent hover:text-accent-foreground hover:shadow-[var(--story-box-shadow-hover)] active:scale-95 active:duration-100";
+var paginatorCurrentClass = "page-number current relative mx-[0.3rem] inline-flex items-center justify-center rounded-[9px] px-4 py-2 whitespace-nowrap bg-accent text-accent-foreground shadow-[var(--story-box-shadow)]";
+var paginatorIconClass = "block size-[0.9em] shrink-0";
 var Pagination = (props) => {
   const t2 = () => useTranslations(props.ctx.lang);
   const prevHref = () => props.pageNo > 1 ? paginationHref(props.basePath, props.pageNo - 1) : void 0;
   const nextHref = () => props.pageNo < props.pageCount ? paginationHref(props.basePath, props.pageNo + 1) : void 0;
-  return ssr(_tmpl$27, escape(createComponent(Show, {
+  const pageItems = () => buildPageNavItems(props.pageNo, props.pageCount);
+  const paginator = () => ssr(_tmpl$12, escape(createComponent(Show, {
+    get when() {
+      return prevHref();
+    },
+    children: (href) => ssr(_tmpl$27, `extend prev ${escape(paginatorChipClass, true)} max-sm:hidden`, ssrAttribute("href", escape(href(), true), false) + ssrAttribute("aria-label", escape(t2().a11y.goToPreviousPage, true), false), escape(createComponent(NavigatePrevIcon, {
+      "class": paginatorIconClass
+    })))
+  })), escape(createComponent(For, {
+    get each() {
+      return pageItems();
+    },
+    children: (item) => typeof item === "number" ? item === props.pageNo ? ssr(_tmpl$36, ssrAttribute("class", escape(paginatorCurrentClass, true), false), escape(item)) : ssr(_tmpl$46, `page-number ${escape(paginatorChipClass, true)}`, ssrAttribute("href", escape(paginationHref(props.basePath, item), true), false), escape(item)) : ssr(_tmpl$56)
+  })), escape(createComponent(Show, {
+    get when() {
+      return nextHref();
+    },
+    children: (href) => ssr(_tmpl$64, `extend next ${escape(paginatorChipClass, true)} max-sm:hidden`, ssrAttribute("href", escape(href(), true), false) + ssrAttribute("aria-label", escape(t2().a11y.goToNextPage, true), false), escape(createComponent(NavigateNextIcon, {
+      "class": paginatorIconClass
+    })))
+  })));
+  return ssr(_tmpl$82, escape(createComponent(Show, {
     get when() {
       return props.pageCount > 1;
     },
     get children() {
-      return ssr(_tmpl$13, escape(createComponent(LinkButton, {
-        get href() {
-          return prevHref();
+      return createComponent(Show, {
+        get when() {
+          return props.layout === "home";
         },
-        get disabled() {
-          return !prevHref();
-        },
-        get ["class"]() {
-          return `select-none ${!prevHref() ? "opacity-50" : ""}`;
-        },
-        get ["aria-label"]() {
-          return t2().a11y.goToPreviousPage;
+        get fallback() {
+          return paginator();
         },
         get children() {
-          return [createComponent(Icon, {
-            svg: IconArrowLeft_default,
-            "class": "inline-block rtl:rotate-180"
-          }), t2().pagination.prev];
+          return ssr(_tmpl$72, escape(paginator()));
         }
-      })), escape(props.pageNo), escape(props.pageCount), escape(createComponent(LinkButton, {
-        get href() {
-          return nextHref();
-        },
-        get disabled() {
-          return !nextHref();
-        },
-        get ["class"]() {
-          return `select-none ${!nextHref() ? "opacity-50" : ""}`;
-        },
-        get ["aria-label"]() {
-          return t2().a11y.goToNextPage;
-        },
-        get children() {
-          return [t2().pagination.next, createComponent(Icon, {
-            svg: IconArrowRight_default,
-            "class": "inline-block rtl:rotate-180"
-          })];
-        }
-      })));
+      });
     }
   })));
 };
@@ -3621,13 +3610,14 @@ function resolveBannerSubtitleStatic(cfg) {
 }
 
 // src/components/HomeBanner.tsx
-var _tmpl$14 = ['<div class="home-banner-background" aria-hidden="true"><img', ' alt class="home-banner-background__img--light"><img', ' alt class="home-banner-background__img--dark"></div>'];
+var _tmpl$13 = ['<div class="', '" aria-hidden="true"><img', ' alt class="home-banner-background__img--light"><img', ' alt class="home-banner-background__img--dark"></div>'];
 var _tmpl$28 = ['<div class="home-banner-container__inline-bg" aria-hidden="true"><img', ' alt class="home-banner-background__img--light"><img', ' alt class="home-banner-background__img--dark"></div>'];
-var _tmpl$36 = ['<p class="home-banner-container__subtitle"><span id="home-banner-subtitle"', "></span></p>"];
-var _tmpl$46 = ['<p class="home-banner-container__subtitle">', "</p>"];
-var _tmpl$56 = ['<div class="home-banner-container__socials">', "</div>"];
-var _tmpl$64 = ['<section class="', '">', '<div class="home-banner-container__content"><div class="home-banner-container__description"><span>', "</span>", "", '</div><div class="home-banner-container__actions"><button type="button" class="home-banner-container__scroll-btn" aria-label="Scroll to content">\u2193</button>', "</div></div></section>"];
+var _tmpl$37 = ['<p class="home-banner-container__subtitle"><span id="home-banner-subtitle"', "></span></p>"];
+var _tmpl$47 = ['<p class="home-banner-container__subtitle">', "</p>"];
+var _tmpl$57 = ['<div class="home-banner-container__socials">', "</div>"];
+var _tmpl$65 = ['<section class="', '">', '<div class="home-banner-container__content"><div class="home-banner-container__description"><span>', "</span>", "", '</div><div class="home-banner-container__actions"><button type="button" class="home-banner-container__scroll-btn" aria-label="Scroll to content">\u2193</button>', "</div></div></section>"];
 var HomeBanner = (props) => {
+  const mode = () => props.mode ?? "hero";
   const banner = () => props.cfg.story?.home_banner;
   const enabled = () => props.cfg.features?.home_banner !== false && banner()?.enable !== false;
   const title = () => banner()?.title || props.cfg.site.name || "Story";
@@ -3639,6 +3629,7 @@ var HomeBanner = (props) => {
   const imageDark = () => banner()?.image?.dark || "/assets/images/main_bg.jpg";
   const isFixed = () => banner()?.style === "fixed";
   const socials = () => props.cfg.socials ?? [];
+  const background = () => ssr(_tmpl$13, `home-banner-background ${mode() === "background" ? "home-banner-background--blurred" : ""}`, ssrAttribute("src", escape(assetUrl(props.ctx.request_id, imageLight()), true), false), ssrAttribute("src", escape(assetUrl(props.ctx.request_id, imageDark()), true), false));
   return createComponent(Show, {
     get when() {
       return enabled();
@@ -3646,56 +3637,77 @@ var HomeBanner = (props) => {
     get children() {
       return [createComponent(Show, {
         get when() {
-          return isFixed();
+          return mode() === "background";
         },
         get children() {
-          return ssr(_tmpl$14, ssrAttribute("src", escape(assetUrl(props.ctx.request_id, imageLight()), true), false), ssrAttribute("src", escape(assetUrl(props.ctx.request_id, imageDark()), true), false));
-        }
-      }), ssr(_tmpl$64, `home-banner-container ${!isFixed() ? "home-banner-container--static" : ""}`, escape(createComponent(Show, {
-        get when() {
-          return !isFixed();
-        },
-        get children() {
-          return ssr(_tmpl$28, ssrAttribute("src", escape(assetUrl(props.ctx.request_id, imageLight()), true), false), ssrAttribute("src", escape(assetUrl(props.ctx.request_id, imageDark()), true), false));
-        }
-      })), escape(title()), escape(createComponent(Show, {
-        get when() {
-          return typingEnabled();
-        },
-        get children() {
-          return ssr(_tmpl$36, ssrAttribute("data-typed-config", escape(typedConfig(), true), false) + ssrAttribute("data-typed-strings", escape(typedStrings(), true), false));
-        }
-      })), escape(createComponent(Show, {
-        get when() {
-          return !typingEnabled() && !!staticSubtitle();
-        },
-        get children() {
-          return ssr(_tmpl$46, escape(staticSubtitle()));
-        }
-      })), escape(createComponent(Show, {
-        get when() {
-          return socials().length > 0;
-        },
-        get children() {
-          return ssr(_tmpl$56, escape(createComponent(Socials, {
-            get ctx() {
-              return props.ctx;
+          return createComponent(Show, {
+            get when() {
+              return isFixed();
             },
-            get socials() {
-              return socials();
+            get children() {
+              return background();
             }
-          })));
+          });
         }
-      })))];
+      }), createComponent(Show, {
+        get when() {
+          return mode() === "hero";
+        },
+        get children() {
+          return [createComponent(Show, {
+            get when() {
+              return isFixed();
+            },
+            get children() {
+              return background();
+            }
+          }), ssr(_tmpl$65, `home-banner-container ${!isFixed() ? "home-banner-container--static" : ""}`, escape(createComponent(Show, {
+            get when() {
+              return !isFixed();
+            },
+            get children() {
+              return ssr(_tmpl$28, ssrAttribute("src", escape(assetUrl(props.ctx.request_id, imageLight()), true), false), ssrAttribute("src", escape(assetUrl(props.ctx.request_id, imageDark()), true), false));
+            }
+          })), escape(title()), escape(createComponent(Show, {
+            get when() {
+              return typingEnabled();
+            },
+            get children() {
+              return ssr(_tmpl$37, ssrAttribute("data-typed-config", escape(typedConfig(), true), false) + ssrAttribute("data-typed-strings", escape(typedStrings(), true), false));
+            }
+          })), escape(createComponent(Show, {
+            get when() {
+              return !typingEnabled() && !!staticSubtitle();
+            },
+            get children() {
+              return ssr(_tmpl$47, escape(staticSubtitle()));
+            }
+          })), escape(createComponent(Show, {
+            get when() {
+              return socials().length > 0;
+            },
+            get children() {
+              return ssr(_tmpl$57, escape(createComponent(Socials, {
+                get ctx() {
+                  return props.ctx;
+                },
+                get socials() {
+                  return socials();
+                }
+              })));
+            }
+          })))];
+        }
+      })];
     }
   });
 };
 
 // src/components/HomeSidebar.tsx
-var _tmpl$15 = ['<div class="announcement">', "</div>"];
+var _tmpl$14 = ['<div class="announcement">', "</div>"];
 var _tmpl$29 = ['<div class="label">', "</div>"];
-var _tmpl$37 = ['<div class="author"><div class="name">', "</div>", "</div>"];
-var _tmpl$47 = ['<div class="home-sidebar-container"><div class="home-sidebar-container__sticky"><div class="sidebar-links"><div class="site-info"><div class="site-name">', "</div>", '</div><a class="links"', '><span class="link-name">', '</span></a></div><div class="sidebar-content"><div class="avatar"><img', "></div>", '<div class="statistics"><a class="tag-count-item"', '><div class="number">', '</div><div class="label">', "</div></a></div></div></div></div>"];
+var _tmpl$38 = ['<div class="author"><div class="name">', "</div>", "</div>"];
+var _tmpl$48 = ['<div class="home-sidebar-container"><div class="home-sidebar-container__sticky"><div class="sidebar-links"><div class="site-info"><div class="site-name">', "</div>", '</div><a class="links"', '><span class="link-name">', '</span></a></div><div class="sidebar-content"><div class="avatar"><img', "></div>", '<div class="statistics"><a class="tag-count-item"', '><div class="number">', '</div><div class="label">', "</div></a></div></div></div></div>"];
 var HomeSidebar = (props) => {
   const t2 = () => useTranslations(props.ctx.lang);
   const sidebar = () => props.cfg.story?.home_sidebar;
@@ -3706,19 +3718,19 @@ var HomeSidebar = (props) => {
       return enabled();
     },
     get children() {
-      return ssr(_tmpl$47, escape(props.cfg.site.name), escape(createComponent(Show, {
+      return ssr(_tmpl$48, escape(props.cfg.site.name), escape(createComponent(Show, {
         get when() {
           return !!sidebar()?.announcement;
         },
         get children() {
-          return ssr(_tmpl$15, escape(sidebar()?.announcement));
+          return ssr(_tmpl$14, escape(sidebar()?.announcement));
         }
       })), ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/archives/index.html"), true), false), escape(t2().nav.archives), ssrAttribute("src", escape(assetUrl(props.ctx.request_id, avatar()), true), false) + ssrAttribute("alt", escape(props.cfg.site.author, true) ?? escape(props.cfg.site.name, true), false), escape(createComponent(Show, {
         get when() {
           return !!props.cfg.site.author;
         },
         get children() {
-          return ssr(_tmpl$37, escape(props.cfg.site.author), escape(createComponent(Show, {
+          return ssr(_tmpl$38, escape(props.cfg.site.author), escape(createComponent(Show, {
             get when() {
               return !!props.cfg.site.description;
             },
@@ -3733,7 +3745,7 @@ var HomeSidebar = (props) => {
 };
 
 // src/pages/home.tsx
-var _tmpl$16 = ['<main class="', '" id="main-content" data-layout="home"', ">", '<div class="main-content-container"><div class="main-content-header">', '</div><div class="main-content-body">', '<div class="main-content"><div class="home-content-container"><ul class="home-article-list">', "</ul>", "</div></div>", "</div>", "</div></main>"];
+var _tmpl$15 = ['<main class="', '" id="main-content" data-layout="home"', ">", "", '<div class="main-content-container"><div class="main-content-header">', '</div><div class="main-content-body">', '<div class="main-content"><div class="home-content-container"><ul class="home-article-list">', "</ul>", "</div></div>", "</div>", "</div></main>"];
 var HomePage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
@@ -3744,19 +3756,50 @@ var HomePage = (p3) => {
     limit: pagination().pageSize
   }).items;
   const sidebarPosition = () => cfg().story?.home_sidebar?.position ?? "left";
-  const bannerFixed = () => cfg().features?.home_banner !== false && cfg().story?.home_banner?.enable !== false && cfg().story?.home_banner?.style === "fixed";
-  return ssr(_tmpl$16, `page-container story-page-home ${bannerFixed() ? "story-page-home--fixed-banner" : ""}`, ssrAttribute("data-home-path", escape(pageUrl(ctx().request_id, "/index.html"), true), false), escape(createComponent(HomeBanner, {
-    get ctx() {
-      return ctx();
+  const pageNo = () => pagination().pageNo;
+  const bannerEnabled = () => cfg().features?.home_banner !== false && cfg().story?.home_banner?.enable !== false;
+  const isFixedBanner = () => cfg().story?.home_banner?.style === "fixed";
+  const showFullBanner = () => bannerEnabled() && pageNo() === 1;
+  const showBannerBackground = () => bannerEnabled() && pageNo() > 1 && isFixedBanner();
+  const bannerFixed = () => bannerEnabled() && isFixedBanner();
+  return ssr(_tmpl$15, `page-container story-page-home ${bannerFixed() ? "story-page-home--fixed-banner" : ""} ${showBannerBackground() ? "story-page-home--banner-background-only" : ""}`, ssrAttribute("data-home-path", escape(pageUrl(ctx().request_id, "/index.html"), true), false), escape(createComponent(Show, {
+    get when() {
+      return showFullBanner();
     },
-    get cfg() {
-      return cfg();
+    get children() {
+      return createComponent(HomeBanner, {
+        get ctx() {
+          return ctx();
+        },
+        get cfg() {
+          return cfg();
+        },
+        mode: "hero"
+      });
+    }
+  })), escape(createComponent(Show, {
+    get when() {
+      return showBannerBackground();
+    },
+    get children() {
+      return createComponent(HomeBanner, {
+        get ctx() {
+          return ctx();
+        },
+        get cfg() {
+          return cfg();
+        },
+        mode: "background"
+      });
     }
   })), escape(createComponent(Header, {
     get ctx() {
       return ctx();
     },
-    mode: "home"
+    mode: "home",
+    get hasHomeBanner() {
+      return showFullBanner();
+    }
   })), escape(createComponent(Show, {
     get when() {
       return sidebarPosition() === "left";
@@ -3794,7 +3837,8 @@ var HomePage = (p3) => {
     get pageCount() {
       return pagination().pageCount;
     },
-    basePath: HOME_PATH
+    basePath: HOME_PATH,
+    layout: "home"
   })), escape(createComponent(Show, {
     get when() {
       return sidebarPosition() === "right";
@@ -3945,13 +3989,45 @@ function buildBreadcrumbSegments(ctx, t2, pageKey) {
   }));
 }
 
+// src/components/LinkButton.tsx
+var _tmpl$16 = ["<span", ">", "</span>"];
+var LinkButton = (props) => {
+  const [local, rest] = splitProps(props, ["href", "disabled", "title", "aria-label", "class", "accentHover", "children"]);
+  const accentHover = () => local.accentHover !== false && !local.disabled;
+  const linkClass = () => ["group inline-flex items-center gap-1", accentHover() ? "hover:text-accent" : "", local.class ?? ""].filter(Boolean).join(" ");
+  return createComponent(Show, {
+    get when() {
+      return !local.disabled && local.href;
+    },
+    get fallback() {
+      return ssr(_tmpl$16, ssrAttribute("class", escape(linkClass(), true), false) + ssrAttribute("title", escape(local.title, true), false) + ssrAttribute("aria-label", escape(local["aria-label"], true), false), escape(local.children));
+    },
+    get children() {
+      return ssrElement("a", mergeProps({
+        get href() {
+          return local.href;
+        },
+        get ["class"]() {
+          return linkClass();
+        },
+        get title() {
+          return local.title;
+        },
+        get ["aria-label"]() {
+          return local["aria-label"];
+        }
+      }, rest), escape(local.children), false);
+    }
+  });
+};
+
 // src/assets/icons/IconChevronLeft.svg
 var IconChevronLeft_default = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>\n';
 
 // src/components/BackButton.tsx
 var _tmpl$17 = ['<span aria-hidden="true">', "</span>"];
 var _tmpl$210 = ["<span>", "</span>"];
-var _tmpl$38 = ['<div class="app-layout flex items-center justify-start">', "</div>"];
+var _tmpl$39 = ['<div class="app-layout flex items-center justify-start">', "</div>"];
 function chevronMarkup() {
   if (IconChevronLeft_default.includes('class="')) {
     return IconChevronLeft_default.replace(/class="([^"]*)"/, 'class="$1 inline-block size-6 rtl:rotate-180"');
@@ -3961,7 +4037,7 @@ function chevronMarkup() {
 var BackButton = (props) => {
   const t2 = () => useTranslations(props.ctx.lang);
   const linkClass = () => ["focus-outline hover:text-foreground/75 -ms-2 mb-2", props.omitTopMargin ? "" : "mt-8"].filter(Boolean).join(" ");
-  return ssr(_tmpl$38, escape(createComponent(LinkButton, {
+  return ssr(_tmpl$39, escape(createComponent(LinkButton, {
     id: "back-button",
     accentHover: false,
     get href() {
@@ -3979,9 +4055,9 @@ var BackButton = (props) => {
 // src/components/Breadcrumb.tsx
 var _tmpl$18 = ['<nav class="app-layout mt-8 mb-4" aria-label="breadcrumb"><ul class="font-light flex flex-wrap items-center gap-x-1 [&amp;>li:not(:last-child)>a]:hover:opacity-100"><li class="inline-flex items-center gap-x-1"><a', ' class="opacity-80">', '</a><span aria-hidden="true" class="opacity-80">&raquo;</span></li>', "</ul></nav>"];
 var _tmpl$211 = ["<a", ' class="capitalize opacity-70">', "</a>"];
-var _tmpl$39 = '<span aria-hidden="true" class="opacity-70">&raquo;</span>';
-var _tmpl$48 = ['<li class="inline-flex items-center gap-x-1">', "</li>"];
-var _tmpl$57 = ['<span class="', '" aria-current="page">', "</span>"];
+var _tmpl$310 = '<span aria-hidden="true" class="opacity-70">&raquo;</span>';
+var _tmpl$49 = ['<li class="inline-flex items-center gap-x-1">', "</li>"];
+var _tmpl$58 = ['<span class="', '" aria-current="page">', "</span>"];
 var Breadcrumb = (props) => {
   const t2 = () => useTranslations(props.ctx.lang);
   const pageKey = () => props.pageKey ?? "";
@@ -3996,15 +4072,15 @@ var Breadcrumb = (props) => {
         get each() {
           return segments();
         },
-        children: (item) => ssr(_tmpl$48, escape(createComponent(Show, {
+        children: (item) => ssr(_tmpl$49, escape(createComponent(Show, {
           get when() {
             return item.href;
           },
           get fallback() {
-            return ssr(_tmpl$57, `capitalize opacity-75 ${item.lowercase ? "lowercase" : ""}`, escape(item.label));
+            return ssr(_tmpl$58, `capitalize opacity-75 ${item.lowercase ? "lowercase" : ""}`, escape(item.label));
           },
           get children() {
-            return [ssr(_tmpl$211, ssrAttribute("href", escape(item.href, true), false), escape(item.label)), ssr(_tmpl$39)];
+            return [ssr(_tmpl$211, ssrAttribute("href", escape(item.href, true), false), escape(item.label)), ssr(_tmpl$310)];
           }
         })))
       })));
@@ -4051,7 +4127,7 @@ var PageChrome = (props) => {
 // src/components/Main.tsx
 var _tmpl$20 = ['<h1 class="text-2xl font-semibold sm:text-3xl">', "</h1>"];
 var _tmpl$212 = ['<p class="text-muted-foreground mt-2 mb-6 italic">', "</p>"];
-var _tmpl$310 = ['<main id="main-content"', ">", "", "</main>"];
+var _tmpl$311 = ['<main id="main-content"', ">", "", "</main>"];
 var Main = (props) => {
   const [local] = splitProps(props, ["pageTitle", "pageDesc", "layout", "ctx", "pageKey", "hidePageHeader", "class", "children"]);
   const hasBreadcrumb = () => local.ctx && local.pageKey ? shouldShowBreadcrumb(local.ctx, local.pageKey) : false;
@@ -4062,7 +4138,7 @@ var Main = (props) => {
     return pageUrl(local.ctx.request_id, local.ctx.page_path);
   };
   const mainClass = () => ["app-layout pb-4", hasBreadcrumb() ? "" : "mt-8", local.class ?? ""].filter(Boolean).join(" ");
-  return ssr(_tmpl$310, ssrAttribute("data-layout", escape(local.layout, true) ?? "page", false) + ssrAttribute("data-backurl", escape(backUrl(), true), false) + ssrAttribute("class", escape(mainClass(), true), false), escape(createComponent(Show, {
+  return ssr(_tmpl$311, ssrAttribute("data-layout", escape(local.layout, true) ?? "page", false) + ssrAttribute("data-backurl", escape(backUrl(), true), false) + ssrAttribute("class", escape(mainClass(), true), false), escape(createComponent(Show, {
     get when() {
       return !local.hidePageHeader;
     },
@@ -4086,7 +4162,7 @@ var APP_PROSE_POST = `${APP_PROSE} mt-8`;
 // src/pages/about.tsx
 var _tmpl$21 = ["<div>", "</div>"];
 var _tmpl$213 = ['<div class="page-template-container"><h1 class="page-title-header">', '</h1><div class="', '">', "</div></div>"];
-var _tmpl$311 = ['<p class="text-muted-foreground italic">', "</p>"];
+var _tmpl$312 = ['<p class="text-muted-foreground italic">', "</p>"];
 var AboutPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
@@ -4122,7 +4198,7 @@ var AboutPage = (p3) => {
           return aboutDoc()?.content_html;
         },
         get fallback() {
-          return ssr(_tmpl$311, escape(t2().pages.aboutEmpty));
+          return ssr(_tmpl$312, escape(t2().pages.aboutEmpty));
         },
         get children() {
           return ssr(_tmpl$21, aboutDoc().content_html);
@@ -4241,8 +4317,8 @@ function resolveCopyrightLicense(raw) {
 // src/components/PostCopyright.tsx
 var _tmpl$31 = ["<li><strong>", ":</strong> ", "</li>"];
 var _tmpl$215 = ['<div class="post-copyright"><div class="article-copyright-info-container"><ul><li><strong>', ":</strong> ", "</li>", "", "", "<li><strong>", ":</strong> ", "</li><li><strong>", ":</strong> ", "</li></ul></div></div>"];
-var _tmpl$312 = ["<span>", "</span>"];
-var _tmpl$49 = ["<a", ' target="_blank" rel="noopener noreferrer">', "</a>"];
+var _tmpl$313 = ["<span>", "</span>"];
+var _tmpl$410 = ["<a", ' target="_blank" rel="noopener noreferrer">', "</a>"];
 import_dayjs2.default.extend(import_utc2.default);
 import_dayjs2.default.extend(import_timezone2.default);
 function formatTs(ts, timezoneName) {
@@ -4299,9 +4375,9 @@ var PostCopyright = (props) => {
           return license()?.url;
         },
         get fallback() {
-          return ssr(_tmpl$312, escape(license()?.label));
+          return ssr(_tmpl$313, escape(license()?.label));
         },
-        children: (url) => ssr(_tmpl$49, ssrAttribute("href", escape(url(), true), false), escape(license()?.label))
+        children: (url) => ssr(_tmpl$410, ssrAttribute("href", escape(url(), true), false), escape(license()?.label))
       })));
     }
   });
@@ -4310,7 +4386,7 @@ var PostCopyright = (props) => {
 // src/components/PostNeighbors.tsx
 var _tmpl$40 = ['<nav class="article-nav"', ">", "", "</nav>"];
 var _tmpl$216 = ['<div class="article-nav__item"><a class="article-nav__link"', '><span class="article-nav__arrow" aria-hidden="true">\u2190</span><span class="min-w-0"><span class="article-nav__title">', '</span><span class="article-nav__label">', "</span></span></a></div>"];
-var _tmpl$313 = ['<div class="article-nav__item article-nav__item--next"><a class="article-nav__link article-nav__link--next"', '><span class="article-nav__arrow" aria-hidden="true">\u2192</span><span class="min-w-0"><span class="article-nav__title">', '</span><span class="article-nav__label">', "</span></span></a></div>"];
+var _tmpl$314 = ['<div class="article-nav__item article-nav__item--next"><a class="article-nav__link article-nav__link--next"', '><span class="article-nav__arrow" aria-hidden="true">\u2192</span><span class="min-w-0"><span class="article-nav__title">', '</span><span class="article-nav__label">', "</span></span></a></div>"];
 var PostNeighbors = (props) => {
   const t2 = () => useTranslations(props.ctx.lang);
   return createComponent(Show, {
@@ -4327,7 +4403,7 @@ var PostNeighbors = (props) => {
         get when() {
           return props.nextPost;
         },
-        children: (next) => ssr(_tmpl$313, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, next().url_path), true), false), escape(next().title), escape(t2().post.nextPost))
+        children: (next) => ssr(_tmpl$314, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, next().url_path), true), false), escape(next().title), escape(t2().post.nextPost))
       })));
     }
   });
@@ -4336,11 +4412,11 @@ var PostNeighbors = (props) => {
 // src/pages/post.tsx
 var _tmpl$41 = ['<main id="main-content" data-layout="post" class="app-layout mt-8">', "", "</main>"];
 var _tmpl$217 = ['<div class="article-hero"><img', ' class="article-hero__cover" loading="eager"><div class="article-hero__title-wrap"><h1 class="article-hero__title" style="', '">', "</h1></div></div>"];
-var _tmpl$314 = ['<div class="px-4 pt-6 sm:px-6 md:px-8"><h1 class="text-accent text-2xl font-bold sm:text-3xl" style="', '">', "</h1></div>"];
-var _tmpl$410 = ['<div class="article-header__name">', "</div>"];
-var _tmpl$58 = ['<div class="flex flex-wrap gap-2 px-4 pb-2 sm:px-6 md:px-8"><span class="text-muted-foreground italic">', ':</span><ul class="flex flex-wrap gap-2">', "</ul></div>"];
-var _tmpl$65 = ['<div class="post-page-container"><article class="article-content-container" id="article">', "", '<div class="article-header"><div class="article-header__avatar"><img', "></div><div>", '<div class="article-header__meta">', "", "</div></div></div>", '<div class="', '">', "</div>", "", "</article></div>"];
-var _tmpl$72 = ['<span class="article-header__meta-item">', ": ", "</span>"];
+var _tmpl$315 = ['<div class="px-4 pt-6 sm:px-6 md:px-8"><h1 class="text-accent text-2xl font-bold sm:text-3xl" style="', '">', "</h1></div>"];
+var _tmpl$411 = ['<div class="article-header__name">', "</div>"];
+var _tmpl$59 = ['<div class="flex flex-wrap gap-2 px-4 pb-2 sm:px-6 md:px-8"><span class="text-muted-foreground italic">', ':</span><ul class="flex flex-wrap gap-2">', "</ul></div>"];
+var _tmpl$66 = ['<div class="post-page-container"><article class="article-content-container" id="article">', "", '<div class="article-header"><div class="article-header__avatar"><img', "></div><div>", '<div class="article-header__meta">', "", "</div></div></div>", '<div class="', '">', "</div>", "", "</article></div>"];
+var _tmpl$73 = ['<span class="article-header__meta-item">', ": ", "</span>"];
 import_dayjs3.default.extend(import_utc3.default);
 import_dayjs3.default.extend(import_timezone3.default);
 function formatMetaTime(ts, timezoneName) {
@@ -4407,7 +4483,7 @@ var PostPage = (p3) => {
     get when() {
       return post();
     },
-    children: (item) => ssr(_tmpl$65, escape(createComponent(Show, {
+    children: (item) => ssr(_tmpl$66, escape(createComponent(Show, {
       get when() {
         return cover();
       },
@@ -4419,31 +4495,31 @@ var PostPage = (p3) => {
         return !cover();
       },
       get children() {
-        return ssr(_tmpl$314, "view-transition-name:" + escape(toTransitionName(item().title || item().slug), true), escape(item().title) || escape(item().slug));
+        return ssr(_tmpl$315, "view-transition-name:" + escape(toTransitionName(item().title || item().slug), true), escape(item().title) || escape(item().slug));
       }
     })), ssrAttribute("src", escape(avatar(), true), false) + ssrAttribute("alt", escape(cfg().site.author, true) ?? "", false), escape(createComponent(Show, {
       get when() {
         return !!cfg().site.author;
       },
       get children() {
-        return ssr(_tmpl$410, escape(cfg().site.author));
+        return ssr(_tmpl$411, escape(cfg().site.author));
       }
     })), escape(createComponent(Show, {
       get when() {
         return publishedTs2(item());
       },
-      children: (published) => ssr(_tmpl$72, escape(t2().post.publishedAt), escape(formatMetaTime(published(), cfg().site.timezone ?? "UTC")))
+      children: (published) => ssr(_tmpl$73, escape(t2().post.publishedAt), escape(formatMetaTime(published(), cfg().site.timezone ?? "UTC")))
     })), escape(createComponent(Show, {
       get when() {
         return updatedTs2(item());
       },
-      children: (updated) => ssr(_tmpl$72, escape(t2().post.updatedAt), escape(formatMetaTime(updated(), cfg().site.timezone ?? "UTC")))
+      children: (updated) => ssr(_tmpl$73, escape(t2().post.updatedAt), escape(formatMetaTime(updated(), cfg().site.timezone ?? "UTC")))
     })), escape(createComponent(Show, {
       get when() {
         return (item().tags?.length ?? 0) > 0;
       },
       get children() {
-        return ssr(_tmpl$58, escape(t2().post.tagLabel), escape(createComponent(For, {
+        return ssr(_tmpl$59, escape(t2().post.tagLabel), escape(createComponent(For, {
           get each() {
             return item().tags ?? [];
           },
@@ -4576,7 +4652,7 @@ var TagCloudItem = (props) => {
 };
 
 // src/pages/tags-index.tsx
-var _tmpl$59 = ['<div class="tagcloud-content"><ul class="tag-list" data-show-value="true">', "</ul></div>"];
+var _tmpl$60 = ['<div class="tagcloud-content"><ul class="tag-list" data-show-value="true">', "</ul></div>"];
 var TagsIndexPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
@@ -4609,7 +4685,7 @@ var TagsIndexPage = (p3) => {
     },
     layout: "tags-index",
     get children() {
-      return ssr(_tmpl$59, escape(createComponent(For, {
+      return ssr(_tmpl$60, escape(createComponent(For, {
         get each() {
           return tagEntries();
         },
@@ -4633,7 +4709,7 @@ var TagsIndexPage = (p3) => {
 };
 
 // src/pages/tag-posts.tsx
-var _tmpl$60 = ['<ul class="home-article-list">', "</ul>"];
+var _tmpl$61 = ['<ul class="home-article-list">', "</ul>"];
 var TagPostsPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
@@ -4675,7 +4751,7 @@ var TagPostsPage = (p3) => {
     },
     layout: "tag-posts",
     get children() {
-      return ssr(_tmpl$60, escape(createComponent(For, {
+      return ssr(_tmpl$61, escape(createComponent(For, {
         get each() {
           return items();
         },
@@ -4757,10 +4833,10 @@ function groupArchiveByDateLabel(posts) {
 }
 
 // src/pages/archives.tsx
-var _tmpl$61 = ['<div class="archive-container"><div class="archive-list-container">', "</div></div>"];
+var _tmpl$67 = ['<div class="archive-container"><div class="archive-list-container">', "</div></div>"];
 var _tmpl$218 = ['<section class="archive-item"><div class="archive-item__header"><span class="archive-year">', '</span><span class="archive-year-post-count">', '</span></div><ul class="archive-article-list">', "</ul></section>"];
-var _tmpl$315 = ['<li class="archive-article-item"', ">", "</li>"];
-var _tmpl$411 = ['<a class="archive-article-link"', '><span class="archive-article-title">', "</span></a>"];
+var _tmpl$316 = ['<li class="archive-article-item"', ">", "</li>"];
+var _tmpl$412 = ['<a class="archive-article-link"', '><span class="archive-article-title">', "</span></a>"];
 var ArchivesPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
@@ -4789,7 +4865,7 @@ var ArchivesPage = (p3) => {
     layout: "archives",
     hidePageHeader: true,
     get children() {
-      return ssr(_tmpl$61, escape(createComponent(For, {
+      return ssr(_tmpl$67, escape(createComponent(For, {
         get each() {
           return years();
         },
@@ -4797,11 +4873,11 @@ var ArchivesPage = (p3) => {
           get each() {
             return groupArchiveByDateLabel(yearGroup.posts);
           },
-          children: (dateGroup) => ssr(_tmpl$315, ssrAttribute("data-date-label", escape(dateGroup.dateLabel, true), false), escape(createComponent(For, {
+          children: (dateGroup) => ssr(_tmpl$316, ssrAttribute("data-date-label", escape(dateGroup.dateLabel, true), false), escape(createComponent(For, {
             get each() {
               return dateGroup.posts;
             },
-            children: (post) => ssr(_tmpl$411, ssrAttribute("href", escape(pageUrl(ctx().request_id, post.url_path), true), false), escape(post.title) || escape(post.slug))
+            children: (post) => ssr(_tmpl$412, ssrAttribute("href", escape(pageUrl(ctx().request_id, post.url_path), true), false), escape(post.title) || escape(post.slug))
           })))
         })))
       })));
@@ -4817,16 +4893,16 @@ var ArchivesPage = (p3) => {
 };
 
 // src/pages/links.tsx
-var _tmpl$66 = ['<div class="app-prose mt-8">', "</div>"];
+var _tmpl$68 = ['<div class="app-prose mt-8">', "</div>"];
 var _tmpl$219 = ['<div class="page-template-container"><h1 class="page-title-header">', '</h1><div class="friends-link-container">', "", "</div></div>"];
-var _tmpl$316 = ['<p class="text-muted-foreground italic">', "</p>"];
-var _tmpl$412 = ['<h2 class="friends-link-category__title">', "</h2>"];
+var _tmpl$317 = ['<p class="text-muted-foreground italic">', "</p>"];
+var _tmpl$413 = ['<h2 class="friends-link-category__title">', "</h2>"];
 var _tmpl$510 = ["<section>", '<ul class="', '">', "</ul></section>"];
-var _tmpl$67 = ['<div class="friends-link-card__thumbnail"><img', ' alt loading="lazy"></div>'];
-var _tmpl$73 = ['<div class="friends-link-avatar"><img', ' alt loading="lazy"></div>'];
-var _tmpl$82 = ['<div class="friends-link-desc">', "</div>"];
-var _tmpl$92 = ['<div class="friends-link-card">', '<div class="friends-link-card__body">', '<div class="friends-link-meta"><div class="friends-link-name">', "</div>", "</div></div></div>"];
-var _tmpl$102 = ['<li class="friends-link-item"><a', ' target="_blank" rel="noopener noreferrer">', "</a></li>"];
+var _tmpl$69 = ['<div class="friends-link-card__thumbnail"><img', ' alt loading="lazy"></div>'];
+var _tmpl$74 = ['<div class="friends-link-avatar"><img', ' alt loading="lazy"></div>'];
+var _tmpl$83 = ['<div class="friends-link-desc">', "</div>"];
+var _tmpl$93 = ['<div class="friends-link-card">', '<div class="friends-link-card__body">', '<div class="friends-link-meta"><div class="friends-link-name">', "</div>", "</div></div></div>"];
+var _tmpl$103 = ['<li class="friends-link-item"><a', ' target="_blank" rel="noopener noreferrer">', "</a></li>"];
 var _tmpl$112 = ['<div class="friends-link-row">', '<div class="friends-link-meta"><div class="friends-link-name">', "</div>", "</div></div>"];
 var LinksPage = (p3) => {
   const ctx = () => p3.props;
@@ -4860,7 +4936,7 @@ var LinksPage = (p3) => {
           return categories().length > 0;
         },
         get fallback() {
-          return ssr(_tmpl$316, escape(t2().pages.linksEmpty));
+          return ssr(_tmpl$317, escape(t2().pages.linksEmpty));
         },
         get children() {
           return createComponent(For, {
@@ -4872,13 +4948,13 @@ var LinksPage = (p3) => {
                 return !!categoryLabel(category);
               },
               get children() {
-                return ssr(_tmpl$412, escape(categoryLabel(category)));
+                return ssr(_tmpl$413, escape(categoryLabel(category)));
               }
             })), `friends-link-grid ${category.has_thumbnail ? "friends-link-grid--cards" : ""} ${!category.has_thumbnail ? "friends-link-grid--list" : ""}`, escape(createComponent(For, {
               get each() {
                 return category.list ?? [];
               },
-              children: (item) => ssr(_tmpl$102, ssrAttribute("href", escape(item.link, true), false), escape(createComponent(Show, {
+              children: (item) => ssr(_tmpl$103, ssrAttribute("href", escape(item.link, true), false), escape(createComponent(Show, {
                 get when() {
                   return category.has_thumbnail;
                 },
@@ -4888,38 +4964,38 @@ var LinksPage = (p3) => {
                       return !!item.avatar;
                     },
                     get children() {
-                      return ssr(_tmpl$73, ssrAttribute("src", escape(resolveStoryMediaUrl(ctx(), item.avatar, originPath()), true), false));
+                      return ssr(_tmpl$74, ssrAttribute("src", escape(resolveStoryMediaUrl(ctx(), item.avatar, originPath()), true), false));
                     }
                   })), escape(item.name), escape(createComponent(Show, {
                     get when() {
                       return !!item.description;
                     },
                     get children() {
-                      return ssr(_tmpl$82, escape(item.description));
+                      return ssr(_tmpl$83, escape(item.description));
                     }
                   })));
                 },
                 get children() {
-                  return ssr(_tmpl$92, escape(createComponent(Show, {
+                  return ssr(_tmpl$93, escape(createComponent(Show, {
                     get when() {
                       return !!item.thumbnail;
                     },
                     get children() {
-                      return ssr(_tmpl$67, ssrAttribute("src", escape(resolveStoryMediaUrl(ctx(), item.thumbnail, originPath()), true), false));
+                      return ssr(_tmpl$69, ssrAttribute("src", escape(resolveStoryMediaUrl(ctx(), item.thumbnail, originPath()), true), false));
                     }
                   })), escape(createComponent(Show, {
                     get when() {
                       return !!item.avatar;
                     },
                     get children() {
-                      return ssr(_tmpl$73, ssrAttribute("src", escape(resolveStoryMediaUrl(ctx(), item.avatar, originPath()), true), false));
+                      return ssr(_tmpl$74, ssrAttribute("src", escape(resolveStoryMediaUrl(ctx(), item.avatar, originPath()), true), false));
                     }
                   })), escape(item.name), escape(createComponent(Show, {
                     get when() {
                       return !!item.description;
                     },
                     get children() {
-                      return ssr(_tmpl$82, escape(item.description));
+                      return ssr(_tmpl$83, escape(item.description));
                     }
                   })));
                 }
@@ -4932,7 +5008,7 @@ var LinksPage = (p3) => {
           return !!doc()?.content_html;
         },
         get children() {
-          return ssr(_tmpl$66, doc().content_html);
+          return ssr(_tmpl$68, doc().content_html);
         }
       })));
     }
@@ -4947,16 +5023,16 @@ var LinksPage = (p3) => {
 };
 
 // src/pages/album.tsx
-var _tmpl$68 = '<div class="loading-placeholder"><div class="flex-grid generic-card"><div class="card loading"></div><div class="card loading"></div><div class="card loading"></div></div></div>';
+var _tmpl$70 = '<div class="loading-placeholder"><div class="flex-grid generic-card"><div class="card loading"></div><div class="card loading"></div><div class="card loading"></div></div></div>';
 var _tmpl$220 = ['<div id="album-container"', ">", "</div>"];
-var _tmpl$317 = ['<div class="page-template-content app-prose mt-8">', "</div>"];
-var _tmpl$413 = ['<div class="page-template-container"><h1 class="page-title-header">', "</h1>", "", "</div>"];
+var _tmpl$318 = ['<div class="page-template-content app-prose mt-8">', "</div>"];
+var _tmpl$414 = ['<div class="page-template-container"><h1 class="page-title-header">', "</h1>", "", "</div>"];
 var _tmpl$511 = ['<p class="text-muted-foreground italic">', "</p>"];
-var _tmpl$69 = ['<div class="image-title">', "</div>"];
-var _tmpl$74 = ['<div class="image-description">', "</div>"];
-var _tmpl$83 = ["<strong>", "</strong>"];
-var _tmpl$93 = ['<span class="hidden-caption-content">', "", "</span>"];
-var _tmpl$103 = ['<div class="album-item"><a class="story-album-link"', '><div class="image-container"><img', ">", "", "", "</div></a></div>"];
+var _tmpl$610 = ['<div class="image-title">', "</div>"];
+var _tmpl$75 = ['<div class="image-description">', "</div>"];
+var _tmpl$84 = ["<strong>", "</strong>"];
+var _tmpl$94 = ['<span class="hidden-caption-content">', "", "</span>"];
+var _tmpl$104 = ['<div class="album-item"><a class="story-album-link"', '><div class="image-container"><img', ">", "", "", "</div></a></div>"];
 var AlbumPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
@@ -4985,7 +5061,7 @@ var AlbumPage = (p3) => {
     layout: "album",
     hidePageHeader: true,
     get children() {
-      return ssr(_tmpl$413, escape(pageTitle()), escape(createComponent(Show, {
+      return ssr(_tmpl$414, escape(pageTitle()), escape(createComponent(Show, {
         get when() {
           return items().length > 0;
         },
@@ -4993,37 +5069,37 @@ var AlbumPage = (p3) => {
           return ssr(_tmpl$511, escape(t2().pages.albumEmpty));
         },
         get children() {
-          return [ssr(_tmpl$68), ssr(_tmpl$220, ssrAttribute("data-vendor-script", escape(pageUrl(ctx().request_id, "/assets/vendor/minimasonry.min.js"), true), false), escape(createComponent(For, {
+          return [ssr(_tmpl$70), ssr(_tmpl$220, ssrAttribute("data-vendor-script", escape(pageUrl(ctx().request_id, "/assets/vendor/minimasonry.min.js"), true), false), escape(createComponent(For, {
             get each() {
               return items();
             },
             children: (item) => {
               const imageUrl = resolveStoryMediaUrl(ctx(), item.image, originPath());
-              return ssr(_tmpl$103, ssrAttribute("href", escape(imageUrl, true), false) + ssrAttribute("aria-label", escape(item.title, true) ?? escape(item.description, true) ?? escape(imageUrl, true), false), ssrAttribute("src", escape(imageUrl, true), false) + ssrAttribute("alt", escape(item.title, true) ?? "", false), escape(createComponent(Show, {
+              return ssr(_tmpl$104, ssrAttribute("href", escape(imageUrl, true), false) + ssrAttribute("aria-label", escape(item.title, true) ?? escape(item.description, true) ?? escape(imageUrl, true), false), ssrAttribute("src", escape(imageUrl, true), false) + ssrAttribute("alt", escape(item.title, true) ?? "", false), escape(createComponent(Show, {
                 get when() {
                   return !!item.title;
                 },
                 get children() {
-                  return ssr(_tmpl$69, escape(item.title));
+                  return ssr(_tmpl$610, escape(item.title));
                 }
               })), escape(createComponent(Show, {
                 get when() {
                   return !!item.description;
                 },
                 get children() {
-                  return ssr(_tmpl$74, escape(item.description));
+                  return ssr(_tmpl$75, escape(item.description));
                 }
               })), escape(createComponent(Show, {
                 get when() {
                   return !!item.title || !!item.description;
                 },
                 get children() {
-                  return ssr(_tmpl$93, escape(createComponent(Show, {
+                  return ssr(_tmpl$94, escape(createComponent(Show, {
                     get when() {
                       return !!item.title;
                     },
                     get children() {
-                      return ssr(_tmpl$83, escape(item.title));
+                      return ssr(_tmpl$84, escape(item.title));
                     }
                   })), escape(createComponent(Show, {
                     get when() {
@@ -5043,7 +5119,7 @@ var AlbumPage = (p3) => {
           return !!doc()?.content_html;
         },
         get children() {
-          return ssr(_tmpl$317, doc().content_html);
+          return ssr(_tmpl$318, doc().content_html);
         }
       })));
     }
@@ -5058,7 +5134,7 @@ var AlbumPage = (p3) => {
 };
 
 // src/pages/not-found.tsx
-var _tmpl$70 = ['<main id="main-content" data-layout="not-found" class="app-layout flex min-h-[50vh] flex-col items-center justify-center py-16 text-center"><p class="text-accent text-7xl font-bold sm:text-8xl">404</p><h1 class="mt-4 text-2xl font-semibold sm:text-3xl">', '</h1><p class="text-muted-foreground mt-3 max-w-md">', "</p>", "</main>"];
+var _tmpl$71 = ['<main id="main-content" data-layout="not-found" class="app-layout flex min-h-[50vh] flex-col items-center justify-center py-16 text-center"><p class="text-accent text-7xl font-bold sm:text-8xl">404</p><h1 class="mt-4 text-2xl font-semibold sm:text-3xl">', '</h1><p class="text-muted-foreground mt-3 max-w-md">', "</p>", "</main>"];
 var NotFoundPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
@@ -5067,7 +5143,7 @@ var NotFoundPage = (p3) => {
     get ctx() {
       return ctx();
     }
-  }), ssr(_tmpl$70, escape(t2().pages.notFoundTitle), escape(t2().pages.notFoundDesc), escape(createComponent(LinkButton, {
+  }), ssr(_tmpl$71, escape(t2().pages.notFoundTitle), escape(t2().pages.notFoundDesc), escape(createComponent(LinkButton, {
     get href() {
       return pageUrl(ctx().request_id, "/index.html");
     },

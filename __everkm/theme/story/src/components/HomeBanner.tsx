@@ -12,9 +12,12 @@ import { Socials } from "./Socials";
 type HomeBannerProps = {
   ctx: PageContext;
   cfg: StoryConfig;
+  /** Full hero on page 1; background-only on later pages with fixed banner. */
+  mode?: "hero" | "background";
 };
 
 export const HomeBanner: Component<HomeBannerProps> = (props) => {
+  const mode = () => props.mode ?? "hero";
   const banner = () => props.cfg.story?.home_banner;
   const enabled = () =>
     props.cfg.features?.home_banner !== false && banner()?.enable !== false;
@@ -31,22 +34,33 @@ export const HomeBanner: Component<HomeBannerProps> = (props) => {
   const isFixed = () => banner()?.style === "fixed";
   const socials = () => props.cfg.socials ?? [];
 
+  const background = () => (
+    <div
+      class="home-banner-background"
+      classList={{ "home-banner-background--blurred": mode() === "background" }}
+      aria-hidden="true"
+    >
+      <img
+        src={assetUrl(props.ctx.request_id, imageLight())}
+        alt=""
+        class="home-banner-background__img--light"
+      />
+      <img
+        src={assetUrl(props.ctx.request_id, imageDark())}
+        alt=""
+        class="home-banner-background__img--dark"
+      />
+    </div>
+  );
+
   return (
     <Show when={enabled()}>
-      <Show when={isFixed()}>
-        <div class="home-banner-background" aria-hidden="true">
-          <img
-            src={assetUrl(props.ctx.request_id, imageLight())}
-            alt=""
-            class="home-banner-background__img--light"
-          />
-          <img
-            src={assetUrl(props.ctx.request_id, imageDark())}
-            alt=""
-            class="home-banner-background__img--dark"
-          />
-        </div>
+      <Show when={mode() === "background"}>
+        <Show when={isFixed()}>{background()}</Show>
       </Show>
+
+      <Show when={mode() === "hero"}>
+      <Show when={isFixed()}>{background()}</Show>
 
       <section
         class="home-banner-container"
@@ -100,6 +114,7 @@ export const HomeBanner: Component<HomeBannerProps> = (props) => {
           </div>
         </div>
       </section>
+      </Show>
     </Show>
   );
 };
