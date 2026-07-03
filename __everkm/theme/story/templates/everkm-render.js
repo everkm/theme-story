@@ -3106,7 +3106,7 @@ function filterPublicPosts(items) {
 function queryPublicPosts(requestId, options = {}) {
   const raw = everkm.posts(requestId, {
     dir: POSTS_CONTENT_DIR,
-    recursive: false,
+    recursive: true,
     order_by: "date",
     order_direction: "desc",
     draft: false,
@@ -4369,7 +4369,7 @@ var PostPage = (p3) => {
     return everkm.post_neighbors(ctx().request_id, {
       id: item.id,
       dir: POSTS_CONTENT_DIR,
-      recursive: false,
+      recursive: true,
       draft: false,
       order_by: "date",
       order_direction: "desc"

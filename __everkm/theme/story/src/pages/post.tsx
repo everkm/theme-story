@@ -58,7 +58,7 @@ export const PostPage: Component<PostPageProps> = (p) => {
     return everkm.post_neighbors(ctx().request_id, {
       id: item.id,
       dir: POSTS_CONTENT_DIR,
-      recursive: false,
+      recursive: true,
       draft: false,
       order_by: "date",
       order_direction: "desc",

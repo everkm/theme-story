@@ -1,4 +1,4 @@
-/** Everkm content directory (`dir` in posts queries). Articles live at content root. */
+/** Everkm content directory (`dir` in posts queries). */
 export const POSTS_CONTENT_DIR = "/";
 
 /** Virtual URL base for homepage pagination (site root). */

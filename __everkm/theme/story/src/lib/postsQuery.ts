@@ -21,14 +21,14 @@ type PublicPostsOptions = {
   exclude_tags?: string[];
 };
 
-/** List public root-level posts with underscore data files excluded. */
+/** List public posts with underscore data files excluded. */
 export function queryPublicPosts(
   requestId: string,
   options: PublicPostsOptions = {},
 ): { items: PostItem[]; total: number } {
   const raw = everkm.posts(requestId, {
     dir: POSTS_CONTENT_DIR,
-    recursive: false,
+    recursive: true,
     order_by: "date",
     order_direction: "desc",
     draft: false,
