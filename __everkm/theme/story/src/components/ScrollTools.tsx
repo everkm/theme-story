@@ -1,9 +1,18 @@
 import { Component, Show } from "solid-js";
+import { Icon } from "./Icon";
+import IconArrowDown from "../assets/icons/IconArrowDown.svg";
+import IconArrowNarrowUp from "../assets/icons/IconArrowNarrowUp.svg";
+import IconMoon from "../assets/icons/IconMoon.svg";
+import IconSettings from "../assets/icons/IconSettings.svg";
+import IconZoomIn from "../assets/icons/IconZoomIn.svg";
+import IconZoomOut from "../assets/icons/IconZoomOut.svg";
 import { getStoryConfig } from "../lib/config";
 
 type ScrollToolsProps = {
   ctx: PageContext;
 };
+
+const toolIconClass = "story-tool-icon size-5";
 
 export const ScrollTools: Component<ScrollToolsProps> = (props) => {
   const cfg = () => getStoryConfig(props.ctx);
@@ -23,39 +32,53 @@ export const ScrollTools: Component<ScrollToolsProps> = (props) => {
       <div class="right-side-tools-container" data-vt-persist>
         <div class="side-tools-container">
           <ul class="hidden-tools-list">
+            <li
+              class="right-bottom-tools tool-font-adjust-plus"
+              title="Increase font size"
+            >
+              <Icon svg={IconZoomIn} class={toolIconClass} />
+            </li>
+            <li
+              class="right-bottom-tools tool-font-adjust-minus"
+              title="Decrease font size"
+            >
+              <Icon svg={IconZoomOut} class={toolIconClass} />
+            </li>
             <Show when={showThemeToggle()}>
               <li
                 class="right-bottom-tools tool-dark-light-toggle"
                 title="Toggle theme"
               >
-                <span aria-hidden="true">◐</span>
+                <Icon svg={IconMoon} class={toolIconClass} />
               </li>
             </Show>
             <li
               class="right-bottom-tools tool-scroll-to-bottom"
               title="Scroll to bottom"
             >
-              <span aria-hidden="true">↓</span>
+              <Icon svg={IconArrowDown} class={toolIconClass} />
             </li>
           </ul>
           <ul class="visible-tools-list">
-            <li
-              class="right-bottom-tools toggle-tools-list"
-              title="Tools"
-            >
-              <span aria-hidden="true">⚙</span>
+            <li class="right-bottom-tools toggle-tools-list" title="Tools">
+              <Icon
+                svg={IconSettings}
+                class={`${toolIconClass} toggle-tools-list__icon`}
+              />
             </li>
-            <Show when={showPercent()}>
-              <li
-                class="right-bottom-tools tool-scroll-to-top"
-                title="Scroll to top"
-              >
-                <span class="arrow-up" aria-hidden="true">
-                  ↑
-                </span>
+            <li
+              class="right-bottom-tools tool-scroll-to-top"
+              classList={{ "tool-scroll-to-top--plain": !showPercent() }}
+              title="Scroll to top"
+            >
+              <Icon
+                svg={IconArrowNarrowUp}
+                class={`${toolIconClass} arrow-up`}
+              />
+              <Show when={showPercent()}>
                 <span class="percent">0</span>
-              </li>
-            </Show>
+              </Show>
+            </li>
           </ul>
         </div>
       </div>

@@ -87,10 +87,10 @@ config:
         - label: Archives
           path: /archives/index.html
           icon: archives
-        - label: Github
-          path: https://github.com/EvanNotFound/hexo-theme-redefine
-          external: true
-          icon: github
+        # - label: Github
+        #   path: https://github.com/everkm/theme-story
+        #   external: true
+        #   icon: github
         - label: Album
           path: /album/index.html
           icon: album
@@ -110,4 +110,5 @@ config:
 
 folders:
   "/":
+    url_slug: posts
     url_id_suffix: false

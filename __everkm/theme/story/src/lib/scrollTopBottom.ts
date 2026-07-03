@@ -1,6 +1,10 @@
+const FONT_SIZE_LEVEL_KEY = "story-font-size-level";
+
 let bound = false;
 let prevScrollY = 0;
 let scrollHandler: (() => void) | null = null;
+let fontSizeLevel = 0;
+let baseFontSize = 0;
 
 function readScrollConfig(): {
   bar: boolean;
@@ -20,6 +24,57 @@ function calcPercent(scrollTop: number, scrollHeight: number, clientHeight: numb
   return Math.min(value, 100);
 }
 
+function readStoredFontSizeLevel(): number {
+  try {
+    const raw = localStorage.getItem(FONT_SIZE_LEVEL_KEY);
+    if (raw == null) return 0;
+    const level = Number.parseInt(raw, 10);
+    return Number.isFinite(level) ? Math.min(Math.max(level, 0), 5) : 0;
+  } catch {
+    return 0;
+  }
+}
+
+function persistFontSizeLevel(level: number): void {
+  try {
+    localStorage.setItem(FONT_SIZE_LEVEL_KEY, String(level));
+  } catch {
+    // ignore storage failures
+  }
+}
+
+function applyFontSizeLevel(level: number): void {
+  fontSizeLevel = Math.min(Math.max(level, 0), 5);
+  if (baseFontSize <= 0) {
+    const fontSize = getComputedStyle(document.body).fontSize;
+    baseFontSize = Number.parseFloat(fontSize) || 16;
+  }
+  document.documentElement.style.fontSize = `${baseFontSize * (1 + fontSizeLevel * 0.05)}px`;
+  persistFontSizeLevel(fontSizeLevel);
+}
+
+function bindFontAdjustControls(): void {
+  const plus = document.querySelector<HTMLElement>(".tool-font-adjust-plus");
+  const minus = document.querySelector<HTMLElement>(".tool-font-adjust-minus");
+  if (!plus || !minus) return;
+
+  if (plus.dataset.bound !== "1") {
+    plus.dataset.bound = "1";
+    plus.addEventListener("click", () => {
+      applyFontSizeLevel(fontSizeLevel + 1);
+    });
+  }
+
+  if (minus.dataset.bound !== "1") {
+    minus.dataset.bound = "1";
+    minus.addEventListener("click", () => {
+      applyFontSizeLevel(fontSizeLevel - 1);
+    });
+  }
+
+  applyFontSizeLevel(readStoredFontSizeLevel());
+}
+
 function updateScrollUi(): void {
   const scrollTop = window.scrollY;
   const scrollHeight = document.documentElement.scrollHeight;
@@ -35,9 +90,11 @@ function updateScrollUi(): void {
 
   const backToTop = document.querySelector<HTMLElement>(".tool-scroll-to-top");
   const percentEl = backToTop?.querySelector<HTMLElement>(".percent");
-  if (backToTop && percentage) {
-    backToTop.classList.toggle("show", percent > 0);
-    if (percentEl) percentEl.textContent = String(percent);
+  if (backToTop) {
+    backToTop.classList.toggle("show", scrollTop > 0);
+    if (percentage && percentEl) {
+      percentEl.textContent = String(percent);
+    }
   }
 
   const toolsContainer = document.querySelector<HTMLElement>(
@@ -45,10 +102,8 @@ function updateScrollUi(): void {
   );
   if (toolsContainer) {
     const atTop = scrollTop <= 100;
-    const atBottom = scrollTop + clientHeight >= scrollHeight - 20;
     const isHome = document.querySelector(".story-page-home") !== null;
-    const hide = (isHome && atTop) || atBottom;
-    toolsContainer.classList.toggle("hide", hide);
+    toolsContainer.classList.toggle("hide", isHome && atTop);
   }
 
   prevScrollY = scrollTop;
@@ -85,13 +140,7 @@ function bindControls(): void {
     });
   }
 
-  const themeToggle = document.querySelector<HTMLElement>(".tool-dark-light-toggle");
-  if (themeToggle && themeToggle.dataset.bound !== "1") {
-    themeToggle.dataset.bound = "1";
-    themeToggle.addEventListener("click", () => {
-      document.querySelector<HTMLButtonElement>("#theme-btn")?.click();
-    });
-  }
+  bindFontAdjustControls();
 }
 
 export function installScrollTopBottom(): void {

@@ -11,7 +11,7 @@
 }
 
 .right-side-tools-container {
-  @apply fixed right-[38px] bottom-[5%] opacity-100 transition-opacity duration-200;
+  @apply fixed right-[38px] bottom-[5%] z-[1007] opacity-100 transition-opacity duration-200;
 }
 
 .right-side-tools-container.hide {
@@ -25,7 +25,7 @@
 }
 
 .side-tools-container .right-bottom-tools {
-  @apply mb-1 flex size-[42px] cursor-pointer items-center justify-center rounded-xl text-xl;
+  @apply mb-[5px] flex size-[42px] cursor-pointer items-center justify-center rounded-xl text-xl;
   color: var(--story-text-default);
   background: var(--background);
   box-shadow: var(--story-box-shadow-flat);
@@ -34,6 +34,14 @@
 
 .side-tools-container .right-bottom-tools:hover {
   background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.side-tools-container .right-bottom-tools .story-tool-icon {
+  @apply block shrink-0;
+}
+
+.side-tools-container .right-bottom-tools:hover .story-tool-icon {
   color: var(--accent-foreground);
 }
 
@@ -84,6 +92,20 @@
   @apply flex;
 }
 
-.side-tools-container .toggle-tools-list span {
-  display: inline-block;
+.side-tools-container .visible-tools-list .tool-scroll-to-top--plain.show .arrow-up {
+  @apply flex;
+}
+
+.side-tools-container .toggle-tools-list .toggle-tools-list__icon {
+  animation: story-tools-spin 2s linear infinite;
+}
+
+@keyframes story-tools-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

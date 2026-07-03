@@ -6,8 +6,6 @@ import { Icon } from "../components/Icon";
 import IconMenuDeep from "../assets/icons/IconMenuDeep.svg";
 import IconX from "../assets/icons/IconX.svg";
 import IconArchive from "../assets/icons/IconArchive.svg";
-import IconSunHigh from "../assets/icons/IconSunHigh.svg";
-import IconMoon from "../assets/icons/IconMoon.svg";
 import { configValue } from "../lib/configValue";
 import { resolveNavIcon } from "../lib/navIcons";
 import IconHome from "../assets/icons/IconHome.svg";
@@ -82,30 +80,6 @@ export const Header: Component<HeaderProps> = (props) => {
             only-button="false"
           />
         </div>
-      </li>
-    </Show>
-  );
-
-  const themeToggleItem = () => (
-    <Show when={cfg().features?.light_and_dark_mode !== false}>
-      <li class="navbar-item">
-        <button
-          id="theme-btn"
-          class="navbar-icon-btn focus-outline"
-          title={t().a11y.toggleTheme}
-          aria-label="auto"
-          aria-live="polite"
-          type="button"
-        >
-          <Icon
-            svg={IconMoon}
-            class="absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
-          />
-          <Icon
-            svg={IconSunHigh}
-            class="absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
-          />
-        </button>
       </li>
     </Show>
   );
@@ -231,7 +205,6 @@ export const Header: Component<HeaderProps> = (props) => {
                 {configNavItems()}
               </Show>
               {searchItem()}
-              {themeToggleItem()}
             </ul>
           </nav>
         </div>

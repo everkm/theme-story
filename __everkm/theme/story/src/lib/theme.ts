@@ -60,8 +60,10 @@ export function installTheme(): void {
   themeSetup = true;
 
   document.addEventListener("click", (e) => {
-    const btn = (e.target as Element)?.closest("#theme-btn");
-    if (!btn) return;
+    const target = (e.target as Element)?.closest(
+      "#theme-btn, .tool-dark-light-toggle",
+    );
+    if (!target) return;
     e.preventDefault();
     toggleTheme();
   });

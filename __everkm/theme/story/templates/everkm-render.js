@@ -2897,11 +2897,56 @@ function assetUrl(requestId, path) {
   return everkm.asset_base_url(requestId, { url: path });
 }
 
+// src/components/Icon.tsx
+var Icon = (props) => {
+  const [local, rest] = splitProps(props, ["svg", "class", "id"]);
+  const withAttrs = () => {
+    let svg = local.svg;
+    if (local.id) {
+      svg = svg.replace("<svg", `<svg id="${local.id}"`);
+    }
+    const cls = local.class ?? "";
+    if (cls) {
+      if (svg.includes('class="')) {
+        svg = svg.replace(/class="([^"]*)"/, `class="$1 ${cls}"`);
+      } else {
+        svg = svg.replace("<svg", `<svg class="${cls}"`);
+      }
+    }
+    return svg;
+  };
+  return ssrElement("span", mergeProps({
+    get innerHTML() {
+      return withAttrs();
+    },
+    "aria-hidden": "true"
+  }, rest), void 0, false);
+};
+
+// src/assets/icons/IconArrowDown.svg
+var IconArrowDown_default = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-down"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M18 13l-6 6" /><path d="M6 13l6 6" /></svg>\n';
+
+// src/assets/icons/IconArrowNarrowUp.svg
+var IconArrowNarrowUp_default = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-up"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M16 9l-4 -4" /><path d="M8 9l4 -4" /></svg>\n';
+
+// src/assets/icons/IconMoon.svg
+var IconMoon_default = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-moon"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg>';
+
+// src/assets/icons/IconSettings.svg
+var IconSettings_default = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-settings"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /></svg>\n';
+
+// src/assets/icons/IconZoomIn.svg
+var IconZoomIn_default = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-zoom-in"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M7 10l6 0" /><path d="M10 7l0 6" /><path d="M21 21l-6 -6" /></svg>\n';
+
+// src/assets/icons/IconZoomOut.svg
+var IconZoomOut_default = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-zoom-out"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M7 10l6 0" /><path d="M21 21l-6 -6" /></svg>\n';
+
 // src/components/ScrollTools.tsx
 var _tmpl$ = '<div class="progress-bar-container" data-vt-persist><div class="scroll-progress-bar"></div></div>';
-var _tmpl$2 = '<li class="right-bottom-tools tool-dark-light-toggle" title="Toggle theme"><span aria-hidden="true">\u25D0</span></li>';
-var _tmpl$3 = '<li class="right-bottom-tools tool-scroll-to-top" title="Scroll to top"><span class="arrow-up" aria-hidden="true">\u2191</span><span class="percent">0</span></li>';
-var _tmpl$4 = ['<div class="right-side-tools-container" data-vt-persist><div class="side-tools-container"><ul class="hidden-tools-list">', '<li class="right-bottom-tools tool-scroll-to-bottom" title="Scroll to bottom"><span aria-hidden="true">\u2193</span></li></ul><ul class="visible-tools-list"><li class="right-bottom-tools toggle-tools-list" title="Tools"><span aria-hidden="true">\u2699</span></li>', "</ul></div></div>"];
+var _tmpl$2 = ['<li class="right-bottom-tools tool-dark-light-toggle" title="Toggle theme">', "</li>"];
+var _tmpl$3 = '<span class="percent">0</span>';
+var _tmpl$4 = ['<div class="right-side-tools-container" data-vt-persist><div class="side-tools-container"><ul class="hidden-tools-list"><li class="right-bottom-tools tool-font-adjust-plus" title="Increase font size">', '</li><li class="right-bottom-tools tool-font-adjust-minus" title="Decrease font size">', "</li>", '<li class="right-bottom-tools tool-scroll-to-bottom" title="Scroll to bottom">', '</li></ul><ul class="visible-tools-list"><li class="right-bottom-tools toggle-tools-list" title="Tools">', '</li><li class="', '" title="Scroll to top">', "", "</li></ul></div></div>"];
+var toolIconClass = "story-tool-icon size-5";
 var ScrollTools = (props) => {
   const cfg = () => getStoryConfig(props.ctx);
   const enabled = () => cfg().story?.global?.scroll_tools?.enable !== false;
@@ -2920,13 +2965,31 @@ var ScrollTools = (props) => {
         get children() {
           return ssr(_tmpl$);
         }
-      }), ssr(_tmpl$4, escape(createComponent(Show, {
+      }), ssr(_tmpl$4, escape(createComponent(Icon, {
+        svg: IconZoomIn_default,
+        "class": toolIconClass
+      })), escape(createComponent(Icon, {
+        svg: IconZoomOut_default,
+        "class": toolIconClass
+      })), escape(createComponent(Show, {
         get when() {
           return showThemeToggle();
         },
         get children() {
-          return ssr(_tmpl$2);
+          return ssr(_tmpl$2, escape(createComponent(Icon, {
+            svg: IconMoon_default,
+            "class": toolIconClass
+          })));
         }
+      })), escape(createComponent(Icon, {
+        svg: IconArrowDown_default,
+        "class": toolIconClass
+      })), escape(createComponent(Icon, {
+        svg: IconSettings_default,
+        "class": `${toolIconClass} toggle-tools-list__icon`
+      })), `right-bottom-tools tool-scroll-to-top ${!showPercent() ? "tool-scroll-to-top--plain" : ""}`, escape(createComponent(Icon, {
+        svg: IconArrowNarrowUp_default,
+        "class": `${toolIconClass} arrow-up`
       })), escape(createComponent(Show, {
         get when() {
           return showPercent();
@@ -3086,32 +3149,6 @@ function paginationHref(base, targetPage) {
   return `${normalized}/index.p${targetPage}.html`;
 }
 
-// src/components/Icon.tsx
-var Icon = (props) => {
-  const [local, rest] = splitProps(props, ["svg", "class", "id"]);
-  const withAttrs = () => {
-    let svg = local.svg;
-    if (local.id) {
-      svg = svg.replace("<svg", `<svg id="${local.id}"`);
-    }
-    const cls = local.class ?? "";
-    if (cls) {
-      if (svg.includes('class="')) {
-        svg = svg.replace(/class="([^"]*)"/, `class="$1 ${cls}"`);
-      } else {
-        svg = svg.replace("<svg", `<svg class="${cls}"`);
-      }
-    }
-    return svg;
-  };
-  return ssrElement("span", mergeProps({
-    get innerHTML() {
-      return withAttrs();
-    },
-    "aria-hidden": "true"
-  }, rest), void 0, false);
-};
-
 // src/assets/icons/IconMenuDeep.svg
 var IconMenuDeep_default = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 6h16" /><path d="M7 12h13" /><path d="M10 18h10" /></svg>';
 
@@ -3120,12 +3157,6 @@ var IconX_default = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  heigh
 
 // src/assets/icons/IconArchive.svg
 var IconArchive_default = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-archive"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" /><path d="M10 12l4 0" /></svg>';
-
-// src/assets/icons/IconSunHigh.svg
-var IconSunHigh_default = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-sun-high"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" /><path d="M6.343 17.657l-1.414 1.414" /><path d="M6.343 6.343l-1.414 -1.414" /><path d="M17.657 6.343l1.414 -1.414" /><path d="M17.657 17.657l1.414 1.414" /><path d="M4 12h-2" /><path d="M12 4v-2" /><path d="M20 12h2" /><path d="M12 20v2" /></svg>';
-
-// src/assets/icons/IconMoon.svg
-var IconMoon_default = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-moon"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg>';
 
 // src/assets/icons/IconHome.svg
 var IconHome_default = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-home"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>\n';
@@ -3176,14 +3207,13 @@ function resolveNavIcon(link) {
 
 // src/layout/Header.tsx
 var _tmpl$7 = ['<li class="navbar-item"><div id="header-in-search"><x-in-search', ' only-button="false"></x-in-search></div></li>'];
-var _tmpl$23 = ['<li class="navbar-item"><button id="theme-btn" class="navbar-icon-btn focus-outline"', ' aria-label="auto" aria-live="polite" type="button">', "", "</button></li>"];
-var _tmpl$33 = ['<span class="navbar-link__label">', "</span>"];
-var _tmpl$43 = ['<li class="navbar-item"><a', ' data-nav-path="/"', ">", "</a></li>"];
-var _tmpl$53 = ['<li class="navbar-item"><a', ' data-nav-path="/tags"', ">", "</a></li>"];
-var _tmpl$62 = ['<li class="navbar-item"><a', ' data-nav-path="/about"', ">", "</a></li>"];
-var _tmpl$72 = ['<li class="navbar-item"><a', ' data-nav-path="/archives"', ">", "</a></li>"];
-var _tmpl$8 = ['<li class="navbar-item"><a', ">", "</a></li>"];
-var _tmpl$9 = ['<header class="', '" data-vt-swap="header" style="', '"><div class="', '"><div class="navbar-content__left"><a', ' class="logo-title" data-nav-path="/"><h1>', '</h1></a></div><nav id="nav-menu" class="navbar-content__right"><button id="menu-btn" class="navbar-menu-btn focus-outline"', ' aria-expanded="false" aria-controls="menu-items"', ' type="button">', "", '</button><ul id="menu-items" class="navbar-list navbar-list--desktop">', "", "", "</ul></nav></div></header>"];
+var _tmpl$23 = ['<span class="navbar-link__label">', "</span>"];
+var _tmpl$33 = ['<li class="navbar-item"><a', ' data-nav-path="/"', ">", "</a></li>"];
+var _tmpl$43 = ['<li class="navbar-item"><a', ' data-nav-path="/tags"', ">", "</a></li>"];
+var _tmpl$53 = ['<li class="navbar-item"><a', ' data-nav-path="/about"', ">", "</a></li>"];
+var _tmpl$62 = ['<li class="navbar-item"><a', ' data-nav-path="/archives"', ">", "</a></li>"];
+var _tmpl$72 = ['<li class="navbar-item"><a', ">", "</a></li>"];
+var _tmpl$8 = ['<header class="', '" data-vt-swap="header" style="', '"><div class="', '"><div class="navbar-content__left"><a', ' class="logo-title" data-nav-path="/"><h1>', '</h1></a></div><nav id="nav-menu" class="navbar-content__right"><button id="menu-btn" class="navbar-menu-btn focus-outline"', ' aria-expanded="false" aria-controls="menu-items"', ' type="button">', "", '</button><ul id="menu-items" class="navbar-list navbar-list--desktop">', "", "</ul></nav></div></header>"];
 function hexToRgba(hex, alpha) {
   const h = hex.replace("#", "");
   if (h.length !== 6) return `rgba(0,0,0,${alpha})`;
@@ -3225,20 +3255,6 @@ var Header = (props) => {
       return ssr(_tmpl$7, ssrAttribute("app-id", escape(String(configValue(props.ctx.config, "algolia_search/app_id", "")), true), false) + ssrAttribute("api-key", escape(String(configValue(props.ctx.config, "algolia_search/api_key", "")), true), false) + ssrAttribute("index", escape(String(configValue(props.ctx.config, "algolia_search/index_name", "")), true), false) + ssrAttribute("site", escape(String(configValue(props.ctx.config, "algolia_search/site", "")), true), false));
     }
   });
-  const themeToggleItem = () => createComponent(Show, {
-    get when() {
-      return cfg().features?.light_and_dark_mode !== false;
-    },
-    get children() {
-      return ssr(_tmpl$23, ssrAttribute("title", escape(t2().a11y.toggleTheme, true), false), escape(createComponent(Icon, {
-        svg: IconMoon_default,
-        "class": "absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"
-      })), escape(createComponent(Icon, {
-        svg: IconSunHigh_default,
-        "class": "absolute top-1/2 left-1/2 size-5 -translate-x-1/2 -translate-y-1/2 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"
-      })));
-    }
-  });
   const navLinkLabel = (label) => label.toUpperCase();
   const navLinkContent = (iconSvg, label) => [createComponent(Show, {
     when: iconSvg,
@@ -3248,13 +3264,13 @@ var Header = (props) => {
         "class": "navbar-link__icon"
       });
     }
-  }), ssr(_tmpl$33, escape(navLinkLabel(label)))];
-  const defaultNavItems = () => [ssr(_tmpl$43, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/index.html"), true), false), ssrAttribute("class", isActive("/") ? "active" : escape(void 0, true), false), escape(navLinkContent(IconHome_default, t2().nav.home))), ssr(_tmpl$53, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/tags/index.html"), true), false), ssrAttribute("class", isActive("/tags") ? "active" : escape(void 0, true), false), escape(navLinkContent(IconLink_default, t2().nav.tags))), ssr(_tmpl$62, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/about/"), true), false), ssrAttribute("class", isActive("/about") ? "active" : escape(void 0, true), false), escape(navLinkContent(IconInfoCircle_default, t2().nav.about))), createComponent(Show, {
+  }), ssr(_tmpl$23, escape(navLinkLabel(label)))];
+  const defaultNavItems = () => [ssr(_tmpl$33, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/index.html"), true), false), ssrAttribute("class", isActive("/") ? "active" : escape(void 0, true), false), escape(navLinkContent(IconHome_default, t2().nav.home))), ssr(_tmpl$43, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/tags/index.html"), true), false), ssrAttribute("class", isActive("/tags") ? "active" : escape(void 0, true), false), escape(navLinkContent(IconLink_default, t2().nav.tags))), ssr(_tmpl$53, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/about/"), true), false), ssrAttribute("class", isActive("/about") ? "active" : escape(void 0, true), false), escape(navLinkContent(IconInfoCircle_default, t2().nav.about))), createComponent(Show, {
     get when() {
       return cfg().features?.show_archives !== false;
     },
     get children() {
-      return ssr(_tmpl$72, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/archives/index.html"), true), false), ssrAttribute("class", isActive("/archives") ? "active" : escape(void 0, true), false), escape(navLinkContent(IconArchive_default, t2().nav.archives)));
+      return ssr(_tmpl$62, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/archives/index.html"), true), false), ssrAttribute("class", isActive("/archives") ? "active" : escape(void 0, true), false), escape(navLinkContent(IconArchive_default, t2().nav.archives)));
     }
   })];
   const configNavItems = () => createComponent(For, {
@@ -3266,10 +3282,10 @@ var Header = (props) => {
       const activePath = () => resolveNavActivePath(link);
       const external = () => link.external || /^https?:\/\//i.test(link.path);
       const iconSvg = () => resolveNavIcon(link);
-      return ssr(_tmpl$8, ssrAttribute("href", escape(href(), true), false) + ssrAttribute("data-nav-path", escape(activePath(), true) || escape(void 0, true), false) + ssrAttribute("class", activePath() && isActive(activePath()) ? "active" : escape(void 0, true), false) + ssrAttribute("target", external() ? "_blank" : escape(void 0, true), false) + ssrAttribute("rel", external() ? "noopener noreferrer" : escape(void 0, true), false), escape(navLinkContent(iconSvg(), link.label)));
+      return ssr(_tmpl$72, ssrAttribute("href", escape(href(), true), false) + ssrAttribute("data-nav-path", escape(activePath(), true) || escape(void 0, true), false) + ssrAttribute("class", activePath() && isActive(activePath()) ? "active" : escape(void 0, true), false) + ssrAttribute("target", external() ? "_blank" : escape(void 0, true), false) + ssrAttribute("rel", external() ? "noopener noreferrer" : escape(void 0, true), false), escape(navLinkContent(iconSvg(), link.label)));
     }
   });
-  return ssr(_tmpl$9, `navbar-container ${!isHome() ? "navbar-container--page" : ""}`, "background:" + escape(navBackground(), true), `navbar-content transition-navbar ${isHome() ? "has-home-banner" : ""}`, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/index.html"), true), false), escape(cfg().site.name), ssrAttribute("aria-label", escape(t2().a11y.openMenu, true), false), ssrAttribute("data-label-open", escape(t2().a11y.openMenu, true), false) + ssrAttribute("data-label-close", escape(t2().a11y.closeMenu, true), false), escape(createComponent(Icon, {
+  return ssr(_tmpl$8, `navbar-container ${!isHome() ? "navbar-container--page" : ""}`, "background:" + escape(navBackground(), true), `navbar-content transition-navbar ${isHome() ? "has-home-banner" : ""}`, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/index.html"), true), false), escape(cfg().site.name), ssrAttribute("aria-label", escape(t2().a11y.openMenu, true), false), ssrAttribute("data-label-open", escape(t2().a11y.openMenu, true), false) + ssrAttribute("data-label-close", escape(t2().a11y.closeMenu, true), false), escape(createComponent(Icon, {
     svg: IconX_default,
     "class": "navbar-menu-btn__icon navbar-menu-btn__icon--close",
     id: "close-icon"
@@ -3287,7 +3303,7 @@ var Header = (props) => {
     get children() {
       return configNavItems();
     }
-  })), escape(searchItem()), escape(themeToggleItem()));
+  })), escape(searchItem()));
 };
 
 // src/assets/icons/socials/facebook.svg
@@ -3329,7 +3345,7 @@ function getSocialIcon(name) {
 }
 
 // src/components/Socials.tsx
-var _tmpl$10 = ['<div class="flex flex-wrap items-center gap-4">', "</div>"];
+var _tmpl$9 = ['<div class="flex flex-wrap items-center gap-4">', "</div>"];
 var _tmpl$24 = ["<a", ' target="_blank" rel="noopener noreferrer"', ">", "</a>"];
 var Socials = (props) => {
   return createComponent(Show, {
@@ -3337,7 +3353,7 @@ var Socials = (props) => {
       return props.socials.length > 0;
     },
     get children() {
-      return ssr(_tmpl$10, escape(createComponent(For, {
+      return ssr(_tmpl$9, escape(createComponent(For, {
         get each() {
           return props.socials;
         },
@@ -3354,7 +3370,7 @@ var Socials = (props) => {
 };
 
 // src/components/Footer.tsx
-var _tmpl$11 = ['<span class="story-footer__socials">', "</span>"];
+var _tmpl$10 = ['<span class="story-footer__socials">', "</span>"];
 var _tmpl$25 = ['<div class="story-footer__line story-footer__line--secondary">', "</div>"];
 var _tmpl$34 = ['<div class="', '" data-vt-swap="footer"><footer class="story-footer"><div class="story-footer__info"><div class="story-footer__line story-footer__line--primary"><span class="story-footer__copyright">&#169; ', " <a", ' class="mr-2">', "</a>", "</span>", "</div>", "</div></footer></div>"];
 var _tmpl$44 = ["<span>", "</span>"];
@@ -3372,7 +3388,7 @@ var Footer = (props) => {
       return socials().length > 0;
     },
     get children() {
-      return ssr(_tmpl$11, escape(createComponent(Socials, {
+      return ssr(_tmpl$10, escape(createComponent(Socials, {
         get ctx() {
           return props.ctx;
         },
@@ -3436,7 +3452,7 @@ function toTransitionName(title) {
 }
 
 // src/components/HomeArticleCard.tsx
-var _tmpl$12 = ['<div class="home-article-thumbnail"><a', ' tabindex="-1" aria-hidden="true"><img', ' alt loading="lazy" class="dark:brightness-75"></a></div>'];
+var _tmpl$11 = ['<div class="home-article-thumbnail"><a', ' tabindex="-1" aria-hidden="true"><img', ' alt loading="lazy" class="dark:brightness-75"></a></div>'];
 var _tmpl$26 = ['<div class="home-article-content">', "</div>"];
 var _tmpl$35 = ['<span class="home-article-date"><time', ">", "</time></span>"];
 var _tmpl$45 = ['<span class="home-article-tag">', "</span>"];
@@ -3460,7 +3476,7 @@ var HomeArticleCard = (props) => {
       return cover();
     },
     get children() {
-      return ssr(_tmpl$12, ssrAttribute("href", escape(href(), true), false), ssrAttribute("src", escape(cover(), true), false));
+      return ssr(_tmpl$11, ssrAttribute("href", escape(href(), true), false), ssrAttribute("src", escape(cover(), true), false));
     }
   })), ssrAttribute("href", escape(href(), true), false), "view-transition-name:" + escape(toTransitionName(props.post.title), true), escape(props.post.title), escape(createComponent(Show, {
     get when() {
@@ -3492,7 +3508,7 @@ var HomeArticleCard = (props) => {
 };
 
 // src/components/LinkButton.tsx
-var _tmpl$13 = ["<span", ">", "</span>"];
+var _tmpl$12 = ["<span", ">", "</span>"];
 var LinkButton = (props) => {
   const [local, rest] = splitProps(props, ["href", "disabled", "title", "aria-label", "class", "accentHover", "children"]);
   const accentHover = () => local.accentHover !== false && !local.disabled;
@@ -3502,7 +3518,7 @@ var LinkButton = (props) => {
       return !local.disabled && local.href;
     },
     get fallback() {
-      return ssr(_tmpl$13, ssrAttribute("class", escape(linkClass(), true), false) + ssrAttribute("title", escape(local.title, true), false) + ssrAttribute("aria-label", escape(local["aria-label"], true), false), escape(local.children));
+      return ssr(_tmpl$12, ssrAttribute("class", escape(linkClass(), true), false) + ssrAttribute("title", escape(local.title, true), false) + ssrAttribute("aria-label", escape(local["aria-label"], true), false), escape(local.children));
     },
     get children() {
       return ssrElement("a", mergeProps({
@@ -3530,7 +3546,7 @@ var IconArrowLeft_default = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24
 var IconArrowRight_default = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" /></svg>';
 
 // src/components/Pagination.tsx
-var _tmpl$14 = ['<nav class="mt-auto mb-8 flex justify-center gap-4" role="navigation" aria-label="Pagination Navigation">', "", " / ", "", "</nav>"];
+var _tmpl$13 = ['<nav class="mt-auto mb-8 flex justify-center gap-4" role="navigation" aria-label="Pagination Navigation">', "", " / ", "", "</nav>"];
 var _tmpl$27 = ['<div data-vt-swap="pagination">', "</div>"];
 var Pagination = (props) => {
   const t2 = () => useTranslations(props.ctx.lang);
@@ -3541,7 +3557,7 @@ var Pagination = (props) => {
       return props.pageCount > 1;
     },
     get children() {
-      return ssr(_tmpl$14, escape(createComponent(LinkButton, {
+      return ssr(_tmpl$13, escape(createComponent(LinkButton, {
         get href() {
           return prevHref();
         },
@@ -3616,7 +3632,7 @@ function resolveBannerSubtitleStatic(cfg) {
 }
 
 // src/components/HomeBanner.tsx
-var _tmpl$15 = ['<div class="home-banner-background" aria-hidden="true"><img', ' alt class="home-banner-background__img--light"><img', ' alt class="home-banner-background__img--dark"></div>'];
+var _tmpl$14 = ['<div class="home-banner-background" aria-hidden="true"><img', ' alt class="home-banner-background__img--light"><img', ' alt class="home-banner-background__img--dark"></div>'];
 var _tmpl$28 = ['<div class="home-banner-container__inline-bg" aria-hidden="true"><img', ' alt class="home-banner-background__img--light"><img', ' alt class="home-banner-background__img--dark"></div>'];
 var _tmpl$36 = ['<p class="home-banner-container__subtitle"><span id="home-banner-subtitle"', "></span></p>"];
 var _tmpl$46 = ['<p class="home-banner-container__subtitle">', "</p>"];
@@ -3644,7 +3660,7 @@ var HomeBanner = (props) => {
           return isFixed();
         },
         get children() {
-          return ssr(_tmpl$15, ssrAttribute("src", escape(assetUrl(props.ctx.request_id, imageLight()), true), false), ssrAttribute("src", escape(assetUrl(props.ctx.request_id, imageDark()), true), false));
+          return ssr(_tmpl$14, ssrAttribute("src", escape(assetUrl(props.ctx.request_id, imageLight()), true), false), ssrAttribute("src", escape(assetUrl(props.ctx.request_id, imageDark()), true), false));
         }
       }), ssr(_tmpl$64, `home-banner-container ${!isFixed() ? "home-banner-container--static" : ""}`, escape(createComponent(Show, {
         get when() {
@@ -3687,7 +3703,7 @@ var HomeBanner = (props) => {
 };
 
 // src/components/HomeSidebar.tsx
-var _tmpl$16 = ['<div class="announcement">', "</div>"];
+var _tmpl$15 = ['<div class="announcement">', "</div>"];
 var _tmpl$29 = ['<div class="label">', "</div>"];
 var _tmpl$37 = ['<div class="author"><div class="name">', "</div>", "</div>"];
 var _tmpl$47 = ['<div class="home-sidebar-container"><div class="home-sidebar-container__sticky"><div class="sidebar-links"><div class="site-info"><div class="site-name">', "</div>", '</div><a class="links"', '><span class="link-name">', '</span></a></div><div class="sidebar-content"><div class="avatar"><img', "></div>", '<div class="statistics"><a class="tag-count-item"', '><div class="number">', '</div><div class="label">', "</div></a></div></div></div></div>"];
@@ -3706,7 +3722,7 @@ var HomeSidebar = (props) => {
           return !!sidebar()?.announcement;
         },
         get children() {
-          return ssr(_tmpl$16, escape(sidebar()?.announcement));
+          return ssr(_tmpl$15, escape(sidebar()?.announcement));
         }
       })), ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/archives/index.html"), true), false), escape(t2().nav.archives), ssrAttribute("src", escape(assetUrl(props.ctx.request_id, avatar()), true), false) + ssrAttribute("alt", escape(props.cfg.site.author, true) ?? escape(props.cfg.site.name, true), false), escape(createComponent(Show, {
         get when() {
@@ -3728,7 +3744,7 @@ var HomeSidebar = (props) => {
 };
 
 // src/pages/home.tsx
-var _tmpl$17 = ['<main class="', '" id="main-content" data-layout="home"', ">", '<div class="main-content-container"><div class="main-content-header">', '</div><div class="main-content-body">', '<div class="main-content"><div class="home-content-container"><ul class="home-article-list">', "</ul>", "</div></div>", "</div>", "</div></main>"];
+var _tmpl$16 = ['<main class="', '" id="main-content" data-layout="home"', ">", '<div class="main-content-container"><div class="main-content-header">', '</div><div class="main-content-body">', '<div class="main-content"><div class="home-content-container"><ul class="home-article-list">', "</ul>", "</div></div>", "</div>", "</div></main>"];
 var HomePage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
@@ -3740,7 +3756,7 @@ var HomePage = (p3) => {
   }).items;
   const sidebarPosition = () => cfg().story?.home_sidebar?.position ?? "left";
   const bannerFixed = () => cfg().features?.home_banner !== false && cfg().story?.home_banner?.enable !== false && cfg().story?.home_banner?.style === "fixed";
-  return ssr(_tmpl$17, `page-container story-page-home ${bannerFixed() ? "story-page-home--fixed-banner" : ""}`, ssrAttribute("data-home-path", escape(pageUrl(ctx().request_id, "/index.html"), true), false), escape(createComponent(HomeBanner, {
+  return ssr(_tmpl$16, `page-container story-page-home ${bannerFixed() ? "story-page-home--fixed-banner" : ""}`, ssrAttribute("data-home-path", escape(pageUrl(ctx().request_id, "/index.html"), true), false), escape(createComponent(HomeBanner, {
     get ctx() {
       return ctx();
     },
@@ -3944,7 +3960,7 @@ function buildBreadcrumbSegments(ctx, t2, pageKey) {
 var IconChevronLeft_default = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>\n';
 
 // src/components/BackButton.tsx
-var _tmpl$18 = ['<span aria-hidden="true">', "</span>"];
+var _tmpl$17 = ['<span aria-hidden="true">', "</span>"];
 var _tmpl$210 = ["<span>", "</span>"];
 var _tmpl$38 = ['<div class="app-layout flex items-center justify-start">', "</div>"];
 function chevronMarkup() {
@@ -3966,13 +3982,13 @@ var BackButton = (props) => {
       return linkClass();
     },
     get children() {
-      return [ssr(_tmpl$18, chevronMarkup()), ssr(_tmpl$210, escape(t2().post.goBack))];
+      return [ssr(_tmpl$17, chevronMarkup()), ssr(_tmpl$210, escape(t2().post.goBack))];
     }
   })));
 };
 
 // src/components/Breadcrumb.tsx
-var _tmpl$19 = ['<nav class="app-layout mt-8 mb-4" aria-label="breadcrumb"><ul class="font-light flex flex-wrap items-center gap-x-1 [&amp;>li:not(:last-child)>a]:hover:opacity-100"><li class="inline-flex items-center gap-x-1"><a', ' class="opacity-80">', '</a><span aria-hidden="true" class="opacity-80">&raquo;</span></li>', "</ul></nav>"];
+var _tmpl$18 = ['<nav class="app-layout mt-8 mb-4" aria-label="breadcrumb"><ul class="font-light flex flex-wrap items-center gap-x-1 [&amp;>li:not(:last-child)>a]:hover:opacity-100"><li class="inline-flex items-center gap-x-1"><a', ' class="opacity-80">', '</a><span aria-hidden="true" class="opacity-80">&raquo;</span></li>', "</ul></nav>"];
 var _tmpl$211 = ["<a", ' class="capitalize opacity-70">', "</a>"];
 var _tmpl$39 = '<span aria-hidden="true" class="opacity-70">&raquo;</span>';
 var _tmpl$48 = ['<li class="inline-flex items-center gap-x-1">', "</li>"];
@@ -3987,7 +4003,7 @@ var Breadcrumb = (props) => {
       return show();
     },
     get children() {
-      return ssr(_tmpl$19, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/index.html"), true), false), escape(t2().nav.home), escape(createComponent(For, {
+      return ssr(_tmpl$18, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/index.html"), true), false), escape(t2().nav.home), escape(createComponent(For, {
         get each() {
           return segments();
         },
@@ -4008,11 +4024,11 @@ var Breadcrumb = (props) => {
 };
 
 // src/components/PageChrome.tsx
-var _tmpl$20 = ['<div data-vt-swap="page-chrome">', "", "</div>"];
+var _tmpl$19 = ['<div data-vt-swap="page-chrome">', "", "</div>"];
 var PageChrome = (props) => {
   const hasBreadcrumb = () => shouldShowBreadcrumb(props.ctx, props.pageKey);
   const hasBack = () => !!props.showBack;
-  return ssr(_tmpl$20, escape(createComponent(Show, {
+  return ssr(_tmpl$19, escape(createComponent(Show, {
     get when() {
       return hasBreadcrumb();
     },
@@ -4044,7 +4060,7 @@ var PageChrome = (props) => {
 };
 
 // src/components/Main.tsx
-var _tmpl$21 = ['<h1 class="text-2xl font-semibold sm:text-3xl">', "</h1>"];
+var _tmpl$20 = ['<h1 class="text-2xl font-semibold sm:text-3xl">', "</h1>"];
 var _tmpl$212 = ['<p class="text-muted-foreground mt-2 mb-6 italic">', "</p>"];
 var _tmpl$310 = ['<main id="main-content"', ">", "", "</main>"];
 var Main = (props) => {
@@ -4062,7 +4078,7 @@ var Main = (props) => {
       return !local.hidePageHeader;
     },
     get children() {
-      return [ssr(_tmpl$21, escape(local.pageTitle)), createComponent(Show, {
+      return [ssr(_tmpl$20, escape(local.pageTitle)), createComponent(Show, {
         get when() {
           return local.pageDesc;
         },
@@ -4079,7 +4095,7 @@ var APP_PROSE = "app-prose max-w-app w-full prose-pre:bg-(--shiki-light-bg) dark
 var APP_PROSE_POST = `${APP_PROSE} mt-8`;
 
 // src/pages/about.tsx
-var _tmpl$30 = ["<div>", "</div>"];
+var _tmpl$21 = ["<div>", "</div>"];
 var _tmpl$213 = ['<div class="page-template-container"><h1 class="page-title-header">', '</h1><div class="', '">', "</div></div>"];
 var _tmpl$311 = ['<p class="text-muted-foreground italic">', "</p>"];
 var AboutPage = (p3) => {
@@ -4120,7 +4136,7 @@ var AboutPage = (p3) => {
           return ssr(_tmpl$311, escape(t2().pages.aboutEmpty));
         },
         get children() {
-          return ssr(_tmpl$30, aboutDoc().content_html);
+          return ssr(_tmpl$21, aboutDoc().content_html);
         }
       })));
     }
@@ -4184,12 +4200,12 @@ function dataSourceTitle(ctx, innerLink, fallbackPath, fallbackTitle) {
 }
 
 // src/components/Tag.tsx
-var _tmpl$31 = ["<li><a", ' class="text-accent decoration-dashed underline-offset-4 hover:underline">#', "", "</a></li>"];
+var _tmpl$30 = ["<li><a", ' class="text-accent decoration-dashed underline-offset-4 hover:underline">#', "", "</a></li>"];
 var _tmpl$214 = ['<sup class="text-muted-foreground ms-1 text-xs">', "</sup>"];
 var Tag = (props) => {
   const slug = () => encodeURIComponent(props.tag);
   const href = () => pageUrl(props.ctx.request_id, `/tags/${slug()}/index.html`);
-  return ssr(_tmpl$31, ssrAttribute("href", escape(href(), true), false), escape(props.tag), props.count != null && ssr(_tmpl$214, escape(props.count)));
+  return ssr(_tmpl$30, ssrAttribute("href", escape(href(), true), false), escape(props.tag), props.count != null && ssr(_tmpl$214, escape(props.count)));
 };
 
 // src/components/PostCopyright.tsx
@@ -4234,7 +4250,7 @@ function resolveCopyrightLicense(raw) {
 }
 
 // src/components/PostCopyright.tsx
-var _tmpl$40 = ["<li><strong>", ":</strong> ", "</li>"];
+var _tmpl$31 = ["<li><strong>", ":</strong> ", "</li>"];
 var _tmpl$215 = ['<div class="post-copyright"><div class="article-copyright-info-container"><ul><li><strong>', ":</strong> ", "</li>", "", "", "<li><strong>", ":</strong> ", "</li><li><strong>", ":</strong> ", "</li></ul></div></div>"];
 var _tmpl$312 = ["<span>", "</span>"];
 var _tmpl$49 = ["<a", ' target="_blank" rel="noopener noreferrer">', "</a>"];
@@ -4277,18 +4293,18 @@ var PostCopyright = (props) => {
           return !!cfg().site.author;
         },
         get children() {
-          return ssr(_tmpl$40, escape(t2().post.copyrightAuthor), escape(cfg().site.author));
+          return ssr(_tmpl$31, escape(t2().post.copyrightAuthor), escape(cfg().site.author));
         }
       })), escape(createComponent(Show, {
         get when() {
           return formatTs(publishedTs(props.post) ?? void 0, tz());
         },
-        children: (created) => ssr(_tmpl$40, escape(t2().post.copyrightCreated), escape(created()))
+        children: (created) => ssr(_tmpl$31, escape(t2().post.copyrightCreated), escape(created()))
       })), escape(createComponent(Show, {
         get when() {
           return formatTs(updatedTs(props.post) ?? void 0, tz());
         },
-        children: (updated) => ssr(_tmpl$40, escape(t2().post.copyrightUpdated), escape(updated()))
+        children: (updated) => ssr(_tmpl$31, escape(t2().post.copyrightUpdated), escape(updated()))
       })), escape(t2().post.copyrightLink), escape(canonical()), escape(t2().post.copyrightLicense), escape(createComponent(Show, {
         get when() {
           return license()?.url;
@@ -4303,7 +4319,7 @@ var PostCopyright = (props) => {
 };
 
 // src/components/PostNeighbors.tsx
-var _tmpl$41 = ['<nav class="article-nav"', ">", "", "</nav>"];
+var _tmpl$40 = ['<nav class="article-nav"', ">", "", "</nav>"];
 var _tmpl$216 = ['<div class="article-nav__item"><a class="article-nav__link"', '><span class="article-nav__arrow" aria-hidden="true">\u2190</span><span class="min-w-0"><span class="article-nav__title">', '</span><span class="article-nav__label">', "</span></span></a></div>"];
 var _tmpl$313 = ['<div class="article-nav__item article-nav__item--next"><a class="article-nav__link article-nav__link--next"', '><span class="article-nav__arrow" aria-hidden="true">\u2192</span><span class="min-w-0"><span class="article-nav__title">', '</span><span class="article-nav__label">', "</span></span></a></div>"];
 var PostNeighbors = (props) => {
@@ -4313,7 +4329,7 @@ var PostNeighbors = (props) => {
       return props.prevPost || props.nextPost;
     },
     get children() {
-      return ssr(_tmpl$41, ssrAttribute("aria-label", escape(t2().post.neighborNav, true), false), escape(createComponent(Show, {
+      return ssr(_tmpl$40, ssrAttribute("aria-label", escape(t2().post.neighborNav, true), false), escape(createComponent(Show, {
         get when() {
           return props.prevPost;
         },
@@ -4329,7 +4345,7 @@ var PostNeighbors = (props) => {
 };
 
 // src/pages/post.tsx
-var _tmpl$50 = ['<main id="main-content" data-layout="post" class="app-layout mt-8">', "", "</main>"];
+var _tmpl$41 = ['<main id="main-content" data-layout="post" class="app-layout mt-8">', "", "</main>"];
 var _tmpl$217 = ['<div class="article-hero"><img', ' class="article-hero__cover" loading="eager"><div class="article-hero__title-wrap"><h1 class="article-hero__title" style="', '">', "</h1></div></div>"];
 var _tmpl$314 = ['<div class="px-4 pt-6 sm:px-6 md:px-8"><h1 class="text-accent text-2xl font-bold sm:text-3xl" style="', '">', "</h1></div>"];
 var _tmpl$410 = ['<div class="article-header__name">', "</div>"];
@@ -4386,7 +4402,7 @@ var PostPage = (p3) => {
     get ctx() {
       return ctx();
     }
-  }), ssr(_tmpl$50, escape(createComponent(Show, {
+  }), ssr(_tmpl$41, escape(createComponent(Show, {
     get when() {
       return showBack();
     },
@@ -4494,7 +4510,7 @@ function resolvePostDetail(ctx) {
 }
 
 // src/pages/posts-list.tsx
-var _tmpl$51 = ['<ul class="home-article-list">', "</ul>"];
+var _tmpl$50 = ['<ul class="home-article-list">', "</ul>"];
 var PostsListPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
@@ -4527,7 +4543,7 @@ var PostsListPage = (p3) => {
     },
     layout: "posts-list",
     get children() {
-      return ssr(_tmpl$51, escape(createComponent(For, {
+      return ssr(_tmpl$50, escape(createComponent(For, {
         get each() {
           return items();
         },
@@ -4564,14 +4580,14 @@ var PostsListPage = (p3) => {
 };
 
 // src/components/TagCloudItem.tsx
-var _tmpl$59 = ["<li><a", '><span class="tag-cloud-item__hash" aria-hidden="true">#</span>', "</a></li>"];
+var _tmpl$51 = ["<li><a", '><span class="tag-cloud-item__hash" aria-hidden="true">#</span>', "</a></li>"];
 var TagCloudItem = (props) => {
   const href = () => pageUrl(props.ctx.request_id, `/tags/${encodeURIComponent(props.tag)}/index.html`);
-  return ssr(_tmpl$59, ssrAttribute("href", escape(href(), true), false) + ssrAttribute("data-weight", escape(String(props.count), true), false), escape(props.tag));
+  return ssr(_tmpl$51, ssrAttribute("href", escape(href(), true), false) + ssrAttribute("data-weight", escape(String(props.count), true), false), escape(props.tag));
 };
 
 // src/pages/tags-index.tsx
-var _tmpl$60 = ['<div class="tagcloud-content"><ul class="tag-list" data-show-value="true">', "</ul></div>"];
+var _tmpl$59 = ['<div class="tagcloud-content"><ul class="tag-list" data-show-value="true">', "</ul></div>"];
 var TagsIndexPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
@@ -4604,7 +4620,7 @@ var TagsIndexPage = (p3) => {
     },
     layout: "tags-index",
     get children() {
-      return ssr(_tmpl$60, escape(createComponent(For, {
+      return ssr(_tmpl$59, escape(createComponent(For, {
         get each() {
           return tagEntries();
         },
@@ -4628,7 +4644,7 @@ var TagsIndexPage = (p3) => {
 };
 
 // src/pages/tag-posts.tsx
-var _tmpl$61 = ['<ul class="home-article-list">', "</ul>"];
+var _tmpl$60 = ['<ul class="home-article-list">', "</ul>"];
 var TagPostsPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
@@ -4670,7 +4686,7 @@ var TagPostsPage = (p3) => {
     },
     layout: "tag-posts",
     get children() {
-      return ssr(_tmpl$61, escape(createComponent(For, {
+      return ssr(_tmpl$60, escape(createComponent(For, {
         get each() {
           return items();
         },
@@ -4752,7 +4768,7 @@ function groupArchiveByDateLabel(posts) {
 }
 
 // src/pages/archives.tsx
-var _tmpl$66 = ['<div class="archive-container"><div class="archive-list-container">', "</div></div>"];
+var _tmpl$61 = ['<div class="archive-container"><div class="archive-list-container">', "</div></div>"];
 var _tmpl$218 = ['<section class="archive-item"><div class="archive-item__header"><span class="archive-year">', '</span><span class="archive-year-post-count">', '</span></div><ul class="archive-article-list">', "</ul></section>"];
 var _tmpl$315 = ['<li class="archive-article-item"', ">", "</li>"];
 var _tmpl$411 = ['<a class="archive-article-link"', '><span class="archive-article-title">', "</span></a>"];
@@ -4784,7 +4800,7 @@ var ArchivesPage = (p3) => {
     layout: "archives",
     hidePageHeader: true,
     get children() {
-      return ssr(_tmpl$66, escape(createComponent(For, {
+      return ssr(_tmpl$61, escape(createComponent(For, {
         get each() {
           return years();
         },
@@ -4812,12 +4828,12 @@ var ArchivesPage = (p3) => {
 };
 
 // src/pages/links.tsx
-var _tmpl$67 = ['<div class="app-prose mt-8">', "</div>"];
+var _tmpl$66 = ['<div class="app-prose mt-8">', "</div>"];
 var _tmpl$219 = ['<div class="page-template-container"><h1 class="page-title-header">', '</h1><div class="friends-link-container">', "", "</div></div>"];
 var _tmpl$316 = ['<p class="text-muted-foreground italic">', "</p>"];
 var _tmpl$412 = ['<h2 class="friends-link-category__title">', "</h2>"];
 var _tmpl$510 = ["<section>", '<ul class="', '">', "</ul></section>"];
-var _tmpl$68 = ['<div class="friends-link-card__thumbnail"><img', ' alt loading="lazy"></div>'];
+var _tmpl$67 = ['<div class="friends-link-card__thumbnail"><img', ' alt loading="lazy"></div>'];
 var _tmpl$74 = ['<div class="friends-link-avatar"><img', ' alt loading="lazy"></div>'];
 var _tmpl$82 = ['<div class="friends-link-desc">', "</div>"];
 var _tmpl$92 = ['<div class="friends-link-card">', '<div class="friends-link-card__body">', '<div class="friends-link-meta"><div class="friends-link-name">', "</div>", "</div></div></div>"];
@@ -4900,7 +4916,7 @@ var LinksPage = (p3) => {
                       return !!item.thumbnail;
                     },
                     get children() {
-                      return ssr(_tmpl$68, ssrAttribute("src", escape(resolveStoryMediaUrl(ctx(), item.thumbnail, originPath()), true), false));
+                      return ssr(_tmpl$67, ssrAttribute("src", escape(resolveStoryMediaUrl(ctx(), item.thumbnail, originPath()), true), false));
                     }
                   })), escape(createComponent(Show, {
                     get when() {
@@ -4927,7 +4943,7 @@ var LinksPage = (p3) => {
           return !!doc()?.content_html;
         },
         get children() {
-          return ssr(_tmpl$67, doc().content_html);
+          return ssr(_tmpl$66, doc().content_html);
         }
       })));
     }
@@ -4942,12 +4958,12 @@ var LinksPage = (p3) => {
 };
 
 // src/pages/masonry.tsx
-var _tmpl$69 = '<div class="loading-placeholder"><div class="flex-grid generic-card"><div class="card loading"></div><div class="card loading"></div><div class="card loading"></div></div></div>';
+var _tmpl$68 = '<div class="loading-placeholder"><div class="flex-grid generic-card"><div class="card loading"></div><div class="card loading"></div><div class="card loading"></div></div></div>';
 var _tmpl$220 = ['<div id="masonry-container"', ">", "</div>"];
 var _tmpl$317 = ['<div class="page-template-content app-prose mt-8">', "</div>"];
 var _tmpl$413 = ['<div class="page-template-container"><h1 class="page-title-header">', "</h1>", "", "</div>"];
 var _tmpl$511 = ['<p class="text-muted-foreground italic">', "</p>"];
-var _tmpl$610 = ['<div class="image-title">', "</div>"];
+var _tmpl$69 = ['<div class="image-title">', "</div>"];
 var _tmpl$75 = ['<div class="image-description">', "</div>"];
 var _tmpl$83 = ["<strong>", "</strong>"];
 var _tmpl$93 = ['<span class="hidden-caption-content">', "", "</span>"];
@@ -4988,7 +5004,7 @@ var MasonryPage = (p3) => {
           return ssr(_tmpl$511, escape(t2().pages.masonryEmpty));
         },
         get children() {
-          return [ssr(_tmpl$69), ssr(_tmpl$220, ssrAttribute("data-vendor-script", escape(pageUrl(ctx().request_id, "/assets/vendor/minimasonry.min.js"), true), false), escape(createComponent(For, {
+          return [ssr(_tmpl$68), ssr(_tmpl$220, ssrAttribute("data-vendor-script", escape(pageUrl(ctx().request_id, "/assets/vendor/minimasonry.min.js"), true), false), escape(createComponent(For, {
             get each() {
               return items();
             },
@@ -4999,7 +5015,7 @@ var MasonryPage = (p3) => {
                   return !!item.title;
                 },
                 get children() {
-                  return ssr(_tmpl$610, escape(item.title));
+                  return ssr(_tmpl$69, escape(item.title));
                 }
               })), escape(createComponent(Show, {
                 get when() {
