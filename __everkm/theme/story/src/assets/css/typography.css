@@ -50,6 +50,15 @@
       @apply border-border mx-auto border;
     }
 
+    a.story-prose-image-link {
+      @apply block no-underline;
+      cursor: zoom-in;
+    }
+
+    a.story-prose-image-link img {
+      cursor: zoom-in;
+    }
+
     img[role="button"] {
       @apply cursor-zoom-in;
 

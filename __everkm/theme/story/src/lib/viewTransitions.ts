@@ -15,11 +15,14 @@ import { installPreloader } from "./preloader";
 import { resetHomeBannerBlur } from "./homeBannerBlur";
 import { installHomeBannerScroll } from "./homeBannerScroll";
 import { installParticles } from "./particles";
+import { bootImageViewer, teardownImageViewer } from "./imageViewer";
 import { bootMasonryLayout, teardownMasonryLayout } from "./masonryLayout";
 
 import { STORY_PAGE_SWAP } from "./events";
 
 function shouldIntercept(anchor: HTMLAnchorElement): boolean {
+  if (anchor.classList.contains("story-album-link")) return false;
+  if (anchor.classList.contains("story-prose-image-link")) return false;
   if (anchor.target === "_blank") return false;
   if (anchor.hasAttribute("download")) return false;
   const href = anchor.getAttribute("href");
@@ -242,7 +245,7 @@ export function bootClient(): void {
   installBannerTyped();
   installHomeBannerScroll();
   installParticles();
-  void bootMasonryLayout();
+  void bootMasonryLayout().then(() => bootImageViewer());
   updateActiveNav();
   mountClientBlocks();
   installFootnoteBackButton("#article");
@@ -259,7 +262,8 @@ export function bootClient(): void {
     installScrollTopBottom();
     resetHomeBannerBlur();
     installNavbarShrink();
+    teardownImageViewer();
     teardownMasonryLayout();
-    void bootMasonryLayout();
+    void bootMasonryLayout().then(() => bootImageViewer());
   });
 }

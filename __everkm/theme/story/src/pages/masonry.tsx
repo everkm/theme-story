@@ -59,26 +59,47 @@ export const MasonryPage: Component<MasonryPageProps> = (p) => {
               )}
             >
               <For each={items()}>
-                {(item) => (
-                  <div class="masonry-item">
-                    <div class="image-container">
-                      <img
-                        src={resolveStoryMediaUrl(
-                          ctx(),
-                          item.image,
-                          originPath(),
-                        )}
-                        alt={item.title ?? ""}
-                      />
-                      <Show when={!!item.title}>
-                        <div class="image-title">{item.title}</div>
-                      </Show>
-                      <Show when={!!item.description}>
-                        <div class="image-description">{item.description}</div>
-                      </Show>
+                {(item) => {
+                  const imageUrl = resolveStoryMediaUrl(
+                    ctx(),
+                    item.image,
+                    originPath(),
+                  );
+                  return (
+                    <div class="masonry-item">
+                      <a
+                        class="story-album-link"
+                        href={imageUrl}
+                        aria-label={item.title ?? item.description ?? imageUrl}
+                      >
+                        <div class="image-container">
+                          <img
+                            src={imageUrl}
+                            alt={item.title ?? ""}
+                          />
+                          <Show when={!!item.title}>
+                            <div class="image-title">{item.title}</div>
+                          </Show>
+                          <Show when={!!item.description}>
+                            <div class="image-description">
+                              {item.description}
+                            </div>
+                          </Show>
+                          <Show when={!!item.title || !!item.description}>
+                            <span class="hidden-caption-content">
+                              <Show when={!!item.title}>
+                                <strong>{item.title}</strong>
+                              </Show>
+                              <Show when={!!item.description}>
+                                {item.description}
+                              </Show>
+                            </span>
+                          </Show>
+                        </div>
+                      </a>
                     </div>
-                  </div>
-                )}
+                  );
+                }}
               </For>
             </div>
           </Show>

@@ -4949,7 +4949,9 @@ var _tmpl$413 = ['<div class="page-template-container"><h1 class="page-title-hea
 var _tmpl$511 = ['<p class="text-muted-foreground italic">', "</p>"];
 var _tmpl$610 = ['<div class="image-title">', "</div>"];
 var _tmpl$75 = ['<div class="image-description">', "</div>"];
-var _tmpl$83 = ['<div class="masonry-item"><div class="image-container"><img', ">", "", "</div></div>"];
+var _tmpl$83 = ["<strong>", "</strong>"];
+var _tmpl$93 = ['<span class="hidden-caption-content">', "", "</span>"];
+var _tmpl$103 = ['<div class="masonry-item"><a class="story-album-link"', '><div class="image-container"><img', ">", "", "", "</div></a></div>"];
 var MasonryPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
@@ -4990,21 +4992,45 @@ var MasonryPage = (p3) => {
             get each() {
               return items();
             },
-            children: (item) => ssr(_tmpl$83, ssrAttribute("src", escape(resolveStoryMediaUrl(ctx(), item.image, originPath()), true), false) + ssrAttribute("alt", escape(item.title, true) ?? "", false), escape(createComponent(Show, {
-              get when() {
-                return !!item.title;
-              },
-              get children() {
-                return ssr(_tmpl$610, escape(item.title));
-              }
-            })), escape(createComponent(Show, {
-              get when() {
-                return !!item.description;
-              },
-              get children() {
-                return ssr(_tmpl$75, escape(item.description));
-              }
-            })))
+            children: (item) => {
+              const imageUrl = resolveStoryMediaUrl(ctx(), item.image, originPath());
+              return ssr(_tmpl$103, ssrAttribute("href", escape(imageUrl, true), false) + ssrAttribute("aria-label", escape(item.title, true) ?? escape(item.description, true) ?? escape(imageUrl, true), false), ssrAttribute("src", escape(imageUrl, true), false) + ssrAttribute("alt", escape(item.title, true) ?? "", false), escape(createComponent(Show, {
+                get when() {
+                  return !!item.title;
+                },
+                get children() {
+                  return ssr(_tmpl$610, escape(item.title));
+                }
+              })), escape(createComponent(Show, {
+                get when() {
+                  return !!item.description;
+                },
+                get children() {
+                  return ssr(_tmpl$75, escape(item.description));
+                }
+              })), escape(createComponent(Show, {
+                get when() {
+                  return !!item.title || !!item.description;
+                },
+                get children() {
+                  return ssr(_tmpl$93, escape(createComponent(Show, {
+                    get when() {
+                      return !!item.title;
+                    },
+                    get children() {
+                      return ssr(_tmpl$83, escape(item.title));
+                    }
+                  })), escape(createComponent(Show, {
+                    get when() {
+                      return !!item.description;
+                    },
+                    get children() {
+                      return item.description;
+                    }
+                  })));
+                }
+              })));
+            }
           })))];
         }
       })), escape(createComponent(Show, {
