@@ -1,8 +1,12 @@
 ---
 title: 欢迎
-description: Story 主题首页侧边栏与 Banner 文案来源
+description: Story 主题演示站首页文案
 ---
 
-这是 **Story 主题**演示站，由 [hexo-theme-redefine](https://github.com/EvanNotFound/hexo-theme-redefine) 迁移至 [Everkm Publish](https://publish.everkm.com)。
+**Story 主题**是 [Everkm Publish](https://publish.everkm.com) 的博客主题，由 [hexo-theme-redefine](https://github.com/EvanNotFound/hexo-theme-redefine) 迁移而来。
 
-首页 URL 为虚拟模板 `/index.html`，本文来自 `_home.md`（数据源文件，以下划线开头）。
+本页 Hero 区域内容来自 `_home.md`。站点首页 URL 为 `/index.html`（虚拟模板）。
+
+关于页内容来自 `_about.md`，关于页 URL 为 `/about/`（虚拟模板）。
+
+可通过顶部导航浏览全部文章、标签，或阅读关于页。

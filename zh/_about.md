@@ -1,15 +1,14 @@
 ---
 title: 关于
-description: 关于本站
-created_at: 2025-04-09T16:23:59+08:00
+description: 关于 Story 主题演示站
+created_at: 2026-06-28T00:00:00Z
+updated_at: 2026-07-03T11:51:44Z
 ---
 
-### 基本信息
+这是 **Story 主题**演示站的关于页。
 
-我是一个好人。
+Story 主题支持：
 
----
-
-### 示例
-
-This is examples.
+- 首页、关于、文章列表、标签、归档等虚拟页面
+- 在任意内容目录下编写 Markdown 文章
+- 深色模式、View Transitions，以及 Algolia 搜索（配置 `algolia_search` 后可用）
