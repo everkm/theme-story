@@ -33,6 +33,15 @@ function isImageUrl(url: string): boolean {
   }
 }
 
+function resolveImageUrl(img: HTMLImageElement): string {
+  return (
+    img.getAttribute("data-src") ||
+    img.currentSrc ||
+    img.src ||
+    ""
+  );
+}
+
 function isProseImageCandidate(img: HTMLImageElement): boolean {
   if (img.closest("#album-container")) return false;
   if (img.closest(".article-hero")) return false;
@@ -55,14 +64,21 @@ function prepareProseImages(): void {
     }
 
     if (parentLink) {
-      if (!isImageUrl(parentLink.href)) continue;
-      parentLink.classList.add("story-prose-image-link");
+      if (!isImageUrl(parentLink.href)) {
+        const imageUrl = resolveImageUrl(img);
+        if (imageUrl && isImageUrl(imageUrl)) {
+          parentLink.href = imageUrl;
+          parentLink.classList.add("story-prose-image-link");
+        }
+      } else {
+        parentLink.classList.add("story-prose-image-link");
+      }
       img.dataset.storyImageViewer = "1";
       continue;
     }
 
     const link = document.createElement("a");
-    link.href = img.currentSrc || img.src;
+    link.href = resolveImageUrl(img);
     link.className = "story-prose-image-link";
     link.setAttribute("aria-label", img.alt || "View image");
     img.parentNode?.insertBefore(link, img);
@@ -76,10 +92,20 @@ function syncLinkDimensions(root: ParentNode, selector: string): void {
     if (link.dataset.pswpWidth && link.dataset.pswpHeight) continue;
 
     const img = link.querySelector("img");
-    if (!img || img.naturalWidth <= 0 || img.naturalHeight <= 0) continue;
+    if (!img) continue;
 
-    link.dataset.pswpWidth = String(img.naturalWidth);
-    link.dataset.pswpHeight = String(img.naturalHeight);
+    if (img.naturalWidth > 0 && img.naturalHeight > 0) {
+      link.dataset.pswpWidth = String(img.naturalWidth);
+      link.dataset.pswpHeight = String(img.naturalHeight);
+      continue;
+    }
+
+    const width = link.dataset.pswpWidth || img.getAttribute("width");
+    const height = link.dataset.pswpHeight || img.getAttribute("height");
+    if (width && height) {
+      link.dataset.pswpWidth = width;
+      link.dataset.pswpHeight = height;
+    }
   }
 }
 

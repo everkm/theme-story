@@ -17,6 +17,7 @@ import { installHomeBannerScroll } from "./homeBannerScroll";
 import { installParticles } from "./particles";
 import { bootImageViewer, teardownImageViewer } from "./imageViewer";
 import { bootAlbumLayout, teardownAlbumLayout } from "./albumLayout";
+import { installLazyImg } from "./widgets/image-lazy";
 
 import { STORY_PAGE_SWAP } from "./events";
 
@@ -239,6 +240,7 @@ export function bootClient(): void {
   installPreloader();
   installTheme();
   installViewTransitions();
+  installLazyImg("#article .article-content");
   installMobileNav();
   installNavbarShrink();
   installScrollTopBottom();

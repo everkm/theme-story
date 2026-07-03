@@ -1,5 +1,10 @@
 import { Component, For, Show } from "solid-js";
 import { queryAlbumImages } from "../lib/albumQuery";
+import {
+  IMAGE_PLACEHOLDER_DEFAULT_HEIGHT,
+  IMAGE_PLACEHOLDER_DEFAULT_WIDTH,
+  imagePlaceholderSvg,
+} from "../lib/imagePlaceholder";
 import { useTranslations } from "../lib/i18n";
 import { pageUrl } from "../lib/url";
 import { Header } from "../layout/Header";
@@ -53,15 +58,33 @@ export const AlbumPage: Component<AlbumPageProps> = (p) => {
               )}
             >
               <For each={items()}>
-                {(item) => (
-                  <div class="album-item">
-                    <a
-                      class="story-album-link"
-                      href={item.image}
-                      aria-label={item.title ?? item.image}
-                    >
-                      <div class="image-container">
-                        <img src={item.image} alt={item.title ?? ""} />
+                {(item) => {
+                  const width = () =>
+                    item.width ?? IMAGE_PLACEHOLDER_DEFAULT_WIDTH;
+                  const height = () =>
+                    item.height ?? IMAGE_PLACEHOLDER_DEFAULT_HEIGHT;
+                  return (
+                    <div class="album-item">
+                      <a
+                        class="story-album-link"
+                        href={item.image}
+                        data-pswp-width={String(width())}
+                        data-pswp-height={String(height())}
+                        aria-label={item.title ?? item.image}
+                      >
+                        <div class="image-container">
+                          <img
+                            class="story-album-img"
+                            src={imagePlaceholderSvg({
+                              width: width(),
+                              height: height(),
+                            })}
+                            data-src={item.image}
+                            width={width()}
+                            height={height()}
+                            alt={item.title ?? ""}
+                            decoding="async"
+                          />
                         <Show when={!!item.title}>
                           <div class="image-title">{item.title}</div>
                         </Show>
@@ -73,7 +96,8 @@ export const AlbumPage: Component<AlbumPageProps> = (p) => {
                       </div>
                     </a>
                   </div>
-                )}
+                  );
+                }}
               </For>
             </div>
           </Show>

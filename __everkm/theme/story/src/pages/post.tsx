@@ -7,6 +7,7 @@ import { useTranslations } from "../lib/i18n";
 import { toTransitionName } from "../lib/toTransitionName";
 import { pageUrl } from "../lib/url";
 import { resolvePostCover } from "../lib/postCover";
+import { resolvePostDetail } from "../lib/postDetail";
 import { resolveStoryMediaUrl } from "../lib/dataSource";
 import { POSTS_CONTENT_DIR } from "../lib/postsPath";
 import { APP_PROSE } from "../lib/proseClasses";
@@ -192,19 +193,3 @@ export const PostPage: Component<PostPageProps> = (p) => {
     </>
   );
 };
-
-function resolvePostDetail(ctx: PageContext): PostItem | null {
-  const meta = ctx.post;
-  if (meta?.path) {
-    return everkm.post_detail(ctx.request_id, { path: meta.path }) ?? meta;
-  }
-
-  const pagePath = ctx.page_path;
-  if (pagePath?.endsWith(".html")) {
-    return everkm.post_detail(ctx.request_id, {
-      path: pagePath.replace(/\.html$/, ".md"),
-    });
-  }
-
-  return meta;
-}

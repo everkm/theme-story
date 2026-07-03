@@ -4257,6 +4257,23 @@ var import_dayjs4 = __toESM(require_dayjs_min(), 1);
 var import_utc3 = __toESM(require_utc(), 1);
 var import_timezone3 = __toESM(require_timezone(), 1);
 
+// src/lib/postDetail.ts
+function resolvePostDetail(ctx) {
+  const lazyArgs = { lazy_img: true };
+  const meta = ctx.post;
+  if (meta?.path) {
+    return everkm.post_detail(ctx.request_id, { path: meta.path, ...lazyArgs }) ?? meta;
+  }
+  const pagePath = ctx.page_path;
+  if (pagePath?.endsWith(".html")) {
+    return everkm.post_detail(ctx.request_id, {
+      path: pagePath.replace(/\.html$/, ".md"),
+      ...lazyArgs
+    });
+  }
+  return meta;
+}
+
 // src/lib/dataSource.ts
 function loadDataSourceDoc(ctx, innerLink, fallbackPath) {
   const path = resolveInnerLinkPath(innerLink) || fallbackPath;
@@ -4590,21 +4607,6 @@ var PostPage = (p3) => {
     }
   })];
 };
-function resolvePostDetail(ctx) {
-  const meta = ctx.post;
-  if (meta?.path) {
-    return everkm.post_detail(ctx.request_id, {
-      path: meta.path
-    }) ?? meta;
-  }
-  const pagePath = ctx.page_path;
-  if (pagePath?.endsWith(".html")) {
-    return everkm.post_detail(ctx.request_id, {
-      path: pagePath.replace(/\.html$/, ".md")
-    });
-  }
-  return meta;
-}
 
 // src/pages/posts-list.tsx
 var _tmpl$50 = ['<ul class="home-article-list">', "</ul>"];
@@ -5062,12 +5064,39 @@ function queryAlbumImages(requestId) {
       const title = resource.title?.trim() || resource.alt?.trim() || void 0;
       items.push({
         image: resource.url,
-        title
+        title,
+        width: resource.width,
+        height: resource.height
       });
     }
   }
   return items;
 }
+
+// src/lib/imagePlaceholder.ts
+var PLACEHOLDER_DEFAULT_WIDTH = 300;
+var PLACEHOLDER_DEFAULT_HEIGHT = 180;
+var PLACEHOLDER_FONT_RATIO = 0.16;
+function imagePlaceholderSvg(options = {}) {
+  const width = options.width || PLACEHOLDER_DEFAULT_WIDTH;
+  const height = options.height || PLACEHOLDER_DEFAULT_HEIGHT;
+  const text = options.text || `${width}\xD7${height}`;
+  const fontFamily = options.fontFamily || "sans-serif";
+  const fontWeight = options.fontWeight || "bold";
+  const fontSize = options.fontSize || Math.floor(Math.min(width, height) * PLACEHOLDER_FONT_RATIO);
+  const bgColor = options.bgColor || "#ddd";
+  const textColor = options.textColor || "rgba(0,0,0,0.3)";
+  const charset = options.charset || "UTF-8";
+  const str = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+        <rect fill="${bgColor}" width="${width}" height="${height}"/>
+        <text fill="${textColor}" font-family="${fontFamily}" font-size="${fontSize}" font-weight="${fontWeight}" x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">${text}</text>
+      </svg>`;
+  const cleaned = str.replace(/[\t\n\r]/gim, "").replace(/\s\s+/g, " ").replace(/'/gim, "\\i");
+  const encoded = encodeURIComponent(cleaned).replace(/\(/g, "%28").replace(/\)/g, "%29");
+  return `data:image/svg+xml;charset=${charset},${encoded}`;
+}
+var IMAGE_PLACEHOLDER_DEFAULT_WIDTH = PLACEHOLDER_DEFAULT_WIDTH;
+var IMAGE_PLACEHOLDER_DEFAULT_HEIGHT = PLACEHOLDER_DEFAULT_HEIGHT;
 
 // src/pages/album.tsx
 var _tmpl$70 = '<div class="loading-placeholder"><div class="flex-grid generic-card"><div class="card loading"></div><div class="card loading"></div><div class="card loading"></div></div></div>';
@@ -5076,7 +5105,7 @@ var _tmpl$318 = ['<div class="page-template-container"><h1 class="page-title-hea
 var _tmpl$414 = ['<p class="text-muted-foreground italic">', "</p>"];
 var _tmpl$511 = ['<div class="image-title">', "</div>"];
 var _tmpl$610 = ['<span class="hidden-caption-content"><strong>', "</strong></span>"];
-var _tmpl$75 = ['<div class="album-item"><a class="story-album-link"', '><div class="image-container"><img', ">", "", "</div></a></div>"];
+var _tmpl$75 = ['<div class="album-item"><a class="story-album-link"', '><div class="image-container"><img class="story-album-img"', ' decoding="async">', "", "</div></a></div>"];
 var AlbumPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
@@ -5115,21 +5144,28 @@ var AlbumPage = (p3) => {
             get each() {
               return items();
             },
-            children: (item) => ssr(_tmpl$75, ssrAttribute("href", escape(item.image, true), false) + ssrAttribute("aria-label", escape(item.title, true) ?? escape(item.image, true), false), ssrAttribute("src", escape(item.image, true), false) + ssrAttribute("alt", escape(item.title, true) ?? "", false), escape(createComponent(Show, {
-              get when() {
-                return !!item.title;
-              },
-              get children() {
-                return ssr(_tmpl$511, escape(item.title));
-              }
-            })), escape(createComponent(Show, {
-              get when() {
-                return !!item.title;
-              },
-              get children() {
-                return ssr(_tmpl$610, escape(item.title));
-              }
-            })))
+            children: (item) => {
+              const width = () => item.width ?? IMAGE_PLACEHOLDER_DEFAULT_WIDTH;
+              const height = () => item.height ?? IMAGE_PLACEHOLDER_DEFAULT_HEIGHT;
+              return ssr(_tmpl$75, ssrAttribute("href", escape(item.image, true), false) + ssrAttribute("data-pswp-width", escape(String(width()), true), false) + ssrAttribute("data-pswp-height", escape(String(height()), true), false) + ssrAttribute("aria-label", escape(item.title, true) ?? escape(item.image, true), false), ssrAttribute("src", escape(imagePlaceholderSvg({
+                width: width(),
+                height: height()
+              }), true), false) + ssrAttribute("data-src", escape(item.image, true), false) + ssrAttribute("width", escape(width(), true), false) + ssrAttribute("height", escape(height(), true), false) + ssrAttribute("alt", escape(item.title, true) ?? "", false), escape(createComponent(Show, {
+                get when() {
+                  return !!item.title;
+                },
+                get children() {
+                  return ssr(_tmpl$511, escape(item.title));
+                }
+              })), escape(createComponent(Show, {
+                get when() {
+                  return !!item.title;
+                },
+                get children() {
+                  return ssr(_tmpl$610, escape(item.title));
+                }
+              })));
+            }
           })))];
         }
       })));

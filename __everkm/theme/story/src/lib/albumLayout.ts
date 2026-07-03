@@ -1,3 +1,5 @@
+import { bootAlbumLazy, teardownAlbumLazy } from "./albumLazy";
+
 type MiniMasonryInstance = {
   layout: () => void;
   destroy: () => void;
@@ -19,8 +21,6 @@ declare global {
 
 let layoutInstance: MiniMasonryInstance | null = null;
 let scriptPromise: Promise<void> | null = null;
-
-const IMAGE_WAIT_MS = 8000;
 
 function vendorScriptUrl(): string {
   const fromDom = document
@@ -53,10 +53,14 @@ function loadMiniMasonryScript(): Promise<void> {
         finish();
         return;
       }
-      existing.addEventListener("load", () => {
-        existing.dataset.loaded = "1";
-        finish();
-      }, { once: true });
+      existing.addEventListener(
+        "load",
+        () => {
+          existing.dataset.loaded = "1";
+          finish();
+        },
+        { once: true },
+      );
       existing.addEventListener(
         "error",
         () => reject(new Error("MiniMasonry load failed")),
@@ -81,44 +85,13 @@ function loadMiniMasonryScript(): Promise<void> {
 }
 
 export function teardownAlbumLayout(): void {
+  teardownAlbumLazy();
   layoutInstance?.destroy();
   layoutInstance = null;
 }
 
-function waitForAlbumImages(container: HTMLElement): Promise<void> {
-  const images = container.querySelectorAll<HTMLImageElement>(".album-item img");
-  if (images.length === 0) return Promise.resolve();
-
-  return new Promise((resolve) => {
-    let settled = 0;
-    let done = false;
-    const finish = () => {
-      if (done) return;
-      done = true;
-      resolve();
-    };
-
-    const onImageSettled = () => {
-      settled += 1;
-      if (settled >= images.length) finish();
-    };
-
-    const timeout = window.setTimeout(finish, IMAGE_WAIT_MS);
-
-    for (const img of images) {
-      if (img.complete) {
-        onImageSettled();
-      } else {
-        img.addEventListener("load", onImageSettled, { once: true });
-        img.addEventListener("error", onImageSettled, { once: true });
-      }
-    }
-
-    if (settled >= images.length) {
-      window.clearTimeout(timeout);
-      finish();
-    }
-  });
+function relayoutAlbum(): void {
+  layoutInstance?.layout();
 }
 
 function revealAlbumLayout(
@@ -135,6 +108,7 @@ function revealAlbumLayout(
     const MiniMasonry = window.MiniMasonry;
     if (!MiniMasonry) {
       albumContainer.style.opacity = "1";
+      bootAlbumLazy(albumContainer, relayoutAlbum);
       return;
     }
 
@@ -149,6 +123,7 @@ function revealAlbumLayout(
     });
     layoutInstance.layout();
     albumContainer.style.opacity = "1";
+    bootAlbumLazy(albumContainer, relayoutAlbum);
   }, 100);
 }
 
@@ -169,10 +144,7 @@ export async function bootAlbumLayout(): Promise<void> {
   albumContainer.style.opacity = "0";
 
   try {
-    await Promise.all([
-      loadMiniMasonryScript(),
-      waitForAlbumImages(albumContainer),
-    ]);
+    await loadMiniMasonryScript();
     revealAlbumLayout(loadingPlaceholder, albumContainer);
   } catch (error) {
     console.error("[story] album layout failed:", error);

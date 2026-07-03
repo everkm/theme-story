@@ -4,6 +4,8 @@ import { isUnderscoreDataSource } from "./postsQuery";
 export type AlbumItem = {
   image: string;
   title?: string;
+  width?: number;
+  height?: number;
 };
 
 /** Collect image resources from public posts (URLs are resolved by Everkm). */
@@ -29,6 +31,8 @@ export function queryAlbumImages(requestId: string): AlbumItem[] {
       items.push({
         image: resource.url,
         title,
+        width: resource.width,
+        height: resource.height,
       });
     }
   }

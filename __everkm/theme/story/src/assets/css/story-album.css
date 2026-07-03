@@ -32,6 +32,10 @@
   box-shadow: var(--story-box-shadow-flat);
 }
 
+.page-template-container #album-container .story-album-img--pending {
+  background: rgba(156, 156, 156, 0.12);
+}
+
 .page-template-container .story-album-link {
   display: block;
   color: inherit;
