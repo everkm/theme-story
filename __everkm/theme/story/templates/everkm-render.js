@@ -3424,9 +3424,15 @@ var Footer = (props) => {
 };
 
 // src/components/HomeArticleCard.tsx
-var import_dayjs = __toESM(require_dayjs_min(), 1);
+var import_dayjs2 = __toESM(require_dayjs_min(), 1);
 var import_utc = __toESM(require_utc(), 1);
 var import_timezone = __toESM(require_timezone(), 1);
+
+// src/assets/icons/IconCalendars.svg
+var IconCalendars_default = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"><path d="M96 32V64H48C21.5 64 0 85.5 0 112v48h448V112c0-26.5-21.5-48-48-48h-48V32c0-17.7-14.3-32-32-32s-32 14.3-32 32v32H160V32c0-17.7-14.3-32-32-32S96 14.3 96 32zM0 192v272c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0z"/></svg>\n';
+
+// src/assets/icons/IconTags.svg
+var IconTags_default = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M345 39.1 472.8 168.4c52.4 53 52.4 138.2 0 191.2L360.8 472.9c-9.3 9.4-24.5 9.5-33.9.2s-9.5-24.5-.2-33.9L438.6 325.9c33.9-34.3 33.9-89.4 0-123.7L310.9 72.9c-9.3-9.4-9.2-24.6 .2-33.9s24.6-9.2 33.9.2zM0 229.5V80C0 53.5 21.5 32 48 32h149.5c17 0 33.3 6.7 45.3 18.7l168 168c25 25 25 65.5 0 90.5L277.3 442.7c-25 25-65.5 25-90.5 0l-168-168C6.7 262.7 0 246.5 0 229.5zM144 144a32 32 0 1 0-64 0 32 32 0 1 0 64 0z"/></svg>\n';
 
 // src/lib/postCover.ts
 function resolvePostCover(ctx, post) {
@@ -3453,30 +3459,60 @@ function resolvePostCanonicalUrl(ctx, post) {
   return pageUrl(ctx.request_id, post.url_path);
 }
 
+// src/lib/postDate.ts
+var import_dayjs = __toESM(require_dayjs_min(), 1);
+function parseMetaTimestamp(value) {
+  if (typeof value === "number" && value > 0) {
+    return value > 1e12 ? Math.floor(value / 1e3) : value;
+  }
+  if (typeof value === "string" && value) {
+    const ms = Date.parse(value);
+    if (!Number.isNaN(ms)) return Math.floor(ms / 1e3);
+  }
+  return 0;
+}
+function postTimestampSeconds(post) {
+  const raw = post.date || post.updated_at || parseMetaTimestamp(post.meta?.created_at) || parseMetaTimestamp(post.meta?.date);
+  if (!raw) return 0;
+  return raw > 1e12 ? Math.floor(raw / 1e3) : raw;
+}
+function postDate(post) {
+  return import_dayjs.default.unix(postTimestampSeconds(post));
+}
+
 // src/lib/toTransitionName.ts
 function toTransitionName(title) {
   if (!title) return "";
   return title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 }
 
+// src/layout/icons.tsx
+var _tmpl$26 = ["<svg", ' viewBox="0 0 16 16" fill="currentColor"><path d="M6.6 13.4L5.2 12l4-4-4-4 1.4-1.4L12 8z"></path></svg>'];
+var _tmpl$92 = ['<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1024 1024"', '><path fill="currentColor" d="M338.752 104.704a64 64 0 0 0 0 90.496l316.8 316.8l-316.8 316.8a64 64 0 0 0 90.496 90.496l362.048-362.048a64 64 0 0 0 0-90.496L429.248 104.704a64 64 0 0 0-90.496 0"></path></svg>'];
+var _tmpl$102 = ['<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1024 1024"', '><path fill="currentColor" d="M685.248 104.704a64 64 0 0 1 0 90.496L368.448 512l316.8 316.8a64 64 0 0 1-90.496 90.496L232.704 557.248a64 64 0 0 1 0-90.496l362.048-362.048a64 64 0 0 1 90.496 0"></path></svg>'];
+var ChevronRightIcon = (props) => ssr(_tmpl$26, ssrAttribute("class", escape(props.class, true) || "w-3 h-3 mx-1 inline-flex items-center", false));
+var NavigateNextIcon = (props) => ssr(_tmpl$92, ssrAttribute("class", escape(props.class, true), false));
+var NavigatePrevIcon = (props) => ssr(_tmpl$102, ssrAttribute("class", escape(props.class, true), false));
+
 // src/components/HomeArticleCard.tsx
 var _tmpl$11 = ['<div class="home-article-thumbnail"><a', ' tabindex="-1" aria-hidden="true"><img', ' alt loading="lazy" class="dark:brightness-75"></a></div>'];
-var _tmpl$26 = ['<div class="home-article-content">', "</div>"];
-var _tmpl$35 = ['<span class="home-article-date"><time', ">", "</time></span>"];
-var _tmpl$45 = ['<span class="home-article-tag">', "</span>"];
-var _tmpl$55 = ['<li class="home-article-item">', '<div class="home-article-body"><h3 class="home-article-title"><a', ' style="', '">', "</a></h3>", '<div class="home-article-meta-info-container"><div class="home-article-meta-info">', "", '</div><a class="home-article-read-more"', ">", '<span aria-hidden="true"> \u2192</span></a></div></div></li>'];
-var _tmpl$63 = ["<a", ">", "</a>"];
-import_dayjs.default.extend(import_utc.default);
-import_dayjs.default.extend(import_timezone.default);
+var _tmpl$27 = ['<div class="home-article-content">', "</div>"];
+var _tmpl$35 = ['<span class="mr-2.5 inline-flex items-center gap-1 last:mr-0">', '<span class="home-article-date"><time', ">", "</time></span></span>"];
+var _tmpl$45 = ['<span class="home-article-tag mr-2.5 inline-flex items-center gap-1 last:mr-0 max-md:hidden">', '<ul class="m-0 inline list-none p-0">', "</ul></span>"];
+var _tmpl$55 = ['<li class="home-article-item">', '<div class="home-article-body"><h3 class="home-article-title"><a', ' style="', '">', "</a></h3>", '<div class="home-article-meta-info-container flex items-center justify-between text-[0.92rem] tracking-[0.5px] text-[var(--story-text-muted)]"><div class="home-article-meta-info min-w-0">', "", '</div><a class="shrink-0 whitespace-nowrap text-[var(--story-text-muted)] no-underline hover:text-accent"', ">", '<span class="sr-only">', "</span>", "</a></div></div></li>"];
+var _tmpl$63 = ['<li class="inline">', '<a class="text-[var(--story-text-muted)] no-underline hover:text-accent"', ">", "</a> </li>"];
+import_dayjs2.default.extend(import_utc.default);
+import_dayjs2.default.extend(import_timezone.default);
+var metaIconClass = "inline-block size-[0.92em] shrink-0 align-[-0.125em]";
 var HomeArticleCard = (props) => {
   const t2 = () => useTranslations(props.ctx.lang);
   const href = () => pageUrl(props.ctx.request_id, props.post.url_path);
   const cover = () => resolvePostCover(props.ctx, props.post);
   const cfg = () => getStoryConfig(props.ctx);
   const dateLabel = () => {
-    const ts = props.post.date ?? 0;
+    const ts = postTimestampSeconds(props.post);
     if (!ts) return "";
-    return import_dayjs.default.unix(ts).tz(cfg().site.timezone ?? "UTC").format("YYYY-MM-DD");
+    return import_dayjs2.default.unix(ts).tz(cfg().site.timezone ?? "UTC").format("YYYY-MM-DD");
   };
   const tags = () => props.post.tags?.filter(Boolean) ?? [];
   return ssr(_tmpl$55, escape(createComponent(Show, {
@@ -3491,39 +3527,41 @@ var HomeArticleCard = (props) => {
       return !!props.post.summary;
     },
     get children() {
-      return ssr(_tmpl$26, escape(props.post.summary));
+      return ssr(_tmpl$27, escape(props.post.summary));
     }
   })), escape(createComponent(Show, {
     get when() {
       return !!dateLabel();
     },
     get children() {
-      return ssr(_tmpl$35, ssrAttribute("datetime", escape(dateLabel(), true), false), escape(dateLabel()));
+      return ssr(_tmpl$35, escape(createComponent(Icon, {
+        svg: IconCalendars_default,
+        "class": metaIconClass
+      })), ssrAttribute("datetime", escape(dateLabel(), true), false), escape(dateLabel()));
     }
   })), escape(createComponent(Show, {
     get when() {
       return tags().length > 0;
     },
     get children() {
-      return ssr(_tmpl$45, escape(createComponent(For, {
+      return ssr(_tmpl$45, escape(createComponent(Icon, {
+        svg: IconTags_default,
+        "class": metaIconClass
+      })), escape(createComponent(For, {
         get each() {
           return tags();
         },
-        children: (tag) => ssr(_tmpl$63, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, `/tags/${encodeURIComponent(tag)}/index.html`), true), false), escape(tag))
+        children: (tag, index) => ssr(_tmpl$63, index() > 0 ? "| " : "", ssrAttribute("href", escape(pageUrl(props.ctx.request_id, `/tags/${encodeURIComponent(tag)}/index.html`), true), false), escape(tag))
       })));
     }
-  })), ssrAttribute("href", escape(href(), true), false), escape(t2().home.readMore));
+  })), ssrAttribute("href", escape(href(), true), false), escape(t2().home.readMore), escape(props.post.title), escape(createComponent(ChevronRightIcon, {
+    "class": "mx-0.5 inline-block size-[0.85em] align-[-0.1em]"
+  })));
 };
-
-// src/layout/icons.tsx
-var _tmpl$92 = ['<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1024 1024"', '><path fill="currentColor" d="M338.752 104.704a64 64 0 0 0 0 90.496l316.8 316.8l-316.8 316.8a64 64 0 0 0 90.496 90.496l362.048-362.048a64 64 0 0 0 0-90.496L429.248 104.704a64 64 0 0 0-90.496 0"></path></svg>'];
-var _tmpl$102 = ['<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 1024 1024"', '><path fill="currentColor" d="M685.248 104.704a64 64 0 0 1 0 90.496L368.448 512l316.8 316.8a64 64 0 0 1-90.496 90.496L232.704 557.248a64 64 0 0 1 0-90.496l362.048-362.048a64 64 0 0 1 90.496 0"></path></svg>'];
-var NavigateNextIcon = (props) => ssr(_tmpl$92, ssrAttribute("class", escape(props.class, true), false));
-var NavigatePrevIcon = (props) => ssr(_tmpl$102, ssrAttribute("class", escape(props.class, true), false));
 
 // src/components/Pagination.tsx
 var _tmpl$12 = ['<div class="paginator mt-[30px] flex justify-center text-base" role="navigation" aria-label="Pagination Navigation">', "", "", "</div>"];
-var _tmpl$27 = ['<a class="', '" rel="prev"', ">", "</a>"];
+var _tmpl$28 = ['<a class="', '" rel="prev"', ">", "</a>"];
 var _tmpl$36 = ["<span", ">", "</span>"];
 var _tmpl$46 = ['<a class="', '"', ">", "</a>"];
 var _tmpl$56 = '<span class="space mx-[0.3rem] inline-flex items-center px-2.5 py-2 max-sm:px-0.5">&hellip;</span>';
@@ -3542,7 +3580,7 @@ var Pagination = (props) => {
     get when() {
       return prevHref();
     },
-    children: (href) => ssr(_tmpl$27, `extend prev ${escape(paginatorChipClass, true)} max-sm:hidden`, ssrAttribute("href", escape(href(), true), false) + ssrAttribute("aria-label", escape(t2().a11y.goToPreviousPage, true), false), escape(createComponent(NavigatePrevIcon, {
+    children: (href) => ssr(_tmpl$28, `extend prev ${escape(paginatorChipClass, true)} max-sm:hidden`, ssrAttribute("href", escape(href(), true), false) + ssrAttribute("aria-label", escape(t2().a11y.goToPreviousPage, true), false), escape(createComponent(NavigatePrevIcon, {
       "class": paginatorIconClass
     })))
   })), escape(createComponent(For, {
@@ -3611,7 +3649,7 @@ function resolveBannerSubtitleStatic(cfg) {
 
 // src/components/HomeBanner.tsx
 var _tmpl$13 = ['<div class="', '" aria-hidden="true"><img', ' alt class="home-banner-background__img--light"><img', ' alt class="home-banner-background__img--dark"></div>'];
-var _tmpl$28 = ['<div class="home-banner-container__inline-bg" aria-hidden="true"><img', ' alt class="home-banner-background__img--light"><img', ' alt class="home-banner-background__img--dark"></div>'];
+var _tmpl$29 = ['<div class="home-banner-container__inline-bg" aria-hidden="true"><img', ' alt class="home-banner-background__img--light"><img', ' alt class="home-banner-background__img--dark"></div>'];
 var _tmpl$37 = ['<p class="home-banner-container__subtitle"><span id="home-banner-subtitle"', "></span></p>"];
 var _tmpl$47 = ['<p class="home-banner-container__subtitle">', "</p>"];
 var _tmpl$57 = ['<div class="home-banner-container__socials">', "</div>"];
@@ -3666,7 +3704,7 @@ var HomeBanner = (props) => {
               return !isFixed();
             },
             get children() {
-              return ssr(_tmpl$28, ssrAttribute("src", escape(assetUrl(props.ctx.request_id, imageLight()), true), false), ssrAttribute("src", escape(assetUrl(props.ctx.request_id, imageDark()), true), false));
+              return ssr(_tmpl$29, ssrAttribute("src", escape(assetUrl(props.ctx.request_id, imageLight()), true), false), ssrAttribute("src", escape(assetUrl(props.ctx.request_id, imageDark()), true), false));
             }
           })), escape(title()), escape(createComponent(Show, {
             get when() {
@@ -3705,7 +3743,7 @@ var HomeBanner = (props) => {
 
 // src/components/HomeSidebar.tsx
 var _tmpl$14 = ['<div class="announcement">', "</div>"];
-var _tmpl$29 = ['<div class="label">', "</div>"];
+var _tmpl$210 = ['<div class="label">', "</div>"];
 var _tmpl$38 = ['<div class="author"><div class="name">', "</div>", "</div>"];
 var _tmpl$48 = ['<div class="home-sidebar-container"><div class="home-sidebar-container__sticky"><div class="sidebar-links"><div class="site-info"><div class="site-name">', "</div>", '</div><a class="links"', '><span class="link-name">', '</span></a></div><div class="sidebar-content"><div class="avatar"><img', "></div>", '<div class="statistics"><a class="tag-count-item"', '><div class="number">', '</div><div class="label">', "</div></a></div></div></div></div>"];
 var HomeSidebar = (props) => {
@@ -3735,7 +3773,7 @@ var HomeSidebar = (props) => {
               return !!props.cfg.site.description;
             },
             get children() {
-              return ssr(_tmpl$29, escape(props.cfg.site.description));
+              return ssr(_tmpl$210, escape(props.cfg.site.description));
             }
           })));
         }
@@ -4026,7 +4064,7 @@ var IconChevronLeft_default = '<svg  xmlns="http://www.w3.org/2000/svg"  width="
 
 // src/components/BackButton.tsx
 var _tmpl$17 = ['<span aria-hidden="true">', "</span>"];
-var _tmpl$210 = ["<span>", "</span>"];
+var _tmpl$211 = ["<span>", "</span>"];
 var _tmpl$39 = ['<div class="app-layout flex items-center justify-start">', "</div>"];
 function chevronMarkup() {
   if (IconChevronLeft_default.includes('class="')) {
@@ -4047,14 +4085,14 @@ var BackButton = (props) => {
       return linkClass();
     },
     get children() {
-      return [ssr(_tmpl$17, chevronMarkup()), ssr(_tmpl$210, escape(t2().post.goBack))];
+      return [ssr(_tmpl$17, chevronMarkup()), ssr(_tmpl$211, escape(t2().post.goBack))];
     }
   })));
 };
 
 // src/components/Breadcrumb.tsx
 var _tmpl$18 = ['<nav class="app-layout mt-8 mb-4" aria-label="breadcrumb"><ul class="font-light flex flex-wrap items-center gap-x-1 [&amp;>li:not(:last-child)>a]:hover:opacity-100"><li class="inline-flex items-center gap-x-1"><a', ' class="opacity-80">', '</a><span aria-hidden="true" class="opacity-80">&raquo;</span></li>', "</ul></nav>"];
-var _tmpl$211 = ["<a", ' class="capitalize opacity-70">', "</a>"];
+var _tmpl$212 = ["<a", ' class="capitalize opacity-70">', "</a>"];
 var _tmpl$310 = '<span aria-hidden="true" class="opacity-70">&raquo;</span>';
 var _tmpl$49 = ['<li class="inline-flex items-center gap-x-1">', "</li>"];
 var _tmpl$58 = ['<span class="', '" aria-current="page">', "</span>"];
@@ -4080,7 +4118,7 @@ var Breadcrumb = (props) => {
             return ssr(_tmpl$58, `capitalize opacity-75 ${item.lowercase ? "lowercase" : ""}`, escape(item.label));
           },
           get children() {
-            return [ssr(_tmpl$211, ssrAttribute("href", escape(item.href, true), false), escape(item.label)), ssr(_tmpl$310)];
+            return [ssr(_tmpl$212, ssrAttribute("href", escape(item.href, true), false), escape(item.label)), ssr(_tmpl$310)];
           }
         })))
       })));
@@ -4126,7 +4164,7 @@ var PageChrome = (props) => {
 
 // src/components/Main.tsx
 var _tmpl$20 = ['<h1 class="text-2xl font-semibold sm:text-3xl">', "</h1>"];
-var _tmpl$212 = ['<p class="text-muted-foreground mt-2 mb-6 italic">', "</p>"];
+var _tmpl$213 = ['<p class="text-muted-foreground mt-2 mb-6 italic">', "</p>"];
 var _tmpl$311 = ['<main id="main-content"', ">", "", "</main>"];
 var Main = (props) => {
   const [local] = splitProps(props, ["pageTitle", "pageDesc", "layout", "ctx", "pageKey", "hidePageHeader", "class", "children"]);
@@ -4148,7 +4186,7 @@ var Main = (props) => {
           return local.pageDesc;
         },
         get children() {
-          return ssr(_tmpl$212, escape(local.pageDesc));
+          return ssr(_tmpl$213, escape(local.pageDesc));
         }
       })];
     }
@@ -4161,7 +4199,7 @@ var APP_PROSE_POST = `${APP_PROSE} mt-8`;
 
 // src/pages/about.tsx
 var _tmpl$21 = ["<div>", "</div>"];
-var _tmpl$213 = ['<div class="page-template-container"><h1 class="page-title-header">', '</h1><div class="', '">', "</div></div>"];
+var _tmpl$214 = ['<div class="page-template-container"><h1 class="page-title-header">', '</h1><div class="', '">', "</div></div>"];
 var _tmpl$312 = ['<p class="text-muted-foreground italic">', "</p>"];
 var AboutPage = (p3) => {
   const ctx = () => p3.props;
@@ -4193,7 +4231,7 @@ var AboutPage = (p3) => {
     layout: "about",
     hidePageHeader: true,
     get children() {
-      return ssr(_tmpl$213, escape(pageTitle()), `page-template-content ${escape(APP_PROSE, true)}`, escape(createComponent(Show, {
+      return ssr(_tmpl$214, escape(pageTitle()), `page-template-content ${escape(APP_PROSE, true)}`, escape(createComponent(Show, {
         get when() {
           return aboutDoc()?.content_html;
         },
@@ -4216,7 +4254,7 @@ var AboutPage = (p3) => {
 };
 
 // src/pages/post.tsx
-var import_dayjs3 = __toESM(require_dayjs_min(), 1);
+var import_dayjs4 = __toESM(require_dayjs_min(), 1);
 var import_utc3 = __toESM(require_utc(), 1);
 var import_timezone3 = __toESM(require_timezone(), 1);
 
@@ -4266,15 +4304,15 @@ function dataSourceTitle(ctx, innerLink, fallbackPath, fallbackTitle) {
 
 // src/components/Tag.tsx
 var _tmpl$30 = ["<li><a", ' class="text-accent decoration-dashed underline-offset-4 hover:underline">#', "", "</a></li>"];
-var _tmpl$214 = ['<sup class="text-muted-foreground ms-1 text-xs">', "</sup>"];
+var _tmpl$215 = ['<sup class="text-muted-foreground ms-1 text-xs">', "</sup>"];
 var Tag = (props) => {
   const slug = () => encodeURIComponent(props.tag);
   const href = () => pageUrl(props.ctx.request_id, `/tags/${slug()}/index.html`);
-  return ssr(_tmpl$30, ssrAttribute("href", escape(href(), true), false), escape(props.tag), props.count != null && ssr(_tmpl$214, escape(props.count)));
+  return ssr(_tmpl$30, ssrAttribute("href", escape(href(), true), false), escape(props.tag), props.count != null && ssr(_tmpl$215, escape(props.count)));
 };
 
 // src/components/PostCopyright.tsx
-var import_dayjs2 = __toESM(require_dayjs_min(), 1);
+var import_dayjs3 = __toESM(require_dayjs_min(), 1);
 var import_utc2 = __toESM(require_utc(), 1);
 var import_timezone2 = __toESM(require_timezone(), 1);
 
@@ -4316,14 +4354,14 @@ function resolveCopyrightLicense(raw) {
 
 // src/components/PostCopyright.tsx
 var _tmpl$31 = ["<li><strong>", ":</strong> ", "</li>"];
-var _tmpl$215 = ['<div class="post-copyright"><div class="article-copyright-info-container"><ul><li><strong>', ":</strong> ", "</li>", "", "", "<li><strong>", ":</strong> ", "</li><li><strong>", ":</strong> ", "</li></ul></div></div>"];
+var _tmpl$216 = ['<div class="post-copyright"><div class="article-copyright-info-container"><ul><li><strong>', ":</strong> ", "</li>", "", "", "<li><strong>", ":</strong> ", "</li><li><strong>", ":</strong> ", "</li></ul></div></div>"];
 var _tmpl$313 = ["<span>", "</span>"];
 var _tmpl$410 = ["<a", ' target="_blank" rel="noopener noreferrer">', "</a>"];
-import_dayjs2.default.extend(import_utc2.default);
-import_dayjs2.default.extend(import_timezone2.default);
+import_dayjs3.default.extend(import_utc2.default);
+import_dayjs3.default.extend(import_timezone2.default);
 function formatTs(ts, timezoneName) {
   if (!ts) return null;
-  return import_dayjs2.default.unix(ts).tz(timezoneName).format("YYYY-MM-DD HH:mm:ss");
+  return import_dayjs3.default.unix(ts).tz(timezoneName).format("YYYY-MM-DD HH:mm:ss");
 }
 function publishedTs(post) {
   return post.date || post.updated_at || null;
@@ -4353,7 +4391,7 @@ var PostCopyright = (props) => {
       return enabled() && license();
     },
     get children() {
-      return ssr(_tmpl$215, escape(t2().post.copyrightTitle), escape(props.post.title) || escape(props.post.slug), escape(createComponent(Show, {
+      return ssr(_tmpl$216, escape(t2().post.copyrightTitle), escape(props.post.title) || escape(props.post.slug), escape(createComponent(Show, {
         get when() {
           return !!cfg().site.author;
         },
@@ -4385,7 +4423,7 @@ var PostCopyright = (props) => {
 
 // src/components/PostNeighbors.tsx
 var _tmpl$40 = ['<nav class="article-nav"', ">", "", "</nav>"];
-var _tmpl$216 = ['<div class="article-nav__item"><a class="article-nav__link"', '><span class="article-nav__arrow" aria-hidden="true">\u2190</span><span class="min-w-0"><span class="article-nav__title">', '</span><span class="article-nav__label">', "</span></span></a></div>"];
+var _tmpl$217 = ['<div class="article-nav__item"><a class="article-nav__link"', '><span class="article-nav__arrow" aria-hidden="true">\u2190</span><span class="min-w-0"><span class="article-nav__title">', '</span><span class="article-nav__label">', "</span></span></a></div>"];
 var _tmpl$314 = ['<div class="article-nav__item article-nav__item--next"><a class="article-nav__link article-nav__link--next"', '><span class="article-nav__arrow" aria-hidden="true">\u2192</span><span class="min-w-0"><span class="article-nav__title">', '</span><span class="article-nav__label">', "</span></span></a></div>"];
 var PostNeighbors = (props) => {
   const t2 = () => useTranslations(props.ctx.lang);
@@ -4398,7 +4436,7 @@ var PostNeighbors = (props) => {
         get when() {
           return props.prevPost;
         },
-        children: (prev) => ssr(_tmpl$216, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, prev().url_path), true), false), escape(prev().title), escape(t2().post.previousPost))
+        children: (prev) => ssr(_tmpl$217, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, prev().url_path), true), false), escape(prev().title), escape(t2().post.previousPost))
       })), escape(createComponent(Show, {
         get when() {
           return props.nextPost;
@@ -4411,17 +4449,17 @@ var PostNeighbors = (props) => {
 
 // src/pages/post.tsx
 var _tmpl$41 = ['<main id="main-content" data-layout="post" class="app-layout mt-8">', "", "</main>"];
-var _tmpl$217 = ['<div class="article-hero"><img', ' class="article-hero__cover" loading="eager"><div class="article-hero__title-wrap"><h1 class="article-hero__title" style="', '">', "</h1></div></div>"];
+var _tmpl$218 = ['<div class="article-hero"><img', ' class="article-hero__cover" loading="eager"><div class="article-hero__title-wrap"><h1 class="article-hero__title" style="', '">', "</h1></div></div>"];
 var _tmpl$315 = ['<div class="px-4 pt-6 sm:px-6 md:px-8"><h1 class="text-accent text-2xl font-bold sm:text-3xl" style="', '">', "</h1></div>"];
 var _tmpl$411 = ['<div class="article-header__name">', "</div>"];
 var _tmpl$59 = ['<div class="flex flex-wrap gap-2 px-4 pb-2 sm:px-6 md:px-8"><span class="text-muted-foreground italic">', ':</span><ul class="flex flex-wrap gap-2">', "</ul></div>"];
 var _tmpl$66 = ['<div class="post-page-container"><article class="article-content-container" id="article">', "", '<div class="article-header"><div class="article-header__avatar"><img', "></div><div>", '<div class="article-header__meta">', "", "</div></div></div>", '<div class="', '">', "</div>", "", "</article></div>"];
 var _tmpl$73 = ['<span class="article-header__meta-item">', ": ", "</span>"];
-import_dayjs3.default.extend(import_utc3.default);
-import_dayjs3.default.extend(import_timezone3.default);
+import_dayjs4.default.extend(import_utc3.default);
+import_dayjs4.default.extend(import_timezone3.default);
 function formatMetaTime(ts, timezoneName) {
   if (!ts) return "";
-  return import_dayjs3.default.unix(ts).tz(timezoneName).format("YYYY-MM-DD HH:mm:ss");
+  return import_dayjs4.default.unix(ts).tz(timezoneName).format("YYYY-MM-DD HH:mm:ss");
 }
 function publishedTs2(post) {
   return post.date || post.updated_at || null;
@@ -4488,7 +4526,7 @@ var PostPage = (p3) => {
         return cover();
       },
       get children() {
-        return ssr(_tmpl$217, ssrAttribute("src", escape(cover(), true), false) + ssrAttribute("alt", escape(item().title, true) || escape(item().slug, true), false), "view-transition-name:" + escape(toTransitionName(item().title || item().slug), true), escape(item().title) || escape(item().slug));
+        return ssr(_tmpl$218, ssrAttribute("src", escape(cover(), true), false) + ssrAttribute("alt", escape(item().title, true) || escape(item().slug, true), false), "view-transition-name:" + escape(toTransitionName(item().title || item().slug), true), escape(item().title) || escape(item().slug));
       }
     })), escape(createComponent(Show, {
       get when() {
@@ -4789,17 +4827,6 @@ var TagPostsPage = (p3) => {
   })];
 };
 
-// src/lib/postDate.ts
-var import_dayjs4 = __toESM(require_dayjs_min(), 1);
-function postTimestampSeconds(post) {
-  const raw = post.date || post.updated_at;
-  if (!raw) return 0;
-  return raw > 1e12 ? Math.floor(raw / 1e3) : raw;
-}
-function postDate(post) {
-  return import_dayjs4.default.unix(postTimestampSeconds(post));
-}
-
 // src/lib/archives.ts
 function groupArchiveByYear(posts) {
   const byYear = /* @__PURE__ */ new Map();
@@ -4834,7 +4861,7 @@ function groupArchiveByDateLabel(posts) {
 
 // src/pages/archives.tsx
 var _tmpl$67 = ['<div class="archive-container"><div class="archive-list-container">', "</div></div>"];
-var _tmpl$218 = ['<section class="archive-item"><div class="archive-item__header"><span class="archive-year">', '</span><span class="archive-year-post-count">', '</span></div><ul class="archive-article-list">', "</ul></section>"];
+var _tmpl$219 = ['<section class="archive-item"><div class="archive-item__header"><span class="archive-year">', '</span><span class="archive-year-post-count">', '</span></div><ul class="archive-article-list">', "</ul></section>"];
 var _tmpl$316 = ['<li class="archive-article-item"', ">", "</li>"];
 var _tmpl$412 = ['<a class="archive-article-link"', '><span class="archive-article-title">', "</span></a>"];
 var ArchivesPage = (p3) => {
@@ -4869,7 +4896,7 @@ var ArchivesPage = (p3) => {
         get each() {
           return years();
         },
-        children: (yearGroup) => ssr(_tmpl$218, escape(yearGroup.year), escape(yearGroup.posts.length), escape(createComponent(For, {
+        children: (yearGroup) => ssr(_tmpl$219, escape(yearGroup.year), escape(yearGroup.posts.length), escape(createComponent(For, {
           get each() {
             return groupArchiveByDateLabel(yearGroup.posts);
           },
@@ -4894,7 +4921,7 @@ var ArchivesPage = (p3) => {
 
 // src/pages/links.tsx
 var _tmpl$68 = ['<div class="app-prose mt-8">', "</div>"];
-var _tmpl$219 = ['<div class="page-template-container"><h1 class="page-title-header">', '</h1><div class="friends-link-container">', "", "</div></div>"];
+var _tmpl$220 = ['<div class="page-template-container"><h1 class="page-title-header">', '</h1><div class="friends-link-container">', "", "</div></div>"];
 var _tmpl$317 = ['<p class="text-muted-foreground italic">', "</p>"];
 var _tmpl$413 = ['<h2 class="friends-link-category__title">', "</h2>"];
 var _tmpl$510 = ["<section>", '<ul class="', '">', "</ul></section>"];
@@ -4931,7 +4958,7 @@ var LinksPage = (p3) => {
     layout: "links",
     hidePageHeader: true,
     get children() {
-      return ssr(_tmpl$219, escape(doc()?.title) ?? escape(t2().pages.linksTitle), escape(createComponent(Show, {
+      return ssr(_tmpl$220, escape(doc()?.title) ?? escape(t2().pages.linksTitle), escape(createComponent(Show, {
         get when() {
           return categories().length > 0;
         },
@@ -5024,7 +5051,7 @@ var LinksPage = (p3) => {
 
 // src/pages/album.tsx
 var _tmpl$70 = '<div class="loading-placeholder"><div class="flex-grid generic-card"><div class="card loading"></div><div class="card loading"></div><div class="card loading"></div></div></div>';
-var _tmpl$220 = ['<div id="album-container"', ">", "</div>"];
+var _tmpl$221 = ['<div id="album-container"', ">", "</div>"];
 var _tmpl$318 = ['<div class="page-template-content app-prose mt-8">', "</div>"];
 var _tmpl$414 = ['<div class="page-template-container"><h1 class="page-title-header">', "</h1>", "", "</div>"];
 var _tmpl$511 = ['<p class="text-muted-foreground italic">', "</p>"];
@@ -5069,7 +5096,7 @@ var AlbumPage = (p3) => {
           return ssr(_tmpl$511, escape(t2().pages.albumEmpty));
         },
         get children() {
-          return [ssr(_tmpl$70), ssr(_tmpl$220, ssrAttribute("data-vendor-script", escape(pageUrl(ctx().request_id, "/assets/vendor/minimasonry.min.js"), true), false), escape(createComponent(For, {
+          return [ssr(_tmpl$70), ssr(_tmpl$221, ssrAttribute("data-vendor-script", escape(pageUrl(ctx().request_id, "/assets/vendor/minimasonry.min.js"), true), false), escape(createComponent(For, {
             get each() {
               return items();
             },

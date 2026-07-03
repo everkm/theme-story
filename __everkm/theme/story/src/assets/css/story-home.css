@@ -289,29 +289,6 @@ body:has(.story-page-home) {
   color: var(--story-text-default);
 }
 
-.home-article-meta-info-container {
-  @apply flex items-center justify-between gap-4 text-[0.92rem];
-  color: var(--story-text-muted);
-}
-
-.home-article-meta-info span {
-  @apply mr-2.5 last:mr-0;
-}
-
-.home-article-meta-info a {
-  color: var(--story-text-muted);
-  @apply no-underline hover:text-accent;
-}
-
-.home-article-read-more {
-  @apply shrink-0 whitespace-nowrap no-underline;
-  color: var(--story-text-muted);
-}
-
-.home-article-read-more:hover {
-  color: var(--accent);
-}
-
 @media (max-width: 768px) {
   .home-article-title {
     @apply text-[1.3rem];
