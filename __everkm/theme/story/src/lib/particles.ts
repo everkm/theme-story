@@ -122,7 +122,7 @@ export function installParticles(): void {
   if (document.body.dataset.particles !== "true") return;
 
   try {
-    startParticles();
+    // startParticles();
   } catch (error) {
     console.warn("[story] particles init failed:", error);
   }
