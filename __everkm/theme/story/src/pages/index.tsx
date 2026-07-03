@@ -14,6 +14,7 @@ import { LinksPage } from "./links";
 import { AlbumPage } from "./album";
 import { NotFoundPage } from "./not-found";
 import { dataSourceTitle } from "../lib/dataSource";
+import { useTranslations } from "../lib/i18n";
 
 function renderPageBody(pageKey: string, props: PageContext) {
   switch (pageKey) {
@@ -71,13 +72,8 @@ function resolveLayoutTitle(
     return `${title} | ${siteName}`;
   }
   if (pageKey === "album") {
-    const title = dataSourceTitle(
-      props,
-      cfg.album,
-      "/_album.md",
-      "Album",
-    );
-    return `${title} | ${siteName}`;
+    const t = useTranslations(cfg.site.lang);
+    return `${t.pages.albumTitle} | ${siteName}`;
   }
   if (pageKey === "not-found") {
     return `404 | ${siteName}`;

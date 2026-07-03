@@ -59,7 +59,7 @@ export const zh: UIStrings = {
     linksTitle: "友情链接",
     linksEmpty: "尚未配置友链。",
     albumTitle: "相册",
-    albumEmpty: "尚未配置相册内容。",
+    albumEmpty: "暂无图片。",
     notFoundTitle: "页面未找到",
     notFoundDesc: "您访问的页面不存在或已被移动。",
     notFoundBackHome: "返回首页",

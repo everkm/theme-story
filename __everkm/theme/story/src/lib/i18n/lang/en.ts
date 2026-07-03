@@ -57,7 +57,7 @@ export const en = {
     linksTitle: "Friend Links",
     linksEmpty: "No friend links configured yet.",
     albumTitle: "Album",
-    albumEmpty: "No album items configured yet.",
+    albumEmpty: "No images found yet.",
     notFoundTitle: "Page Not Found",
     notFoundDesc: "The page you are looking for doesn't exist or has been moved.",
     notFoundBackHome: "Back to Home",

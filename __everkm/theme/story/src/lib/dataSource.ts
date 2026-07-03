@@ -16,12 +16,6 @@ export type FriendLinkCategory = {
   list?: FriendLinkItem[];
 };
 
-export type AlbumItem = {
-  image: string;
-  title?: string;
-  description?: string;
-};
-
 export function loadDataSourceDoc(
   ctx: PageContext,
   innerLink: string | undefined,
@@ -40,12 +34,6 @@ export function parseFriendLinkCategories(meta: Record<string, unknown> | undefi
   const raw = meta?.links;
   if (!Array.isArray(raw)) return [];
   return raw as FriendLinkCategory[];
-}
-
-export function parseAlbumItems(meta: Record<string, unknown> | undefined): AlbumItem[] {
-  const raw = meta?.items;
-  if (!Array.isArray(raw)) return [];
-  return raw as AlbumItem[];
 }
 
 export function categoryLabel(category: FriendLinkCategory): string {

@@ -1,16 +1,12 @@
 import { Component, For, Show } from "solid-js";
-import { getStoryConfig } from "../lib/config";
-import {
-  loadDataSourceDoc,
-  parseAlbumItems,
-  resolveStoryMediaUrl,
-} from "../lib/dataSource";
+import { queryAlbumImages } from "../lib/albumQuery";
 import { useTranslations } from "../lib/i18n";
 import { pageUrl } from "../lib/url";
 import { Header } from "../layout/Header";
 import { Footer } from "../components/Footer";
 import { PageChrome } from "../components/PageChrome";
 import { Main } from "../components/Main";
+import { getStoryConfig } from "../lib/config";
 
 type AlbumPageProps = {
   props: PageContext;
@@ -20,10 +16,8 @@ export const AlbumPage: Component<AlbumPageProps> = (p) => {
   const ctx = () => p.props;
   const cfg = () => getStoryConfig(ctx());
   const t = () => useTranslations(ctx().lang);
-  const doc = () => loadDataSourceDoc(ctx(), cfg().album, "/_album.md");
-  const items = () => parseAlbumItems(doc()?.meta);
-  const originPath = () => doc()?.path ?? "/_album.md";
-  const pageTitle = () => doc()?.title ?? t().pages.albumTitle;
+  const items = () => queryAlbumImages(ctx().request_id);
+  const pageTitle = () => t().pages.albumTitle;
 
   return (
     <>
@@ -59,55 +53,29 @@ export const AlbumPage: Component<AlbumPageProps> = (p) => {
               )}
             >
               <For each={items()}>
-                {(item) => {
-                  const imageUrl = resolveStoryMediaUrl(
-                    ctx(),
-                    item.image,
-                    originPath(),
-                  );
-                  return (
-                    <div class="album-item">
-                      <a
-                        class="story-album-link"
-                        href={imageUrl}
-                        aria-label={item.title ?? item.description ?? imageUrl}
-                      >
-                        <div class="image-container">
-                          <img
-                            src={imageUrl}
-                            alt={item.title ?? ""}
-                          />
-                          <Show when={!!item.title}>
-                            <div class="image-title">{item.title}</div>
-                          </Show>
-                          <Show when={!!item.description}>
-                            <div class="image-description">
-                              {item.description}
-                            </div>
-                          </Show>
-                          <Show when={!!item.title || !!item.description}>
-                            <span class="hidden-caption-content">
-                              <Show when={!!item.title}>
-                                <strong>{item.title}</strong>
-                              </Show>
-                              <Show when={!!item.description}>
-                                {item.description}
-                              </Show>
-                            </span>
-                          </Show>
-                        </div>
-                      </a>
-                    </div>
-                  );
-                }}
+                {(item) => (
+                  <div class="album-item">
+                    <a
+                      class="story-album-link"
+                      href={item.image}
+                      aria-label={item.title ?? item.image}
+                    >
+                      <div class="image-container">
+                        <img src={item.image} alt={item.title ?? ""} />
+                        <Show when={!!item.title}>
+                          <div class="image-title">{item.title}</div>
+                        </Show>
+                        <Show when={!!item.title}>
+                          <span class="hidden-caption-content">
+                            <strong>{item.title}</strong>
+                          </span>
+                        </Show>
+                      </div>
+                    </a>
+                  </div>
+                )}
               </For>
             </div>
-          </Show>
-          <Show when={!!doc()?.content_html}>
-            <div
-              class="page-template-content app-prose mt-8"
-              innerHTML={doc()!.content_html!}
-            />
           </Show>
         </div>
       </Main>

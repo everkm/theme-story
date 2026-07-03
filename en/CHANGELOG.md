@@ -2,7 +2,7 @@
 title: Changelog
 slug: changelog
 created_at: 2026-06-28T00:00:00Z
-updated_at: 2026-07-03T10:37:00Z
+updated_at: 2026-07-03T10:53:01Z
 tags:
   - featured
 ---
@@ -15,6 +15,9 @@ This changelog is for end users. Keep the wording user-friendly and avoid exposi
 - The date in parentheses after the version number is the release date
 - When no new version is specified, append entries under the latest version
 
+- **Album**
+  - Album page now collects images from public post content via Everkm `posts_resources` (no `_album.md` data file)
+  - Removed per-item description from album captions
 
 ## v0.1.0 (2026-06-28)
 
@@ -65,7 +68,8 @@ This changelog is for end users. Keep the wording user-friendly and avoid exposi
 
 - **Configuration**
   - Site info, social links, copyright, and post pagination via `everkm.yaml`
-  - About, links, and album content from `_about.md`, `_links.md`, and `_album.md` via inner links; homepage banner copy from `story.home_banner`
+  - About and links content from `_about.md` and `_links.md` via inner links; homepage banner copy from `story.home_banner`
+  - Album page collects images from public post content automatically
   - Story-specific options under `story.*` for banner, sidebar, navbar, scroll tools, and article copyright
   - Social links with bundled icons when `name` matches a known platform (case-insensitive); otherwise shows text
   - Underscore-prefixed files (`_*.md`) are data sources and are not listed as public posts

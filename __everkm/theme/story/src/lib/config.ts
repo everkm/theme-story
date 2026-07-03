@@ -82,7 +82,6 @@ export interface StoryConfig {
   home?: string;
   about?: string;
   links?: string;
-  album?: string;
   posts?: {
     per_page?: number;
     per_index?: number;
@@ -106,7 +105,6 @@ const DEFAULTS: StoryConfig = {
   home: "/_home.md",
   about: "/_about.md",
   links: "/_links.md",
-  album: "/_album.md",
   posts: {
     per_page: 10,
     per_index: 10,

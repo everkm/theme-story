@@ -2,7 +2,7 @@
 title: Theme Configuration
 slug: readme
 created_at: 2026-06-28T00:00:00Z
-updated_at: 2026-07-03T10:37:00Z
+updated_at: 2026-07-03T10:53:01Z
 tags:
   - featured
 ---
@@ -23,7 +23,6 @@ config:
   home: '[[_home]]'       # Homepage data source marker (underscore file)
   about: '[[_about]]'     # About page content
   links: '[[_links]]'     # Friend links data
-  album: '[[_album]]'     # Album data
   posts: { ... }          # Post list pagination
   features: { ... }       # Feature toggles
   story: { ... }          # Story theme appearance & layout
@@ -68,7 +67,7 @@ config:
 
 ---
 
-## Virtual Pages `home` / `about` / `links` / `album`
+## Virtual Pages `home` / `about` / `links`
 
 Story uses **virtual templates** for several pages. Body content and structured data come from underscore-prefixed Markdown files referenced by inner links:
 
@@ -77,7 +76,8 @@ Story uses **virtual templates** for several pages. Body content and structured 
 | `home` | `[[_home]]` | Homepage data source marker (`_home.md`; excluded from public post lists; banner copy is configured under `story.home_banner`) |
 | `about` | `[[_about]]` | About page Markdown |
 | `links` | `[[_links]]` | Friend links data (`links` array in front matter) |
-| `album` | `[[_album]]` | Album data (`items` array in front matter) |
+
+The **album** page (`/album/index.html`) is also a virtual template. It collects images from public post content via the Everkm `posts_resources` API — no separate data file is required.
 
 Example content layout:
 
@@ -86,7 +86,6 @@ en/
 ├── _home.md          # Homepage data source marker (banner uses story.home_banner)
 ├── _about.md         # About page
 ├── _links.md         # Friend links data
-├── _album.md         # Album data
 ├── README.md         # Theme configuration docs
 ├── CHANGELOG.md      # Changelog
 └── hello-world.md    # Blog posts (at content root)
@@ -361,7 +360,7 @@ Story provides these virtual pages (no corresponding public Markdown file requir
 | `/archives/index.html` | Archives | Posts grouped by year and month |
 | `/about/` | About | About page from `config.about` |
 | `/links/index.html` | Links | Friend links from `config.links` |
-| `/album/index.html` | Album | Photo album from `config.album` |
+| `/album/index.html` | Album | Images extracted from public post content |
 
 ---
 
@@ -393,21 +392,11 @@ links:
 
 ---
 
-## Album `_album.md`
+## Album
 
-Album items are stored in the front matter of `_album.md`:
+The album page automatically collects **images embedded in public posts** (Markdown `![]()` and image links). Everkm resolves image URLs at build time; the theme renders them in a MiniMasonry grid with hover captions and a lightbox.
 
-```yaml
----
-title: Album
-items:
-  - image: /assets/images/1.jpg
-    title: Image title
-    description: Optional caption
----
-```
-
-The album page uses MiniMasonry layout with hover captions, a loading skeleton, and an image lightbox.
+Images in posts whose path starts with `_` (data sources such as `_about.md`) are excluded. Add images to regular blog posts to populate the album.
 
 ---
 

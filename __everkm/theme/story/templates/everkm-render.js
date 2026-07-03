@@ -2592,7 +2592,6 @@ var DEFAULTS = {
   home: "/_home.md",
   about: "/_about.md",
   links: "/_links.md",
-  album: "/_album.md",
   posts: {
     per_page: 10,
     per_index: 10,
@@ -2719,7 +2718,7 @@ var en = {
     linksTitle: "Friend Links",
     linksEmpty: "No friend links configured yet.",
     albumTitle: "Album",
-    albumEmpty: "No album items configured yet.",
+    albumEmpty: "No images found yet.",
     notFoundTitle: "Page Not Found",
     notFoundDesc: "The page you are looking for doesn't exist or has been moved.",
     notFoundBackHome: "Back to Home"
@@ -2794,7 +2793,7 @@ var zh = {
     linksTitle: "\u53CB\u60C5\u94FE\u63A5",
     linksEmpty: "\u5C1A\u672A\u914D\u7F6E\u53CB\u94FE\u3002",
     albumTitle: "\u76F8\u518C",
-    albumEmpty: "\u5C1A\u672A\u914D\u7F6E\u76F8\u518C\u5185\u5BB9\u3002",
+    albumEmpty: "\u6682\u65E0\u56FE\u7247\u3002",
     notFoundTitle: "\u9875\u9762\u672A\u627E\u5230",
     notFoundDesc: "\u60A8\u8BBF\u95EE\u7684\u9875\u9762\u4E0D\u5B58\u5728\u6216\u5DF2\u88AB\u79FB\u52A8\u3002",
     notFoundBackHome: "\u8FD4\u56DE\u9996\u9875"
@@ -4271,11 +4270,6 @@ function parseFriendLinkCategories(meta) {
   if (!Array.isArray(raw)) return [];
   return raw;
 }
-function parseAlbumItems(meta) {
-  const raw = meta?.items;
-  if (!Array.isArray(raw)) return [];
-  return raw;
-}
 function categoryLabel(category) {
   return category.category ?? category.links_category ?? "";
 }
@@ -5049,25 +5043,46 @@ var LinksPage = (p3) => {
   })];
 };
 
+// src/lib/albumQuery.ts
+function queryAlbumImages(requestId) {
+  const raw = everkm.posts_resources(requestId, {
+    dir: POSTS_CONTENT_DIR,
+    recursive: true,
+    draft: false,
+    kinds: ["image"],
+    order_by: "date",
+    order_direction: "desc"
+  });
+  const items = [];
+  for (const entry of raw.items) {
+    const path = entry.post.path ?? entry.post.url_path ?? "";
+    if (isUnderscoreDataSource(path)) continue;
+    for (const resource of entry.resources) {
+      if (resource.kind !== "image") continue;
+      const title = resource.title?.trim() || resource.alt?.trim() || void 0;
+      items.push({
+        image: resource.url,
+        title
+      });
+    }
+  }
+  return items;
+}
+
 // src/pages/album.tsx
 var _tmpl$70 = '<div class="loading-placeholder"><div class="flex-grid generic-card"><div class="card loading"></div><div class="card loading"></div><div class="card loading"></div></div></div>';
 var _tmpl$221 = ['<div id="album-container"', ">", "</div>"];
-var _tmpl$318 = ['<div class="page-template-content app-prose mt-8">', "</div>"];
-var _tmpl$414 = ['<div class="page-template-container"><h1 class="page-title-header">', "</h1>", "", "</div>"];
-var _tmpl$511 = ['<p class="text-muted-foreground italic">', "</p>"];
-var _tmpl$610 = ['<div class="image-title">', "</div>"];
-var _tmpl$75 = ['<div class="image-description">', "</div>"];
-var _tmpl$84 = ["<strong>", "</strong>"];
-var _tmpl$94 = ['<span class="hidden-caption-content">', "", "</span>"];
-var _tmpl$104 = ['<div class="album-item"><a class="story-album-link"', '><div class="image-container"><img', ">", "", "", "</div></a></div>"];
+var _tmpl$318 = ['<div class="page-template-container"><h1 class="page-title-header">', "</h1>", "</div>"];
+var _tmpl$414 = ['<p class="text-muted-foreground italic">', "</p>"];
+var _tmpl$511 = ['<div class="image-title">', "</div>"];
+var _tmpl$610 = ['<span class="hidden-caption-content"><strong>', "</strong></span>"];
+var _tmpl$75 = ['<div class="album-item"><a class="story-album-link"', '><div class="image-container"><img', ">", "", "</div></a></div>"];
 var AlbumPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
   const t2 = () => useTranslations(ctx().lang);
-  const doc = () => loadDataSourceDoc(ctx(), cfg().album, "/_album.md");
-  const items = () => parseAlbumItems(doc()?.meta);
-  const originPath = () => doc()?.path ?? "/_album.md";
-  const pageTitle = () => doc()?.title ?? t2().pages.albumTitle;
+  const items = () => queryAlbumImages(ctx().request_id);
+  const pageTitle = () => t2().pages.albumTitle;
   return [createComponent(Header, {
     get ctx() {
       return ctx();
@@ -5088,65 +5103,34 @@ var AlbumPage = (p3) => {
     layout: "album",
     hidePageHeader: true,
     get children() {
-      return ssr(_tmpl$414, escape(pageTitle()), escape(createComponent(Show, {
+      return ssr(_tmpl$318, escape(pageTitle()), escape(createComponent(Show, {
         get when() {
           return items().length > 0;
         },
         get fallback() {
-          return ssr(_tmpl$511, escape(t2().pages.albumEmpty));
+          return ssr(_tmpl$414, escape(t2().pages.albumEmpty));
         },
         get children() {
           return [ssr(_tmpl$70), ssr(_tmpl$221, ssrAttribute("data-vendor-script", escape(pageUrl(ctx().request_id, "/assets/vendor/minimasonry.min.js"), true), false), escape(createComponent(For, {
             get each() {
               return items();
             },
-            children: (item) => {
-              const imageUrl = resolveStoryMediaUrl(ctx(), item.image, originPath());
-              return ssr(_tmpl$104, ssrAttribute("href", escape(imageUrl, true), false) + ssrAttribute("aria-label", escape(item.title, true) ?? escape(item.description, true) ?? escape(imageUrl, true), false), ssrAttribute("src", escape(imageUrl, true), false) + ssrAttribute("alt", escape(item.title, true) ?? "", false), escape(createComponent(Show, {
-                get when() {
-                  return !!item.title;
-                },
-                get children() {
-                  return ssr(_tmpl$610, escape(item.title));
-                }
-              })), escape(createComponent(Show, {
-                get when() {
-                  return !!item.description;
-                },
-                get children() {
-                  return ssr(_tmpl$75, escape(item.description));
-                }
-              })), escape(createComponent(Show, {
-                get when() {
-                  return !!item.title || !!item.description;
-                },
-                get children() {
-                  return ssr(_tmpl$94, escape(createComponent(Show, {
-                    get when() {
-                      return !!item.title;
-                    },
-                    get children() {
-                      return ssr(_tmpl$84, escape(item.title));
-                    }
-                  })), escape(createComponent(Show, {
-                    get when() {
-                      return !!item.description;
-                    },
-                    get children() {
-                      return item.description;
-                    }
-                  })));
-                }
-              })));
-            }
+            children: (item) => ssr(_tmpl$75, ssrAttribute("href", escape(item.image, true), false) + ssrAttribute("aria-label", escape(item.title, true) ?? escape(item.image, true), false), ssrAttribute("src", escape(item.image, true), false) + ssrAttribute("alt", escape(item.title, true) ?? "", false), escape(createComponent(Show, {
+              get when() {
+                return !!item.title;
+              },
+              get children() {
+                return ssr(_tmpl$511, escape(item.title));
+              }
+            })), escape(createComponent(Show, {
+              get when() {
+                return !!item.title;
+              },
+              get children() {
+                return ssr(_tmpl$610, escape(item.title));
+              }
+            })))
           })))];
-        }
-      })), escape(createComponent(Show, {
-        get when() {
-          return !!doc()?.content_html;
-        },
-        get children() {
-          return ssr(_tmpl$318, doc().content_html);
         }
       })));
     }
@@ -5257,8 +5241,8 @@ function resolveLayoutTitle(pageKey, props, cfg) {
     return `${title} | ${siteName}`;
   }
   if (pageKey === "album") {
-    const title = dataSourceTitle(props, cfg.album, "/_album.md", "Album");
-    return `${title} | ${siteName}`;
+    const t2 = useTranslations(cfg.site.lang);
+    return `${t2.pages.albumTitle} | ${siteName}`;
   }
   if (pageKey === "not-found") {
     return `404 | ${siteName}`;
