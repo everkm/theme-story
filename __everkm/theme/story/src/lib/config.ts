@@ -67,7 +67,7 @@ export interface StoryThemeConfig {
     links?: StoryNavLink[];
   };
   global?: {
-    scroll_progress?: { bar?: boolean; percentage?: boolean };
+    scroll_progress?: { bar?: boolean };
     scroll_tools?: { enable?: boolean };
     preloader?: { message?: string; max_duration_ms?: number };
   };
@@ -126,7 +126,7 @@ const DEFAULTS: StoryConfig = {
   story: {
     colors: { primary: "#A31F34", default_mode: "light" },
     global: {
-      scroll_progress: { bar: false, percentage: true },
+      scroll_progress: { bar: false },
       scroll_tools: { enable: true },
     },
     home_banner: {

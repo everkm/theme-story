@@ -50,8 +50,6 @@ export const RootLayout: ParentComponent<RootLayoutProps> = (props) => {
     cfg().story?.navbar?.auto_hide !== false ? "true" : "false";
   const scrollProgressBar = () =>
     cfg().story?.global?.scroll_progress?.bar === true ? "true" : "false";
-  const scrollProgressPercent = () =>
-    cfg().story?.global?.scroll_progress?.percentage !== false ? "true" : "false";
   const particlesEnabled = () => cfg().features?.particles === true;
   const t = () => useTranslations(lang());
 
@@ -101,7 +99,6 @@ export const RootLayout: ParentComponent<RootLayoutProps> = (props) => {
         class="bg-background font-app text-foreground selection:bg-accent/75 selection:text-accent-foreground flex min-h-svh flex-col"
         data-navbar-auto-hide={navbarAutoHide()}
         data-scroll-progress-bar={scrollProgressBar()}
-        data-scroll-progress-percentage={scrollProgressPercent()}
         data-particles={particlesEnabled() ? "true" : "false"}
       >
         <Preloader ctx={ctx()} />

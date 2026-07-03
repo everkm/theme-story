@@ -2612,7 +2612,7 @@ var DEFAULTS = {
   story: {
     colors: { primary: "#A31F34", default_mode: "light" },
     global: {
-      scroll_progress: { bar: false, percentage: true },
+      scroll_progress: { bar: false },
       scroll_tools: { enable: true }
     },
     home_banner: {
@@ -2944,14 +2944,12 @@ var IconZoomOut_default = '<svg xmlns="http://www.w3.org/2000/svg" width="24" he
 // src/components/ScrollTools.tsx
 var _tmpl$ = '<div class="progress-bar-container" data-vt-persist><div class="scroll-progress-bar"></div></div>';
 var _tmpl$2 = ['<li class="right-bottom-tools tool-dark-light-toggle" title="Toggle theme">', "</li>"];
-var _tmpl$3 = '<span class="percent">0</span>';
-var _tmpl$4 = ['<div class="right-side-tools-container" data-vt-persist><div class="side-tools-container"><ul class="hidden-tools-list"><li class="right-bottom-tools tool-font-adjust-plus" title="Increase font size">', '</li><li class="right-bottom-tools tool-font-adjust-minus" title="Decrease font size">', "</li>", '<li class="right-bottom-tools tool-scroll-to-bottom" title="Scroll to bottom">', '</li></ul><ul class="visible-tools-list"><li class="right-bottom-tools toggle-tools-list" title="Tools">', '</li><li class="', '" title="Scroll to top">', "", "</li></ul></div></div>"];
+var _tmpl$3 = ['<div class="right-side-tools-container" data-vt-persist><div class="side-tools-container"><ul class="hidden-tools-list"><li class="right-bottom-tools tool-font-adjust-plus" title="Increase font size">', '</li><li class="right-bottom-tools tool-font-adjust-minus" title="Decrease font size">', "</li>", '<li class="right-bottom-tools tool-scroll-to-bottom" title="Scroll to bottom">', '</li></ul><ul class="visible-tools-list"><li class="right-bottom-tools toggle-tools-list" title="Tools">', '</li><li class="right-bottom-tools tool-scroll-to-top" title="Scroll to top" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="tool-scroll-to-top__ring" aria-hidden="true"></span>', "</li></ul></div></div>"];
 var toolIconClass = "story-tool-icon size-5";
 var ScrollTools = (props) => {
   const cfg = () => getStoryConfig(props.ctx);
   const enabled = () => cfg().story?.global?.scroll_tools?.enable !== false;
   const showBar = () => cfg().story?.global?.scroll_progress?.bar === true;
-  const showPercent = () => cfg().story?.global?.scroll_progress?.percentage !== false;
   const showThemeToggle = () => cfg().features?.light_and_dark_mode !== false;
   return createComponent(Show, {
     get when() {
@@ -2965,7 +2963,7 @@ var ScrollTools = (props) => {
         get children() {
           return ssr(_tmpl$);
         }
-      }), ssr(_tmpl$4, escape(createComponent(Icon, {
+      }), ssr(_tmpl$3, escape(createComponent(Icon, {
         svg: IconZoomIn_default,
         "class": toolIconClass
       })), escape(createComponent(Icon, {
@@ -2987,23 +2985,16 @@ var ScrollTools = (props) => {
       })), escape(createComponent(Icon, {
         svg: IconSettings_default,
         "class": `${toolIconClass} toggle-tools-list__icon`
-      })), `right-bottom-tools tool-scroll-to-top ${!showPercent() ? "tool-scroll-to-top--plain" : ""}`, escape(createComponent(Icon, {
+      })), escape(createComponent(Icon, {
         svg: IconArrowNarrowUp_default,
-        "class": `${toolIconClass} arrow-up`
-      })), escape(createComponent(Show, {
-        get when() {
-          return showPercent();
-        },
-        get children() {
-          return ssr(_tmpl$3);
-        }
+        "class": `${toolIconClass} tool-scroll-to-top__icon`
       })))];
     }
   });
 };
 
 // src/components/Preloader.tsx
-var _tmpl$5 = ['<div class="story-preloader"', ' role="status" aria-live="polite" aria-busy="true"><h2 class="story-preloader__title">', "</h2></div>"];
+var _tmpl$4 = ['<div class="story-preloader"', ' role="status" aria-live="polite" aria-busy="true"><h2 class="story-preloader__title">', "</h2></div>"];
 var Preloader = (props) => {
   const cfg = () => getStoryConfig(props.ctx);
   const enabled = () => cfg().features?.preloader === true;
@@ -3014,13 +3005,13 @@ var Preloader = (props) => {
       return enabled();
     },
     get children() {
-      return ssr(_tmpl$5, ssrAttribute("data-max-duration", escape(String(maxDuration()), true), false), escape(message()));
+      return ssr(_tmpl$4, ssrAttribute("data-max-duration", escape(String(maxDuration()), true), false), escape(message()));
     }
   });
 };
 
 // src/layout/RootLayout.tsx
-var _tmpl$6 = ['<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>', '</title><meta name="title"', '><meta name="description"', '><meta name="generator" content="', '"><meta name="theme" content="', '"><link rel="icon" type="image/svg+xml"', '><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet"><meta name="theme-color" content><script>(function () {\n  const stored = localStorage.getItem("theme");\n  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;\n  const theme = stored ?? (prefersDark ? "dark" : "light");\n  const root = document.documentElement;\n  const isDark = theme === "dark";\n  root.setAttribute("data-theme", theme);\n  root.classList.toggle("dark", isDark);\n  root.classList.toggle("light", !isDark);\n  root.style.colorScheme = theme;\n  document.addEventListener("DOMContentLoaded", function () {\n    document.body.classList.toggle("dark-mode", isDark);\n    document.body.classList.toggle("light-mode", !isDark);\n  });\n  window.__theme = { value: theme };\n})();</script><script>', "</script></head>"];
+var _tmpl$5 = ['<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>', '</title><meta name="title"', '><meta name="description"', '><meta name="generator" content="', '"><meta name="theme" content="', '"><link rel="icon" type="image/svg+xml"', '><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet"><meta name="theme-color" content><script>(function () {\n  const stored = localStorage.getItem("theme");\n  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;\n  const theme = stored ?? (prefersDark ? "dark" : "light");\n  const root = document.documentElement;\n  const isDark = theme === "dark";\n  root.setAttribute("data-theme", theme);\n  root.classList.toggle("dark", isDark);\n  root.classList.toggle("light", !isDark);\n  root.style.colorScheme = theme;\n  document.addEventListener("DOMContentLoaded", function () {\n    document.body.classList.toggle("dark-mode", isDark);\n    document.body.classList.toggle("light-mode", !isDark);\n  });\n  window.__theme = { value: theme };\n})();</script><script>', "</script></head>"];
 var _tmpl$22 = '<div id="particles-js" class="story-particles" data-vt-persist aria-hidden="true"></div>';
 var _tmpl$32 = ["<script", "></script>"];
 var _tmpl$42 = ["<div>", "</div>"];
@@ -3039,19 +3030,18 @@ var RootLayout = (props) => {
   const customBodyEndHtml = () => ctx().config?.body_end_html || "";
   const navbarAutoHide = () => cfg().story?.navbar?.auto_hide !== false ? "true" : "false";
   const scrollProgressBar = () => cfg().story?.global?.scroll_progress?.bar === true ? "true" : "false";
-  const scrollProgressPercent = () => cfg().story?.global?.scroll_progress?.percentage !== false ? "true" : "false";
   const particlesEnabled = () => cfg().features?.particles === true;
   const t2 = () => useTranslations(lang());
   return ssr(_tmpl$52, ssrAttribute("lang", escape(lang(), true), false) + ssrAttribute("dir", escape(dir(), true), false), createComponent(NoHydration, {
     get children() {
-      return ssr(_tmpl$6, escape(pageTitle()), ssrAttribute("content", escape(pageTitle(), true), false), ssrAttribute("content", escape(metaDesc(), true), false), `everkm-publish@v${escape(ctx().everkm_publish_version, true)}`, `${escape(ctx().theme_name, true)}@${escape(ctx().theme_version, true)}`, ssrAttribute("href", escape(pageUrl(ctx().request_id, "/assets/favicon.svg"), true), false), `
+      return ssr(_tmpl$5, escape(pageTitle()), ssrAttribute("content", escape(pageTitle(), true), false), ssrAttribute("content", escape(metaDesc(), true), false), `everkm-publish@v${escape(ctx().everkm_publish_version, true)}`, `${escape(ctx().theme_name, true)}@${escape(ctx().theme_version, true)}`, ssrAttribute("href", escape(pageUrl(ctx().request_id, "/assets/favicon.svg"), true), false), `
           window.__everkm_lang = ${JSON.stringify(lang())};
           window.__everkm_base_url = ${JSON.stringify(baseUrl() + "/")};
           window.__everkm_features_view_transitions = ${JSON.stringify(cfg().features?.view_transitions !== false)};
           window.__everkm_env_is_preview = ${JSON.stringify(!!ctx().env_is_preview)};
           `);
     }
-  }), ssrAttribute("data-navbar-auto-hide", escape(navbarAutoHide(), true), false) + ssrAttribute("data-scroll-progress-bar", escape(scrollProgressBar(), true), false) + ssrAttribute("data-scroll-progress-percentage", escape(scrollProgressPercent(), true), false) + ssrAttribute("data-particles", particlesEnabled() ? "true" : "false", false), escape(createComponent(Preloader, {
+  }), ssrAttribute("data-navbar-auto-hide", escape(navbarAutoHide(), true), false) + ssrAttribute("data-scroll-progress-bar", escape(scrollProgressBar(), true), false) + ssrAttribute("data-particles", particlesEnabled() ? "true" : "false", false), escape(createComponent(Preloader, {
     get ctx() {
       return ctx();
     }
@@ -3206,13 +3196,13 @@ function resolveNavIcon(link) {
 }
 
 // src/layout/Header.tsx
-var _tmpl$7 = ['<li class="navbar-item"><div id="header-in-search"><x-in-search', ' only-button="false"></x-in-search></div></li>'];
+var _tmpl$6 = ['<li class="navbar-item"><div id="header-in-search"><x-in-search', ' only-button="false"></x-in-search></div></li>'];
 var _tmpl$23 = ['<span class="navbar-link__label">', "</span>"];
 var _tmpl$33 = ['<li class="navbar-item"><a', ' data-nav-path="/"', ">", "</a></li>"];
 var _tmpl$43 = ['<li class="navbar-item"><a', ' data-nav-path="/tags"', ">", "</a></li>"];
 var _tmpl$53 = ['<li class="navbar-item"><a', ' data-nav-path="/about"', ">", "</a></li>"];
 var _tmpl$62 = ['<li class="navbar-item"><a', ' data-nav-path="/archives"', ">", "</a></li>"];
-var _tmpl$72 = ['<li class="navbar-item"><a', ">", "</a></li>"];
+var _tmpl$7 = ['<li class="navbar-item"><a', ">", "</a></li>"];
 var _tmpl$8 = ['<header class="', '" data-vt-swap="header" style="', '"><div class="', '"><div class="navbar-content__left"><a', ' class="logo-title" data-nav-path="/"><h1>', '</h1></a></div><nav id="nav-menu" class="navbar-content__right"><button id="menu-btn" class="navbar-menu-btn focus-outline"', ' aria-expanded="false" aria-controls="menu-items"', ' type="button">', "", '</button><ul id="menu-items" class="navbar-list navbar-list--desktop">', "", "</ul></nav></div></header>"];
 function hexToRgba(hex, alpha) {
   const h = hex.replace("#", "");
@@ -3252,7 +3242,7 @@ var Header = (props) => {
       return configValue(props.ctx.config, "algolia_search");
     },
     get children() {
-      return ssr(_tmpl$7, ssrAttribute("app-id", escape(String(configValue(props.ctx.config, "algolia_search/app_id", "")), true), false) + ssrAttribute("api-key", escape(String(configValue(props.ctx.config, "algolia_search/api_key", "")), true), false) + ssrAttribute("index", escape(String(configValue(props.ctx.config, "algolia_search/index_name", "")), true), false) + ssrAttribute("site", escape(String(configValue(props.ctx.config, "algolia_search/site", "")), true), false));
+      return ssr(_tmpl$6, ssrAttribute("app-id", escape(String(configValue(props.ctx.config, "algolia_search/app_id", "")), true), false) + ssrAttribute("api-key", escape(String(configValue(props.ctx.config, "algolia_search/api_key", "")), true), false) + ssrAttribute("index", escape(String(configValue(props.ctx.config, "algolia_search/index_name", "")), true), false) + ssrAttribute("site", escape(String(configValue(props.ctx.config, "algolia_search/site", "")), true), false));
     }
   });
   const navLinkLabel = (label) => label.toUpperCase();
@@ -3282,7 +3272,7 @@ var Header = (props) => {
       const activePath = () => resolveNavActivePath(link);
       const external = () => link.external || /^https?:\/\//i.test(link.path);
       const iconSvg = () => resolveNavIcon(link);
-      return ssr(_tmpl$72, ssrAttribute("href", escape(href(), true), false) + ssrAttribute("data-nav-path", escape(activePath(), true) || escape(void 0, true), false) + ssrAttribute("class", activePath() && isActive(activePath()) ? "active" : escape(void 0, true), false) + ssrAttribute("target", external() ? "_blank" : escape(void 0, true), false) + ssrAttribute("rel", external() ? "noopener noreferrer" : escape(void 0, true), false), escape(navLinkContent(iconSvg(), link.label)));
+      return ssr(_tmpl$7, ssrAttribute("href", escape(href(), true), false) + ssrAttribute("data-nav-path", escape(activePath(), true) || escape(void 0, true), false) + ssrAttribute("class", activePath() && isActive(activePath()) ? "active" : escape(void 0, true), false) + ssrAttribute("target", external() ? "_blank" : escape(void 0, true), false) + ssrAttribute("rel", external() ? "noopener noreferrer" : escape(void 0, true), false), escape(navLinkContent(iconSvg(), link.label)));
     }
   });
   return ssr(_tmpl$8, `navbar-container ${!isHome() ? "navbar-container--page" : ""}`, "background:" + escape(navBackground(), true), `navbar-content transition-navbar ${isHome() ? "has-home-banner" : ""}`, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/index.html"), true), false), escape(cfg().site.name), ssrAttribute("aria-label", escape(t2().a11y.openMenu, true), false), ssrAttribute("data-label-open", escape(t2().a11y.openMenu, true), false) + ssrAttribute("data-label-close", escape(t2().a11y.closeMenu, true), false), escape(createComponent(Icon, {
@@ -4351,7 +4341,7 @@ var _tmpl$314 = ['<div class="px-4 pt-6 sm:px-6 md:px-8"><h1 class="text-accent 
 var _tmpl$410 = ['<div class="article-header__name">', "</div>"];
 var _tmpl$58 = ['<div class="flex flex-wrap gap-2 px-4 pb-2 sm:px-6 md:px-8"><span class="text-muted-foreground italic">', ':</span><ul class="flex flex-wrap gap-2">', "</ul></div>"];
 var _tmpl$65 = ['<div class="post-page-container"><article class="article-content-container" id="article">', "", '<div class="article-header"><div class="article-header__avatar"><img', "></div><div>", '<div class="article-header__meta">', "", "</div></div></div>", '<div class="', '">', "</div>", "", "</article></div>"];
-var _tmpl$73 = ['<span class="article-header__meta-item">', ": ", "</span>"];
+var _tmpl$72 = ['<span class="article-header__meta-item">', ": ", "</span>"];
 import_dayjs3.default.extend(import_utc3.default);
 import_dayjs3.default.extend(import_timezone3.default);
 function formatMetaTime(ts, timezoneName) {
@@ -4443,12 +4433,12 @@ var PostPage = (p3) => {
       get when() {
         return publishedTs2(item());
       },
-      children: (published) => ssr(_tmpl$73, escape(t2().post.publishedAt), escape(formatMetaTime(published(), cfg().site.timezone ?? "UTC")))
+      children: (published) => ssr(_tmpl$72, escape(t2().post.publishedAt), escape(formatMetaTime(published(), cfg().site.timezone ?? "UTC")))
     })), escape(createComponent(Show, {
       get when() {
         return updatedTs2(item());
       },
-      children: (updated) => ssr(_tmpl$73, escape(t2().post.updatedAt), escape(formatMetaTime(updated(), cfg().site.timezone ?? "UTC")))
+      children: (updated) => ssr(_tmpl$72, escape(t2().post.updatedAt), escape(formatMetaTime(updated(), cfg().site.timezone ?? "UTC")))
     })), escape(createComponent(Show, {
       get when() {
         return (item().tags?.length ?? 0) > 0;
@@ -4834,7 +4824,7 @@ var _tmpl$316 = ['<p class="text-muted-foreground italic">', "</p>"];
 var _tmpl$412 = ['<h2 class="friends-link-category__title">', "</h2>"];
 var _tmpl$510 = ["<section>", '<ul class="', '">', "</ul></section>"];
 var _tmpl$67 = ['<div class="friends-link-card__thumbnail"><img', ' alt loading="lazy"></div>'];
-var _tmpl$74 = ['<div class="friends-link-avatar"><img', ' alt loading="lazy"></div>'];
+var _tmpl$73 = ['<div class="friends-link-avatar"><img', ' alt loading="lazy"></div>'];
 var _tmpl$82 = ['<div class="friends-link-desc">', "</div>"];
 var _tmpl$92 = ['<div class="friends-link-card">', '<div class="friends-link-card__body">', '<div class="friends-link-meta"><div class="friends-link-name">', "</div>", "</div></div></div>"];
 var _tmpl$102 = ['<li class="friends-link-item"><a', ' target="_blank" rel="noopener noreferrer">', "</a></li>"];
@@ -4899,7 +4889,7 @@ var LinksPage = (p3) => {
                       return !!item.avatar;
                     },
                     get children() {
-                      return ssr(_tmpl$74, ssrAttribute("src", escape(resolveStoryMediaUrl(ctx(), item.avatar, originPath()), true), false));
+                      return ssr(_tmpl$73, ssrAttribute("src", escape(resolveStoryMediaUrl(ctx(), item.avatar, originPath()), true), false));
                     }
                   })), escape(item.name), escape(createComponent(Show, {
                     get when() {
@@ -4923,7 +4913,7 @@ var LinksPage = (p3) => {
                       return !!item.avatar;
                     },
                     get children() {
-                      return ssr(_tmpl$74, ssrAttribute("src", escape(resolveStoryMediaUrl(ctx(), item.avatar, originPath()), true), false));
+                      return ssr(_tmpl$73, ssrAttribute("src", escape(resolveStoryMediaUrl(ctx(), item.avatar, originPath()), true), false));
                     }
                   })), escape(item.name), escape(createComponent(Show, {
                     get when() {
@@ -4964,7 +4954,7 @@ var _tmpl$317 = ['<div class="page-template-content app-prose mt-8">', "</div>"]
 var _tmpl$413 = ['<div class="page-template-container"><h1 class="page-title-header">', "</h1>", "", "</div>"];
 var _tmpl$511 = ['<p class="text-muted-foreground italic">', "</p>"];
 var _tmpl$69 = ['<div class="image-title">', "</div>"];
-var _tmpl$75 = ['<div class="image-description">', "</div>"];
+var _tmpl$74 = ['<div class="image-description">', "</div>"];
 var _tmpl$83 = ["<strong>", "</strong>"];
 var _tmpl$93 = ['<span class="hidden-caption-content">', "", "</span>"];
 var _tmpl$103 = ['<div class="masonry-item"><a class="story-album-link"', '><div class="image-container"><img', ">", "", "", "</div></a></div>"];
@@ -5022,7 +5012,7 @@ var MasonryPage = (p3) => {
                   return !!item.description;
                 },
                 get children() {
-                  return ssr(_tmpl$75, escape(item.description));
+                  return ssr(_tmpl$74, escape(item.description));
                 }
               })), escape(createComponent(Show, {
                 get when() {

@@ -18,8 +18,6 @@ export const ScrollTools: Component<ScrollToolsProps> = (props) => {
   const cfg = () => getStoryConfig(props.ctx);
   const enabled = () => cfg().story?.global?.scroll_tools?.enable !== false;
   const showBar = () => cfg().story?.global?.scroll_progress?.bar === true;
-  const showPercent = () =>
-    cfg().story?.global?.scroll_progress?.percentage !== false;
   const showThemeToggle = () => cfg().features?.light_and_dark_mode !== false;
 
   return (
@@ -68,16 +66,17 @@ export const ScrollTools: Component<ScrollToolsProps> = (props) => {
             </li>
             <li
               class="right-bottom-tools tool-scroll-to-top"
-              classList={{ "tool-scroll-to-top--plain": !showPercent() }}
               title="Scroll to top"
+              role="progressbar"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={0}
             >
+              <span class="tool-scroll-to-top__ring" aria-hidden="true" />
               <Icon
                 svg={IconArrowNarrowUp}
-                class={`${toolIconClass} arrow-up`}
+                class={`${toolIconClass} tool-scroll-to-top__icon`}
               />
-              <Show when={showPercent()}>
-                <span class="percent">0</span>
-              </Show>
             </li>
           </ul>
         </div>

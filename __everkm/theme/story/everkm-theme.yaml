@@ -49,7 +49,6 @@ config:
     global:
       scroll_progress:
         bar: false
-        percentage: true
       scroll_tools:
         enable: true
       preloader:

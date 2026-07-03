@@ -1,19 +1,12 @@
 const FONT_SIZE_LEVEL_KEY = "story-font-size-level";
 
 let bound = false;
-let prevScrollY = 0;
 let scrollHandler: (() => void) | null = null;
 let fontSizeLevel = 0;
 let baseFontSize = 0;
 
-function readScrollConfig(): {
-  bar: boolean;
-  percentage: boolean;
-} {
-  return {
-    bar: document.body.dataset.scrollProgressBar === "true",
-    percentage: document.body.dataset.scrollProgressPercentage !== "false",
-  };
+function readScrollBarEnabled(): boolean {
+  return document.body.dataset.scrollProgressBar === "true";
 }
 
 function calcPercent(scrollTop: number, scrollHeight: number, clientHeight: number): number {
@@ -80,7 +73,7 @@ function updateScrollUi(): void {
   const scrollHeight = document.documentElement.scrollHeight;
   const clientHeight = window.innerHeight;
   const percent = calcPercent(scrollTop, scrollHeight, clientHeight);
-  const { bar, percentage } = readScrollConfig();
+  const bar = readScrollBarEnabled();
 
   const progressBar = document.querySelector<HTMLElement>(".scroll-progress-bar");
   if (progressBar && bar) {
@@ -89,12 +82,12 @@ function updateScrollUi(): void {
   }
 
   const backToTop = document.querySelector<HTMLElement>(".tool-scroll-to-top");
-  const percentEl = backToTop?.querySelector<HTMLElement>(".percent");
   if (backToTop) {
     backToTop.classList.toggle("show", scrollTop > 0);
-    if (percentage && percentEl) {
-      percentEl.textContent = String(percent);
-    }
+    backToTop.style.setProperty("--scroll-progress", String(percent / 100));
+    backToTop.setAttribute("aria-valuenow", String(percent));
+    backToTop.title =
+      percent > 0 ? `Scroll to top (${percent}%)` : "Scroll to top";
   }
 
   const toolsContainer = document.querySelector<HTMLElement>(
@@ -105,8 +98,6 @@ function updateScrollUi(): void {
     const isHome = document.querySelector(".story-page-home") !== null;
     toolsContainer.classList.toggle("hide", isHome && atTop);
   }
-
-  prevScrollY = scrollTop;
 }
 
 function bindControls(): void {
@@ -151,7 +142,6 @@ export function installScrollTopBottom(): void {
 
   if (bound) return;
   bound = true;
-  prevScrollY = window.scrollY;
 
   let ticking = false;
   scrollHandler = () => {

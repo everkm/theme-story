@@ -25,7 +25,7 @@
 }
 
 .side-tools-container .right-bottom-tools {
-  @apply mb-[5px] flex size-[42px] cursor-pointer items-center justify-center rounded-xl text-xl;
+  @apply relative mb-[5px] flex size-[42px] cursor-pointer items-center justify-center rounded-xl text-xl;
   color: var(--story-text-default);
   background: var(--background);
   box-shadow: var(--story-box-shadow-flat);
@@ -38,7 +38,7 @@
 }
 
 .side-tools-container .right-bottom-tools .story-tool-icon {
-  @apply block shrink-0;
+  @apply relative z-[1] block shrink-0;
 }
 
 .side-tools-container .right-bottom-tools:hover .story-tool-icon {
@@ -69,6 +69,7 @@
 }
 
 .side-tools-container .visible-tools-list .tool-scroll-to-top {
+  --scroll-progress: 0;
   @apply hidden;
 }
 
@@ -76,24 +77,26 @@
   @apply flex;
 }
 
-.side-tools-container .visible-tools-list .tool-scroll-to-top .arrow-up {
-  @apply hidden;
+.side-tools-container .visible-tools-list .tool-scroll-to-top__ring {
+  @apply pointer-events-none absolute inset-0 rounded-[inherit];
+  padding: 2px;
+  background: conic-gradient(
+    from -90deg,
+    var(--accent) calc(var(--scroll-progress) * 360deg),
+    var(--border) 0
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
 }
 
-.side-tools-container .visible-tools-list .tool-scroll-to-top .percent {
-  @apply flex text-base;
-}
-
-.side-tools-container .visible-tools-list .tool-scroll-to-top:hover .percent {
-  @apply hidden;
-}
-
-.side-tools-container .visible-tools-list .tool-scroll-to-top:hover .arrow-up {
-  @apply flex;
-}
-
-.side-tools-container .visible-tools-list .tool-scroll-to-top--plain.show .arrow-up {
-  @apply flex;
+.side-tools-container .visible-tools-list .tool-scroll-to-top:hover .tool-scroll-to-top__ring {
+  opacity: 0;
 }
 
 .side-tools-container .toggle-tools-list .toggle-tools-list__icon {
