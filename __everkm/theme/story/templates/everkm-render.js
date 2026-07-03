@@ -3356,7 +3356,7 @@ var Socials = (props) => {
 // src/components/Footer.tsx
 var _tmpl$11 = ['<span class="story-footer__socials">', "</span>"];
 var _tmpl$25 = ['<div class="story-footer__line story-footer__line--secondary">', "</div>"];
-var _tmpl$34 = ['<div class="', '" data-vt-swap="footer"><footer class="story-footer"><div class="story-footer__info"><div class="story-footer__line story-footer__line--primary"><span class="story-footer__copyright">&#169; ', " <a", ">", "</a> | ", "</span>", "</div>", "</div></footer></div>"];
+var _tmpl$34 = ['<div class="', '" data-vt-swap="footer"><footer class="story-footer"><div class="story-footer__info"><div class="story-footer__line story-footer__line--primary"><span class="story-footer__copyright">&#169; ', " <a", ' class="mr-2">', "</a>", "</span>", "</div>", "</div></footer></div>"];
 var _tmpl$44 = ["<span>", "</span>"];
 var _tmpl$54 = ["<a", ' target="_blank" rel="noopener noreferrer">', "</a>"];
 var Footer = (props) => {

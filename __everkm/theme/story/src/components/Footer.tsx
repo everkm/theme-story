@@ -30,8 +30,7 @@ export const Footer: Component<FooterProps> = (props) => {
           <div class="story-footer__line story-footer__line--primary">
             <span class="story-footer__copyright">
               &#169; {year}{" "}
-              <a href={homeHref()}>{siteName()}</a>
-              {" | "}
+              <a href={homeHref()} class="mr-2">{siteName()}</a>
               {t().footer.allRightsReserved}
             </span>
             <Show when={socials().length > 0}>
