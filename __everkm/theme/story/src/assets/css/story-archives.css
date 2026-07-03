@@ -80,7 +80,9 @@
 
 .archive-article-title::after {
   content: "";
-  @apply absolute -left-7 top-1/2 size-[7px] -translate-y-1/2 rounded-full border;
+  @apply absolute top-1/2 size-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full border;
+  /* Align dot center with border-l-2 timeline (same axis as .archive-article-item::after) */
+  left: calc(-1.5rem - 1px);
   border-color: var(--border);
   background: var(--muted-foreground);
   opacity: 0.35;
@@ -113,6 +115,7 @@
   }
 
   .archive-article-title::after {
-    @apply -left-6 size-1.5;
+    @apply size-1.5;
+    left: calc(-0.75rem - 1px);
   }
 }
