@@ -112,18 +112,13 @@ export const RootLayout: ParentComponent<RootLayoutProps> = (props) => {
         {props.children}
         <Show when={particlesEnabled()}>
           <div
-            id="particles-js"
+            id="story-particles-webgl"
             class="story-particles"
             data-vt-persist
             aria-hidden="true"
           />
         </Show>
         <ScrollTools ctx={ctx()} />
-        <Show when={particlesEnabled()}>
-          <script
-            src={pageUrl(ctx().request_id, "/assets/vendor/particles.min.js")}
-          />
-        </Show>
         <Show when={!!customBodyEndHtml()}>
           <div innerHTML={customBodyEndHtml()} />
         </Show>

@@ -3011,10 +3011,9 @@ var Preloader = (props) => {
 
 // src/layout/RootLayout.tsx
 var _tmpl$5 = ['<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>', '</title><meta name="title"', '><meta name="description"', '><meta name="generator" content="', '"><meta name="theme" content="', '"><link rel="icon" type="image/svg+xml"', '><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet"><meta name="theme-color" content><script>(function () {\n  const stored = localStorage.getItem("theme");\n  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;\n  const theme = stored ?? (prefersDark ? "dark" : "light");\n  const root = document.documentElement;\n  const isDark = theme === "dark";\n  root.setAttribute("data-theme", theme);\n  root.classList.toggle("dark", isDark);\n  root.classList.toggle("light", !isDark);\n  root.style.colorScheme = theme;\n  document.addEventListener("DOMContentLoaded", function () {\n    document.body.classList.toggle("dark-mode", isDark);\n    document.body.classList.toggle("light-mode", !isDark);\n  });\n  window.__theme = { value: theme };\n})();</script><script>', "</script></head>"];
-var _tmpl$22 = '<div id="particles-js" class="story-particles" data-vt-persist aria-hidden="true"></div>';
-var _tmpl$32 = ["<script", "></script>"];
-var _tmpl$42 = ["<div>", "</div>"];
-var _tmpl$52 = ["<html", ' class="overflow-y-scroll scroll-smooth">', '<body class="bg-background font-app text-foreground selection:bg-accent/75 selection:text-accent-foreground flex min-h-svh flex-col"', ">", '<a id="skip-to-content" href="#main-content" class="bg-background text-accent absolute inset-s-16 -top-full z-50 px-3 py-2 backdrop-blur-lg transition-all focus:top-4">', "</a>", "", "", "", "", "</body></html>"];
+var _tmpl$22 = '<div id="story-particles-webgl" class="story-particles" data-vt-persist aria-hidden="true"></div>';
+var _tmpl$32 = ["<div>", "</div>"];
+var _tmpl$42 = ["<html", ' class="overflow-y-scroll scroll-smooth">', '<body class="bg-background font-app text-foreground selection:bg-accent/75 selection:text-accent-foreground flex min-h-svh flex-col"', ">", '<a id="skip-to-content" href="#main-content" class="bg-background text-accent absolute inset-s-16 -top-full z-50 px-3 py-2 backdrop-blur-lg transition-all focus:top-4">', "</a>", "", "", "", "</body></html>"];
 var RootLayout = (props) => {
   const ctx = () => props.context;
   const cfg = () => getStoryConfig(ctx());
@@ -3031,7 +3030,7 @@ var RootLayout = (props) => {
   const scrollProgressBar = () => cfg().story?.global?.scroll_progress?.bar === true ? "true" : "false";
   const particlesEnabled = () => cfg().features?.particles === true;
   const t2 = () => useTranslations(lang());
-  return ssr(_tmpl$52, ssrAttribute("lang", escape(lang(), true), false) + ssrAttribute("dir", escape(dir(), true), false), createComponent(NoHydration, {
+  return ssr(_tmpl$42, ssrAttribute("lang", escape(lang(), true), false) + ssrAttribute("dir", escape(dir(), true), false), createComponent(NoHydration, {
     get children() {
       return ssr(_tmpl$5, escape(pageTitle()), ssrAttribute("content", escape(pageTitle(), true), false), ssrAttribute("content", escape(metaDesc(), true), false), `everkm-publish@v${escape(ctx().everkm_publish_version, true)}`, `${escape(ctx().theme_name, true)}@${escape(ctx().theme_version, true)}`, ssrAttribute("href", escape(pageUrl(ctx().request_id, "/assets/favicon.svg"), true), false), `
           window.__everkm_lang = ${JSON.stringify(lang())};
@@ -3057,17 +3056,10 @@ var RootLayout = (props) => {
     }
   })), escape(createComponent(Show, {
     get when() {
-      return particlesEnabled();
-    },
-    get children() {
-      return ssr(_tmpl$32, ssrAttribute("src", escape(pageUrl(ctx().request_id, "/assets/vendor/particles.min.js"), true), false));
-    }
-  })), escape(createComponent(Show, {
-    get when() {
       return !!customBodyEndHtml();
     },
     get children() {
-      return ssr(_tmpl$42, customBodyEndHtml());
+      return ssr(_tmpl$32, customBodyEndHtml());
     }
   })));
 };
@@ -3216,7 +3208,7 @@ var _tmpl$6 = ['<li class="navbar-item"><div id="header-in-search"><x-in-search'
 var _tmpl$23 = ['<span class="navbar-link__label">', "</span>"];
 var _tmpl$33 = ['<li class="navbar-item"><a', ' data-nav-path="/"', ">", "</a></li>"];
 var _tmpl$43 = ['<li class="navbar-item"><a', ' data-nav-path="/tags"', ">", "</a></li>"];
-var _tmpl$53 = ['<li class="navbar-item"><a', ' data-nav-path="/about"', ">", "</a></li>"];
+var _tmpl$52 = ['<li class="navbar-item"><a', ' data-nav-path="/about"', ">", "</a></li>"];
 var _tmpl$62 = ['<li class="navbar-item"><a', ' data-nav-path="/archives"', ">", "</a></li>"];
 var _tmpl$7 = ['<li class="navbar-item"><a', ">", "</a></li>"];
 var _tmpl$8 = ['<header class="', '" data-vt-swap="header" style="', '"><div class="', '"><div class="navbar-content__left"><a', ' class="logo-title" data-nav-path="/"><h1>', '</h1></a></div><nav id="nav-menu" class="navbar-content__right"><button id="menu-btn" class="navbar-menu-btn focus-outline"', ' aria-expanded="false" aria-controls="menu-items"', ' type="button">', "", '</button><ul id="menu-items" class="navbar-list navbar-list--desktop">', "", "</ul></nav></div></header>"];
@@ -3272,7 +3264,7 @@ var Header = (props) => {
       });
     }
   }), ssr(_tmpl$23, escape(navLinkLabel(label)))];
-  const defaultNavItems = () => [ssr(_tmpl$33, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/index.html"), true), false), ssrAttribute("class", isActive("/") ? "active" : escape(void 0, true), false), escape(navLinkContent(IconHome_default, t2().nav.home))), ssr(_tmpl$43, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/tags/index.html"), true), false), ssrAttribute("class", isActive("/tags") ? "active" : escape(void 0, true), false), escape(navLinkContent(IconLink_default, t2().nav.tags))), ssr(_tmpl$53, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/about/"), true), false), ssrAttribute("class", isActive("/about") ? "active" : escape(void 0, true), false), escape(navLinkContent(IconInfoCircle_default, t2().nav.about))), createComponent(Show, {
+  const defaultNavItems = () => [ssr(_tmpl$33, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/index.html"), true), false), ssrAttribute("class", isActive("/") ? "active" : escape(void 0, true), false), escape(navLinkContent(IconHome_default, t2().nav.home))), ssr(_tmpl$43, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/tags/index.html"), true), false), ssrAttribute("class", isActive("/tags") ? "active" : escape(void 0, true), false), escape(navLinkContent(IconLink_default, t2().nav.tags))), ssr(_tmpl$52, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, "/about/"), true), false), ssrAttribute("class", isActive("/about") ? "active" : escape(void 0, true), false), escape(navLinkContent(IconInfoCircle_default, t2().nav.about))), createComponent(Show, {
     get when() {
       return cfg().features?.show_archives !== false;
     },
@@ -3381,7 +3373,7 @@ var _tmpl$10 = ['<span class="story-footer__socials">', "</span>"];
 var _tmpl$25 = ['<div class="story-footer__line story-footer__line--secondary">', "</div>"];
 var _tmpl$34 = ['<div class="', '" data-vt-swap="footer"><footer class="story-footer"><div class="story-footer__info"><div class="story-footer__line story-footer__line--primary"><span class="story-footer__copyright">&#169; ', " <a", ' class="mr-2">', "</a>", "</span>", "</div>", "</div></footer></div>"];
 var _tmpl$44 = ["<span>", "</span>"];
-var _tmpl$54 = ["<a", ' target="_blank" rel="noopener noreferrer">', "</a>"];
+var _tmpl$53 = ["<a", ' target="_blank" rel="noopener noreferrer">', "</a>"];
 var Footer = (props) => {
   const t2 = () => useTranslations(props.ctx.lang);
   const year = (/* @__PURE__ */ new Date()).getFullYear();
@@ -3416,7 +3408,7 @@ var Footer = (props) => {
         get fallback() {
           return ssr(_tmpl$44, escape(poweredBy()));
         },
-        children: (href) => ["Powered by", " ", ssr(_tmpl$54, ssrAttribute("href", escape(href(), true), false), escape(poweredBy()))]
+        children: (href) => ["Powered by", " ", ssr(_tmpl$53, ssrAttribute("href", escape(href(), true), false), escape(poweredBy()))]
       })));
     }
   })));
@@ -3498,7 +3490,7 @@ var _tmpl$11 = ['<div class="home-article-thumbnail"><a', ' tabindex="-1" aria-h
 var _tmpl$27 = ['<div class="home-article-content">', "</div>"];
 var _tmpl$35 = ['<span class="mr-2.5 inline-flex items-center gap-1 last:mr-0">', '<span class="home-article-date"><time', ">", "</time></span></span>"];
 var _tmpl$45 = ['<span class="home-article-tag mr-2.5 inline-flex items-center gap-1 last:mr-0 max-md:hidden">', '<ul class="m-0 inline list-none p-0">', "</ul></span>"];
-var _tmpl$55 = ['<li class="home-article-item">', '<div class="home-article-body"><h3 class="home-article-title"><a', ' style="', '">', "</a></h3>", '<div class="home-article-meta-info-container flex items-center justify-between text-[0.92rem] tracking-[0.5px] text-[var(--story-text-muted)]"><div class="home-article-meta-info min-w-0">', "", '</div><a class="shrink-0 whitespace-nowrap text-[var(--story-text-muted)] no-underline hover:text-accent"', ">", '<span class="sr-only">', "</span>", "</a></div></div></li>"];
+var _tmpl$54 = ['<li class="home-article-item">', '<div class="home-article-body"><h3 class="home-article-title"><a', ' style="', '">', "</a></h3>", '<div class="home-article-meta-info-container flex items-center justify-between text-[0.92rem] tracking-[0.5px] text-[var(--story-text-muted)]"><div class="home-article-meta-info min-w-0">', "", '</div><a class="shrink-0 whitespace-nowrap text-[var(--story-text-muted)] no-underline hover:text-accent"', ">", '<span class="sr-only">', "</span>", "</a></div></div></li>"];
 var _tmpl$63 = ['<li class="inline">', '<a class="text-[var(--story-text-muted)] no-underline hover:text-accent"', ">", "</a> </li>"];
 import_dayjs2.default.extend(import_utc.default);
 import_dayjs2.default.extend(import_timezone.default);
@@ -3514,7 +3506,7 @@ var HomeArticleCard = (props) => {
     return import_dayjs2.default.unix(ts).tz(cfg().site.timezone ?? "UTC").format("YYYY-MM-DD");
   };
   const tags = () => props.post.tags?.filter(Boolean) ?? [];
-  return ssr(_tmpl$55, escape(createComponent(Show, {
+  return ssr(_tmpl$54, escape(createComponent(Show, {
     get when() {
       return cover();
     },
@@ -3563,7 +3555,7 @@ var _tmpl$12 = ['<div class="paginator mt-[30px] flex justify-center text-base" 
 var _tmpl$28 = ['<a class="', '" rel="prev"', ">", "</a>"];
 var _tmpl$36 = ["<span", ">", "</span>"];
 var _tmpl$46 = ['<a class="', '"', ">", "</a>"];
-var _tmpl$56 = '<span class="space mx-[0.3rem] inline-flex items-center px-2.5 py-2 max-sm:px-0.5">&hellip;</span>';
+var _tmpl$55 = '<span class="space mx-[0.3rem] inline-flex items-center px-2.5 py-2 max-sm:px-0.5">&hellip;</span>';
 var _tmpl$64 = ['<a class="', '" rel="next"', ">", "</a>"];
 var _tmpl$72 = ['<div class="home-paginator px-7 py-5">', "</div>"];
 var _tmpl$82 = ['<div data-vt-swap="pagination">', "</div>"];
@@ -3586,7 +3578,7 @@ var Pagination = (props) => {
     get each() {
       return pageItems();
     },
-    children: (item) => typeof item === "number" ? item === props.pageNo ? ssr(_tmpl$36, ssrAttribute("class", escape(paginatorCurrentClass, true), false), escape(item)) : ssr(_tmpl$46, `page-number ${escape(paginatorChipClass, true)}`, ssrAttribute("href", escape(paginationHref(props.basePath, item), true), false), escape(item)) : ssr(_tmpl$56)
+    children: (item) => typeof item === "number" ? item === props.pageNo ? ssr(_tmpl$36, ssrAttribute("class", escape(paginatorCurrentClass, true), false), escape(item)) : ssr(_tmpl$46, `page-number ${escape(paginatorChipClass, true)}`, ssrAttribute("href", escape(paginationHref(props.basePath, item), true), false), escape(item)) : ssr(_tmpl$55)
   })), escape(createComponent(Show, {
     get when() {
       return nextHref();
@@ -3651,7 +3643,7 @@ var _tmpl$13 = ['<div class="', '" aria-hidden="true"><img', ' alt class="home-b
 var _tmpl$29 = ['<div class="home-banner-container__inline-bg" aria-hidden="true"><img', ' alt class="home-banner-background__img--light"><img', ' alt class="home-banner-background__img--dark"></div>'];
 var _tmpl$37 = ['<p class="home-banner-container__subtitle"><span id="home-banner-subtitle"', "></span></p>"];
 var _tmpl$47 = ['<p class="home-banner-container__subtitle">', "</p>"];
-var _tmpl$57 = ['<div class="home-banner-container__socials">', "</div>"];
+var _tmpl$56 = ['<div class="home-banner-container__socials">', "</div>"];
 var _tmpl$65 = ['<section class="', '">', '<div class="home-banner-container__content"><div class="home-banner-container__description"><span>', "</span>", "", '</div><div class="home-banner-container__actions"><button type="button" class="home-banner-container__scroll-btn" aria-label="Scroll to content">\u2193</button>', "</div></div></section>"];
 var HomeBanner = (props) => {
   const mode = () => props.mode ?? "hero";
@@ -3724,7 +3716,7 @@ var HomeBanner = (props) => {
               return socials().length > 0;
             },
             get children() {
-              return ssr(_tmpl$57, escape(createComponent(Socials, {
+              return ssr(_tmpl$56, escape(createComponent(Socials, {
                 get ctx() {
                   return props.ctx;
                 },
@@ -4094,7 +4086,7 @@ var _tmpl$18 = ['<nav class="app-layout mt-8 mb-4" aria-label="breadcrumb"><ul c
 var _tmpl$212 = ["<a", ' class="capitalize opacity-70">', "</a>"];
 var _tmpl$310 = '<span aria-hidden="true" class="opacity-70">&raquo;</span>';
 var _tmpl$49 = ['<li class="inline-flex items-center gap-x-1">', "</li>"];
-var _tmpl$58 = ['<span class="', '" aria-current="page">', "</span>"];
+var _tmpl$57 = ['<span class="', '" aria-current="page">', "</span>"];
 var Breadcrumb = (props) => {
   const t2 = () => useTranslations(props.ctx.lang);
   const pageKey = () => props.pageKey ?? "";
@@ -4114,7 +4106,7 @@ var Breadcrumb = (props) => {
             return item.href;
           },
           get fallback() {
-            return ssr(_tmpl$58, `capitalize opacity-75 ${item.lowercase ? "lowercase" : ""}`, escape(item.label));
+            return ssr(_tmpl$57, `capitalize opacity-75 ${item.lowercase ? "lowercase" : ""}`, escape(item.label));
           },
           get children() {
             return [ssr(_tmpl$212, ssrAttribute("href", escape(item.href, true), false), escape(item.label)), ssr(_tmpl$310)];
@@ -4463,7 +4455,7 @@ var _tmpl$41 = ['<main id="main-content" data-layout="post" class="app-layout mt
 var _tmpl$218 = ['<div class="article-hero"><img', ' class="article-hero__cover" loading="eager"><div class="article-hero__title-wrap"><h1 class="article-hero__title" style="', '">', "</h1></div></div>"];
 var _tmpl$315 = ['<div class="px-4 pt-6 sm:px-6 md:px-8"><h1 class="text-accent text-2xl font-bold sm:text-3xl" style="', '">', "</h1></div>"];
 var _tmpl$411 = ['<div class="article-header__name">', "</div>"];
-var _tmpl$59 = ['<div class="flex flex-wrap gap-2 px-4 pb-2 sm:px-6 md:px-8"><span class="text-muted-foreground italic">', ':</span><ul class="flex flex-wrap gap-2">', "</ul></div>"];
+var _tmpl$58 = ['<div class="flex flex-wrap gap-2 px-4 pb-2 sm:px-6 md:px-8"><span class="text-muted-foreground italic">', ':</span><ul class="flex flex-wrap gap-2">', "</ul></div>"];
 var _tmpl$66 = ['<div class="post-page-container"><article class="article-content-container" id="article">', "", '<div class="article-header"><div class="article-header__avatar"><img', "></div><div>", '<div class="article-header__meta">', "", "</div></div></div>", '<div class="', '">', "</div>", "", "</article></div>"];
 var _tmpl$73 = ['<span class="article-header__meta-item">', ": ", "</span>"];
 import_dayjs4.default.extend(import_utc3.default);
@@ -4568,7 +4560,7 @@ var PostPage = (p3) => {
         return (item().tags?.length ?? 0) > 0;
       },
       get children() {
-        return ssr(_tmpl$59, escape(t2().post.tagLabel), escape(createComponent(For, {
+        return ssr(_tmpl$58, escape(t2().post.tagLabel), escape(createComponent(For, {
           get each() {
             return item().tags ?? [];
           },
@@ -4686,7 +4678,7 @@ var TagCloudItem = (props) => {
 };
 
 // src/pages/tags-index.tsx
-var _tmpl$60 = ['<div class="tagcloud-content"><ul class="tag-list" data-show-value="true">', "</ul></div>"];
+var _tmpl$59 = ['<div class="tagcloud-content"><ul class="tag-list" data-show-value="true">', "</ul></div>"];
 var TagsIndexPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
@@ -4719,7 +4711,7 @@ var TagsIndexPage = (p3) => {
     },
     layout: "tags-index",
     get children() {
-      return ssr(_tmpl$60, escape(createComponent(For, {
+      return ssr(_tmpl$59, escape(createComponent(For, {
         get each() {
           return tagEntries();
         },
@@ -4743,7 +4735,7 @@ var TagsIndexPage = (p3) => {
 };
 
 // src/pages/tag-posts.tsx
-var _tmpl$61 = ['<ul class="home-article-list">', "</ul>"];
+var _tmpl$60 = ['<ul class="home-article-list">', "</ul>"];
 var TagPostsPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
@@ -4785,7 +4777,7 @@ var TagPostsPage = (p3) => {
     },
     layout: "tag-posts",
     get children() {
-      return ssr(_tmpl$61, escape(createComponent(For, {
+      return ssr(_tmpl$60, escape(createComponent(For, {
         get each() {
           return items();
         },
@@ -4856,7 +4848,7 @@ function groupArchiveByDateLabel(posts) {
 }
 
 // src/pages/archives.tsx
-var _tmpl$67 = ['<div class="archive-container"><div class="archive-list-container">', "</div></div>"];
+var _tmpl$61 = ['<div class="archive-container"><div class="archive-list-container">', "</div></div>"];
 var _tmpl$219 = ['<section class="archive-item"><div class="archive-item__header"><span class="archive-year">', '</span><span class="archive-year-post-count">', '</span></div><ul class="archive-article-list">', "</ul></section>"];
 var _tmpl$316 = ['<li class="archive-article-item"', ">", "</li>"];
 var _tmpl$412 = ['<a class="archive-article-link"', '><span class="archive-article-title">', "</span></a>"];
@@ -4888,7 +4880,7 @@ var ArchivesPage = (p3) => {
     layout: "archives",
     hidePageHeader: true,
     get children() {
-      return ssr(_tmpl$67, escape(createComponent(For, {
+      return ssr(_tmpl$61, escape(createComponent(For, {
         get each() {
           return years();
         },
@@ -4916,12 +4908,12 @@ var ArchivesPage = (p3) => {
 };
 
 // src/pages/links.tsx
-var _tmpl$68 = ['<div class="app-prose mt-8">', "</div>"];
+var _tmpl$67 = ['<div class="app-prose mt-8">', "</div>"];
 var _tmpl$220 = ['<div class="page-template-container"><h1 class="page-title-header">', '</h1><div class="friends-link-container">', "", "</div></div>"];
 var _tmpl$317 = ['<p class="text-muted-foreground italic">', "</p>"];
 var _tmpl$413 = ['<h2 class="friends-link-category__title">', "</h2>"];
 var _tmpl$510 = ["<section>", '<ul class="', '">', "</ul></section>"];
-var _tmpl$69 = ['<div class="friends-link-card__thumbnail"><img', ' alt loading="lazy"></div>'];
+var _tmpl$68 = ['<div class="friends-link-card__thumbnail"><img', ' alt loading="lazy"></div>'];
 var _tmpl$74 = ['<div class="friends-link-avatar"><img', ' alt loading="lazy"></div>'];
 var _tmpl$83 = ['<div class="friends-link-desc">', "</div>"];
 var _tmpl$93 = ['<div class="friends-link-card">', '<div class="friends-link-card__body">', '<div class="friends-link-meta"><div class="friends-link-name">', "</div>", "</div></div></div>"];
@@ -5004,7 +4996,7 @@ var LinksPage = (p3) => {
                       return !!item.thumbnail;
                     },
                     get children() {
-                      return ssr(_tmpl$69, ssrAttribute("src", escape(resolveStoryMediaUrl(ctx(), item.thumbnail, originPath()), true), false));
+                      return ssr(_tmpl$68, ssrAttribute("src", escape(resolveStoryMediaUrl(ctx(), item.thumbnail, originPath()), true), false));
                     }
                   })), escape(createComponent(Show, {
                     get when() {
@@ -5031,7 +5023,7 @@ var LinksPage = (p3) => {
           return !!doc()?.content_html;
         },
         get children() {
-          return ssr(_tmpl$68, doc().content_html);
+          return ssr(_tmpl$67, doc().content_html);
         }
       })));
     }
@@ -5099,7 +5091,7 @@ var IMAGE_PLACEHOLDER_DEFAULT_WIDTH = PLACEHOLDER_DEFAULT_WIDTH;
 var IMAGE_PLACEHOLDER_DEFAULT_HEIGHT = PLACEHOLDER_DEFAULT_HEIGHT;
 
 // src/pages/album.tsx
-var _tmpl$70 = '<div class="loading-placeholder"><div class="flex-grid generic-card"><div class="card loading"></div><div class="card loading"></div><div class="card loading"></div></div></div>';
+var _tmpl$69 = '<div class="loading-placeholder"><div class="flex-grid generic-card"><div class="card loading"></div><div class="card loading"></div><div class="card loading"></div></div></div>';
 var _tmpl$221 = ['<div id="album-container"', ">", "</div>"];
 var _tmpl$318 = ['<div class="page-template-container"><h1 class="page-title-header">', "</h1>", "</div>"];
 var _tmpl$414 = ['<p class="text-muted-foreground italic">', "</p>"];
@@ -5140,7 +5132,7 @@ var AlbumPage = (p3) => {
           return ssr(_tmpl$414, escape(t2().pages.albumEmpty));
         },
         get children() {
-          return [ssr(_tmpl$70), ssr(_tmpl$221, ssrAttribute("data-vendor-script", escape(pageUrl(ctx().request_id, "/assets/vendor/minimasonry.min.js"), true), false), escape(createComponent(For, {
+          return [ssr(_tmpl$69), ssr(_tmpl$221, ssrAttribute("data-vendor-script", escape(pageUrl(ctx().request_id, "/assets/vendor/minimasonry.min.js"), true), false), escape(createComponent(For, {
             get each() {
               return items();
             },
@@ -5181,7 +5173,7 @@ var AlbumPage = (p3) => {
 };
 
 // src/pages/not-found.tsx
-var _tmpl$71 = ['<main id="main-content" data-layout="not-found" class="app-layout flex min-h-[50vh] flex-col items-center justify-center py-16 text-center"><p class="text-accent text-7xl font-bold sm:text-8xl">404</p><h1 class="mt-4 text-2xl font-semibold sm:text-3xl">', '</h1><p class="text-muted-foreground mt-3 max-w-md">', "</p>", "</main>"];
+var _tmpl$70 = ['<main id="main-content" data-layout="not-found" class="app-layout flex min-h-[50vh] flex-col items-center justify-center py-16 text-center"><p class="text-accent text-7xl font-bold sm:text-8xl">404</p><h1 class="mt-4 text-2xl font-semibold sm:text-3xl">', '</h1><p class="text-muted-foreground mt-3 max-w-md">', "</p>", "</main>"];
 var NotFoundPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
@@ -5190,7 +5182,7 @@ var NotFoundPage = (p3) => {
     get ctx() {
       return ctx();
     }
-  }), ssr(_tmpl$71, escape(t2().pages.notFoundTitle), escape(t2().pages.notFoundDesc), escape(createComponent(LinkButton, {
+  }), ssr(_tmpl$70, escape(t2().pages.notFoundTitle), escape(t2().pages.notFoundDesc), escape(createComponent(LinkButton, {
     get href() {
       return pageUrl(ctx().request_id, "/index.html");
     },
