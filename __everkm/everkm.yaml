@@ -9,7 +9,7 @@ config:
 
   socials:
     - name: github
-      url: https://github.com/EvanNotFound/hexo-theme-redefine
+      url: https://github.com/everkm/theme-story
 
   algolia_search:
     app_id: 1N74YC70XF
@@ -18,5 +18,5 @@ config:
     site: theme-story
 
   copyright:
-    text: everkm
-    link: https://everkm.com
+    text: Everkm
+    link: https://publish.everkm.com

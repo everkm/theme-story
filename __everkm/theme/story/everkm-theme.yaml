@@ -52,7 +52,7 @@ config:
       scroll_tools:
         enable: true
       preloader:
-        max_duration_ms: 5000
+        max_duration_ms: 2500
     home_banner:
       enable: true
       style: fixed

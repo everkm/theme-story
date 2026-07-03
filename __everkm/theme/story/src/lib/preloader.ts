@@ -51,9 +51,15 @@ export function installPreloader(): void {
   }
 
   const letterCount = wrapPreloaderLetters(titleEl);
-  const maxMs = Number.parseInt(el.dataset.maxDuration ?? "5000", 10);
-  const animMs = Math.min(maxMs, 300 + letterCount * 20 + 1800);
-  const targetDelay = Math.min(maxMs, Math.max(animMs, 1200));
+  const maxMs = Number.parseInt(el.dataset.maxDuration ?? "2500", 10);
+  const letterAnimMs = 450;
+  const letterStaggerMs = 20;
+  const holdMs = 120;
+  const animMs = Math.min(
+    maxMs,
+    Math.max(0, letterCount - 1) * letterStaggerMs + letterAnimMs + holdMs,
+  );
+  const targetDelay = Math.min(maxMs, Math.max(animMs, 500));
 
   let hidden = false;
   const hide = () => {

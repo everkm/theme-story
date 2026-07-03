@@ -2999,7 +2999,7 @@ var Preloader = (props) => {
   const cfg = () => getStoryConfig(props.ctx);
   const enabled = () => cfg().features?.preloader === true;
   const message = () => cfg().story?.global?.preloader?.message?.trim() || cfg().site.name || "Story";
-  const maxDuration = () => cfg().story?.global?.preloader?.max_duration_ms ?? 5e3;
+  const maxDuration = () => cfg().story?.global?.preloader?.max_duration_ms ?? 2500;
   return createComponent(Show, {
     get when() {
       return enabled();

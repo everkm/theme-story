@@ -13,7 +13,7 @@ export const Preloader: Component<PreloaderProps> = (props) => {
     cfg().site.name ||
     "Story";
   const maxDuration = () =>
-    cfg().story?.global?.preloader?.max_duration_ms ?? 5000;
+    cfg().story?.global?.preloader?.max_duration_ms ?? 2500;
 
   return (
     <Show when={enabled()}>
