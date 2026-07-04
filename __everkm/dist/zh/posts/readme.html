@@ -1,0 +1,368 @@
+<!DOCTYPE html><html class="overflow-y-scroll scroll-smooth" dir="ltr" lang="zh"><head><meta charset="UTF-8"><meta content="width=device-width, initial-scale=1" name="viewport"><title>主题配置 | Jack's Blog</title><meta content="主题配置 | Jack's Blog" name="title"><meta content="" name="description"><meta content="everkm-publish@v0.18.1" name="generator"><meta content="story@0.1.0" name="theme"><link href="/zh/assets/favicon.svg" rel="icon" type="image/svg+xml"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet"><meta content="" name="theme-color"><script>(function () {
+  const stored = localStorage.getItem("theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const theme = stored ?? (prefersDark ? "dark" : "light");
+  const root = document.documentElement;
+  const isDark = theme === "dark";
+  root.setAttribute("data-theme", theme);
+  root.classList.toggle("dark", isDark);
+  root.classList.toggle("light", !isDark);
+  root.style.colorScheme = theme;
+  document.addEventListener("DOMContentLoaded", function () {
+    document.body.classList.toggle("dark-mode", isDark);
+    document.body.classList.toggle("light-mode", !isDark);
+  });
+  window.__theme = { value: theme };
+})();</script><script>
+          window.__everkm_lang = "zh";
+          window.__everkm_base_url = "/zh/";
+          window.__everkm_features_view_transitions = true;
+          window.__everkm_env_is_preview = false;
+          </script><link href="/assets/story.4R5MI5PB.css" rel="stylesheet"><link href="/assets/plugin-in-search.7S37UFJ6.css" rel="stylesheet"></head><body class="bg-background font-app text-foreground selection:bg-accent/75 selection:text-accent-foreground flex min-h-svh flex-col" data-navbar-auto-hide="true" data-particles="true" data-scroll-progress-bar="false"><div aria-busy="true" aria-live="polite" class="story-preloader" data-max-duration="2500" role="status"><h2 class="story-preloader__title">Jack's Blog</h2></div><a class="bg-background text-accent absolute inset-s-16 -top-full z-50 px-3 py-2 backdrop-blur-lg transition-all focus:top-4" href="#main-content" id="skip-to-content">跳到正文</a><header class="navbar-container navbar-container--page" data-vt-swap="header" style="background:linear-gradient(120deg, rgba(247,135,54,0.314) 0%, rgba(54,125,247,0.314) 100%)"><div class="navbar-content transition-navbar "><div class="navbar-content__left"><a class="logo-title" data-nav-path="/" href="/zh/index.html"><h1>Jack's Blog</h1></a></div><nav class="navbar-content__right" id="nav-menu"><button aria-controls="menu-items" aria-expanded="false" aria-label="打开菜单" class="navbar-menu-btn focus-outline" data-label-close="关闭菜单" data-label-open="打开菜单" id="menu-btn" type="button"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-x navbar-menu-btn__icon navbar-menu-btn__icon--close" fill="none" height="24" id="close-icon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M18 6l-12 12"></path><path d="M6 6l12 12"></path></svg></span><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep navbar-menu-btn__icon navbar-menu-btn__icon--open" fill="none" height="24" id="menu-icon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M4 6h16"></path><path d="M7 12h13"></path><path d="M10 18h10"></path></svg></span></button><ul class="navbar-list navbar-list--desktop" id="menu-items"><li class="navbar-item"><a data-nav-path="/index.html" href="/zh/index.html"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-home navbar-link__icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M5 12l-2 0l9 -9l9 9l-2 0"></path><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"></path></svg>
+</span><span class="navbar-link__label">HOME</span></a></li><li class="navbar-item"><a data-nav-path="/archives/index.html" href="/zh/archives/index.html"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-archive navbar-link__icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10"></path><path d="M10 12l4 0"></path></svg></span><span class="navbar-link__label">ARCHIVES</span></a></li><li class="navbar-item"><a data-nav-path="/album/index.html" href="/zh/album/index.html"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-photo navbar-link__icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M15 8h.01"></path><path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12"></path><path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5"></path><path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3"></path></svg>
+</span><span class="navbar-link__label">ALBUM</span></a></li><li class="navbar-item"><a data-nav-path="/links/index.html" href="/zh/links/index.html"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-link navbar-link__icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M10 13a5 5 0 0 0 7.54.54l3 -3a5 5 0 0 0 -7.07 -7.07l-3 3"></path><path d="M14 11a5 5 0 0 0 -7.54 -.54l-3 3a5 5 0 0 0 7.07 7.07l3 -3"></path></svg>
+</span><span class="navbar-link__label">LINKS</span></a></li><li class="navbar-item"><a data-nav-path="/about/" href="/zh/about/"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-info-circle navbar-link__icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path><path d="M12 9h.01"></path><path d="M11 12h1v4h1"></path></svg>
+</span><span class="navbar-link__label">ABOUT</span></a></li><li class="navbar-item"><div id="header-in-search"><x-in-search api-key="95bb37e3122ee9cb57a8ee0abbd14409" app-id="1N74YC70XF" index="story" only-button="false" site="theme-story"></x-in-search></div></li></ul></nav></div></header><main class="app-layout mt-8" data-layout="post" id="main-content"><div class="app-layout flex items-center justify-start"><a class="group inline-flex items-center gap-1 focus-outline hover:text-foreground/75 -ms-2 mb-2 " href="/zh/index.html" id="back-button"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left inline-block size-6 rtl:rotate-180" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M15 6l-6 6l6 6"></path></svg>
+</span><span>返回</span></a></div><div class="post-page-container"><article class="article-content-container" id="article"><div class="px-4 pt-6 sm:px-6 md:px-8"><h1 class="text-accent text-2xl font-bold sm:text-3xl" style="view-transition-name:">主题配置</h1></div><div class="article-header"><div class="article-header__avatar"><img alt="Jack" src="/zh/assets/images/avatar-0.jpg"></div><div><div class="article-header__name">Jack</div><div class="article-header__meta"><span class="article-header__meta-item">发布于: 2026-07-04 14:00:29</span></div></div></div><div class="flex flex-wrap gap-2 px-4 pb-2 sm:px-6 md:px-8"><span class="text-muted-foreground italic">标签:</span><ul class="flex flex-wrap gap-2"><li><a class="text-accent decoration-dashed underline-offset-4 hover:underline" href="/zh/tags/featured/index.html">#featured</a></li></ul></div><div class="article-content app-prose max-w-app w-full prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"><h1>主题配置<a class="heading-anchor" href="#zhu-ti-pei-zhi" name="zhu-ti-pei-zhi"></a></h1>
+<p>Story 是 <a href="https://publish.everkm.com">everkm-publish</a> 的博客主题，由 <a href="https://github.com/EvanNotFound/hexo-theme-redefine">hexo-theme-redefine</a> 迁移而来。默认模板为 <code>post</code>。站点级配置位于工作区 <code>__everkm/everkm.yaml</code> 的 <code>config</code> 节点；内容目录的 URL 规则在 <code>folders</code> 中设置。主题默认值定义在 <code>__everkm/theme/story/everkm-theme.yaml</code>。</p>
+<h2>配置概览<a class="heading-anchor" href="#pei-zhi-gai-lan" name="pei-zhi-gai-lan"></a></h2>
+<pre><code class="syn-code language-yaml"><span class="syn-source syn-yaml"><span class="syn-comment syn-line syn-number-sign syn-yaml"><span class="syn-punctuation syn-definition syn-comment syn-line syn-number-sign syn-yaml">#</span> __everkm/everkm.yaml
+</span>
+<span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">config</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">site</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-meta syn-flow-mapping syn-yaml"><span class="syn-punctuation syn-definition syn-mapping syn-begin syn-yaml">{</span> <span class="syn-constant syn-numeric syn-float syn-yaml">...</span> <span class="syn-punctuation syn-definition syn-mapping syn-end syn-yaml">}</span></span>           <span class="syn-comment syn-line syn-number-sign syn-yaml"><span class="syn-punctuation syn-definition syn-comment syn-line syn-number-sign syn-yaml">#</span> 站点基本信息
+</span>  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">home</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-quoted syn-single syn-yaml"><span class="syn-punctuation syn-definition syn-string syn-begin syn-yaml">'</span>[[_home]]<span class="syn-punctuation syn-definition syn-string syn-end syn-yaml">'</span></span>       <span class="syn-comment syn-line syn-number-sign syn-yaml"><span class="syn-punctuation syn-definition syn-comment syn-line syn-number-sign syn-yaml">#</span> 首页数据源标记（下划线文件）
+</span>  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">about</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-quoted syn-single syn-yaml"><span class="syn-punctuation syn-definition syn-string syn-begin syn-yaml">'</span>[[_about]]<span class="syn-punctuation syn-definition syn-string syn-end syn-yaml">'</span></span>     <span class="syn-comment syn-line syn-number-sign syn-yaml"><span class="syn-punctuation syn-definition syn-comment syn-line syn-number-sign syn-yaml">#</span> 关于页内容
+</span>  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">links</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-quoted syn-single syn-yaml"><span class="syn-punctuation syn-definition syn-string syn-begin syn-yaml">'</span>[[_links]]<span class="syn-punctuation syn-definition syn-string syn-end syn-yaml">'</span></span>     <span class="syn-comment syn-line syn-number-sign syn-yaml"><span class="syn-punctuation syn-definition syn-comment syn-line syn-number-sign syn-yaml">#</span> 友链数据
+</span>  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">posts</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-meta syn-flow-mapping syn-yaml"><span class="syn-punctuation syn-definition syn-mapping syn-begin syn-yaml">{</span> <span class="syn-constant syn-numeric syn-float syn-yaml">...</span> <span class="syn-punctuation syn-definition syn-mapping syn-end syn-yaml">}</span></span>          <span class="syn-comment syn-line syn-number-sign syn-yaml"><span class="syn-punctuation syn-definition syn-comment syn-line syn-number-sign syn-yaml">#</span> 文章列表分页
+</span>  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">features</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-meta syn-flow-mapping syn-yaml"><span class="syn-punctuation syn-definition syn-mapping syn-begin syn-yaml">{</span> <span class="syn-constant syn-numeric syn-float syn-yaml">...</span> <span class="syn-punctuation syn-definition syn-mapping syn-end syn-yaml">}</span></span>       <span class="syn-comment syn-line syn-number-sign syn-yaml"><span class="syn-punctuation syn-definition syn-comment syn-line syn-number-sign syn-yaml">#</span> 功能开关
+</span>  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">story</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-meta syn-flow-mapping syn-yaml"><span class="syn-punctuation syn-definition syn-mapping syn-begin syn-yaml">{</span> <span class="syn-constant syn-numeric syn-float syn-yaml">...</span> <span class="syn-punctuation syn-definition syn-mapping syn-end syn-yaml">}</span></span>          <span class="syn-comment syn-line syn-number-sign syn-yaml"><span class="syn-punctuation syn-definition syn-comment syn-line syn-number-sign syn-yaml">#</span> Story 主题外观与布局
+</span>  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">code_highlight</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-meta syn-flow-mapping syn-yaml"><span class="syn-punctuation syn-definition syn-mapping syn-begin syn-yaml">{</span> <span class="syn-constant syn-numeric syn-float syn-yaml">...</span> <span class="syn-punctuation syn-definition syn-mapping syn-end syn-yaml">}</span></span> <span class="syn-comment syn-line syn-number-sign syn-yaml"><span class="syn-punctuation syn-definition syn-comment syn-line syn-number-sign syn-yaml">#</span> 服务端代码高亮
+</span>  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">math_render</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-meta syn-flow-mapping syn-yaml"><span class="syn-punctuation syn-definition syn-mapping syn-begin syn-yaml">{</span> <span class="syn-constant syn-numeric syn-float syn-yaml">...</span> <span class="syn-punctuation syn-definition syn-mapping syn-end syn-yaml">}</span></span>    <span class="syn-comment syn-line syn-number-sign syn-yaml"><span class="syn-punctuation syn-definition syn-comment syn-line syn-number-sign syn-yaml">#</span> 服务端数学渲染
+</span>  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">socials</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-meta syn-flow-sequence syn-yaml"><span class="syn-punctuation syn-definition syn-sequence syn-begin syn-yaml">[</span> <span class="syn-constant syn-numeric syn-float syn-yaml">...</span> <span class="syn-punctuation syn-definition syn-sequence syn-end syn-yaml">]</span></span>        <span class="syn-comment syn-line syn-number-sign syn-yaml"><span class="syn-punctuation syn-definition syn-comment syn-line syn-number-sign syn-yaml">#</span> 社交链接（Banner 与页脚）
+</span>  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">copyright</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-meta syn-flow-mapping syn-yaml"><span class="syn-punctuation syn-definition syn-mapping syn-begin syn-yaml">{</span> <span class="syn-constant syn-numeric syn-float syn-yaml">...</span> <span class="syn-punctuation syn-definition syn-mapping syn-end syn-yaml">}</span></span>      <span class="syn-comment syn-line syn-number-sign syn-yaml"><span class="syn-punctuation syn-definition syn-comment syn-line syn-number-sign syn-yaml">#</span> 页脚「Powered by」行
+</span>  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">algolia_search</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-meta syn-flow-mapping syn-yaml"><span class="syn-punctuation syn-definition syn-mapping syn-begin syn-yaml">{</span> <span class="syn-constant syn-numeric syn-float syn-yaml">...</span> <span class="syn-punctuation syn-definition syn-mapping syn-end syn-yaml">}</span></span> <span class="syn-comment syn-line syn-number-sign syn-yaml"><span class="syn-punctuation syn-definition syn-comment syn-line syn-number-sign syn-yaml">#</span> 可选 Algolia 搜索
+</span>
+<span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">folders</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+  <span class="syn-string syn-quoted syn-double syn-yaml"><span class="syn-punctuation syn-definition syn-string syn-begin syn-yaml">"</span>/<span class="syn-punctuation syn-definition syn-string syn-end syn-yaml">"</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">url_slug</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">posts</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">url_id_suffix</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">false</span>
+</span></code></pre>
+<hr>
+<h2>站点信息 <code>site</code><a class="heading-anchor" href="#zhan-dian-xin-xi-site" name="zhan-dian-xin-xi-site"></a></h2>
+<table><thead><tr><th>字段</th><th>类型</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>site.name</code></td><td>string</td><td>站点名称，用于页面标题、顶栏、页脚、Banner 等</td></tr>
+<tr><td><code>site.description</code></td><td>string</td><td>站点描述（发布元数据；也可作为 Banner 副标题回退）</td></tr>
+<tr><td><code>site.author</code></td><td>string</td><td>作者名，显示在文章页与首页侧边栏</td></tr>
+<tr><td><code>site.profile</code></td><td>string</td><td>作者头像路径，如 <code>/assets/images/avatar-0.jpg</code></td></tr>
+<tr><td><code>site.lang</code></td><td>string</td><td>站点语言，如 <code>en</code>、<code>zh</code></td></tr>
+<tr><td><code>site.timezone</code></td><td>string</td><td>日期显示时区，如 <code>UTC</code>、<code>Asia/Shanghai</code></td></tr>
+<tr><td><code>site.dir</code></td><td>string</td><td>文本方向，<code>ltr</code> 或 <code>rtl</code></td></tr>
+</tbody></table>
+<p>示例：</p>
+<pre><code class="syn-code language-yaml"><span class="syn-source syn-yaml"><span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">config</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">site</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">name</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">我的博客</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">description</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">你的个人博客之旅。</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">author</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">张三</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">profile</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">/assets/images/avatar-0.jpg</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">lang</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">zh</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">timezone</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">Asia/Shanghai</span>
+</span></code></pre>
+<hr>
+<h2>虚拟页面 <code>home</code> / <code>about</code> / <code>links</code><a class="heading-anchor" href="#xu-ni-ye-mian-home-about-links" name="xu-ni-ye-mian-home-about-links"></a></h2>
+<p>Story 对若干页面使用<strong>虚拟模板</strong>。正文与结构化数据来自下划线开头的 Markdown 文件，通过内链引用：</p>
+<table><thead><tr><th>字段</th><th>默认值</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>home</code></td><td><code>[[_home]]</code></td><td>首页数据源标记（<code>_home.md</code>；不进入公开文章列表；Banner 文案在 <code>story.home_banner</code> 配置）</td></tr>
+<tr><td><code>about</code></td><td><code>[[_about]]</code></td><td>关于页 Markdown</td></tr>
+<tr><td><code>links</code></td><td><code>[[_links]]</code></td><td>友链数据（front matter 中的 <code>links</code> 数组）</td></tr>
+</tbody></table>
+<p><strong>相册</strong>页（<code>/album/index.html</code>）也是虚拟模板，通过 Everkm <code>posts_resources</code> API 从公开发布的文章内容中收集图片——无需单独的数据文件。</p>
+<p>示例内容布局：</p>
+<pre><code class="language-text">zh/
+├── _home.md          # 首页数据源标记（Banner 使用 story.home_banner）
+├── _about.md         # 关于页
+├── _links.md         # 友链数据
+├── README.md         # 主题配置文档
+├── CHANGELOG.md      # 更新日志
+└── hello-world.md    # 博客文章（位于内容根目录）
+</code></pre>
+<p class="NOTE" data-extra="class"><strong>不要</strong>创建根目录 <code>index.md</code>。若 <code>/index.html</code> 解析到某篇 Markdown，会按普通文章详情页渲染，而非虚拟首页。</p>
+<p>文件 basename 以 <code>_</code> 开头的视为<strong>数据源</strong>，不作为公开发布的文章。</p>
+<hr>
+<h2>文章 <code>posts</code><a class="heading-anchor" href="#wen-zhang-posts" name="wen-zhang-posts"></a></h2>
+<table><thead><tr><th>字段</th><th>类型</th><th>默认值</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>posts.per_page</code></td><td>number</td><td><code>10</code></td><td>首页、文章列表与标签页每页文章数</td></tr>
+</tbody></table>
+<p>首页分页使用站点根路径，如 <code>/index.html</code>、<code>/index.p2.html</code>。</p>
+<hr>
+<h2>功能开关 <code>features</code><a class="heading-anchor" href="#gong-neng-kai-guan-features" name="gong-neng-kai-guan-features"></a></h2>
+<table><thead><tr><th>字段</th><th>类型</th><th>默认值</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>features.light_and_dark_mode</code></td><td>boolean</td><td><code>true</code></td><td>顶栏浅色 / 深色模式切换</td></tr>
+<tr><td><code>features.show_archives</code></td><td>boolean</td><td><code>true</code></td><td>顶栏显示归档入口（使用默认导航时）</td></tr>
+<tr><td><code>features.show_back_button</code></td><td>boolean</td><td><code>true</code></td><td>文章详情页显示返回按钮</td></tr>
+<tr><td><code>features.view_transitions</code></td><td>boolean</td><td><code>true</code></td><td>启用站内 View Transitions 导航</td></tr>
+<tr><td><code>features.preloader</code></td><td>boolean</td><td><code>false</code></td><td>首次访问显示加载屏</td></tr>
+<tr><td><code>features.particles</code></td><td>boolean</td><td><code>false</code></td><td>粒子动画背景</td></tr>
+<tr><td><code>features.home_banner</code></td><td>boolean</td><td><code>true</code></td><td>显示首页 Banner</td></tr>
+<tr><td><code>features.home_sidebar</code></td><td>boolean</td><td><code>true</code></td><td>显示首页侧边栏</td></tr>
+</tbody></table>
+<p>示例：</p>
+<pre><code class="syn-code language-yaml"><span class="syn-source syn-yaml"><span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">config</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">features</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">light_and_dark_mode</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">true</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">show_archives</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">true</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">show_back_button</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">true</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">view_transitions</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">true</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">preloader</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">true</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">particles</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">false</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">home_banner</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">true</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">home_sidebar</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">true</span>
+</span></code></pre>
+<hr>
+<h2>Story 主题 <code>story</code><a class="heading-anchor" href="#story-zhu-ti-story" name="story-zhu-ti-story"></a></h2>
+<p>Story 专属的外观与布局选项。默认值在 <code>everkm-theme.yaml</code> 中提供。</p>
+<h3>颜色 <code>story.colors</code><a class="heading-anchor" href="#yan-se-story-colors" name="yan-se-story-colors"></a></h3>
+<table><thead><tr><th>字段</th><th>默认值</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>story.colors.primary</code></td><td><code>#A31F34</code></td><td>强调色</td></tr>
+<tr><td><code>story.colors.default_mode</code></td><td><code>light</code></td><td>默认配色模式（<code>light</code> 或 <code>dark</code>）</td></tr>
+</tbody></table>
+<h3>首页 Banner <code>story.home_banner</code><a class="heading-anchor" href="#shou-ye-banner-story-home-banner" name="shou-ye-banner-story-home-banner"></a></h3>
+<table><thead><tr><th>字段</th><th>默认值</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>story.home_banner.enable</code></td><td><code>true</code></td><td>启用 Banner（也由 <code>features.home_banner</code> 控制）</td></tr>
+<tr><td><code>story.home_banner.style</code></td><td><code>fixed</code></td><td><code>fixed</code> — 第 1 页全屏 Hero，后续页模糊背景；<code>static</code> — 内联 Banner</td></tr>
+<tr><td><code>story.home_banner.image.light</code></td><td>内置图片</td><td>浅色模式背景图</td></tr>
+<tr><td><code>story.home_banner.image.dark</code></td><td>内置图片</td><td>深色模式背景图</td></tr>
+<tr><td><code>story.home_banner.title</code></td><td>站点名称</td><td>Banner 标题</td></tr>
+<tr><td><code>story.home_banner.subtitle</code></td><td>—</td><td>静态字符串，或打字机配置（见下）</td></tr>
+</tbody></table>
+<p>副标题打字机配置：</p>
+<pre><code class="syn-code language-yaml"><span class="syn-source syn-yaml"><span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">story</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">home_banner</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">subtitle</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+      <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">text</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+        <span class="syn-punctuation syn-definition syn-block syn-sequence syn-item syn-yaml">-</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">欢迎来到我的博客</span>
+        <span class="syn-punctuation syn-definition syn-block syn-sequence syn-item syn-yaml">-</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">你的个人博客之旅。</span>
+      <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">typing_speed</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-numeric syn-integer syn-yaml">100</span>
+      <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">backing_speed</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-numeric syn-integer syn-yaml">80</span>
+      <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">starting_delay</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-numeric syn-integer syn-yaml">500</span>
+      <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">backing_delay</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-numeric syn-integer syn-yaml">1500</span>
+      <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">loop</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">true</span>
+      <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">smart_backspace</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">true</span>
+      <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">hitokoto</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+        <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">enable</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">false</span>
+        <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">show_author</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">false</span>
+        <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">api</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">https://v1.hitokoto.cn</span>
+</span></code></pre>
+<p><code>hitokoto.enable</code> 为 <code>true</code> 时，Banner 从配置的 API 获取随机一言，而非使用 <code>text</code>。</p>
+<h3>首页侧边栏 <code>story.home_sidebar</code><a class="heading-anchor" href="#shou-ye-ce-bian-lan-story-home-sidebar" name="shou-ye-ce-bian-lan-story-home-sidebar"></a></h3>
+<table><thead><tr><th>字段</th><th>默认值</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>story.home_sidebar.enable</code></td><td><code>true</code></td><td>启用侧边栏（也由 <code>features.home_sidebar</code> 控制）</td></tr>
+<tr><td><code>story.home_sidebar.position</code></td><td><code>left</code></td><td><code>left</code> 或 <code>right</code></td></tr>
+<tr><td><code>story.home_sidebar.announcement</code></td><td>—</td><td>站点名称下方的可选公告文字</td></tr>
+</tbody></table>
+<h3>导航栏 <code>story.navbar</code><a class="heading-anchor" href="#dao-hang-lan-story-navbar" name="dao-hang-lan-story-navbar"></a></h3>
+<table><thead><tr><th>字段</th><th>默认值</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>story.navbar.auto_hide</code></td><td>—</td><td>滚动时收缩导航栏</td></tr>
+<tr><td><code>story.navbar.color.left</code></td><td><code>#f78736</code></td><td>左侧渐变色（导航栏背景）</td></tr>
+<tr><td><code>story.navbar.color.right</code></td><td><code>#367df7</code></td><td>右侧渐变色</td></tr>
+<tr><td><code>story.navbar.links</code></td><td>—</td><td>自定义导航链接（设置后替换默认导航）</td></tr>
+</tbody></table>
+<p>链接项：</p>
+<pre><code class="syn-code language-yaml"><span class="syn-source syn-yaml"><span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">story</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">navbar</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">links</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+      <span class="syn-punctuation syn-definition syn-block syn-sequence syn-item syn-yaml">-</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">label</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">首页</span>
+        <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">path</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">/index.html</span>
+        <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">icon</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">home</span>
+      <span class="syn-punctuation syn-definition syn-block syn-sequence syn-item syn-yaml">-</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">label</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">相册</span>
+        <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">path</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">/album/index.html</span>
+        <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">icon</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">album</span>
+      <span class="syn-punctuation syn-definition syn-block syn-sequence syn-item syn-yaml">-</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">label</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">Github</span>
+        <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">path</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">https://github.com/everkm/theme-story</span>
+        <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">external</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">true</span>
+        <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">icon</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">github</span>
+</span></code></pre>
+<p>支持的 <code>icon</code> 包括 <code>home</code>、<code>archives</code>、<code>github</code>、<code>album</code>、<code>links</code>、<code>about</code> 等，在主题中有对应映射。</p>
+<h3>全局 <code>story.global</code><a class="heading-anchor" href="#quan-ju-story-global" name="quan-ju-story-global"></a></h3>
+<table><thead><tr><th>字段</th><th>默认值</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>story.global.scroll_progress.bar</code></td><td><code>false</code></td><td>页面顶部显示阅读进度条</td></tr>
+<tr><td><code>story.global.scroll_tools.enable</code></td><td><code>true</code></td><td>显示回到顶部与字号调节控件</td></tr>
+<tr><td><code>story.global.preloader.message</code></td><td>站点名称</td><td>预加载屏文字</td></tr>
+<tr><td><code>story.global.preloader.max_duration_ms</code></td><td><code>2500</code></td><td>预加载屏最长显示时间</td></tr>
+</tbody></table>
+<h3>文章 <code>story.articles</code><a class="heading-anchor" href="#wen-zhang-story-articles" name="wen-zhang-story-articles"></a></h3>
+<table><thead><tr><th>字段</th><th>默认值</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>story.articles.toc.enable</code></td><td><code>false</code></td><td>文章页显示目录</td></tr>
+<tr><td><code>story.articles.toc.max_depth</code></td><td><code>3</code></td><td>目录最大标题层级</td></tr>
+<tr><td><code>story.articles.copyright.enable</code></td><td><code>true</code></td><td>文章底部显示版权块</td></tr>
+<tr><td><code>story.articles.copyright.default</code></td><td><code>cc_by_nc_sa</code></td><td>文章 front matter 无 <code>copyright</code> 时的默认许可</td></tr>
+</tbody></table>
+<p>支持的许可键：<code>cc_by_nc_sa</code>、<code>cc_by</code>、<code>cc_by_nc</code>、<code>cc_by_nd</code>、<code>cc_by_sa</code>、<code>cc0</code>、<code>all_rights_reserved</code>。</p>
+<hr>
+<h2>搜索 <code>algolia_search</code><a class="heading-anchor" href="#sou-suo-algolia-search" name="sou-suo-algolia-search"></a></h2>
+<p>配置后，Algolia 全文搜索组件出现在顶栏（需要 <code>plugin-in-search</code> 构建产物）。</p>
+<pre><code class="syn-code language-yaml"><span class="syn-source syn-yaml"><span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">config</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">algolia_search</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">app_id</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">YOUR_APP_ID</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">api_key</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">YOUR_SEARCH_API_KEY</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">index_name</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">your_index</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">site</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">your-site-id</span>
+</span></code></pre>
+<table><thead><tr><th>字段</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>app_id</code></td><td>Algolia Application ID</td></tr>
+<tr><td><code>api_key</code></td><td>Algolia Search-Only API Key</td></tr>
+<tr><td><code>index_name</code></td><td>索引名称</td></tr>
+<tr><td><code>site</code></td><td>站点标识（插件内部使用）</td></tr>
+</tbody></table>
+<hr>
+<h2>代码高亮 <code>code_highlight</code><a class="heading-anchor" href="#dai-ma-gao-liang-code-highlight" name="dai-ma-gao-liang-code-highlight"></a></h2>
+<p>通过 everkm-publish 的服务端语法高亮：</p>
+<pre><code class="syn-code language-yaml"><span class="syn-source syn-yaml"><span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">config</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">code_highlight</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">server</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">true</span>
+</span></code></pre>
+<p><code>server: true</code> 时，代码块在构建时使用 syntect 主题高亮，作用域为 <code>.app-prose</code>。</p>
+<hr>
+<h2>数学渲染 <code>math_render</code><a class="heading-anchor" href="#shu-xue-xuan-ran-math-render" name="shu-xue-xuan-ran-math-render"></a></h2>
+<p>通过 Typst 的服务端数学渲染：</p>
+<pre><code class="syn-code language-yaml"><span class="syn-source syn-yaml"><span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">config</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">math_render</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">server</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">true</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">font_size</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-numeric syn-integer syn-yaml">14</span>
+</span></code></pre>
+<table><thead><tr><th>字段</th><th>类型</th><th>默认值</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>math_render.server</code></td><td>boolean</td><td>—</td><td>启用服务端数学渲染</td></tr>
+<tr><td><code>math_render.font_size</code></td><td>number</td><td><code>14</code></td><td>渲染数学 SVG 的基础字号</td></tr>
+</tbody></table>
+<p>在 Markdown 中使用 <code>$...$</code> 表示行内公式，<code>$$...$$</code> 表示块级公式。</p>
+<hr>
+<h2>社交链接 <code>socials</code><a class="heading-anchor" href="#she-jiao-lian-jie-socials" name="she-jiao-lian-jie-socials"></a></h2>
+<p>显示在首页 Banner 与页脚：</p>
+<pre><code class="syn-code language-yaml"><span class="syn-source syn-yaml"><span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">config</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">socials</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+    <span class="syn-punctuation syn-definition syn-block syn-sequence syn-item syn-yaml">-</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">name</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">github</span>
+      <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">url</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">https://github.com/everkm/theme-story</span>
+</span></code></pre>
+<p>支持的 <code>name</code> 包括 <code>github</code>、<code>twitter</code>、<code>x</code>、<code>facebook</code>、<code>linkedin</code>、<code>mail</code>、<code>telegram</code>、<code>whatsapp</code>、<code>pinterest</code> 等，在主题中映射为图标。未知名称显示为文本。</p>
+<hr>
+<h2>版权 <code>copyright</code><a class="heading-anchor" href="#ban-quan-copyright" name="ban-quan-copyright"></a></h2>
+<p>控制页脚中的 <strong>「Powered by」</strong> 行（与自动生成的 <code>© 年份 站点名</code> 行分开）：</p>
+<pre><code class="syn-code language-yaml"><span class="syn-source syn-yaml"><span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">config</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+  <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">copyright</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">text</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">Everkm</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">link</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">https://publish.everkm.com</span>
+</span></code></pre>
+<hr>
+<h2>目录规则 <code>folders</code><a class="heading-anchor" href="#mu-lu-gui-ze-folders" name="mu-lu-gui-ze-folders"></a></h2>
+<p>Story 默认主题配置将 <code>/</code> 下的内容映射到 <code>/posts/</code> URL：</p>
+<pre><code class="syn-code language-yaml"><span class="syn-source syn-yaml"><span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">folders</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+  <span class="syn-string syn-quoted syn-double syn-yaml"><span class="syn-punctuation syn-definition syn-string syn-begin syn-yaml">"</span>/<span class="syn-punctuation syn-definition syn-string syn-end syn-yaml">"</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">url_slug</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">posts</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">url_id_suffix</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">false</span>
+</span></code></pre>
+<table><thead><tr><th>字段</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>url_slug</code></td><td>该目录内容的 URL 前缀</td></tr>
+<tr><td><code>url_id_suffix</code></td><td>为 <code>true</code> 时 URL 含稳定 ID 后缀，如 <code>/posts/my-post-123.html</code></td></tr>
+</tbody></table>
+<p><code>__everkm/everkm.yaml</code> 中的站点级 <code>folders</code> <strong>覆盖</strong>主题默认值。</p>
+<hr>
+<h2>虚拟页面路由<a class="heading-anchor" href="#xu-ni-ye-mian-lu-you" name="xu-ni-ye-mian-lu-you"></a></h2>
+<p>Story 提供以下虚拟页面（无需对应的公开发布 Markdown 文件）：</p>
+<table><thead><tr><th>URL</th><th>页面</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>/index.html</code></td><td>首页</td><td>Banner、侧边栏、分页文章列表</td></tr>
+<tr><td><code>/index.p{N}.html</code></td><td>首页（第 N 页）</td><td>首页分页</td></tr>
+<tr><td><code>/posts/index.html</code></td><td>文章列表</td><td>分页文章索引</td></tr>
+<tr><td><code>/tags/index.html</code></td><td>标签索引</td><td>全部标签</td></tr>
+<tr><td><code>/tags/{tag}/index.html</code></td><td>标签文章</td><td>按标签筛选的文章</td></tr>
+<tr><td><code>/archives/index.html</code></td><td>归档</td><td>按年月分组的文章</td></tr>
+<tr><td><code>/about/</code></td><td>关于</td><td>来自 <code>config.about</code> 的关于页</td></tr>
+<tr><td><code>/links/index.html</code></td><td>友链</td><td>来自 <code>config.links</code> 的友链</td></tr>
+<tr><td><code>/album/index.html</code></td><td>相册</td><td>从公开发布的文章内容中提取的图片</td></tr>
+</tbody></table>
+<hr>
+<h2>友链 <code>_links.md</code><a class="heading-anchor" href="#you-lian-links-md" name="you-lian-links-md"></a></h2>
+<p>友链数据存放在 <code>_links.md</code> 的 front matter 中：</p>
+<pre><code class="syn-code language-yaml"><span class="syn-source syn-yaml"><span class="syn-entity syn-other syn-document syn-begin syn-yaml">---</span>
+<span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">title</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">友情链接</span>
+<span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">links</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+  <span class="syn-punctuation syn-definition syn-block syn-sequence syn-item syn-yaml">-</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">category</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">示例分类</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">has_thumbnail</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">true</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">list</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+      <span class="syn-punctuation syn-definition syn-block syn-sequence syn-item syn-yaml">-</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">name</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">合作伙伴站点</span>
+        <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">link</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">https://example.com</span>
+        <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">description</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">站点描述</span>
+        <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">avatar</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">/assets/images/avatar-0.jpg</span>
+        <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">thumbnail</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">/assets/images/desc-image.jpg</span>
+  <span class="syn-punctuation syn-definition syn-block syn-sequence syn-item syn-yaml">-</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">category</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">简单列表</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">has_thumbnail</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-language syn-boolean syn-yaml">false</span>
+    <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">list</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+      <span class="syn-punctuation syn-definition syn-block syn-sequence syn-item syn-yaml">-</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">name</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">另一个站点</span>
+        <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">link</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">https://example.com</span>
+        <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">description</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">简短描述</span>
+        <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">avatar</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">/assets/images/avatar-1.jpg</span>
+<span class="syn-entity syn-other syn-document syn-begin syn-yaml">---</span>
+</span></code></pre>
+<hr>
+<h2>相册<a class="heading-anchor" href="#xiang-ce" name="xiang-ce"></a></h2>
+<p>相册页自动收集<strong>公开发布文章中的图片</strong>（Markdown <code>![]()</code> 与图片链接）。Everkm 在构建时解析图片 URL；主题以 MiniMasonry 网格展示，支持悬停标题与灯箱。</p>
+<p>路径以 <code>_</code> 开头的文章（如 <code>_about.md</code> 等数据源）中的图片会被排除。在普通博客文章中添加图片即可填充相册。</p>
+<hr>
+<h2>文章 Front Matter<a class="heading-anchor" href="#wen-zhang-front-matter" name="wen-zhang-front-matter"></a></h2>
+<p>博客文章常用字段：</p>
+<table><thead><tr><th>字段</th><th>类型</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>title</code></td><td>string</td><td>文章标题</td></tr>
+<tr><td><code>description</code></td><td>string</td><td>文章摘要，用于 meta 与卡片</td></tr>
+<tr><td><code>cover</code></td><td>string</td><td>封面图 URL 或路径；显示在首页卡片与文章 Hero</td></tr>
+<tr><td><code>created_at</code></td><td>string</td><td>创建时间，RFC3339 格式</td></tr>
+<tr><td><code>updated_at</code></td><td>string</td><td>更新时间，RFC3339 格式</td></tr>
+<tr><td><code>slug</code></td><td>string</td><td>URL 路径段</td></tr>
+<tr><td><code>tags</code></td><td>array</td><td>用于筛选的标签</td></tr>
+<tr><td><code>draft</code></td><td>boolean</td><td>为 <code>true</code> 时排除在公开列表外</td></tr>
+<tr><td><code>copyright</code></td><td>string</td><td>文章版权块的许可键覆盖</td></tr>
+</tbody></table>
+<p>示例：</p>
+<pre><code class="syn-code language-yaml"><span class="syn-source syn-yaml"><span class="syn-entity syn-other syn-document syn-begin syn-yaml">---</span>
+<span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">title</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">Hello World</span>
+<span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">description</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">我的第一篇博客。</span>
+<span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">cover</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">/assets/images/cover.jpg</span>
+<span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">created_at</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-constant syn-other syn-timestamp syn-yaml">2026-06-28T10:00:00Z</span>
+<span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">tags</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span>
+  <span class="syn-punctuation syn-definition syn-block syn-sequence syn-item syn-yaml">-</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">intro</span>
+<span class="syn-string syn-unquoted syn-plain syn-out syn-yaml"><span class="syn-entity syn-name syn-tag syn-yaml">copyright</span></span><span class="syn-punctuation syn-separator syn-key-value syn-mapping syn-yaml">:</span> <span class="syn-string syn-unquoted syn-plain syn-out syn-yaml">cc_by</span>
+<span class="syn-entity syn-other syn-document syn-begin syn-yaml">---</span>
+</span></code></pre>
+<p>若正文中第一个 <code>h1</code> 与 Front Matter 的 <code>title</code> 一致，渲染时会自动隐藏，避免标题重复显示。</p>
+<hr>
+<h2>内容 Markdown 扩展<a class="heading-anchor" href="#nei-rong-markdown-kuo-zhan" name="nei-rong-markdown-kuo-zhan"></a></h2>
+<p>Story 继承 everkm-publish 的 Markdown 扩展。完整示例见演示文章 <a href="/zh/posts/everkm-markdown.html">Everkm Markdown 格式</a>，或 <a href="https://publish.everkm.com/guide/everkm-markdown.html">Everkm Markdown 指南</a>。</p>
+<p>支持的扩展包括：</p>
+<ul>
+<li>内链 <code>[[...]]</code></li>
+<li>块级属性集 <code>{.class #id}</code></li>
+<li>链接与图片的行内属性集</li>
+<li>宏（<code>macro/toc</code>、<code>macro/include</code>）</li>
+<li>高亮 <code><mark>文字</mark></code>、上标、下标</li>
+<li>定义列表、脚注、任务列表</li>
+</ul>
+<hr>
+<h2>阅读设置（浏览器端）<a class="heading-anchor" href="#yue-du-she-zhi-liu-lan-qi-duan" name="yue-du-she-zhi-liu-lan-qi-duan"></a></h2>
+<p>以下设置保存在用户浏览器本地，<strong>不在</strong> <code>everkm.yaml</code> 中配置：</p>
+<ul>
+<li>浅色 / 深色模式偏好（启用 <code>features.light_and_dark_mode</code> 时）</li>
+<li>字号级别（启用 <code>story.global.scroll_tools.enable</code> 时）</li>
+</ul>
+<p>通过顶栏太阳 / 月亮按钮切换配色模式；通过滚动工具面板的 +/- 按钮调节字号。</p>
+<hr>
+<h2>主题元数据<a class="heading-anchor" href="#zhu-ti-yuan-shu-ju" name="zhu-ti-yuan-shu-ju"></a></h2>
+<table><thead><tr><th>项目</th><th>值</th></tr></thead><tbody>
+<tr><td>主题名称</td><td><code>story</code></td></tr>
+<tr><td>默认模板</td><td><code>post</code></td></tr>
+<tr><td>演示站</td><td>https://story.theme.everkm.com/</td></tr>
+<tr><td>仓库</td><td>https://github.com/everkm/theme-story</td></tr>
+</tbody></table>
+</div><div class="post-copyright"><div class="article-copyright-info-container"><ul><li><strong>文章标题:</strong> 主题配置</li><li><strong>作者:</strong> Jack</li><li><strong>创建时间:</strong> 2026-07-04 14:00:29</li><li><strong>永久链接:</strong> /zh/posts/readme.html</li><li><strong>许可协议:</strong> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0" rel="noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a></li></ul></div></div><nav aria-label="文章导航" class="article-nav"><div class="article-nav__item"><a class="article-nav__link" href="/zh/posts/story-zhu-ti-fa-bu.html"><span aria-hidden="true" class="article-nav__arrow">←</span><span class="min-w-0"><span class="article-nav__title">Story 主题发布</span><span class="article-nav__label">上一篇</span></span></a></div><div class="article-nav__item article-nav__item--next"><a class="article-nav__link article-nav__link--next" href="/zh/posts/changelog.html"><span aria-hidden="true" class="article-nav__arrow">→</span><span class="min-w-0"><span class="article-nav__title">更新日志</span><span class="article-nav__label">下一篇</span></span></a></div></nav></article></div></main><div class="main-content-footer mt-auto" data-vt-swap="footer"><footer class="story-footer"><div class="story-footer__info"><div class="story-footer__line story-footer__line--primary"><span class="story-footer__copyright">© 2026 <a class="mr-2" href="/zh/index.html">Jack's Blog</a>保留所有权利。</span><span class="story-footer__socials"><div class="flex flex-wrap items-center gap-4"><a aria-label="github" class="inline-flex items-center text-accent hover:opacity-80 transition-opacity" href="https://github.com/everkm/theme-story" rel="noopener noreferrer" target="_blank" title="github"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-brand-github size-5 block shrink-0" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path></svg></span></a></div></span></div><div class="story-footer__line story-footer__line--secondary">Powered by<!--!$--> <a href="https://publish.everkm.com" rel="noopener noreferrer" target="_blank">Everkm</a></div></div></footer></div><div aria-hidden="true" class="story-particles" data-vt-persist="" id="story-particles-webgl"></div><div class="right-side-tools-container" data-vt-persist=""><div class="side-tools-container"><ul class="hidden-tools-list"><li class="right-bottom-tools tool-font-adjust-plus" title="Increase font size"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-zoom-in story-tool-icon size-5" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M7 10l6 0"></path><path d="M10 7l0 6"></path><path d="M21 21l-6 -6"></path></svg>
+</span></li><li class="right-bottom-tools tool-font-adjust-minus" title="Decrease font size"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-zoom-out story-tool-icon size-5" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M7 10l6 0"></path><path d="M21 21l-6 -6"></path></svg>
+</span></li><li class="right-bottom-tools tool-dark-light-toggle" title="Toggle theme"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-moon story-tool-icon size-5" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path></svg></span></li><li class="right-bottom-tools tool-scroll-to-bottom" title="Scroll to bottom"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-down story-tool-icon size-5" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M12 5l0 14"></path><path d="M18 13l-6 6"></path><path d="M6 13l6 6"></path></svg>
+</span></li></ul><ul class="visible-tools-list"><li class="right-bottom-tools toggle-tools-list" title="Tools"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-settings story-tool-icon size-5 toggle-tools-list__icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path></svg>
+</span></li><li aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="right-bottom-tools tool-scroll-to-top" role="progressbar" title="Scroll to top"><span aria-hidden="true" class="tool-scroll-to-top__ring"></span><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-up story-tool-icon size-5 tool-scroll-to-top__icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M12 5l0 14"></path><path d="M16 9l-4 -4"></path><path d="M8 9l4 -4"></path></svg>
+</span></li></ul></div></div><script src="/assets/story.2VI7DTCE.js"></script><script src="/assets/plugin-in-search.GNSDIA5D.js"></script></body></html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html><html class="overflow-y-scroll scroll-smooth" dir="ltr" lang="zh"><head><meta charset="UTF-8"><meta content="width=device-width, initial-scale=1" name="viewport"><title>Everkm Markdown 格式 | Jack's Blog</title><meta content="Everkm Markdown 格式 | Jack's Blog" name="title"><meta content="" name="description"><meta content="everkm-publish@v0.18.1" name="generator"><meta content="story@0.1.0" name="theme"><link href="/zh/assets/favicon.svg" rel="icon" type="image/svg+xml"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet"><meta content="" name="theme-color"><script>(function () {
+  const stored = localStorage.getItem("theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const theme = stored ?? (prefersDark ? "dark" : "light");
+  const root = document.documentElement;
+  const isDark = theme === "dark";
+  root.setAttribute("data-theme", theme);
+  root.classList.toggle("dark", isDark);
+  root.classList.toggle("light", !isDark);
+  root.style.colorScheme = theme;
+  document.addEventListener("DOMContentLoaded", function () {
+    document.body.classList.toggle("dark-mode", isDark);
+    document.body.classList.toggle("light-mode", !isDark);
+  });
+  window.__theme = { value: theme };
+})();</script><script>
+          window.__everkm_lang = "zh";
+          window.__everkm_base_url = "/zh/";
+          window.__everkm_features_view_transitions = true;
+          window.__everkm_env_is_preview = false;
+          </script><link href="/assets/story.4R5MI5PB.css" rel="stylesheet"><link href="/assets/plugin-in-search.7S37UFJ6.css" rel="stylesheet"></head><body class="bg-background font-app text-foreground selection:bg-accent/75 selection:text-accent-foreground flex min-h-svh flex-col" data-navbar-auto-hide="true" data-particles="true" data-scroll-progress-bar="false"><div aria-busy="true" aria-live="polite" class="story-preloader" data-max-duration="2500" role="status"><h2 class="story-preloader__title">Jack's Blog</h2></div><a class="bg-background text-accent absolute inset-s-16 -top-full z-50 px-3 py-2 backdrop-blur-lg transition-all focus:top-4" href="#main-content" id="skip-to-content">跳到正文</a><header class="navbar-container navbar-container--page" data-vt-swap="header" style="background:linear-gradient(120deg, rgba(247,135,54,0.314) 0%, rgba(54,125,247,0.314) 100%)"><div class="navbar-content transition-navbar "><div class="navbar-content__left"><a class="logo-title" data-nav-path="/" href="/zh/index.html"><h1>Jack's Blog</h1></a></div><nav class="navbar-content__right" id="nav-menu"><button aria-controls="menu-items" aria-expanded="false" aria-label="打开菜单" class="navbar-menu-btn focus-outline" data-label-close="关闭菜单" data-label-open="打开菜单" id="menu-btn" type="button"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-x navbar-menu-btn__icon navbar-menu-btn__icon--close" fill="none" height="24" id="close-icon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M18 6l-12 12"></path><path d="M6 6l12 12"></path></svg></span><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep navbar-menu-btn__icon navbar-menu-btn__icon--open" fill="none" height="24" id="menu-icon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M4 6h16"></path><path d="M7 12h13"></path><path d="M10 18h10"></path></svg></span></button><ul class="navbar-list navbar-list--desktop" id="menu-items"><li class="navbar-item"><a data-nav-path="/index.html" href="/zh/index.html"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-home navbar-link__icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M5 12l-2 0l9 -9l9 9l-2 0"></path><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"></path></svg>
+</span><span class="navbar-link__label">HOME</span></a></li><li class="navbar-item"><a data-nav-path="/archives/index.html" href="/zh/archives/index.html"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-archive navbar-link__icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10"></path><path d="M10 12l4 0"></path></svg></span><span class="navbar-link__label">ARCHIVES</span></a></li><li class="navbar-item"><a data-nav-path="/album/index.html" href="/zh/album/index.html"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-photo navbar-link__icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M15 8h.01"></path><path d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12"></path><path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5"></path><path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3"></path></svg>
+</span><span class="navbar-link__label">ALBUM</span></a></li><li class="navbar-item"><a data-nav-path="/links/index.html" href="/zh/links/index.html"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-link navbar-link__icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M10 13a5 5 0 0 0 7.54.54l3 -3a5 5 0 0 0 -7.07 -7.07l-3 3"></path><path d="M14 11a5 5 0 0 0 -7.54 -.54l-3 3a5 5 0 0 0 7.07 7.07l3 -3"></path></svg>
+</span><span class="navbar-link__label">LINKS</span></a></li><li class="navbar-item"><a data-nav-path="/about/" href="/zh/about/"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-info-circle navbar-link__icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path><path d="M12 9h.01"></path><path d="M11 12h1v4h1"></path></svg>
+</span><span class="navbar-link__label">ABOUT</span></a></li><li class="navbar-item"><div id="header-in-search"><x-in-search api-key="95bb37e3122ee9cb57a8ee0abbd14409" app-id="1N74YC70XF" index="story" only-button="false" site="theme-story"></x-in-search></div></li></ul></nav></div></header><main class="app-layout mt-8" data-layout="post" id="main-content"><div class="app-layout flex items-center justify-start"><a class="group inline-flex items-center gap-1 focus-outline hover:text-foreground/75 -ms-2 mb-2 " href="/zh/index.html" id="back-button"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left inline-block size-6 rtl:rotate-180" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M15 6l-6 6l6 6"></path></svg>
+</span><span>返回</span></a></div><div class="post-page-container"><article class="article-content-container" id="article"><div class="px-4 pt-6 sm:px-6 md:px-8"><h1 class="text-accent text-2xl font-bold sm:text-3xl" style="view-transition-name:everkm-markdown">Everkm Markdown 格式</h1></div><div class="article-header"><div class="article-header__avatar"><img alt="Jack" src="/zh/assets/images/avatar-0.jpg"></div><div><div class="article-header__name">Jack</div><div class="article-header__meta"><span class="article-header__meta-item">发布于: 2026-07-04 06:00:29</span></div></div></div><div class="flex flex-wrap gap-2 px-4 pb-2 sm:px-6 md:px-8"><span class="text-muted-foreground italic">标签:</span><ul class="flex flex-wrap gap-2"><li><a class="text-accent decoration-dashed underline-offset-4 hover:underline" href="/zh/tags/featured/index.html">#featured</a></li></ul></div><div class="article-content app-prose max-w-app w-full prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"><p>Everkm 在标准 Markdown 与 GitHub Markdown 基础上，增加了若干常用功能，扩展 Markdown 的使用场景。</p>
+<h1>标准 Markdown 语法<a class="heading-anchor" href="#biao-zhun-markdown-yu-fa" name="biao-zhun-markdown-yu-fa"></a></h1>
+<p>参考：<a href="https://daringfireball.net/projects/markdown/syntax">https://daringfireball.net/projects/markdown/syntax</a></p>
+<h2>标题<a class="heading-anchor" href="#biao-ti" name="biao-ti"></a></h2>
+<p class="NOTE" data-extra="class">预览与发布时，若正文中第一个 <code>h1</code> 与页面标题（Front Matter <code>title</code> 或等价字段）<strong>文字一致</strong>，该 h1 会自动隐藏，避免页面上标题重复出现。</p>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-1 syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">#</span> </span><span class="syn-markup syn-heading syn-1 syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">一级标题</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span><span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">##</span> </span><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">二级标题</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span><span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">###</span> </span><span class="syn-markup syn-heading syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">三级标题</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span><span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">####</span> </span><span class="syn-markup syn-heading syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">四级标题</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span><span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">#####</span> </span><span class="syn-markup syn-heading syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">五级标题</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span><span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">######</span> </span><span class="syn-markup syn-heading syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">六级标题</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span></span></code></pre>
+<h2>段落<a class="heading-anchor" href="#duan-luo" name="duan-luo"></a></h2>
+<p>段落之间需按两次 Enter 分隔。单次换行仅分隔文字，前端无视觉效果。两次连续换行形成一个段落。
+在单次换行前输入两个空格，可在段落内换行，即软换行。见本行实际效果。</p>
+<h2>列表<a class="heading-anchor" href="#lie-biao" name="lie-biao"></a></h2>
+<p>列表分为无序列表与有序列表。无序列表使用 <code>* </code> 或 <code>- </code>，后接空格。
+有序列表使用数字序号或 <code>1. </code>，后接空格。前端会自动按顺序重新编号。
+多级列表通过每级前增加两个或四个空格实现缩进。</p>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">*</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"> <span class="syn-meta syn-paragraph syn-list syn-markdown">无序项 1
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">*</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> 无序项 2
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">*</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> 无序项 3
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown">
+</span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"> <span class="syn-meta syn-paragraph syn-list syn-markdown">无序样式 2
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> 无序样式 2
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> 无序样式 2
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown">
+</span><span class="syn-markup syn-list syn-numbered syn-bullet syn-markdown">1<span class="syn-punctuation syn-definition syn-list_item syn-markdown">.</span></span><span class="syn-markup syn-list syn-numbered syn-markdown"> <span class="syn-meta syn-paragraph syn-list syn-markdown">有序项 1
+</span></span><span class="syn-markup syn-list syn-numbered syn-bullet syn-markdown">1<span class="syn-punctuation syn-definition syn-list_item syn-markdown">.</span></span><span class="syn-markup syn-list syn-numbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> 有序项 2
+</span></span><span class="syn-markup syn-list syn-numbered syn-bullet syn-markdown">1<span class="syn-punctuation syn-definition syn-list_item syn-markdown">.</span></span><span class="syn-markup syn-list syn-numbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> 有序项 3
+</span></span><span class="syn-markup syn-list syn-numbered syn-bullet syn-markdown">1<span class="syn-punctuation syn-definition syn-list_item syn-markdown">.</span></span><span class="syn-markup syn-list syn-numbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> 连续编号或全写 1
+</span></span><span class="syn-markup syn-list syn-numbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown">    </span><span class="syn-meta syn-paragraph syn-list syn-markdown">最终渲染会自动修正编号。
+</span><span class="syn-meta syn-paragraph syn-list syn-markdown">    </span><span class="syn-meta syn-paragraph syn-list syn-markdown">若上方有缩进，会归入上一列表项下。
+</span>
+
+</span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"> <span class="syn-meta syn-paragraph syn-list syn-markdown">1 多级列表
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown">    </span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> 1.1 多级列表
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown">    </span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> 1.2 多级列表
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> 2 多级列表
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> 3 多级列表
+</span></span></span></code></pre>
+<h2>强调<a class="heading-anchor" href="#qiang-diao" name="qiang-diao"></a></h2>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">强调，也称斜体，使用 <span class="syn-markup syn-italic syn-markdown"><span class="syn-punctuation syn-definition syn-italic syn-begin syn-markdown">*</span>星号<span class="syn-punctuation syn-definition syn-italic syn-end syn-markdown">*</span></span> 或 <span class="syn-markup syn-italic syn-markdown"><span class="syn-punctuation syn-definition syn-italic syn-begin syn-markdown">_</span>下划线<span class="syn-punctuation syn-definition syn-italic syn-end syn-markdown">_</span></span>。
+
+</span><span class="syn-meta syn-paragraph syn-markdown">加强强调，也称粗体，使用 <span class="syn-markup syn-bold syn-markdown"><span class="syn-punctuation syn-definition syn-bold syn-begin syn-markdown">**</span>双星号<span class="syn-punctuation syn-definition syn-bold syn-end syn-markdown">**</span></span> 或 <span class="syn-markup syn-bold syn-markdown"><span class="syn-punctuation syn-definition syn-bold syn-begin syn-markdown">__</span>双下划线<span class="syn-punctuation syn-definition syn-bold syn-end syn-markdown">__</span></span>。
+
+</span><span class="syn-meta syn-paragraph syn-markdown">组合强调，也称粗斜体，使用 <span class="syn-markup syn-bold syn-markdown"><span class="syn-punctuation syn-definition syn-bold syn-begin syn-markdown">**</span>星号与 <span class="syn-markup syn-italic syn-markdown"><span class="syn-punctuation syn-definition syn-italic syn-begin syn-markdown">_</span>下划线<span class="syn-punctuation syn-definition syn-italic syn-end syn-markdown">_</span></span><span class="syn-punctuation syn-definition syn-bold syn-end syn-markdown">**</span></span> 或 <span class="syn-markup syn-bold syn-markdown"><span class="syn-punctuation syn-definition syn-bold syn-begin syn-markdown">**</span><span class="syn-markup syn-italic syn-markdown"><span class="syn-punctuation syn-definition syn-italic syn-begin syn-markdown">*</span></span></span><span class="syn-markup syn-bold syn-markdown"><span class="syn-markup syn-italic syn-markdown">组合强调</span><span class="syn-markup syn-italic syn-markdown"><span class="syn-punctuation syn-definition syn-italic syn-end syn-markdown">*</span></span><span class="syn-punctuation syn-definition syn-bold syn-end syn-markdown">**</span></span>
+</span></span></code></pre>
+<p><code>-</code> 与 <code>*</code> 效果相同。</p>
+<h2>链接<a class="heading-anchor" href="#lian-jie" name="lian-jie"></a></h2>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown"><span class="syn-meta syn-link syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-link syn-begin syn-markdown">[</span></span><span class="syn-meta syn-link syn-inline syn-description syn-markdown">行内链接</span><span class="syn-meta syn-link syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-link syn-end syn-markdown">]</span></span><span class="syn-meta syn-link syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-metadata syn-begin syn-markdown">(</span><span class="syn-markup syn-underline syn-link syn-markdown">https://note.everkm.cn</span><span class="syn-punctuation syn-definition syn-metadata syn-end syn-markdown">)</span></span>
+
+</span><span class="syn-meta syn-paragraph syn-markdown"><span class="syn-meta syn-link syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-link syn-begin syn-markdown">[</span></span><span class="syn-meta syn-link syn-inline syn-description syn-markdown">带标题的行内链接</span><span class="syn-meta syn-link syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-link syn-end syn-markdown">]</span></span><span class="syn-meta syn-link syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-metadata syn-begin syn-markdown">(</span><span class="syn-markup syn-underline syn-link syn-markdown">https://note.everkm.cn</span> <span class="syn-string syn-other syn-link syn-description syn-title syn-markdown"><span class="syn-punctuation syn-definition syn-string syn-begin syn-markdown">"</span>Everkm 笔记<span class="syn-punctuation syn-definition syn-string syn-end syn-markdown">"</span></span><span class="syn-punctuation syn-definition syn-metadata syn-end syn-markdown">)</span></span>
+
+</span><span class="syn-meta syn-paragraph syn-markdown"><span class="syn-meta syn-link syn-reference syn-markdown"><span class="syn-punctuation syn-definition syn-link syn-begin syn-markdown">[</span></span><span class="syn-meta syn-link syn-reference syn-description syn-markdown">引用链接</span><span class="syn-meta syn-link syn-reference syn-markdown"><span class="syn-punctuation syn-definition syn-link syn-end syn-markdown">]</span></span><span class="syn-meta syn-link syn-reference syn-markdown"><span class="syn-punctuation syn-definition syn-constant syn-begin syn-markdown">[</span><span class="syn-constant syn-other syn-reference syn-link syn-markdown">任意大小写不敏感的引用文本</span><span class="syn-punctuation syn-definition syn-constant syn-end syn-markdown">]</span></span>
+
+</span><span class="syn-meta syn-paragraph syn-markdown">或留空 [链接文字本身]
+
+</span><span class="syn-meta syn-paragraph syn-markdown">引用链接地址可放在后面。
+
+</span><span class="syn-meta syn-link syn-reference syn-def syn-markdown"><span class="syn-punctuation syn-definition syn-constant syn-begin syn-markdown">[</span><span class="syn-entity syn-name syn-reference syn-link syn-markdown">链接文字本身</span><span class="syn-punctuation syn-definition syn-constant syn-end syn-markdown">]</span><span class="syn-punctuation syn-separator syn-key-value syn-markdown">:</span> <span class="syn-markup syn-underline syn-link syn-markdown">https://note.everkm.cn</span>
+</span><span class="syn-meta syn-link syn-reference syn-def syn-markdown"><span class="syn-punctuation syn-definition syn-constant syn-begin syn-markdown">[</span><span class="syn-entity syn-name syn-reference syn-link syn-markdown">任意大小写不敏感的引用文本</span><span class="syn-punctuation syn-definition syn-constant syn-end syn-markdown">]</span><span class="syn-punctuation syn-separator syn-key-value syn-markdown">:</span> <span class="syn-markup syn-underline syn-link syn-markdown">https://note.everkm.cn</span>
+</span></span></code></pre>
+<h2>图片<a class="heading-anchor" href="#tu-pian" name="tu-pian"></a></h2>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-markup syn-list syn-numbered syn-bullet syn-markdown">1<span class="syn-punctuation syn-definition syn-list_item syn-markdown">.</span></span><span class="syn-markup syn-list syn-numbered syn-markdown"> <span class="syn-meta syn-paragraph syn-list syn-markdown">行内
+</span><span class="syn-meta syn-paragraph syn-list syn-markdown"><span class="syn-meta syn-image syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-image syn-begin syn-markdown">![</span></span><span class="syn-meta syn-image syn-inline syn-description syn-markdown">替代文字</span><span class="syn-meta syn-image syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-image syn-end syn-markdown">]</span></span><span class="syn-meta syn-image syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-metadata syn-begin syn-markdown">(</span><span class="syn-markup syn-underline syn-link syn-image syn-markdown">https://example.com/logo.png</span> <span class="syn-string syn-other syn-link syn-description syn-title syn-markdown"><span class="syn-punctuation syn-definition syn-string syn-begin syn-markdown">"</span>图片标题<span class="syn-punctuation syn-definition syn-string syn-end syn-markdown">"</span></span><span class="syn-punctuation syn-definition syn-metadata syn-end syn-markdown">)</span></span>
+</span>
+</span><span class="syn-markup syn-list syn-numbered syn-bullet syn-markdown">2<span class="syn-punctuation syn-definition syn-list_item syn-markdown">.</span></span><span class="syn-markup syn-list syn-numbered syn-markdown"> <span class="syn-meta syn-paragraph syn-list syn-markdown">引用
+</span><span class="syn-meta syn-paragraph syn-list syn-markdown"><span class="syn-meta syn-image syn-reference syn-markdown"><span class="syn-punctuation syn-definition syn-image syn-begin syn-markdown">![</span></span><span class="syn-meta syn-image syn-reference syn-description syn-markdown">替代文字</span><span class="syn-meta syn-image syn-reference syn-markdown"><span class="syn-punctuation syn-definition syn-image syn-end syn-markdown">]</span></span><span class="syn-meta syn-image syn-reference syn-markdown"><span class="syn-punctuation syn-definition syn-constant syn-begin syn-markdown">[</span><span class="syn-constant syn-other syn-reference syn-link syn-markdown">picture</span><span class="syn-punctuation syn-definition syn-constant syn-end syn-markdown">]</span></span>
+</span>
+</span><span class="syn-meta syn-paragraph syn-markdown">引用内容放在后面
+
+</span><span class="syn-meta syn-link syn-reference syn-def syn-markdown"><span class="syn-punctuation syn-definition syn-constant syn-begin syn-markdown">[</span><span class="syn-entity syn-name syn-reference syn-link syn-markdown">picture</span><span class="syn-punctuation syn-definition syn-constant syn-end syn-markdown">]</span><span class="syn-punctuation syn-separator syn-key-value syn-markdown">:</span> <span class="syn-markup syn-underline syn-link syn-markdown">https://example.com/logo.png</span><span class="syn-string syn-other syn-link syn-description syn-title syn-markdown"> <span class="syn-punctuation syn-definition syn-string syn-begin syn-markdown">"</span>图片标题<span class="syn-punctuation syn-definition syn-string syn-end syn-markdown">"</span></span>
+</span></span></code></pre>
+<h2>代码<a class="heading-anchor" href="#dai-ma" name="dai-ma"></a></h2>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown">
+<span class="syn-meta syn-paragraph syn-markdown">行内代码用单个反引号包裹
+
+</span><span class="syn-meta syn-paragraph syn-markdown"><span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>行内代码<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span>
+
+</span>
+<span class="syn-meta syn-paragraph syn-markdown">代码块用三个反引号包裹 <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">```</span>
+<span class="syn-invalid syn-illegal syn-non-terminated syn-raw syn-markdown">
+</span></span><span class="syn-markup syn-raw syn-code-fence syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-code-fence syn-begin syn-markdown">```</span><span class="syn-constant syn-other syn-language-name syn-markdown">javascript</span>
+console.log('代码块 + 语法高亮')
+<span class="syn-punctuation syn-definition syn-raw syn-code-fence syn-end syn-markdown">```
+</span></span>
+</span><span class="syn-meta syn-paragraph syn-markdown"><span class="syn-markup syn-raw syn-code-fence syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-code-fence syn-begin syn-markdown">```</span>
+未指定语言，无语法高亮。
+试试随机标签 tag
+<span class="syn-punctuation syn-definition syn-raw syn-code-fence syn-end syn-markdown">```
+</span></span></span></span></code></pre>
+<h2>分隔线<a class="heading-anchor" href="#fen-ge-xian" name="fen-ge-xian"></a></h2>
+<p>三个或以上的 <code>-</code></p>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-block-level syn-markdown"><span class="syn-meta syn-separator syn-thematic-break syn-markdown"><span class="syn-punctuation syn-definition syn-thematic-break syn-markdown">---</span>
+</span></span></span></code></pre>
+<h2>引用块<a class="heading-anchor" href="#yin-yong-kuai" name="yin-yong-kuai"></a></h2>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-quote syn-markdown"><span class="syn-punctuation syn-definition syn-blockquote syn-markdown">&gt;</span> 引用内容
+</span><span class="syn-markup syn-quote syn-markdown"><span class="syn-punctuation syn-definition syn-blockquote syn-markdown">&gt;</span> 引用块内可使用其他 Markdown 格式
+</span><span class="syn-markup syn-quote syn-markdown"><span class="syn-punctuation syn-definition syn-blockquote syn-markdown">&gt;</span> <span class="syn-markup syn-quote syn-markdown"><span class="syn-punctuation syn-definition syn-blockquote syn-markdown">&gt;</span> 嵌套引用内容
+</span></span></span></span></code></pre>
+<h1>GitHub Markdown 扩展<a class="heading-anchor" href="#github-markdown-kuo-zhan" name="github-markdown-kuo-zhan"></a></h1>
+<p>来源：<a href="https://github.github.com/gfm/">https://github.github.com/gfm/</a></p>
+<h2>删除线<a class="heading-anchor" href="#shan-chu-xian" name="shan-chu-xian"></a></h2>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">~~删除线~~
+</span></span></code></pre>
+<h2>任务列表<a class="heading-anchor" href="#ren-wu-lie-biao" name="ren-wu-lie-biao"></a></h2>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"> <span class="syn-meta syn-paragraph syn-list syn-markdown">[x] 撰写新闻稿
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> [ ] 更新网站
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> [ ] 联系媒体
+</span></span></span></code></pre>
+<h2>自动链接转换<a class="heading-anchor" href="#zi-dong-lian-jie-zhuan-huan" name="zi-dong-lian-jie-zhuan-huan"></a></h2>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown"><span class="syn-meta syn-link syn-inet syn-markdown"><span class="syn-punctuation syn-definition syn-link syn-begin syn-markdown">&lt;</span><span class="syn-markup syn-underline syn-link syn-markdown">https://www.everkm.cn</span><span class="syn-punctuation syn-definition syn-link syn-end syn-markdown">&gt;</span></span>
+</span></span></code></pre>
+<h2>脚注<a class="heading-anchor" href="#jiao-zhu" name="jiao-zhu"></a></h2>
+<p>有时需要为读者提供可见、非超链接的脚注。
+使用 <code>[^数字|字母-下划线-连字符组合]</code> 语法。字符后可用数字或字母、下划线、连字符的组合。渲染时会自动按顺序重新编号。</p>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">脚注引用前的文字。[^2]
+[^2]: 脚注中要包含的注释。
+</span></span></code></pre>
+<h2>表格<a class="heading-anchor" href="#biao-ge" name="biao-ge"></a></h2>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">可用冒号对齐列（可选）。
+
+</span><span class="syn-meta syn-block-level syn-markdown"><span class="syn-meta syn-table syn-header syn-markdown"><span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> 表格        <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> 很           <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> 酷  <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>
+</span><span class="syn-meta syn-table syn-header-separator syn-markdown"><span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> <span class="syn-punctuation syn-section syn-table-header syn-markdown">-------------</span> <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span><span class="syn-punctuation syn-definition syn-table-cell-alignment syn-markdown">:</span><span class="syn-punctuation syn-section syn-table-header syn-markdown">-------------</span><span class="syn-punctuation syn-definition syn-table-cell-alignment syn-markdown">:</span><span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> <span class="syn-punctuation syn-section syn-table-header syn-markdown">-----</span><span class="syn-punctuation syn-definition syn-table-cell-alignment syn-markdown">:</span><span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>
+</span><span class="syn-meta syn-table syn-markdown"><span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> 第 3 列      <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> 右对齐 <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> $1600 <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>
+<span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> 第 2 列      <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> 居中      <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>   $12 <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>
+<span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> 斑马纹 <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> 很整洁      <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>    $1 <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>
+</span></span>
+
+<span class="syn-meta syn-block-level syn-markdown"><span class="syn-meta syn-table syn-header syn-markdown">外侧竖线（<span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>）可选，无需对齐。表格内也可嵌入其他 Markdown。
+</span><span class="syn-meta syn-table syn-header-separator syn-markdown">
+</span><span class="syn-meta syn-table syn-markdown">Markdown <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> Less <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> Pretty
+--- <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> --- <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> ---
+<span class="syn-markup syn-italic syn-markdown"><span class="syn-punctuation syn-definition syn-italic syn-begin syn-markdown">*</span>仍然<span class="syn-punctuation syn-definition syn-italic syn-end syn-markdown">*</span></span> <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>可以<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span> <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> <span class="syn-markup syn-bold syn-markdown"><span class="syn-punctuation syn-definition syn-bold syn-begin syn-markdown">**</span>漂亮地<span class="syn-punctuation syn-definition syn-bold syn-end syn-markdown">**</span></span>
+1 <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> 2 <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> 3
+</span></span></span></code></pre>
+<h2>定义列表<a class="heading-anchor" href="#ding-yi-lie-biao" name="ding-yi-lie-biao"></a></h2>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">Apple
+
+</span><span class="syn-meta syn-paragraph syn-markdown">:   蔷薇科苹果属植物的梨果。
+
+</span><span class="syn-meta syn-paragraph syn-markdown">Orange
+
+</span><span class="syn-meta syn-paragraph syn-markdown">:   柑橘属常绿乔木的果实。
+</span></span></code></pre>
+<h1>Everkm Markdown 扩展<a class="heading-anchor" href="#everkm-markdown-kuo-zhan" name="everkm-markdown-kuo-zhan"></a></h1>
+
+<h2 data-extra="id" id="everkm-macro">宏<a href="#hong" name="hong"></a><a class="heading-anchor" href="#everkm-macro" name="everkm-macro"></a></h2>
+<blockquote>
+<p><strong>v0.17.0 变更</strong>：旧的花括号宏语法 <code>{{everkm::toc(...)}}</code> 与 <code>{{everkm::include(...)}}</code> 已弃用，请使用下方围栏块语法。</p>
+</blockquote>
+<h3>TOC（目录）<a class="heading-anchor" href="#toc-mu-lu" name="toc-mu-lu"></a></h3>
+<p>自动为当前页面生成目录（TOC）。效果见本页顶部。</p>
+<pre class="language-markdown&quot;"><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">[TOC]
+
+</span><span class="syn-meta syn-paragraph syn-markdown"><span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">```</span>macro/toc<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">```</span></span>
+
+</span><span class="syn-meta syn-paragraph syn-markdown"><span class="syn-markup syn-raw syn-code-fence syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-code-fence syn-begin syn-markdown">```</span><span class="syn-constant syn-other syn-language-name syn-markdown">macro</span>/toc
+level: 1
+<span class="syn-punctuation syn-definition syn-raw syn-code-fence syn-end syn-markdown">```
+</span></span></span></span></code></pre>
+<p><strong>参数</strong>：</p>
+<ul>
+<li><code>level</code> 可选。要检索的标题层级，默认 <code>level=3</code></li>
+</ul>
+<h3>包含外部文件<a class="heading-anchor" href="#bao-han-wai-bu-wen-jian" name="bao-han-wai-bu-wen-jian"></a></h3>
+<p>渲染时包含指定文件内容。仅允许常见 <span style="text-decoration:underline; text-underline-offset:4px;"><strong>纯文本</strong></span> 文件，扩展名如 md、txt、csv、js 及其他程序源文件。</p>
+<p><strong>参数</strong>：</p>
+<ul>
+<li><code>source</code> 绝对路径（相对项目根）或文件相对路径。</li>
+<li><code>as</code> 可选。输出格式。省略时按文件扩展名推断。有效值：
+<ol>
+<li><code>plain</code>，渲染时原样输出</li>
+<li><code>table</code>，尝试解析为表格</li>
+<li><code>code</code>，代码块</li>
+<li><code>md</code> 或 <code>markdown</code>，按 Markdown 解析</li>
+</ol>
+</li>
+<li><code>code_lang</code> 可选。编程语言，仅 <code>as=code</code> 时有效。</li>
+<li><code>table_header</code> 可选。首行是否为表头，仅 <code>as=table</code> 时有效。</li>
+<li><code>table_merge</code> 可选。是否自动合并单元格。相同内容合并，先列后行。仅 <code>as=table</code> 时有效。</li>
+<li><code>csv_delimiter</code> 可选。CSV 分隔符，默认 <code>,</code>。</li>
+</ul>
+<p><strong>嵌入外部 Markdown 文件：</strong></p>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown"><span class="syn-markup syn-raw syn-code-fence syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-code-fence syn-begin syn-markdown">```</span><span class="syn-constant syn-other syn-language-name syn-markdown">macro</span>/include
+source: _include_test.inc.md
+as: md
+<span class="syn-punctuation syn-definition syn-raw syn-code-fence syn-end syn-markdown">```
+</span></span></span></span></code></pre>
+<p><strong>包含外部表格：</strong></p>
+<p>内容为 <code>*</code> 的单元格会自动合并并附加扩展属性。</p>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown"><span class="syn-markup syn-raw syn-code-fence syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-code-fence syn-begin syn-markdown">```</span><span class="syn-constant syn-other syn-language-name syn-markdown">macro</span>/include
+source: demo.csv
+as: table
+table_header: true
+table_merge: "*"
+<span class="syn-punctuation syn-definition syn-raw syn-code-fence syn-end syn-markdown">```
+</span></span></span></span></code></pre>
+<p><strong>包含外部代码：</strong></p>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown"><span class="syn-markup syn-raw syn-code-fence syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-code-fence syn-begin syn-markdown">```</span><span class="syn-constant syn-other syn-language-name syn-markdown">macro</span>/include
+source: _xx.js
+as: code
+code_lang: js
+<span class="syn-punctuation syn-definition syn-raw syn-code-fence syn-end syn-markdown">```
+</span></span></span></span></code></pre>
+
+<h2 data-extra="id" id="inner-link">站内项目链接<a href="#zhan-nei-xiang-mu-lian-jie" name="zhan-nei-xiang-mu-lian-jie"></a><a class="heading-anchor" href="#inner-link" name="inner-link"></a></h2>
+<p>站内页面导航的完整文档见 <a href="https://publish.everkm.com/guide/inner-link.html">链接与内链</a>。以下为语法速查。非 Markdown 媒体（如 PDF）也可通过内链引用，导出时会自动复制到静态资源目录。</p>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">[[filename]]
+
+</span><span class="syn-meta syn-paragraph syn-markdown">[[directory/filename]]
+
+</span><span class="syn-meta syn-paragraph syn-markdown">[[./faq/]]          # 显式目录路径，避免歧义
+[[/section/doc]]   # 从站点根目录匹配
+</span></span></code></pre>
+<h3>匹配规则<a class="heading-anchor" href="#pi-pei-gui-ze" name="pi-pei-gui-ze"></a></h3>
+<ul>
+<li>按 <strong>title</strong> 或 <strong>slug</strong> 匹配时<strong>不区分大小写</strong>（如 <code>[[faq]]</code> 可匹配标题「FAQ」）。</li>
+<li>若 slug 或 title 对应<strong>多篇</strong>文档，预览与导出会<strong>立即报错</strong>并列出候选，而非静默使用第一个匹配。</li>
+<li>若标题可能在不同目录重复，建议使用显式路径，如 <code>[[./faq/]]</code> 或 <code>[[/section/doc/file]]</code>。</li>
+<li>以 <code>/</code> 结尾的路径解析为<strong>目录默认页</strong>（如 <code>index.md</code>、<code>slug=index</code> 等）。</li>
+</ul>
+<p>当主题（双括号内为标题）仅有一个标题时，系统搜索整个内容目录。若文件名匹配（忽略 <code>.md</code> 扩展名）则匹配成功。目录识别规则：</p>
+<ol>
+<li>以 <code>/</code> 开头表示从项目根目录严格匹配。</li>
+<li>以 <code>./</code>（当前文件目录）或 <code>../</code>（当前文件父目录）开头表示相对当前文件定位。</li>
+<li>其他情况作为文件名后缀与项目中所有文件匹配。</li>
+</ol>
+<h3>发布前内链检查<a class="heading-anchor" href="#fa-bu-qian-nei-lian-jian-cha" name="fa-bu-qian-nei-lian-jian-cha"></a></h3>
+<pre><code class="language-bash">everkm-publish lint ./my-site
+</code></pre>
+<p>按行号列出无法解析或存在歧义的 <code>[[...]]</code> 链接，适合 CI 与发布前自检。可加 <code>--auto-fix</code> 修复 Front Matter 等可自动修复项。</p>
+<p class="NOTE" data-extra="class">导航函数 <code>nav_indicator</code>、<code>nav_path</code>、<code>nav_tree</code> 的 <code>from_file</code> 参数使用 <code>[[...]]</code> 包裹时，与正文内链采用相同解析规则。</p>
+
+<h2 data-extra="id" id="page-anchor">页内锚点<a href="#ye-nei-mao-dian" name="ye-nei-mao-dian"></a><a class="heading-anchor" href="#page-anchor" name="page-anchor"></a></h2>
+<p>用于在同一页面不同标题间跳转。</p>
+<p>标题会自动生成锚点。可通过 <code>id=标识</code> 定义 ID。默认将标题内容 slugify<sup class="footnote-reference"><a href="#slugify">1</a></sup> 作为锚点名。链接中可用 <code>#id</code> 进行页内锚点导航。</p>
+
+<h2 data-extra="id" id="attr-set">块级扩展属性<a href="#kuai-ji-kuo-zhan-shu-xing" name="kuai-ji-kuo-zhan-shu-xing"></a><a class="heading-anchor" href="#attr-set" name="attr-set"></a></h2>
+<p>放在块正上方单独一行，用大括号包裹。例如：</p>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">{color=red tc}
+</span><span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-1 syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">#</span> </span><span class="syn-markup syn-heading syn-1 syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">红色标题</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span></span></code></pre>
+<p><strong>属性集</strong>支持以下属性：</p>
+<ol>
+<li><code>#tag</code> 添加标签，支持中文</li>
+<li><code>.class</code> 添加 CSS 类名</li>
+<li><code>tl</code>、<code>tc</code>、<code>tr</code> 分别左对齐、居中、右对齐</li>
+<li><code>ul</code> 或 <code>underline</code> 添加下划线</li>
+<li><code>color=red</code> 文字颜色</li>
+<li><code>bgcolor=red</code> 背景颜色</li>
+<li><code>font=Arial</code> 字体</li>
+<li><code>pa=1em</code>、<code>px=1em</code>、<code>py=1em</code> 分别四边内边距、水平内边距、垂直内边距</li>
+<li><code>corner=0.5em</code> 四边圆角，<code>em</code> 为当前字号</li>
+<li><code>key=value</code> 设置其他自定义属性</li>
+</ol>
+<p class="note" data-extra="class">注意：若值含空格或逗号，须用双引号包裹。</p>
+<h3>标题扩展属性<a class="heading-anchor" href="#biao-ti-kuo-zhan-shu-xing" name="biao-ti-kuo-zhan-shu-xing"></a></h3>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">{id=main-header}
+</span><span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-1 syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">#</span> </span><span class="syn-markup syn-heading syn-1 syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">主标题</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span></span></code></pre>
+<h3>段落扩展属性<a class="heading-anchor" href="#duan-luo-kuo-zhan-shu-xing" name="duan-luo-kuo-zhan-shu-xing"></a></h3>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">{bgcolor="rgba(0,0,0,0.1)" color=blue underline pa=1em corner=0.5em}
+这是一段带扩展属性的示例块。
+</span></span></code></pre>
+<p data-extra="style" style="background-color:rgba(0,0,0,0.1); border-radius:0.5em; color:blue; padding:1em; text-decoration:underline; text-underline-offset:4px;">这是一段带扩展属性的示例块。</p>
+<h3>表格扩展属性<a class="heading-anchor" href="#biao-ge-kuo-zhan-shu-xing" name="biao-ge-kuo-zhan-shu-xing"></a></h3>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">{align=center .my-table}
+| 默认   | 左 | 中 | 右 |
+| ---       | :---  | :---: | ---:  |
+| 内容   | 内容 | 内容 | 内容 |
+| 内容   | 内容 | 内容 | 内容 |
+</span></span></code></pre>
+
+<table align="center" class="my-table" data-extra="align,class"><thead><tr><th>默认</th><th style="text-align: left">左</th><th style="text-align: center">中</th><th style="text-align: right">右</th></tr></thead><tbody>
+<tr><td>内容</td><td style="text-align: left">内容</td><td style="text-align: center">内容</td><td style="text-align: right">内容</td></tr>
+<tr><td>内容</td><td style="text-align: left">内容</td><td style="text-align: center">内容</td><td style="text-align: right">内容</td></tr>
+</tbody></table>
+
+<h2 class="main" data-extra="class,data-tags,lang" data-tags="the-site" lang="zh">行内扩展属性<a class="heading-anchor" href="#xing-nei-kuo-zhan-shu-xing" name="xing-nei-kuo-zhan-shu-xing"></a></h2>
+<h3>包裹区域扩展属性<a class="heading-anchor" href="#bao-guo-qu-yu-kuo-zhan-shu-xing" name="bao-guo-qu-yu-kuo-zhan-shu-xing"></a></h3>
+<p>为 <code>#</code> 包裹的区域添加属性，<a href="https://publish.everkm.com/guide/everkm-markdown.html#attr-set">属性集</a> 在前。格式：</p>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">我是{color=red}#一段较长的#段落。
+</span></span></code></pre>
+<p>我是<span style="color:red;">一段较长的</span>段落。</p>
+<h3 id="lian-jie-2">链接<a class="heading-anchor" href="#lian-jie-2" name="lian-jie-2"></a></h3>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">你好 <span class="syn-meta syn-link syn-inet syn-markdown"><span class="syn-punctuation syn-definition syn-link syn-begin syn-markdown">&lt;</span><span class="syn-markup syn-underline syn-link syn-markdown">https://www.everkm.cn</span><span class="syn-punctuation syn-definition syn-link syn-end syn-markdown">&gt;</span></span>{target=<span class="syn-markup syn-italic syn-markdown"><span class="syn-punctuation syn-definition syn-italic syn-begin syn-markdown">_</span>blank color=red} 世界
+<span class="syn-invalid syn-illegal syn-non-terminated syn-bold-italic syn-markdown">
+</span></span>带扩展属性的链接 <span class="syn-meta syn-link syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-link syn-begin syn-markdown">[</span></span><span class="syn-meta syn-link syn-inline syn-description syn-markdown">Everkm</span><span class="syn-meta syn-link syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-link syn-end syn-markdown">]</span></span><span class="syn-meta syn-link syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-metadata syn-begin syn-markdown">(</span><span class="syn-markup syn-underline syn-link syn-markdown">https://www.everkm.cn</span><span class="syn-punctuation syn-definition syn-metadata syn-end syn-markdown">)</span></span>{color=orangered}。
+</span></span></code></pre>
+<p>你好 <a data-extra="style,target" href="https://www.everkm.cn" style="color:red;" target="_blank">https://www.everkm.cn</a> 世界</p>
+<p>带扩展属性的链接 <a data-extra="style" href="https://www.everkm.cn" style="color:orangered;">Everkm</a>。</p>
+<h3 id="tu-pian-2">图片<a class="heading-anchor" href="#tu-pian-2" name="tu-pian-2"></a></h3>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown"><span class="syn-meta syn-image syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-image syn-begin syn-markdown">![</span></span><span class="syn-meta syn-image syn-inline syn-description syn-markdown">天空</span><span class="syn-meta syn-image syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-image syn-end syn-markdown">]</span></span><span class="syn-meta syn-image syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-metadata syn-begin syn-markdown">(</span><span class="syn-markup syn-underline syn-link syn-image syn-markdown">https://images.unsplash.com/photo-1564979045531-fa386a275b27?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=2532&amp;q=80</span> <span class="syn-string syn-other syn-link syn-description syn-title syn-markdown"><span class="syn-punctuation syn-definition syn-string syn-begin syn-markdown">"</span>蓝天与狗尾草<span class="syn-punctuation syn-definition syn-string syn-end syn-markdown">"</span></span><span class="syn-punctuation syn-definition syn-metadata syn-end syn-markdown">)</span></span>{corner=1em}
+</span></span></code></pre>
+<p><strong>预览</strong>：</p>
+<p><img alt="天空" data-extra="style" data-src="https://images.unsplash.com/photo-1564979045531-fa386a275b27?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=2532&amp;q=80" src="data:image/svg+xml,%3Csvg preserveAspectRatio='none' width='640' height='360' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' %3E%3Crect fill='%23eeeeee' width='1024' height='1024' /%3E%3C/svg%3E" style="border-radius:1em;" title="蓝天与狗尾草"> </p>
+<hr>
+<h2>下划线<a class="heading-anchor" href="#xia-hua-xian" name="xia-hua-xian"></a></h2>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">{ul}#下划线#
+</span></span></code></pre>
+<p><span style="text-decoration:underline; text-underline-offset:4px;">下划线</span></p>
+<h2>上标<a class="heading-anchor" href="#shang-biao" name="shang-biao"></a></h2>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">E=MC^2^
+</span></span></code></pre>
+<p>E=MC^2^</p>
+<h2>下标<a class="heading-anchor" href="#xia-biao" name="xia-biao"></a></h2>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">H~2~O
+</span></span></code></pre>
+<p>H~2~O</p>
+<h2>高亮<a class="heading-anchor" href="#gao-liang" name="gao-liang"></a></h2>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">我需要高亮这些 ==非常重要的文字==。
+</span></span></code></pre>
+<p>我需要高亮这些 <mark>非常重要的文字</mark>。</p>
+<p><strong>HTML 输出</strong></p>
+<pre><code class="syn-code language-html"><span class="syn-text syn-html syn-basic">我需要高亮这些 <span class="syn-meta syn-tag syn-other syn-html"><span class="syn-punctuation syn-definition syn-tag syn-begin syn-html">&lt;</span><span class="syn-entity syn-name syn-tag syn-other syn-html">mark</span><span class="syn-punctuation syn-definition syn-tag syn-end syn-html">&gt;</span></span>非常重要的文字<span class="syn-meta syn-tag syn-other syn-html"><span class="syn-punctuation syn-definition syn-tag syn-begin syn-html">&lt;/</span><span class="syn-entity syn-name syn-tag syn-other syn-html">mark</span><span class="syn-punctuation syn-definition syn-tag syn-end syn-html">&gt;</span></span>。
+</span></code></pre>
+<h2>特殊字符替换<a class="heading-anchor" href="#te-shu-zi-fu-ti-huan" name="te-shu-zi-fu-ti-huan"></a></h2>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">| =&gt; <span class="syn-constant syn-character syn-entity syn-html"><span class="syn-punctuation syn-definition syn-entity syn-html">&amp;</span>#124<span class="syn-punctuation syn-definition syn-entity syn-html">;</span></span>
+</span><span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-quote syn-markdown"><span class="syn-punctuation syn-definition syn-blockquote syn-markdown">&gt;</span> =&gt; &amp;gt;
+<span class="syn-meta syn-other syn-valid-bracket syn-markdown">&lt;</span> =&gt; &amp;lt;
+(C) 版权
+(TM) 商标
+(R) 注册商标
+-- 长破折号
+... 省略号
+-&gt; 右箭头
+<span class="syn-meta syn-other syn-valid-bracket syn-markdown">&lt;</span>- 左箭头
+=&gt; 右双箭头
+<span class="syn-meta syn-other syn-valid-bracket syn-markdown">&lt;</span>= 左双箭头
+</span></span></span></code></pre>
+<h2>常用符号<a class="heading-anchor" href="#chang-yong-fu-hao" name="chang-yong-fu-hao"></a></h2>
+<ol>
+<li><a href="https://chaooo.github.io/unicode_css3_content/">HTML 特殊字符</a></li>
+<li><a href="https://gist.github.com/rxaviers/7360908">Emoji 符号</a></li>
+</ol>
+<pre><code class="syn-code language-markdown"><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-paragraph syn-markdown">Emoji 符号
+
+</span><span class="syn-meta syn-paragraph syn-markdown">:+1:
+</span></span></code></pre>
+<p>👍 👉 在此查找 emoji <a href="https://github-emoji-picker.rickstaa.dev/">链接</a> 😄 💪。</p>
+<h1>定义<a class="heading-anchor" href="#ding-yi" name="ding-yi"></a></h1>
+<dl><dt>属性集</dt>
+<dd>
+<p>用大括号包裹的属性集合，多个属性以空格或逗号分隔。</p>
+</dd>
+</dl>
+<hr class="footnote-definitions-separator">
+<div class="footnote-definition" id="slugify"><span class="footnote-definition-label">1</span>
+<p>将文本转换为有效链接字符。字母数字保持不变，空格替换为 <code>-</code>，每个汉字转为拼音并用 <code>-</code> 连接。<mark>注意❗</mark>：字母与汉字交界处没有连字符 <code>-</code>；若需要，可在中间加空格。</p>
+</div>
+<div class="footnote-definition" id="markdown-syntax"><span class="footnote-definition-label">2</span>
+<p><a href="https://daringfireball.net/projects/markdown/syntax">https://daringfireball.net/projects/markdown/syntax</a></p>
+</div>
+<div class="footnote-definition" id="gfm"><span class="footnote-definition-label">3</span>
+<p><a href="https://github.github.com/gfm/">https://github.github.com/gfm/</a></p>
+</div>
+</div><div class="post-copyright"><div class="article-copyright-info-container"><ul><li><strong>文章标题:</strong> Everkm Markdown 格式</li><li><strong>作者:</strong> Jack</li><li><strong>创建时间:</strong> 2026-07-04 06:00:29</li><li><strong>永久链接:</strong> /zh/posts/everkm-markdown.html</li><li><strong>许可协议:</strong> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0" rel="noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a></li></ul></div></div><nav aria-label="文章导航" class="article-nav"><div class="article-nav__item"><a class="article-nav__link" href="/zh/posts/gui-dang-yu-fen-ye.html"><span aria-hidden="true" class="article-nav__arrow">←</span><span class="min-w-0"><span class="article-nav__title">归档与分页</span><span class="article-nav__label">上一篇</span></span></a></div></nav></article></div></main><div class="main-content-footer mt-auto" data-vt-swap="footer"><footer class="story-footer"><div class="story-footer__info"><div class="story-footer__line story-footer__line--primary"><span class="story-footer__copyright">© 2026 <a class="mr-2" href="/zh/index.html">Jack's Blog</a>保留所有权利。</span><span class="story-footer__socials"><div class="flex flex-wrap items-center gap-4"><a aria-label="github" class="inline-flex items-center text-accent hover:opacity-80 transition-opacity" href="https://github.com/everkm/theme-story" rel="noopener noreferrer" target="_blank" title="github"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-brand-github size-5 block shrink-0" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path></svg></span></a></div></span></div><div class="story-footer__line story-footer__line--secondary">Powered by<!--!$--> <a href="https://publish.everkm.com" rel="noopener noreferrer" target="_blank">Everkm</a></div></div></footer></div><div aria-hidden="true" class="story-particles" data-vt-persist="" id="story-particles-webgl"></div><div class="right-side-tools-container" data-vt-persist=""><div class="side-tools-container"><ul class="hidden-tools-list"><li class="right-bottom-tools tool-font-adjust-plus" title="Increase font size"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-zoom-in story-tool-icon size-5" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M7 10l6 0"></path><path d="M10 7l0 6"></path><path d="M21 21l-6 -6"></path></svg>
+</span></li><li class="right-bottom-tools tool-font-adjust-minus" title="Decrease font size"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-zoom-out story-tool-icon size-5" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M7 10l6 0"></path><path d="M21 21l-6 -6"></path></svg>
+</span></li><li class="right-bottom-tools tool-dark-light-toggle" title="Toggle theme"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-moon story-tool-icon size-5" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path></svg></span></li><li class="right-bottom-tools tool-scroll-to-bottom" title="Scroll to bottom"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-down story-tool-icon size-5" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M12 5l0 14"></path><path d="M18 13l-6 6"></path><path d="M6 13l6 6"></path></svg>
+</span></li></ul><ul class="visible-tools-list"><li class="right-bottom-tools toggle-tools-list" title="Tools"><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-settings story-tool-icon size-5 toggle-tools-list__icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path></svg>
+</span></li><li aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="right-bottom-tools tool-scroll-to-top" role="progressbar" title="Scroll to top"><span aria-hidden="true" class="tool-scroll-to-top__ring"></span><span aria-hidden="true"><svg class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-up story-tool-icon size-5 tool-scroll-to-top__icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"></path><path d="M12 5l0 14"></path><path d="M16 9l-4 -4"></path><path d="M8 9l4 -4"></path></svg>
+</span></li></ul></div></div><script src="/assets/story.2VI7DTCE.js"></script><script src="/assets/plugin-in-search.GNSDIA5D.js"></script></body></html>
