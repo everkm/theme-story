@@ -9,9 +9,9 @@ set_latest_release.py
 依赖：Python 3.10+、GitHub CLI（`gh`）。
 
 用法示例：
-  python3 scripts/set_latest_release.py --repo everkm/theme-youlog --tag v0.4.3
-  python3 scripts/set_latest_release.py --repo everkm/theme-youlog
-  python3 scripts/set_latest_release.py --repo everkm/theme-youlog --changelog ./CHANGELOG.md
+  python3 scripts/set_latest_release.py --repo everkm/theme-story --tag v0.1.0
+  python3 scripts/set_latest_release.py --repo everkm/theme-story
+  python3 scripts/set_latest_release.py --repo everkm/theme-story --changelog ./CHANGELOG.md
 
 更新日志：
 - 2026-06-12：初版，CHANGELOG 强校验 + gh release edit 晋升 latest。

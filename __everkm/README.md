@@ -5,8 +5,10 @@
 - 触发 everkm/themes 索引最新模板 <https://github.com/everkm/themes/actions/workflows/publish-theme.yaml>
 
 ```bash
+make push-index-themes
+# 或
 gh workflow run publish-theme.yaml \
   --repo everkm/themes \
   -f mode=single \
-  -f full_name=everkm/theme-youlog
+  -f full_name=everkm/theme-story
 ```

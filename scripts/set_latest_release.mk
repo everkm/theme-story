@@ -3,5 +3,5 @@ MYDIR := $(dir $(lastword $(MAKEFILE_LIST)))
 PYTHON ?= python3
 
 
-youlog-latest:
-	$(PYTHON) $(MYDIR)set_latest_release.py --repo everkm/theme-youlog --changelog $(MYDIR)../zh/CHANGELOG.md
+story-latest:
+	$(PYTHON) $(MYDIR)set_latest_release.py --repo everkm/theme-story --changelog $(MYDIR)../zh/CHANGELOG.md
