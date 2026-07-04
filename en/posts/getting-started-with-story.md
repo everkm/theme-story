@@ -1,6 +1,6 @@
 ---
-title: "Getting Started with Paper"
-description: How to use Paper Theme with everkm-publish.
+title: "Getting Started with Story"
+description: How to use Story Theme with everkm-publish.
 created_at: 2026-06-27T10:00:00Z
 tags:
   - guide
@@ -8,7 +8,7 @@ tags:
 
 ## Install the theme
 
-Install Paper Theme via everkm-publish and set it in your site's `everkm.yaml`.
+Install Story Theme via everkm-publish and set it in your site's `everkm.yaml`.
 
 ## Content structure
 
@@ -16,6 +16,7 @@ Install Paper Theme via everkm-publish and set it in your site's `everkm.yaml`.
 your-site/
 ├── _home.md          # Hero content for virtual homepage
 ├── _about.md         # About page (virtual template)
+├── _links.md         # Friend links data (virtual template)
 └── posts/
     └── *.md          # Blog posts
 ```
@@ -31,7 +32,7 @@ tags:
 
 ## Typography samples
 
-> Blockquotes use a left accent border and reduced opacity, matching Astro Paper.
+> Blockquotes use a left accent border and reduced opacity, matching hexo-theme-redefine.
 
 Inline `code` uses a muted background. Fenced blocks:
 

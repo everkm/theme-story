@@ -1,13 +1,13 @@
 ---
 title: "Code Blocks Demo"
-description: Server-side syntax highlighting in Paper Theme.
+description: Server-side syntax highlighting in Story Theme.
 created_at: 2026-06-22T16:00:00Z
 tags:
   - demo
   - code
 ---
 
-Paper Theme supports server-side code highlighting when `code_highlight.server` is enabled.
+Story Theme supports server-side code highlighting when `code_highlight.server` is enabled.
 
 ## TypeScript
 
@@ -35,5 +35,5 @@ def fibonacci(n: int) -> list[int]:
 ## Shell
 
 ```bash
-everkm-publish serve --work-dir ./my-site --theme paper
+everkm-publish serve --work-dir ./my-site --theme story
 ```

@@ -12,8 +12,8 @@ tags:
 
 ![图片标题 1](album/1.jpg)
 
-![Lorem ipsum 2](album/2.jpg)
+![示例图片 2](album/2.jpg)
 
-![Lorem ipsum 3](album/3.jpg)
+![示例图片 3](album/3.jpg)
 
-![Lorem ipsum 4](album/4.jpg)
+![示例图片 4](album/4.jpg)

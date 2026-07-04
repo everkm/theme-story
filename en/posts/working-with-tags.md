@@ -1,6 +1,6 @@
 ---
 title: "Working with Tags"
-description: Organize posts with tags in Paper Theme.
+description: Organize posts with tags in Story Theme.
 created_at: 2026-06-23T11:00:00Z
 tags:
   - guide

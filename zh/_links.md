@@ -12,17 +12,17 @@ links:
   - category: 示例分类（列表）
     has_thumbnail: false
     list:
-      - name: Partner Link 1
+      - name: 合作伙伴链接 1
         link: https://example.com
-        description: Example Site Information
+        description: 示例站点信息
         avatar: /assets/images/avatar-1.jpg
-      - name: Partner Link 2
+      - name: 合作伙伴链接 2
         link: https://example.com
-        description: Example Site Description
+        description: 示例站点描述
         avatar: /assets/images/avatar-2.png
-      - name: Partner Link 3
+      - name: 合作伙伴链接 3
         link: https://example.com
-        description: Example Site Description
+        description: 示例站点描述
         avatar: /assets/images/avatar-3.png
 ---
 

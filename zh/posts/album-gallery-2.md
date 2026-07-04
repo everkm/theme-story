@@ -10,10 +10,10 @@ tags:
 
 原 `_album.md` 数据源中的图片，现以博文形式嵌入，由相册页通过 `posts_resources` 自动收录。
 
-![Lorem ipsum 5](album/5.webp)
+![示例图片 5](album/5.webp)
 
-![Lorem ipsum 6](album/6.jpg)
+![示例图片 6](album/6.jpg)
 
-![Lorem ipsum 7](album/7.png)
+![示例图片 7](album/7.png)
 
-![Lorem ipsum 8](album/8.jpg)
+![示例图片 8](album/8.jpg)

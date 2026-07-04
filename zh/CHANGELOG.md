@@ -2,7 +2,7 @@
 title: 更新日志
 slug: changelog
 created_at: 2026-06-28T00:00:00Z
-updated_at: 2026-07-03T11:51:44Z
+updated_at: 2026-07-04T14:00:29Z
 tags:
   - featured
 ---

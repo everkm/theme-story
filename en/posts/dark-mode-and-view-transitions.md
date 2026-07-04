@@ -1,12 +1,12 @@
 ---
 title: "Dark Mode and View Transitions"
-description: Client-side enhancements in Paper Theme.
+description: Client-side enhancements in Story Theme.
 created_at: 2026-06-26T10:00:00Z
 tags:
   - features
 ---
 
-Paper Theme includes:
+Story Theme includes:
 
 1. **Dark mode** — toggled via the header button, persisted in `localStorage`
 2. **View Transitions** — smooth in-site navigation without full page reloads

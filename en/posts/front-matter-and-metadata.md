@@ -1,6 +1,6 @@
 ---
 title: "Front Matter and Metadata"
-description: How to configure post metadata in Paper Theme.
+description: How to configure post metadata in Story Theme.
 created_at: 2026-06-24T09:00:00Z
 tags:
   - guide

@@ -6,7 +6,7 @@ tags:
   - features
 ---
 
-Paper Theme provides two ways to explore older content.
+Story Theme provides two ways to explore older content.
 
 ## Archives
 
@@ -19,4 +19,4 @@ The posts list and tag pages support pagination:
 - Page 1: `/posts/index.html`
 - Page 2: `/posts/index.p2.html`
 
-Configure `posts.per_page` in `everkm.yaml` to change the page size (default: 4).
+Configure `posts.per_page` in `everkm.yaml` to change the page size (default: 10).
