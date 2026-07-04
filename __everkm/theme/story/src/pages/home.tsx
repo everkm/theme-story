@@ -3,7 +3,7 @@ import { getStoryConfig } from "../lib/config";
 import { HOME_PATH } from "../lib/postsPath";
 import { queryPublicPosts } from "../lib/postsQuery";
 import { readPagination } from "../lib/pagination";
-import { pageUrl } from "../lib/url";
+import { currentPageUrl } from "../lib/url";
 import { Header } from "../layout/Header";
 import { Footer } from "../components/Footer";
 import { HomeArticleCard } from "../components/HomeArticleCard";
@@ -45,7 +45,7 @@ export const HomePage: Component<HomePageProps> = (p) => {
       class="page-container story-page-home"
       id="main-content"
       data-layout="home"
-      data-home-path={pageUrl(ctx().request_id, "/index.html")}
+      data-home-path={currentPageUrl(ctx())}
       classList={{
         "story-page-home--fixed-banner": bannerFixed(),
         "story-page-home--banner-background-only": showBannerBackground(),

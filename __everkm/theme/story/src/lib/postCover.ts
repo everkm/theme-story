@@ -1,4 +1,4 @@
-import { assetUrl, pageUrl } from "./url";
+import { assetUrl } from "./url";
 
 export function resolvePostCover(
   ctx: PageContext,
@@ -29,5 +29,5 @@ export function resolvePostCanonicalUrl(
   ctx: PageContext,
   post: PostItem,
 ): string {
-  return pageUrl(ctx.request_id, post.url_path);
+  return post.url_path;
 }

@@ -5,7 +5,6 @@ import timezone from "dayjs/plugin/timezone";
 import { getStoryConfig } from "../lib/config";
 import { useTranslations } from "../lib/i18n";
 import { toTransitionName } from "../lib/toTransitionName";
-import { pageUrl } from "../lib/url";
 import { resolvePostCover } from "../lib/postCover";
 import { resolvePostDetail } from "../lib/postDetail";
 import { resolveStoryMediaUrl } from "../lib/dataSource";

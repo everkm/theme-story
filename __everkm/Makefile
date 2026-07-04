@@ -21,17 +21,19 @@ clean-dist:
 	rm -rf dist
 
 work: print-ekmp
+	make clean-dist
 	@RUST_BACKTRACE=0 EVERKM_LOG=everkm_publish=debug,tpls=debug,info \
 		$(EKMP) serve \
 		--work-dir ../ \
 		--theme story \
 		--theme-dev \
 		--lang=$${EVERKM_LANG:-zh} \
+		--base-prefix /zh \
 		--listen=0.0.0.0:9081
 
 export-all: print-ekmp
 	make clean-dist
-	@EVERKM_LOG=info,everkm_publish=info \
+	@EVERKM_LOG=info,everkm_publish=debug \
 		$(EKMP) serve \
 		--work-dir ../ \
 		--theme story \

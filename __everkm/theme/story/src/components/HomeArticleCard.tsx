@@ -25,7 +25,7 @@ const metaIconClass = "inline-block size-[0.92em] shrink-0 align-[-0.125em]";
 
 export const HomeArticleCard: Component<HomeArticleCardProps> = (props) => {
   const t = () => useTranslations(props.ctx.lang);
-  const href = () => pageUrl(props.ctx.request_id, props.post.url_path);
+  const href = () => props.post.url_path;
   const cover = () => resolvePostCover(props.ctx, props.post);
   const cfg = () => getStoryConfig(props.ctx);
   const dateLabel = () => {

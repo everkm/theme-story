@@ -1,6 +1,5 @@
 import { Component, Show } from "solid-js";
 import { useTranslations } from "../lib/i18n";
-import { pageUrl } from "../lib/url";
 
 type PostNeighborsProps = {
   ctx: PageContext;
@@ -19,7 +18,7 @@ export const PostNeighbors: Component<PostNeighborsProps> = (props) => {
             <div class="article-nav__item">
               <a
                 class="article-nav__link"
-                href={pageUrl(props.ctx.request_id, prev().url_path)}
+                href={prev().url_path}
               >
                 <span class="article-nav__arrow" aria-hidden="true">
                   ←
@@ -37,7 +36,7 @@ export const PostNeighbors: Component<PostNeighborsProps> = (props) => {
             <div class="article-nav__item article-nav__item--next">
               <a
                 class="article-nav__link article-nav__link--next"
-                href={pageUrl(props.ctx.request_id, next().url_path)}
+                href={next().url_path}
               >
                 <span class="article-nav__arrow" aria-hidden="true">
                   →

@@ -3,18 +3,11 @@ export function syncBackUrlFromPage(): void {
   const main = document.querySelector<HTMLElement>("#main-content");
   if (!main) return;
 
-  if (main.dataset.layout === "home") {
-    sessionStorage.setItem(
-      "backUrl",
-      main.dataset.homePath ?? window.location.pathname,
-    );
-    return;
-  }
+  // Post detail is never a back target; keep the list/home URL from the prior page.
+  if (main.dataset.layout === "post") return;
 
-  const backUrl = main.dataset.backurl;
-  if (backUrl) {
-    sessionStorage.setItem("backUrl", backUrl);
-  }
+  // Use the live URL — avoids SSR base_url / lang prefix miscalculation.
+  sessionStorage.setItem("backUrl", window.location.pathname);
 }
 
 export function updateBackButton(): void {

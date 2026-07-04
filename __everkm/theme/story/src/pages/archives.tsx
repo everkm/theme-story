@@ -6,7 +6,6 @@ import {
 } from "../lib/archives";
 import { queryPublicPosts } from "../lib/postsQuery";
 import { useTranslations } from "../lib/i18n";
-import { pageUrl } from "../lib/url";
 import { Header } from "../layout/Header";
 import { Footer } from "../components/Footer";
 import { PageChrome } from "../components/PageChrome";
@@ -57,7 +56,7 @@ export const ArchivesPage: Component<ArchivesPageProps> = (p) => {
                             {(post) => (
                               <a
                                 class="archive-article-link"
-                                href={pageUrl(ctx().request_id, post.url_path)}
+                                href={post.url_path}
                               >
                                 <span class="archive-article-title">
                                   {post.title || post.slug}

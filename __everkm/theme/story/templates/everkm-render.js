@@ -2881,6 +2881,27 @@ function pageUrl(requestId, path) {
   const normalized = path.startsWith("/") ? path : `/${path}`;
   return `${base}${normalized}`;
 }
+function normalizeHrefPath(path) {
+  return path.startsWith("/") ? path : `/${path}`;
+}
+function pageUrlFromTpl(ctx) {
+  const tpl = ctx.tpl_path?.trim();
+  if (!tpl) return pageUrl(ctx.request_id, "/index.html");
+  return pageUrl(ctx.request_id, normalizeHrefPath(tpl));
+}
+function currentPageUrl(ctx) {
+  const pageNo = Math.max(1, parseInt(String(ctx.qs?.page ?? "1"), 10) || 1);
+  const tpl = ctx.tpl_path?.trim() ?? "";
+  if (pageNo > 1 || /\.p\d+\.html$/i.test(tpl)) {
+    return pageUrlFromTpl(ctx);
+  }
+  const pagePath = ctx.page_path?.trim();
+  if (pagePath) {
+    if (/^https?:\/\//i.test(pagePath)) return pagePath;
+    return normalizeHrefPath(pagePath);
+  }
+  return pageUrlFromTpl(ctx);
+}
 function assetUrl(requestId, path) {
   if (/^https?:\/\//i.test(path)) return path;
   if (path.startsWith("/assets/")) {
@@ -3447,7 +3468,7 @@ function resolvePostCover(ctx, post) {
   return assetUrl(ctx.request_id, value);
 }
 function resolvePostCanonicalUrl(ctx, post) {
-  return pageUrl(ctx.request_id, post.url_path);
+  return post.url_path;
 }
 
 // src/lib/postDate.ts
@@ -3497,7 +3518,7 @@ import_dayjs2.default.extend(import_timezone.default);
 var metaIconClass = "inline-block size-[0.92em] shrink-0 align-[-0.125em]";
 var HomeArticleCard = (props) => {
   const t2 = () => useTranslations(props.ctx.lang);
-  const href = () => pageUrl(props.ctx.request_id, props.post.url_path);
+  const href = () => props.post.url_path;
   const cover = () => resolvePostCover(props.ctx, props.post);
   const cfg = () => getStoryConfig(props.ctx);
   const dateLabel = () => {
@@ -3564,8 +3585,9 @@ var paginatorCurrentClass = "page-number current relative mx-[0.3rem] inline-fle
 var paginatorIconClass = "block size-[0.9em] shrink-0";
 var Pagination = (props) => {
   const t2 = () => useTranslations(props.ctx.lang);
-  const prevHref = () => props.pageNo > 1 ? paginationHref(props.basePath, props.pageNo - 1) : void 0;
-  const nextHref = () => props.pageNo < props.pageCount ? paginationHref(props.basePath, props.pageNo + 1) : void 0;
+  const pageHref = (targetPage) => pageUrl(props.ctx.request_id, paginationHref(props.basePath, targetPage));
+  const prevHref = () => props.pageNo > 1 ? pageHref(props.pageNo - 1) : void 0;
+  const nextHref = () => props.pageNo < props.pageCount ? pageHref(props.pageNo + 1) : void 0;
   const pageItems = () => buildPageNavItems(props.pageNo, props.pageCount);
   const paginator = () => ssr(_tmpl$12, escape(createComponent(Show, {
     get when() {
@@ -3578,7 +3600,7 @@ var Pagination = (props) => {
     get each() {
       return pageItems();
     },
-    children: (item) => typeof item === "number" ? item === props.pageNo ? ssr(_tmpl$36, ssrAttribute("class", escape(paginatorCurrentClass, true), false), escape(item)) : ssr(_tmpl$46, `page-number ${escape(paginatorChipClass, true)}`, ssrAttribute("href", escape(paginationHref(props.basePath, item), true), false), escape(item)) : ssr(_tmpl$55)
+    children: (item) => typeof item === "number" ? item === props.pageNo ? ssr(_tmpl$36, ssrAttribute("class", escape(paginatorCurrentClass, true), false), escape(item)) : ssr(_tmpl$46, `page-number ${escape(paginatorChipClass, true)}`, ssrAttribute("href", escape(pageHref(item), true), false), escape(item)) : ssr(_tmpl$55)
   })), escape(createComponent(Show, {
     get when() {
       return nextHref();
@@ -3791,7 +3813,7 @@ var HomePage = (p3) => {
   const showFullBanner = () => bannerEnabled() && pageNo() === 1;
   const showBannerBackground = () => bannerEnabled() && pageNo() > 1 && isFixedBanner();
   const bannerFixed = () => bannerEnabled() && isFixedBanner();
-  return ssr(_tmpl$15, `page-container story-page-home ${bannerFixed() ? "story-page-home--fixed-banner" : ""} ${showBannerBackground() ? "story-page-home--banner-background-only" : ""}`, ssrAttribute("data-home-path", escape(pageUrl(ctx().request_id, "/index.html"), true), false), escape(createComponent(Show, {
+  return ssr(_tmpl$15, `page-container story-page-home ${bannerFixed() ? "story-page-home--fixed-banner" : ""} ${showBannerBackground() ? "story-page-home--banner-background-only" : ""}`, ssrAttribute("data-home-path", escape(currentPageUrl(ctx()), true), false), escape(createComponent(Show, {
     get when() {
       return showFullBanner();
     },
@@ -4001,10 +4023,7 @@ function buildBreadcrumbSegments(ctx, t2, pageKey) {
       const page = parseInt(last, 10);
       const base = "/" + pathSegments.slice(0, -1).join("/");
       if (page <= 1) return pageUrl(ctx.request_id, `${base}/index.html`);
-      return pageUrl(
-        ctx.request_id,
-        `${base}/index.p${page}.html`
-      );
+      return pageUrl(ctx.request_id, `${base}/index.p${page}.html`);
     }
     if (pathSegments.length === 1 && pathSegments[0] === "about") {
       return pageUrl(ctx.request_id, "/about/");
@@ -4164,7 +4183,7 @@ var Main = (props) => {
     if (!local.ctx) return void 0;
     const cfg = getStoryConfig(local.ctx);
     if (cfg.features?.show_back_button === false) return void 0;
-    return pageUrl(local.ctx.request_id, local.ctx.page_path);
+    return currentPageUrl(local.ctx);
   };
   const mainClass = () => ["app-layout pb-4", hasBreadcrumb() ? "" : "mt-8", local.class ?? ""].filter(Boolean).join(" ");
   return ssr(_tmpl$311, ssrAttribute("data-layout", escape(local.layout, true) ?? "page", false) + ssrAttribute("data-backurl", escape(backUrl(), true), false) + ssrAttribute("class", escape(mainClass(), true), false), escape(createComponent(Show, {
@@ -4439,12 +4458,12 @@ var PostNeighbors = (props) => {
         get when() {
           return props.prevPost;
         },
-        children: (prev) => ssr(_tmpl$217, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, prev().url_path), true), false), escape(prev().title), escape(t2().post.previousPost))
+        children: (prev) => ssr(_tmpl$217, ssrAttribute("href", escape(prev().url_path, true), false), escape(prev().title), escape(t2().post.previousPost))
       })), escape(createComponent(Show, {
         get when() {
           return props.nextPost;
         },
-        children: (next) => ssr(_tmpl$314, ssrAttribute("href", escape(pageUrl(props.ctx.request_id, next().url_path), true), false), escape(next().title), escape(t2().post.nextPost))
+        children: (next) => ssr(_tmpl$314, ssrAttribute("href", escape(next().url_path, true), false), escape(next().title), escape(t2().post.nextPost))
       })));
     }
   });
@@ -4892,7 +4911,7 @@ var ArchivesPage = (p3) => {
             get each() {
               return dateGroup.posts;
             },
-            children: (post) => ssr(_tmpl$412, ssrAttribute("href", escape(pageUrl(ctx().request_id, post.url_path), true), false), escape(post.title) || escape(post.slug))
+            children: (post) => ssr(_tmpl$412, ssrAttribute("href", escape(post.url_path, true), false), escape(post.title) || escape(post.slug))
           })))
         })))
       })));

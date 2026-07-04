@@ -4,6 +4,7 @@ import {
   buildPageNavItems,
   paginationHref,
 } from "../lib/pagination";
+import { pageUrl } from "../lib/url";
 import { NavigateNextIcon, NavigatePrevIcon } from "../layout/icons";
 
 type PaginationProps = {
@@ -26,14 +27,12 @@ const paginatorIconClass = "block size-[0.9em] shrink-0";
 
 export const Pagination: Component<PaginationProps> = (props) => {
   const t = () => useTranslations(props.ctx.lang);
+  const pageHref = (targetPage: number) =>
+    pageUrl(props.ctx.request_id, paginationHref(props.basePath, targetPage));
   const prevHref = () =>
-    props.pageNo > 1
-      ? paginationHref(props.basePath, props.pageNo - 1)
-      : undefined;
+    props.pageNo > 1 ? pageHref(props.pageNo - 1) : undefined;
   const nextHref = () =>
-    props.pageNo < props.pageCount
-      ? paginationHref(props.basePath, props.pageNo + 1)
-      : undefined;
+    props.pageNo < props.pageCount ? pageHref(props.pageNo + 1) : undefined;
   const pageItems = () => buildPageNavItems(props.pageNo, props.pageCount);
 
   const paginator = () => (
@@ -63,7 +62,7 @@ export const Pagination: Component<PaginationProps> = (props) => {
             ) : (
               <a
                 class={`page-number ${paginatorChipClass}`}
-                href={paginationHref(props.basePath, item)}
+                href={pageHref(item)}
               >
                 {item}
               </a>

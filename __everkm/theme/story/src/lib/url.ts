@@ -69,10 +69,45 @@ export function isActivePath(currentPath: string, target: string): boolean {
   return currentParts[0] === targetParts[0];
 }
 
+/** Template-constructed paths (not from PostItem): prefix with `everkm.base_url`. */
 export function pageUrl(requestId: string, path: string): string {
   const base = everkm.base_url(requestId).replace(/\/+$/, "");
   const normalized = path.startsWith("/") ? path : `/${path}`;
   return `${base}${normalized}`;
+}
+
+function normalizeHrefPath(path: string): string {
+  return path.startsWith("/") ? path : `/${path}`;
+}
+
+/** Logical virtual path from tpl_path — template-constructed, needs base_url. */
+function pageUrlFromTpl(ctx: PageContext): string {
+  const tpl = ctx.tpl_path?.trim();
+  if (!tpl) return pageUrl(ctx.request_id, "/index.html");
+  return pageUrl(ctx.request_id, normalizeHrefPath(tpl));
+}
+
+/**
+ * Canonical href for the current page (data-backurl / data-home-path).
+ * - `ctx.page_path`: server-resolved URL → use as-is
+ * - `ctx.tpl_path` / pagination: template logical path → pageUrl
+ */
+export function currentPageUrl(ctx: PageContext): string {
+  const pageNo = Math.max(1, parseInt(String(ctx.qs?.page ?? "1"), 10) || 1);
+  const tpl = ctx.tpl_path?.trim() ?? "";
+
+  // Paginated virtual pages: tpl_path keeps `.pN`; page_path may normalize to page 1.
+  if (pageNo > 1 || /\.p\d+\.html$/i.test(tpl)) {
+    return pageUrlFromTpl(ctx);
+  }
+
+  const pagePath = ctx.page_path?.trim();
+  if (pagePath) {
+    if (/^https?:\/\//i.test(pagePath)) return pagePath;
+    return normalizeHrefPath(pagePath);
+  }
+
+  return pageUrlFromTpl(ctx);
 }
 
 export function assetUrl(requestId: string, path: string): string {

@@ -140,10 +140,7 @@ export function buildBreadcrumbSegments(
       const page = parseInt(last, 10);
       const base = "/" + pathSegments.slice(0, -1).join("/");
       if (page <= 1) return pageUrl(ctx.request_id, `${base}/index.html`);
-      return pageUrl(
-        ctx.request_id,
-        `${base}/index.p${page}.html`,
-      );
+      return pageUrl(ctx.request_id, `${base}/index.p${page}.html`);
     }
 
     if (pathSegments.length === 1 && pathSegments[0] === "about") {
