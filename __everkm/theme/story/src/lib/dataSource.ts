@@ -1,4 +1,5 @@
 import { resolveInnerLinkPath } from "./config";
+import { maybeAwait } from "./engineCompat";
 import { assetUrl } from "./url";
 
 export type FriendLinkItem = {
@@ -23,10 +24,12 @@ export async function loadDataSourceDoc(
 ): Promise<PostItem | null> {
   const path = resolveInnerLinkPath(innerLink) || fallbackPath;
   return (
-    (await everkm.post_detail(ctx.request_id, {
+    (await maybeAwait(
+      everkm.post_detail(ctx.request_id, {
       path,
       allow_missing: true,
-    })) ?? null
+      }),
+    )) ?? null
   );
 }
 

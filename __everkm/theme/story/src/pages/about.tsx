@@ -1,5 +1,6 @@
 import { Component, Show } from "solid-js";
 import { getStoryConfig, resolveInnerLinkPath } from "../lib/config";
+import { maybeAwait } from "../lib/engineCompat";
 import { useTranslations } from "../lib/i18n";
 import { Header } from "../layout/Header";
 import { Footer } from "../components/Footer";
@@ -16,10 +17,12 @@ export async function loadAboutDoc(ctx: PageContext): Promise<PostItem | null> {
   const cfg = getStoryConfig(ctx);
   const aboutPath = resolveInnerLinkPath(cfg.about) || "/_about.md";
   return (
-    (await everkm.post_detail(ctx.request_id, {
+    (await maybeAwait(
+      everkm.post_detail(ctx.request_id, {
       path: aboutPath,
       allow_missing: true,
-    })) ?? null
+      }),
+    )) ?? null
   );
 }
 

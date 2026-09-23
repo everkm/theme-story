@@ -2,6 +2,7 @@ import { renderToStringAsync } from "solid-js/web";
 import { RootLayout } from "../layout/RootLayout";
 import { resolvePageKey } from "../lib/normalizeTplPath";
 import { getStoryConfig, resolveInnerLinkPath } from "../lib/config";
+import { maybeAwait } from "../lib/engineCompat";
 import { configValue } from "../lib/configValue";
 import { pageNotFound } from "../lib/jsRenderError";
 import { resolvePostDetail } from "../lib/postDetail";
@@ -66,10 +67,12 @@ async function resolveLayoutTitle(
   }
   if (pageKey === "about") {
     const aboutPath = resolveInnerLinkPath(cfg.about) || "/_about.md";
-    const aboutMeta = await everkm.post_detail(props.request_id, {
-      path: aboutPath,
-      allow_missing: true,
-    });
+    const aboutMeta = await maybeAwait(
+      everkm.post_detail(props.request_id, {
+        path: aboutPath,
+        allow_missing: true,
+      }),
+    );
     const aboutTitle = aboutMeta?.title;
     return aboutTitle ? `${aboutTitle} | ${siteName}` : undefined;
   }

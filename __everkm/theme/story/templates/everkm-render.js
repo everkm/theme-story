@@ -3085,6 +3085,11 @@ var RootLayout = (props) => {
   })));
 };
 
+// src/lib/engineCompat.ts
+function maybeAwait(value) {
+  return Promise.resolve(value);
+}
+
 // src/lib/configValue.ts
 function configValue(config, path, defaultValue) {
   if (!config) return defaultValue;
@@ -3110,18 +3115,20 @@ async function resolvePostDetail(ctx) {
   const lazyArgs = { lazy_img: true };
   const meta = ctx.post;
   if (meta?.path) {
-    const detail = await everkm.post_detail(ctx.request_id, {
+    const detail = await maybeAwait(everkm.post_detail(ctx.request_id, {
       path: meta.path,
       ...lazyArgs
-    });
+    }));
     return detail ?? meta;
   }
   const pagePath = ctx.page_path;
   if (pagePath?.endsWith(".html")) {
-    return everkm.post_detail(ctx.request_id, {
-      path: pagePath.replace(/\.html$/, ".md"),
-      ...lazyArgs
-    });
+    return maybeAwait(
+      everkm.post_detail(ctx.request_id, {
+        path: pagePath.replace(/\.html$/, ".md"),
+        ...lazyArgs
+      })
+    );
   }
   return meta ?? null;
 }
@@ -3129,10 +3136,12 @@ async function resolvePostDetail(ctx) {
 // src/lib/dataSource.ts
 async function loadDataSourceDoc(ctx, innerLink, fallbackPath) {
   const path = resolveInnerLinkPath(innerLink) || fallbackPath;
-  return await everkm.post_detail(ctx.request_id, {
-    path,
-    allow_missing: true
-  }) ?? null;
+  return await maybeAwait(
+    everkm.post_detail(ctx.request_id, {
+      path,
+      allow_missing: true
+    })
+  ) ?? null;
 }
 function parseFriendLinkCategories(meta) {
   const raw = meta?.links;
@@ -4282,10 +4291,10 @@ var _tmpl$312 = ['<p class="text-muted-foreground italic">', "</p>"];
 async function loadAboutDoc(ctx) {
   const cfg = getStoryConfig(ctx);
   const aboutPath = resolveInnerLinkPath(cfg.about) || "/_about.md";
-  return await everkm.post_detail(ctx.request_id, {
+  return await maybeAwait(everkm.post_detail(ctx.request_id, {
     path: aboutPath,
     allow_missing: true
-  }) ?? null;
+  })) ?? null;
 }
 var AboutPage = (p3) => {
   const ctx = () => p3.props;
@@ -5298,10 +5307,10 @@ async function resolveLayoutTitle(pageKey, props, cfg) {
   }
   if (pageKey === "about") {
     const aboutPath = resolveInnerLinkPath(cfg.about) || "/_about.md";
-    const aboutMeta = await everkm.post_detail(props.request_id, {
+    const aboutMeta = await maybeAwait(everkm.post_detail(props.request_id, {
       path: aboutPath,
       allow_missing: true
-    });
+    }));
     const aboutTitle = aboutMeta?.title;
     return aboutTitle ? `${aboutTitle} | ${siteName}` : void 0;
   }
