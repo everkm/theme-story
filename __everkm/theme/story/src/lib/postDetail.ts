@@ -1,13 +1,16 @@
 /** Load full post content (incl. content_html) for detail pages. */
-export function resolvePostDetail(ctx: PageContext): PostItem | null {
+export async function resolvePostDetail(
+  ctx: PageContext,
+): Promise<PostItem | null> {
   const lazyArgs = { lazy_img: true as const };
 
   const meta = ctx.post;
   if (meta?.path) {
-    return (
-      everkm.post_detail(ctx.request_id, { path: meta.path, ...lazyArgs }) ??
-      meta
-    );
+    const detail = await everkm.post_detail(ctx.request_id, {
+      path: meta.path,
+      ...lazyArgs,
+    });
+    return detail ?? meta;
   }
 
   const pagePath = ctx.page_path;
@@ -18,5 +21,5 @@ export function resolvePostDetail(ctx: PageContext): PostItem | null {
     });
   }
 
-  return meta;
+  return meta ?? null;
 }

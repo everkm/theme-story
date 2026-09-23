@@ -2832,7 +2832,7 @@ function resolvePageKey(compName, tplPath, post) {
   if (key.startsWith("tags/")) return "tag-posts";
   if (post) return "post";
   if (compName === "post") return "post";
-  if (key) return "not-found";
+  if (key) return key;
   return "post";
 }
 function extractTagSlug(tplKey) {
@@ -3095,6 +3095,74 @@ function configValue(config, path, defaultValue) {
     val = val[key];
   }
   return val ?? defaultValue;
+}
+
+// src/lib/jsRenderError.ts
+var PAGE_NOT_FOUND = "PAGE_NOT_FOUND";
+function pageNotFound(message) {
+  const err = new Error(message);
+  err.code = PAGE_NOT_FOUND;
+  return err;
+}
+
+// src/lib/postDetail.ts
+async function resolvePostDetail(ctx) {
+  const lazyArgs = { lazy_img: true };
+  const meta = ctx.post;
+  if (meta?.path) {
+    const detail = await everkm.post_detail(ctx.request_id, {
+      path: meta.path,
+      ...lazyArgs
+    });
+    return detail ?? meta;
+  }
+  const pagePath = ctx.page_path;
+  if (pagePath?.endsWith(".html")) {
+    return everkm.post_detail(ctx.request_id, {
+      path: pagePath.replace(/\.html$/, ".md"),
+      ...lazyArgs
+    });
+  }
+  return meta ?? null;
+}
+
+// src/lib/dataSource.ts
+async function loadDataSourceDoc(ctx, innerLink, fallbackPath) {
+  const path = resolveInnerLinkPath(innerLink) || fallbackPath;
+  return await everkm.post_detail(ctx.request_id, {
+    path,
+    allow_missing: true
+  }) ?? null;
+}
+function parseFriendLinkCategories(meta) {
+  const raw = meta?.links;
+  if (!Array.isArray(raw)) return [];
+  return raw;
+}
+function categoryLabel(category) {
+  return category.category ?? category.links_category ?? "";
+}
+function resolveStoryMediaUrl(ctx, path, originPath) {
+  if (!path) return "";
+  if (/^https?:\/\//i.test(path)) return path;
+  if (path.startsWith("/assets/")) return assetUrl(ctx.request_id, path);
+  if (path.startsWith("/")) {
+    try {
+      const resolved = everkm.media(ctx.request_id, {
+        file: path,
+        __origin_path: originPath
+      });
+      if (typeof resolved === "string" && resolved.length > 0) {
+        return resolved;
+      }
+    } catch {
+    }
+  }
+  return assetUrl(ctx.request_id, path);
+}
+async function dataSourceTitle(ctx, innerLink, fallbackPath, fallbackTitle) {
+  const doc = await loadDataSourceDoc(ctx, innerLink, fallbackPath);
+  return doc?.title ?? fallbackTitle;
 }
 
 // src/lib/postsPath.ts
@@ -4211,16 +4279,20 @@ var APP_PROSE_POST = `${APP_PROSE} mt-8`;
 var _tmpl$21 = ["<div>", "</div>"];
 var _tmpl$214 = ['<div class="page-template-container"><h1 class="page-title-header">', '</h1><div class="', '">', "</div></div>"];
 var _tmpl$312 = ['<p class="text-muted-foreground italic">', "</p>"];
+async function loadAboutDoc(ctx) {
+  const cfg = getStoryConfig(ctx);
+  const aboutPath = resolveInnerLinkPath(cfg.about) || "/_about.md";
+  return await everkm.post_detail(ctx.request_id, {
+    path: aboutPath,
+    allow_missing: true
+  }) ?? null;
+}
 var AboutPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
   const t2 = () => useTranslations(ctx().lang);
-  const aboutPath = () => resolveInnerLinkPath(cfg().about) || "/_about.md";
-  const aboutDoc = () => everkm.post_detail(p3.props.request_id, {
-    path: aboutPath(),
-    allow_missing: true
-  });
-  const pageTitle = () => aboutDoc()?.title ?? t2().nav.about;
+  const aboutDoc = p3.aboutDoc;
+  const pageTitle = aboutDoc?.title ?? t2().nav.about;
   return [createComponent(Header, {
     get ctx() {
       return ctx();
@@ -4235,21 +4307,19 @@ var AboutPage = (p3) => {
       return ctx();
     },
     pageKey: "about",
-    get pageTitle() {
-      return pageTitle();
-    },
+    pageTitle,
     layout: "about",
     hidePageHeader: true,
     get children() {
-      return ssr(_tmpl$214, escape(pageTitle()), `page-template-content ${escape(APP_PROSE, true)}`, escape(createComponent(Show, {
+      return ssr(_tmpl$214, escape(pageTitle), `page-template-content ${escape(APP_PROSE, true)}`, escape(createComponent(Show, {
         get when() {
-          return aboutDoc()?.content_html;
+          return aboutDoc?.content_html;
         },
         get fallback() {
           return ssr(_tmpl$312, escape(t2().pages.aboutEmpty));
         },
         get children() {
-          return ssr(_tmpl$21, aboutDoc().content_html);
+          return ssr(_tmpl$21, aboutDoc.content_html);
         }
       })));
     }
@@ -4267,62 +4337,6 @@ var AboutPage = (p3) => {
 var import_dayjs4 = __toESM(require_dayjs_min(), 1);
 var import_utc3 = __toESM(require_utc(), 1);
 var import_timezone3 = __toESM(require_timezone(), 1);
-
-// src/lib/postDetail.ts
-function resolvePostDetail(ctx) {
-  const lazyArgs = { lazy_img: true };
-  const meta = ctx.post;
-  if (meta?.path) {
-    return everkm.post_detail(ctx.request_id, { path: meta.path, ...lazyArgs }) ?? meta;
-  }
-  const pagePath = ctx.page_path;
-  if (pagePath?.endsWith(".html")) {
-    return everkm.post_detail(ctx.request_id, {
-      path: pagePath.replace(/\.html$/, ".md"),
-      ...lazyArgs
-    });
-  }
-  return meta;
-}
-
-// src/lib/dataSource.ts
-function loadDataSourceDoc(ctx, innerLink, fallbackPath) {
-  const path = resolveInnerLinkPath(innerLink) || fallbackPath;
-  return everkm.post_detail(ctx.request_id, {
-    path,
-    allow_missing: true
-  }) ?? null;
-}
-function parseFriendLinkCategories(meta) {
-  const raw = meta?.links;
-  if (!Array.isArray(raw)) return [];
-  return raw;
-}
-function categoryLabel(category) {
-  return category.category ?? category.links_category ?? "";
-}
-function resolveStoryMediaUrl(ctx, path, originPath) {
-  if (!path) return "";
-  if (/^https?:\/\//i.test(path)) return path;
-  if (path.startsWith("/assets/")) return assetUrl(ctx.request_id, path);
-  if (path.startsWith("/")) {
-    try {
-      const resolved = everkm.media(ctx.request_id, {
-        file: path,
-        __origin_path: originPath
-      });
-      if (typeof resolved === "string" && resolved.length > 0) {
-        return resolved;
-      }
-    } catch {
-    }
-  }
-  return assetUrl(ctx.request_id, path);
-}
-function dataSourceTitle(ctx, innerLink, fallbackPath, fallbackTitle) {
-  const doc = loadDataSourceDoc(ctx, innerLink, fallbackPath);
-  return doc?.title ?? fallbackTitle;
-}
 
 // src/components/Tag.tsx
 var _tmpl$30 = ["<li><a", ' class="text-accent decoration-dashed underline-offset-4 hover:underline">#', "", "</a></li>"];
@@ -4495,7 +4509,7 @@ var PostPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
   const t2 = () => useTranslations(ctx().lang);
-  const post = () => resolvePostDetail(p3.props);
+  const post = () => p3.post;
   const showBack = () => cfg().features?.show_back_button !== false;
   const cover = () => post() ? resolvePostCover(ctx(), post()) : null;
   const avatar = () => resolveStoryMediaUrl(ctx(), cfg().site.profile || "/assets/images/avatar-0.jpg");
@@ -4942,7 +4956,7 @@ var LinksPage = (p3) => {
   const ctx = () => p3.props;
   const cfg = () => getStoryConfig(ctx());
   const t2 = () => useTranslations(ctx().lang);
-  const doc = () => loadDataSourceDoc(ctx(), cfg().links, "/_links.md");
+  const doc = () => p3.doc;
   const categories = () => parseFriendLinkCategories(doc()?.meta);
   const originPath = () => doc()?.path ?? "/_links.md";
   return [createComponent(Header, {
@@ -5220,20 +5234,26 @@ var NotFoundPage = (p3) => {
 };
 
 // src/pages/index.tsx
-function renderPageBody(pageKey, props) {
+async function renderPageBody(pageKey, props) {
   switch (pageKey) {
     case "home":
       return createComponent(HomePage, {
         props
       });
-    case "about":
+    case "about": {
+      const aboutDoc = await loadAboutDoc(props);
       return createComponent(AboutPage, {
-        props
+        props,
+        aboutDoc
       });
-    case "post":
+    }
+    case "post": {
+      const post = await resolvePostDetail(props);
       return createComponent(PostPage, {
-        props
+        props,
+        post
       });
+    }
     case "posts-list":
       return createComponent(PostsListPage, {
         props
@@ -5250,10 +5270,14 @@ function renderPageBody(pageKey, props) {
       return createComponent(ArchivesPage, {
         props
       });
-    case "links":
+    case "links": {
+      const cfg = getStoryConfig(props);
+      const doc = await loadDataSourceDoc(props, cfg.links, "/_links.md");
       return createComponent(LinksPage, {
-        props
+        props,
+        doc
       });
+    }
     case "album":
       return createComponent(AlbumPage, {
         props
@@ -5263,12 +5287,10 @@ function renderPageBody(pageKey, props) {
         props
       });
     default:
-      return createComponent(NotFoundPage, {
-        props
-      });
+      throw pageNotFound(`Page ${pageKey} not found (compName=${props.tpl_path})`);
   }
 }
-function resolveLayoutTitle(pageKey, props, cfg) {
+async function resolveLayoutTitle(pageKey, props, cfg) {
   const siteName = cfg.site.name;
   if (pageKey === "home") {
     const desc = cfg.site.description;
@@ -5276,7 +5298,7 @@ function resolveLayoutTitle(pageKey, props, cfg) {
   }
   if (pageKey === "about") {
     const aboutPath = resolveInnerLinkPath(cfg.about) || "/_about.md";
-    const aboutMeta = everkm.post_detail(props.request_id, {
+    const aboutMeta = await everkm.post_detail(props.request_id, {
       path: aboutPath,
       allow_missing: true
     });
@@ -5284,7 +5306,7 @@ function resolveLayoutTitle(pageKey, props, cfg) {
     return aboutTitle ? `${aboutTitle} | ${siteName}` : void 0;
   }
   if (pageKey === "links") {
-    const title = dataSourceTitle(props, cfg.links, "/_links.md", "Links");
+    const title = await dataSourceTitle(props, cfg.links, "/_links.md", "Links");
     return `${title} | ${siteName}`;
   }
   if (pageKey === "album") {
@@ -5299,13 +5321,12 @@ function resolveLayoutTitle(pageKey, props, cfg) {
 async function renderPage(compName, props) {
   const pageKey = resolvePageKey(compName, props.tpl_path, props.post);
   const cfg = getStoryConfig(props);
-  const title = resolveLayoutTitle(pageKey, props, cfg);
+  const title = await resolveLayoutTitle(pageKey, props, cfg);
+  const body = await renderPageBody(pageKey, props);
   const html = await renderToStringAsync(() => createComponent(RootLayout, {
     context: props,
     title,
-    get children() {
-      return renderPageBody(pageKey, props);
-    }
+    children: body
   }));
   const cssStory = everkm.assets(props.request_id, {
     type: "css",

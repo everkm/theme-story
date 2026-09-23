@@ -31,7 +31,8 @@ export function resolvePageKey(
   if (post) return "post";
   if (compName === "post") return "post";
 
-  if (key) return "not-found";
+  // 未知路由留给 renderPageBody 抛 PAGE_NOT_FOUND（勿软渲染 404 页，便于引擎入口降级）
+  if (key) return key;
   return "post";
 }
 

@@ -2,7 +2,6 @@ import { Component, For, Show } from "solid-js";
 import { getStoryConfig } from "../lib/config";
 import {
   categoryLabel,
-  loadDataSourceDoc,
   parseFriendLinkCategories,
   resolveStoryMediaUrl,
 } from "../lib/dataSource";
@@ -14,13 +13,14 @@ import { Main } from "../components/Main";
 
 type LinksPageProps = {
   props: PageContext;
+  doc: PostItem | null;
 };
 
 export const LinksPage: Component<LinksPageProps> = (p) => {
   const ctx = () => p.props;
   const cfg = () => getStoryConfig(ctx());
   const t = () => useTranslations(ctx().lang);
-  const doc = () => loadDataSourceDoc(ctx(), cfg().links, "/_links.md");
+  const doc = () => p.doc;
   const categories = () => parseFriendLinkCategories(doc()?.meta);
   const originPath = () => doc()?.path ?? "/_links.md";
 

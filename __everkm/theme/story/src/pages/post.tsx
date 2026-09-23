@@ -6,7 +6,6 @@ import { getStoryConfig } from "../lib/config";
 import { useTranslations } from "../lib/i18n";
 import { toTransitionName } from "../lib/toTransitionName";
 import { resolvePostCover } from "../lib/postCover";
-import { resolvePostDetail } from "../lib/postDetail";
 import { resolveStoryMediaUrl } from "../lib/dataSource";
 import { POSTS_CONTENT_DIR } from "../lib/postsPath";
 import { APP_PROSE } from "../lib/proseClasses";
@@ -22,6 +21,7 @@ dayjs.extend(timezone);
 
 type PostPageProps = {
   props: PageContext;
+  post: PostItem | null;
 };
 
 function formatMetaTime(ts: number | undefined, timezoneName: string): string {
@@ -43,7 +43,7 @@ export const PostPage: Component<PostPageProps> = (p) => {
   const ctx = () => p.props;
   const cfg = () => getStoryConfig(ctx());
   const t = () => useTranslations(ctx().lang);
-  const post = () => resolvePostDetail(p.props);
+  const post = () => p.post;
   const showBack = () => cfg().features?.show_back_button !== false;
   const cover = () => (post() ? resolvePostCover(ctx(), post()!) : null);
   const avatar = () =>

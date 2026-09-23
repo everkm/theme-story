@@ -2,19 +2,25 @@
 title: Changelog
 slug: changelog
 created_at: 2026-06-28T00:00:00Z
-updated_at: 2026-07-03T10:53:01Z
+updated_at: 2026-09-23T12:03:02+08:00
 tags:
   - featured
 ---
 
 {#private}
-## Propmpt
+## Prompt
 This changelog is for end users. Keep the wording user-friendly and avoid exposing internal technical details.
 
 - Maintain the corresponding Chinese version at `../zh/CHANGELOG.md` when updating
 - The date in parentheses after the version number is the release date
 - When no new version is specified, append entries under the latest version
 
+
+## v0.2.0 (2026-09-23)
+
+- **Rendering**
+  - Unknown pages now report “page not found” clearly so directory entry can fall back correctly
+  - Page data is now fetched up front before rendering starts, so content on post, about, and links pages loads more reliably
 - **Album**
   - Album page now collects images from public post content via Everkm `posts_resources` (no `_album.md` data file)
   - Removed per-item description from album captions

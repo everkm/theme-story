@@ -16,21 +16,23 @@ export type FriendLinkCategory = {
   list?: FriendLinkItem[];
 };
 
-export function loadDataSourceDoc(
+export async function loadDataSourceDoc(
   ctx: PageContext,
   innerLink: string | undefined,
   fallbackPath: string,
-): PostItem | null {
+): Promise<PostItem | null> {
   const path = resolveInnerLinkPath(innerLink) || fallbackPath;
   return (
-    everkm.post_detail(ctx.request_id, {
+    (await everkm.post_detail(ctx.request_id, {
       path,
       allow_missing: true,
-    }) ?? null
+    })) ?? null
   );
 }
 
-export function parseFriendLinkCategories(meta: Record<string, unknown> | undefined): FriendLinkCategory[] {
+export function parseFriendLinkCategories(
+  meta: Record<string, unknown> | undefined,
+): FriendLinkCategory[] {
   const raw = meta?.links;
   if (!Array.isArray(raw)) return [];
   return raw as FriendLinkCategory[];
@@ -64,12 +66,12 @@ export function resolveStoryMediaUrl(
   return assetUrl(ctx.request_id, path);
 }
 
-export function dataSourceTitle(
+export async function dataSourceTitle(
   ctx: PageContext,
   innerLink: string | undefined,
   fallbackPath: string,
   fallbackTitle: string,
-): string {
-  const doc = loadDataSourceDoc(ctx, innerLink, fallbackPath);
+): Promise<string> {
+  const doc = await loadDataSourceDoc(ctx, innerLink, fallbackPath);
   return doc?.title ?? fallbackTitle;
 }

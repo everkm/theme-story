@@ -3,8 +3,12 @@ import { RootLayout } from "../layout/RootLayout";
 import { resolvePageKey } from "../lib/normalizeTplPath";
 import { getStoryConfig, resolveInnerLinkPath } from "../lib/config";
 import { configValue } from "../lib/configValue";
+import { pageNotFound } from "../lib/jsRenderError";
+import { resolvePostDetail } from "../lib/postDetail";
+import { dataSourceTitle, loadDataSourceDoc } from "../lib/dataSource";
+import { useTranslations } from "../lib/i18n";
 import { HomePage } from "./home";
-import { AboutPage } from "./about";
+import { AboutPage, loadAboutDoc } from "./about";
 import { PostPage } from "./post";
 import { PostsListPage } from "./posts-list";
 import { TagsIndexPage } from "./tags-index";
@@ -13,17 +17,19 @@ import { ArchivesPage } from "./archives";
 import { LinksPage } from "./links";
 import { AlbumPage } from "./album";
 import { NotFoundPage } from "./not-found";
-import { dataSourceTitle } from "../lib/dataSource";
-import { useTranslations } from "../lib/i18n";
 
-function renderPageBody(pageKey: string, props: PageContext) {
+async function renderPageBody(pageKey: string, props: PageContext) {
   switch (pageKey) {
     case "home":
       return <HomePage props={props} />;
-    case "about":
-      return <AboutPage props={props} />;
-    case "post":
-      return <PostPage props={props} />;
+    case "about": {
+      const aboutDoc = await loadAboutDoc(props);
+      return <AboutPage props={props} aboutDoc={aboutDoc} />;
+    }
+    case "post": {
+      const post = await resolvePostDetail(props);
+      return <PostPage props={props} post={post} />;
+    }
     case "posts-list":
       return <PostsListPage props={props} />;
     case "tags-index":
@@ -32,22 +38,27 @@ function renderPageBody(pageKey: string, props: PageContext) {
       return <TagPostsPage props={props} />;
     case "archives":
       return <ArchivesPage props={props} />;
-    case "links":
-      return <LinksPage props={props} />;
+    case "links": {
+      const cfg = getStoryConfig(props);
+      const doc = await loadDataSourceDoc(props, cfg.links, "/_links.md");
+      return <LinksPage props={props} doc={doc} />;
+    }
     case "album":
       return <AlbumPage props={props} />;
     case "not-found":
       return <NotFoundPage props={props} />;
     default:
-      return <NotFoundPage props={props} />;
+      throw pageNotFound(
+        `Page ${pageKey} not found (compName=${props.tpl_path})`,
+      );
   }
 }
 
-function resolveLayoutTitle(
+async function resolveLayoutTitle(
   pageKey: string,
   props: PageContext,
   cfg: ReturnType<typeof getStoryConfig>,
-): string | undefined {
+): Promise<string | undefined> {
   const siteName = cfg.site.name;
   if (pageKey === "home") {
     const desc = cfg.site.description;
@@ -55,7 +66,7 @@ function resolveLayoutTitle(
   }
   if (pageKey === "about") {
     const aboutPath = resolveInnerLinkPath(cfg.about) || "/_about.md";
-    const aboutMeta = everkm.post_detail(props.request_id, {
+    const aboutMeta = await everkm.post_detail(props.request_id, {
       path: aboutPath,
       allow_missing: true,
     });
@@ -63,7 +74,7 @@ function resolveLayoutTitle(
     return aboutTitle ? `${aboutTitle} | ${siteName}` : undefined;
   }
   if (pageKey === "links") {
-    const title = dataSourceTitle(
+    const title = await dataSourceTitle(
       props,
       cfg.links,
       "/_links.md",
@@ -84,11 +95,12 @@ function resolveLayoutTitle(
 async function renderPage(compName: string, props: PageContext) {
   const pageKey = resolvePageKey(compName, props.tpl_path, props.post);
   const cfg = getStoryConfig(props);
-  const title = resolveLayoutTitle(pageKey, props, cfg);
+  const title = await resolveLayoutTitle(pageKey, props, cfg);
+  const body = await renderPageBody(pageKey, props);
 
   const html = await renderToStringAsync(() => (
     <RootLayout context={props} title={title}>
-      {renderPageBody(pageKey, props)}
+      {body}
     </RootLayout>
   ));
 
